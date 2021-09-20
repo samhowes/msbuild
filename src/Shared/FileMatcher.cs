@@ -2499,13 +2499,13 @@ namespace Microsoft.Build.Shared
             catch (AggregateException ex)
             {
                 // Flatten to get exceptions than are thrown inside a nested Parallel.ForEach
-                if (ex.Flatten().InnerExceptions.All(ex => ExceptionHandling.IsIoRelatedException(ex) && !(ex is FileLoadException)))
+                if (ex.Flatten().InnerExceptions.All(ExceptionHandling.IsIoRelatedException))
                 {
                     return CreateArrayWithSingleItemIfNotExcluded(filespecUnescaped, excludeSpecsUnescaped);
                 }
                 throw;
             }
-            catch (Exception ex) when (ExceptionHandling.IsIoRelatedException(ex) && !(ex is FileLoadException))
+            catch (Exception ex) when (ExceptionHandling.IsIoRelatedException(ex))
             {
                 // Assume it's not meant to be a path
                 return CreateArrayWithSingleItemIfNotExcluded(filespecUnescaped, excludeSpecsUnescaped);
