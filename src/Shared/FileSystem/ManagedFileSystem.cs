@@ -48,9 +48,9 @@ namespace Microsoft.Build.Shared.FileSystem
                         ? Microsoft.IO.Directory.EnumerateFiles(path, searchPattern, (Microsoft.IO.SearchOption)searchOption)
                         : Directory.EnumerateFiles(path, searchPattern, searchOption);
             }
-            catch (Exception ex) when (ex is FileLoadException)
+            catch (Exception ex)
             {
-                throw new InvalidOperationException(ex.Message);
+                throw new InvalidOperationException("My exception message", ex);
             }
 #else
             return Directory.EnumerateFiles(path, searchPattern, searchOption);
@@ -66,9 +66,9 @@ namespace Microsoft.Build.Shared.FileSystem
                     ? Microsoft.IO.Directory.EnumerateDirectories(path, searchPattern, (Microsoft.IO.SearchOption)searchOption)
                     : Directory.EnumerateDirectories(path, searchPattern, searchOption);
             }
-            catch (Exception ex) when (ex is FileLoadException)
+            catch (Exception ex)
             {
-                throw new InvalidOperationException(ex.Message);
+                throw new InvalidOperationException("My exception message", ex);
             }
 #else
             return Directory.EnumerateDirectories(path, searchPattern, searchOption);
@@ -84,9 +84,9 @@ namespace Microsoft.Build.Shared.FileSystem
                     ? Microsoft.IO.Directory.EnumerateFileSystemEntries(path, searchPattern, (Microsoft.IO.SearchOption)searchOption)
                     : Directory.EnumerateFileSystemEntries(path, searchPattern, searchOption);
             }
-            catch (Exception ex) when (ex is FileLoadException)
+            catch (Exception ex)
             {
-                throw new InvalidOperationException(ex.Message);
+                throw new InvalidOperationException("My exception message", ex);
             }
 #else
             return Directory.EnumerateFileSystemEntries(path, searchPattern, searchOption);
