@@ -2325,9 +2325,11 @@ namespace Microsoft.Build.Construction
             ProjectPropertyElement tfv20Property = frameworkVersionProperties.AddProperty("TargetFrameworkVersion", "v2.0");
             ProjectPropertyElement tfv35Property = frameworkVersionProperties.AddProperty("TargetFrameworkVersion", "v3.5");
             ProjectPropertyElement tfv40Property = frameworkVersionProperties.AddProperty("TargetFrameworkVersion", "v4.0");
+            ProjectPropertyElement tfv48Property = frameworkVersionProperties.AddProperty("TargetFrameworkVersion", "v4.8");
             tfv20Property.Condition = "'$(TargetFrameworkVersion)' == '' and '$(MSBuildToolsVersion)' == '2.0'";
             tfv35Property.Condition = "'$(TargetFrameworkVersion)' == '' and ('$(MSBuildToolsVersion)' == '3.5' or '$(MSBuildToolsVersion)' == '3.0')";
-            tfv40Property.Condition = "'$(TargetFrameworkVersion)' == '' and !('$(MSBuildToolsVersion)' == '3.5' or '$(MSBuildToolsVersion)' == '3.0' or '$(MSBuildToolsVersion)' == '2.0')";
+            tfv40Property.Condition = "'$(TargetFrameworkVersion)' == '' and '$(MSBuildToolsVersion)' == '4.0'";
+            tfv48Property.Condition = "'$(TargetFrameworkVersion)' == '' and !('$(MSBuildToolsVersion)' == '3.5' or '$(MSBuildToolsVersion)' == '3.0' or '$(MSBuildToolsVersion)' == '2.0' or '$(MSBuildToolsVersion' == '4.0')";
         }
 
         /// <summary>
