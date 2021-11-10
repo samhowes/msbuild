@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>$(RuntimeOutputTargetFrameworks)</TargetFrameworks>
     <PlatformTarget>$(RuntimeOutputPlatformTarget)</PlatformTarget>
-    
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <IsPackable>false</IsPackable>
     <AssemblyName>Microsoft.Build.Engine.UnitTests</AssemblyName>
 

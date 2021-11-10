@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>$(RuntimeOutputTargetFrameworks)</TargetFrameworks>
     <PlatformTarget>$(RuntimeOutputPlatformTarget)</PlatformTarget>
-    
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <AssemblyName>Microsoft.Build.Utilities.UnitTests</AssemblyName>
     <IsTestProject>true</IsTestProject>
     <RootNamespace>Microsoft.Build.Utilities.UnitTests</RootNamespace>
