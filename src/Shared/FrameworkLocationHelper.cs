@@ -976,13 +976,10 @@ namespace Microsoft.Build.Shared
 
             try
             {
-                string path = targetFrameworkRootPath;
-                path = Path.Combine(path, frameworkName.Identifier);
-                path = Path.Combine(path, "v" + frameworkName.Version.ToString());
+                string path = Path.Combine(targetFrameworkRootPath, frameworkName.Identifier, "v" + frameworkName.Version.ToString());
                 if (!String.IsNullOrEmpty(frameworkName.Profile))
                 {
-                    path = Path.Combine(path, "Profile");
-                    path = Path.Combine(path, frameworkName.Profile);
+                    path = Path.Combine(path, "Profile", frameworkName.Profile);
                 }
 
                 return Path.GetFullPath(path);
@@ -1142,7 +1139,7 @@ namespace Microsoft.Build.Shared
                 version,
                 dotNetFrameworkRegistryKey: dotNetFrameworkSetupRegistryPath + "\\v4\\Full",
                 dotNetFrameworkSetupRegistryInstalledName: "Install",
-                dotNetFrameworkVersionFolderPrefix: NativeMethodsShared.IsWindows ? "v4.0" : "v4.5",
+                dotNetFrameworkVersionFolderPrefix: $"v{version.Major}.{version.Minor}",
                 dotNetFrameworkSdkRegistryToolsKey: "WinSDK-NetFx40Tools-x86",
                 dotNetFrameworkSdkRegistryInstallationFolderName: "InstallationFolder",
                 hasMSBuild: true,
