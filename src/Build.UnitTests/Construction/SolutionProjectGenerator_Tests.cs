@@ -1601,7 +1601,7 @@ EndGlobal
 
             // v4.0 by default
             ProjectInstance msbuildProject = CreateVenusSolutionProject();
-            Assert.Equal("v4.0", msbuildProject.GetPropertyValue("TargetFrameworkVersion"));
+            Assert.Equal("v4.8", msbuildProject.GetPropertyValue("TargetFrameworkVersion"));
 
             if (FrameworkLocationHelper.PathToDotNetFrameworkV35 == null)
             {

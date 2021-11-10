@@ -135,13 +135,13 @@ namespace Microsoft.Build.UnitTests
 
                 Project project = ObjectModelHelpers.CreateInMemoryProject(
                     @"
-                   <Project DefaultTargets=`Build` ToolsVersion=`4.0` xmlns=`msbuildnamespace`>
+                   <Project DefaultTargets=`Build` ToolsVersion=`4.8` xmlns=`msbuildnamespace`>
                       <PropertyGroup>
                         <OutputPath>" + outputPath + @"</OutputPath>
                         <AssemblyName>MyAssembly</AssemblyName>
                         <OutputType>Library</OutputType>
                         <Configuration>Debug</Configuration>
-                        <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+                        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                         <PlatformTarget>AnyCPU</PlatformTarget>
                       </PropertyGroup>
                       <ItemGroup>
@@ -242,7 +242,7 @@ namespace Microsoft.Build.UnitTests
 
                 Project project = ObjectModelHelpers.CreateInMemoryProject(
                     @"
-                   <Project DefaultTargets=`Build` ToolsVersion=`4.0` xmlns=`msbuildnamespace`>
+                   <Project DefaultTargets=`Build` ToolsVersion=`4.8` xmlns=`msbuildnamespace`>
                       <PropertyGroup>
                         <OutputPath>" + outputPath + @"</OutputPath>
                         <AssemblyName>MyAssembly</AssemblyName>
@@ -253,7 +253,7 @@ namespace Microsoft.Build.UnitTests
                       <!-- For dealing with the case where the Jupiter targets do not exist, in order to follow the appropriate codepaths in the standard managed
                            we need to be .NET 4.5 or greater -->
                       <PropertyGroup Condition=`!Exists('$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v1.0\Microsoft.Windows.UI.Xaml.CSharp.targets')`>
-                        <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+                        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                       </PropertyGroup>
                       <ItemGroup>
                         <Compile Include=`" + file + @"` />
@@ -299,13 +299,13 @@ namespace Microsoft.Build.UnitTests
 
                 Project project = ObjectModelHelpers.CreateInMemoryProject(
                     @"
-                   <Project DefaultTargets=`Build` ToolsVersion=`4.0` xmlns=`msbuildnamespace`>
+                   <Project DefaultTargets=`Build` ToolsVersion=`4.8` xmlns=`msbuildnamespace`>
                       <PropertyGroup>
                         <OutputPath>" + outputPath + @"</OutputPath>
                         <AssemblyName>MyAssembly</AssemblyName>
                         <OutputType>Exe</OutputType>
                         <Configuration>Debug</Configuration>
-                        <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+                        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                       </PropertyGroup>
                       <ItemGroup>
                         <Compile Include=`" + file + @"` />
@@ -349,13 +349,13 @@ namespace Microsoft.Build.UnitTests
 
                 Project project = ObjectModelHelpers.CreateInMemoryProject(
                     @"
-                   <Project DefaultTargets=`Build` ToolsVersion=`4.0` xmlns=`msbuildnamespace`>
+                   <Project DefaultTargets=`Build` ToolsVersion=`4.8` xmlns=`msbuildnamespace`>
                       <PropertyGroup>
                         <OutputPath>" + outputPath + @"</OutputPath>
                         <AssemblyName>MyAssembly</AssemblyName>
                         <OutputType>Exe</OutputType>
                         <Configuration>Debug</Configuration>
-                        <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+                        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                         <PlatformTarget>AnyCPU</PlatformTarget>
                       </PropertyGroup>
                       <ItemGroup>
@@ -434,7 +434,7 @@ namespace Microsoft.Build.UnitTests
 
         /// <summary>
         /// Check that with an explicit platformtarget of anycpu, exe type assemblies that are 
-        /// targeting .NET 4.0 do not get forced to anycpu32bitpreferred by default. 
+        /// targeting .NET 4.8 do not get forced to anycpu32bitpreferred by default. 
         /// </summary>
         [Fact]
         public void ExplicitAnyCPU40ExeProjectIsNot32BitPreferred()
@@ -450,13 +450,13 @@ namespace Microsoft.Build.UnitTests
 
                 Project project = ObjectModelHelpers.CreateInMemoryProject(
                     @"
-                   <Project DefaultTargets=`Build` ToolsVersion=`4.0` xmlns=`msbuildnamespace`>
+                   <Project DefaultTargets=`Build` ToolsVersion=`4.8` xmlns=`msbuildnamespace`>
                       <PropertyGroup>
                         <OutputPath>" + outputPath + @"</OutputPath>
                         <AssemblyName>MyAssembly</AssemblyName>
                         <OutputType>Exe</OutputType>
                         <Configuration>Debug</Configuration>
-                        <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+                        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                         <PlatformTarget>AnyCPU</PlatformTarget>
                       </PropertyGroup>
                       <ItemGroup>
@@ -470,7 +470,7 @@ namespace Microsoft.Build.UnitTests
 
                 project.Build();
 
-                logger.AssertLogContains(" /platform:AnyCPU ");
+                logger.AssertLogContains("Platform=AnyCPU");
             }
             finally
             {
@@ -501,7 +501,7 @@ namespace Microsoft.Build.UnitTests
 
                 Project project = ObjectModelHelpers.CreateInMemoryProject(
                     @"
-                   <Project DefaultTargets=`Build` ToolsVersion=`4.0` xmlns=`msbuildnamespace`>
+                   <Project DefaultTargets=`Build` ToolsVersion=`4.8` xmlns=`msbuildnamespace`>
                       <PropertyGroup>
                         <OutputPath>" + outputPath + @"</OutputPath>
                         <AssemblyName>MyAssembly</AssemblyName>
@@ -509,9 +509,9 @@ namespace Microsoft.Build.UnitTests
                         <Configuration>Debug</Configuration>
                       </PropertyGroup>
                       <!-- For dealing with the case where the Jupiter targets do not exist, in order to follow the appropriate codepaths in the standard managed
-                           we need to be .NET 4.5 or greater -->
+                           we need to be .NET 4.5 or greater, but 4.8 is on the CI machine -->
                       <PropertyGroup Condition=`!Exists('$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v1.0\Microsoft.Windows.UI.Xaml.CSharp.targets')`>
-                        <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+                        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                       </PropertyGroup>
                       <ItemGroup>
                         <Compile Include=`" + file + @"` />
@@ -557,7 +557,7 @@ namespace Microsoft.Build.UnitTests
 
                 Project project = ObjectModelHelpers.CreateInMemoryProject(
                     @"
-                   <Project DefaultTargets=`Build` ToolsVersion=`4.0` xmlns=`msbuildnamespace`>
+                   <Project DefaultTargets=`Build` ToolsVersion=`4.8` xmlns=`msbuildnamespace`>
                       <PropertyGroup>
                         <OutputPath>" + outputPath + @"</OutputPath>
                         <AssemblyName>MyAssembly</AssemblyName>
@@ -568,7 +568,7 @@ namespace Microsoft.Build.UnitTests
                       <!-- For dealing with the case where the Jupiter targets do not exist, in order to follow the appropriate codepaths in the standard managed
                            we need to be .NET 4.5 or greater -->
                       <PropertyGroup Condition=`!Exists('$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v1.0\Microsoft.Windows.UI.Xaml.CSharp.targets')`>
-                        <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+                        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                       </PropertyGroup>
                       <ItemGroup>
                         <Compile Include=`" + file + @"` />
@@ -621,7 +621,7 @@ namespace Microsoft.Build.UnitTests
                         <OutputType>Library</OutputType>
                         <Configuration>Debug</Configuration>
                         <PlatformTarget>AnyCPU</PlatformTarget>
-                        <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+                        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                         <Prefer32Bit>true</Prefer32Bit>
                       </PropertyGroup>
                       <ItemGroup>
@@ -666,13 +666,13 @@ namespace Microsoft.Build.UnitTests
 
                 Project project = ObjectModelHelpers.CreateInMemoryProject(
                     @"
-                   <Project DefaultTargets=`Build` ToolsVersion=`4.0` xmlns=`msbuildnamespace`>
+                   <Project DefaultTargets=`Build` ToolsVersion=`4.8` xmlns=`msbuildnamespace`>
                       <PropertyGroup>
                         <OutputPath>" + outputPath + @"</OutputPath>
                         <AssemblyName>MyAssembly</AssemblyName>
                         <Configuration>Debug</Configuration>
                         <PlatformTarget>AnyCPU</PlatformTarget>
-                        <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+                        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                       </PropertyGroup>
                       <ItemGroup>
                         <Compile Include=`" + file + @"` />
@@ -716,13 +716,13 @@ namespace Microsoft.Build.UnitTests
 
                 Project project = ObjectModelHelpers.CreateInMemoryProject(
                     @"
-                   <Project DefaultTargets=`Build` ToolsVersion=`4.0` xmlns=`msbuildnamespace`>
+                   <Project DefaultTargets=`Build` ToolsVersion=`4.8` xmlns=`msbuildnamespace`>
                       <PropertyGroup>
                         <OutputPath>" + outputPath + @"</OutputPath>
                         <AssemblyName>MyAssembly</AssemblyName>
                         <Configuration>Debug</Configuration>
                         <PlatformTarget>AnyCPU</PlatformTarget>
-                        <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+                        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                       </PropertyGroup>
                       <ItemGroup>
                         <Compile Include=`" + file + @"` />
@@ -874,7 +874,7 @@ namespace Microsoft.Build.UnitTests
                         <AssemblyName>MyAssembly</AssemblyName>
                         <OutputType>Library</OutputType>
                         <Configuration>Debug</Configuration>
-                        <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+                        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                         <SynthesizeLinkMetadata>true</SynthesizeLinkMetadata>
                       </PropertyGroup>
                       <ItemGroup>
@@ -959,7 +959,7 @@ namespace Microsoft.Build.UnitTests
                         <AssemblyName>MyAssembly</AssemblyName>
                         <OutputType>Library</OutputType>
                         <Configuration>Debug</Configuration>
-                        <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+                        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                         <SynthesizeLinkMetadata>true</SynthesizeLinkMetadata>
                       </PropertyGroup>
                       <Import Project=`" + files[3] + @"` />
@@ -1037,7 +1037,7 @@ namespace Microsoft.Build.UnitTests
                         <AssemblyName>MyAssembly</AssemblyName>
                         <OutputType>Library</OutputType>
                         <Configuration>Debug</Configuration>
-                        <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+                        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                         <SynthesizeLinkMetadata>false</SynthesizeLinkMetadata>
                       </PropertyGroup>
                       <Import Project=`" + files[3] + @"` />
