@@ -1139,7 +1139,7 @@ namespace Microsoft.Build.Shared
                 version,
                 dotNetFrameworkRegistryKey: dotNetFrameworkSetupRegistryPath + "\\v4\\Full",
                 dotNetFrameworkSetupRegistryInstalledName: "Install",
-                dotNetFrameworkVersionFolderPrefix: $"v{version.Major}.{version.Minor}",
+                dotNetFrameworkVersionFolderPrefix: NativeMethodsShared.IsWindows ? "v4.0" : "v4.5",
                 dotNetFrameworkSdkRegistryToolsKey: "WinSDK-NetFx40Tools-x86",
                 dotNetFrameworkSdkRegistryInstallationFolderName: "InstallationFolder",
                 hasMSBuild: true,
