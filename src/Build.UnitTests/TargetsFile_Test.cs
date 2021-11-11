@@ -33,7 +33,7 @@ namespace Microsoft.Build.UnitTests
 
                 Project project = ObjectModelHelpers.CreateInMemoryProject(
                     @"
-                   <Project DefaultTargets=`Build` ToolsVersion=`4.0` xmlns=`msbuildnamespace`>
+                   <Project DefaultTargets=`Build` xmlns=`msbuildnamespace`>
                       <PropertyGroup>
                         <OutputPath>" + outputPath + @"</OutputPath>
                         <AssemblyName>MyAssembly</AssemblyName>

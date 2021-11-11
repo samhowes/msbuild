@@ -57,6 +57,9 @@ namespace Microsoft.Build.Tasks.UnitTests
             var project = ObjectModelHelpers.CreateInMemoryProject($@"
 <Project>
   <Import Project=""$(MSBuildToolsPath)\Microsoft.Common.props"" />
+  <PropertyGroup>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include=""a.cs""/>
   </ItemGroup>

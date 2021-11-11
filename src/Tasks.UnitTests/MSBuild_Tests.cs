@@ -352,10 +352,11 @@ namespace Microsoft.Build.UnitTests
             ObjectModelHelpers.CreateFileInTempProjectDirectory(
                 Path.Combine("bug'533'369", "Sub;Dir", "ConsoleApplication1", "ConsoleApplication1.csproj"), @"
 
-                <Project DefaultTargets=`Build` ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`msbuildnamespace`>
+                <Project DefaultTargets=`Build` xmlns=`msbuildnamespace`>
                   <Import Project=`$(MSBuildBinPath)\Microsoft.Common.props` />
                   <PropertyGroup>
                     <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
+                    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                     <Platform Condition=` '$(Platform)' == '' `>AnyCPU</Platform>
                     <OutputType>Exe</OutputType>
                     <AssemblyName>ConsoleApplication1</AssemblyName>

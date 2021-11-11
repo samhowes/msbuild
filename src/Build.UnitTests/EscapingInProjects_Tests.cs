@@ -955,7 +955,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
             // Foo.csproj
             // ---------------------
             ObjectModelHelpers.CreateFileInTempProjectDirectory("foo.csproj", @"
-                <Project DefaultTargets=`Build` ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
+                <Project DefaultTargets=`Build` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
                     <Import Project=`$(MSBuildBinPath)\Microsoft.Common.props` />
                     <PropertyGroup>
                         <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
@@ -1020,7 +1020,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
                 // Foo.csproj
                 // ---------------------
                 ObjectModelHelpers.CreateFileInTempProjectDirectory("foo.csproj", @"
-                <Project DefaultTargets=`Build` ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
+                <Project DefaultTargets=`Build` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
                     <Import Project=`$(MSBuildBinPath)\Microsoft.Common.props` />
                     <PropertyGroup>
                         <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
@@ -1085,7 +1085,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
             // Foo.csproj
             // ---------------------
             ObjectModelHelpers.CreateFileInTempProjectDirectory("foo.csproj", @"
-                <Project DefaultTargets=`Build` ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
+                <Project DefaultTargets=`Build` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
                     <Import Project=`$(MSBuildBinPath)\Microsoft.Common.props` />
                     <PropertyGroup>
                         <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
@@ -1145,7 +1145,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
                 // Foo.csproj
                 // ---------------------
                 ObjectModelHelpers.CreateFileInTempProjectDirectory("foo.csproj", @"
-                <Project DefaultTargets=`Build` ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
+                <Project DefaultTargets=`Build` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
                     <Import Project=`$(MSBuildBinPath)\Microsoft.Common.props` />
                     <PropertyGroup>
                         <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
@@ -1205,7 +1205,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
             // Foo.csproj
             // ---------------------
             ObjectModelHelpers.CreateFileInTempProjectDirectory("foo.csproj", @"
-                <Project DefaultTargets=`Build` ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
+                <Project DefaultTargets=`Build` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
                     <Import Project=`$(MSBuildBinPath)\Microsoft.Common.props` />
                     <PropertyGroup>
                         <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
@@ -1265,7 +1265,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
                 // Foo.csproj
                 // ---------------------
                 ObjectModelHelpers.CreateFileInTempProjectDirectory("foo.csproj", @"
-                <Project DefaultTargets=`Build` ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
+                <Project DefaultTargets=`Build` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
                     <Import Project=`$(MSBuildBinPath)\Microsoft.Common.props` />
                     <PropertyGroup>
                         <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
@@ -1325,7 +1325,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
             // Foo.csproj
             // ---------------------
             ObjectModelHelpers.CreateFileInTempProjectDirectory("foo.csproj", @"
-                <Project DefaultTargets=`Build` ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
+                <Project DefaultTargets=`Build` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
                     <Import Project=`$(MSBuildBinPath)\Microsoft.Common.props` />
                     <PropertyGroup>
                         <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
@@ -1385,7 +1385,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
                 // Foo.csproj
                 // ---------------------
                 ObjectModelHelpers.CreateFileInTempProjectDirectory("foo.csproj", @"
-                <Project DefaultTargets=`Build` ToolsVersion=`msbuilddefaulttoolsversion` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
+                <Project DefaultTargets=`Build` xmlns=`http://schemas.microsoft.com/developer/msbuild/2003`>
                     <Import Project=`$(MSBuildBinPath)\Microsoft.Common.props` />
                     <PropertyGroup>
                         <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
