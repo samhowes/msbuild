@@ -960,6 +960,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
                     <PropertyGroup>
                         <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
                         <Platform Condition=` '$(Platform)' == '' `>AnyCPU</Platform>
+                        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                         <OutputType>Library</OutputType>
                         <AssemblyName>ClassLibrary16</AssemblyName>
                     </PropertyGroup>
@@ -1025,6 +1026,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
                     <PropertyGroup>
                         <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
                         <Platform Condition=` '$(Platform)' == '' `>AnyCPU</Platform>
+                        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                         <OutputType>Library</OutputType>
                         <AssemblyName>ClassLibrary16</AssemblyName>
                     </PropertyGroup>
@@ -1090,6 +1092,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
                     <PropertyGroup>
                         <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
                         <Platform Condition=` '$(Platform)' == '' `>AnyCPU</Platform>
+                        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                         <OutputType>Library</OutputType>
                         <AssemblyName>Class%3bLibrary16</AssemblyName>
                     </PropertyGroup>
@@ -1150,6 +1153,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
                     <PropertyGroup>
                         <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
                         <Platform Condition=` '$(Platform)' == '' `>AnyCPU</Platform>
+                        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                         <OutputType>Library</OutputType>
                         <AssemblyName>Class%3bLibrary16</AssemblyName>
                     </PropertyGroup>
@@ -1210,6 +1214,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
                     <PropertyGroup>
                         <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
                         <Platform Condition=` '$(Platform)' == '' `>AnyCPU</Platform>
+                        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                         <OutputType>Library</OutputType>
                         <AssemblyName>Class%24%28prop%29Library16</AssemblyName>
                     </PropertyGroup>
@@ -1270,6 +1275,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
                     <PropertyGroup>
                         <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
                         <Platform Condition=` '$(Platform)' == '' `>AnyCPU</Platform>
+                        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                         <OutputType>Library</OutputType>
                         <AssemblyName>Class%24%28prop%29Library16</AssemblyName>
                     </PropertyGroup>
@@ -1330,6 +1336,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
                     <PropertyGroup>
                         <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
                         <Platform Condition=` '$(Platform)' == '' `>AnyCPU</Platform>
+                        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                         <OutputType>Library</OutputType>
                         <AssemblyName>ClassLibrary16</AssemblyName>
                     </PropertyGroup>
@@ -1390,6 +1397,7 @@ namespace Microsoft.Build.UnitTests.EscapingInProjects_Tests
                     <PropertyGroup>
                         <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
                         <Platform Condition=` '$(Platform)' == '' `>AnyCPU</Platform>
+                        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                         <OutputType>Library</OutputType>
                         <AssemblyName>ClassLibrary16</AssemblyName>
                     </PropertyGroup>

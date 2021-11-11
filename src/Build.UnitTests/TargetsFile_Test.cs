@@ -37,6 +37,7 @@ namespace Microsoft.Build.UnitTests
                       <PropertyGroup>
                         <OutputPath>" + outputPath + @"</OutputPath>
                         <AssemblyName>MyAssembly</AssemblyName>
+                        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                         <OutputType>Library</OutputType>
                         <Configuration>Debug</Configuration>
                         <PlatformTarget>arm</PlatformTarget>

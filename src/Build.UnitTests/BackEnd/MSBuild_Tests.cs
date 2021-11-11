@@ -378,6 +378,7 @@ namespace Microsoft.Build.UnitTests
                   <PropertyGroup>
                     <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
                     <Platform Condition=` '$(Platform)' == '' `>AnyCPU</Platform>
+                    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                     <OutputType>Exe</OutputType>
                     <AssemblyName>ConsoleApplication1</AssemblyName>
                   </PropertyGroup>
