@@ -77,6 +77,8 @@ namespace Microsoft.Build.Shared
         /// </summary>
         internal const string DefaultTargetsMarker = ".default";
 
+        internal const string StandardTestTargetFrameworkVersion = "v4.8";
+
         /// <summary>
         /// Symbol used in ProjectReferenceTarget items to represent targets specified on the ProjectReference item
         /// with fallback to default targets if the ProjectReference item has no targets specified.

@@ -182,13 +182,6 @@ namespace Microsoft.Build.Evaluation
                                     string.Empty));
                         }
 
-                        var v48Dir = FrameworkLocationHelper.GetPathToDotNetFramework(Version.Parse("4.8"));
-                        if (v48Dir is not null && !toolsets.ContainsKey("4.8"))
-                        {
-                            var buildProperties = CreateStandardProperties(globalProperties, "4.8", libraryPath, v48Dir);
-                            toolsets.Add("4.8", new Toolset("4.8", v48Dir, buildProperties, environmentProperties, globalProperties, null, currentDir, string.Empty));
-                        }
-
                         // Other toolsets are installed in the xbuild directory
                         var xbuildToolsetsDir = Path.Combine(libraryPath, $"xbuild{Path.DirectorySeparatorChar}");
                         if (FileSystems.Default.DirectoryExists(xbuildToolsetsDir))

@@ -5,7 +5,6 @@
 
   <PropertyGroup>
     <TargetFrameworks>$(RuntimeOutputTargetFrameworks)</TargetFrameworks>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <PlatformTarget>$(RuntimeOutputPlatformTarget)</PlatformTarget>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <AssemblyName>Microsoft.Build.Framework.UnitTests</AssemblyName>

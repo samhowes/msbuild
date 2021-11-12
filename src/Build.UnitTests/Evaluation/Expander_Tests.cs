@@ -1881,12 +1881,12 @@ namespace Microsoft.Build.UnitTests.Evaluation
                 return;
             }
 
-            string content = @"
+            string content = $@"
                 <Project ToolsVersion=""msbuilddefaulttoolsversion"" xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 
                     <PropertyGroup>
                         <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
-                        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+                        <TargetFrameworkVersion>{MSBuildConstants.StandardTestTargetFrameworkVersion}</TargetFrameworkVersion>
                         <TargetFrameworkProfile></TargetFrameworkProfile>
                         <TargetFrameworkMoniker>$(TargetFrameworkIdentifier),Version=$(TargetFrameworkVersion)</TargetFrameworkMoniker>
                     </PropertyGroup>

@@ -2730,15 +2730,14 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
             // -------------------------------------------------------------------------------
             ObjectModelHelpers.DeleteTempProjectDirectory();
 
-            ObjectModelHelpers.CreateFileInTempProjectDirectory("lib1.csproj", @"
-
+            ObjectModelHelpers.CreateFileInTempProjectDirectory("lib1.csproj", $@"
                     <Project DefaultTargets=`Build` xmlns=`msbuildnamespace`>
                         <PropertyGroup>
                             <ProjectType>Local</ProjectType>
                             <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
                             <Platform Condition=` '$(Platform)' == '' `>AnyCPU</Platform>
                             <AssemblyName>lib1</AssemblyName>
-                            <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+                            <TargetFrameworkVersion>{MSBuildConstants.StandardTestTargetFrameworkVersion}</TargetFrameworkVersion>
                             <OutputType>Library</OutputType>
                             <RootNamespace>lib1</RootNamespace>
                         </PropertyGroup>
@@ -2909,14 +2908,13 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.InProc
             // -------------------------------------------------------------------------------
             ObjectModelHelpers.DeleteTempProjectDirectory();
 
-            ObjectModelHelpers.CreateFileInTempProjectDirectory("ClassLibrary20.csproj", @"
-
+            ObjectModelHelpers.CreateFileInTempProjectDirectory("ClassLibrary20.csproj", $@"
                     <Project DefaultTargets=`Build` xmlns=`msbuildnamespace`>
                         <PropertyGroup>
                             <ProjectType>Local</ProjectType>
                             <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
                             <Platform Condition=` '$(Platform)' == '' `>AnyCPU</Platform>
-                            <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+                            <TargetFrameworkVersion>{MSBuildConstants.StandardTestTargetFrameworkVersion}</TargetFrameworkVersion>
                             <AssemblyName>ClassLibrary20</AssemblyName>
                             <OutputType>Library</OutputType>
                             <RootNamespace>lib1</RootNamespace>

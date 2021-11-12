@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFrameworks>$(RuntimeOutputTargetFrameworks)</TargetFrameworks>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <PlatformTarget>$(RuntimeOutputPlatformTarget)</PlatformTarget>
     <IsPackable>false</IsPackable>
   </PropertyGroup>

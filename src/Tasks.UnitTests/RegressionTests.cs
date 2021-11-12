@@ -58,7 +58,7 @@ namespace Microsoft.Build.Tasks.UnitTests
 <Project>
   <Import Project=""$(MSBuildToolsPath)\Microsoft.Common.props"" />
   <PropertyGroup>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>{MSBuildConstants.StandardTestTargetFrameworkVersion}</TargetFrameworkVersion>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include=""a.cs""/>
