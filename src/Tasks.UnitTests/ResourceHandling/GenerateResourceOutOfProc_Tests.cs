@@ -2377,6 +2377,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
                             <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
                             <Platform Condition=` '$(Platform)' == '' `>AnyCPU</Platform>
                             <AssemblyName>lib1</AssemblyName>
+                            <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                             <OutputType>Library</OutputType>
                             <RootNamespace>lib1</RootNamespace>
                         </PropertyGroup>
