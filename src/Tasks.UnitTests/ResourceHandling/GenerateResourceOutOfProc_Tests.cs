@@ -2554,6 +2554,7 @@ namespace Microsoft.Build.UnitTests.GenerateResource_Tests.OutOfProc
                             <ProjectType>Local</ProjectType>
                             <Configuration Condition=` '$(Configuration)' == '' `>Debug</Configuration>
                             <Platform Condition=` '$(Platform)' == '' `>AnyCPU</Platform>
+                            <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
                             <AssemblyName>ClassLibrary20</AssemblyName>
                             <OutputType>Library</OutputType>
                             <RootNamespace>lib1</RootNamespace>
