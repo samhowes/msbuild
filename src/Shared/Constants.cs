@@ -77,6 +77,9 @@ namespace Microsoft.Build.Shared
         /// </summary>
         internal const string DefaultTargetsMarker = ".default";
 
+        /// <summary>
+        /// Framework version against which our test projects should be built.
+        /// </summary>
         internal const string StandardTestTargetFrameworkVersion = "v4.8";
 
         /// <summary>

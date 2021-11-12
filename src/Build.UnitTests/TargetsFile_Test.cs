@@ -438,7 +438,7 @@ namespace Microsoft.Build.UnitTests
         /// targeting .NET 4.8 do not get forced to anycpu32bitpreferred by default. 
         /// </summary>
         [Fact]
-        public void ExplicitAnyCPU40ExeProjectIsNot32BitPreferred()
+        public void ExplicitAnyCPU48ExeProjectIsNot32BitPreferred()
         {
             string file = null;
             string outputPath = Path.GetTempPath() + "\\" + Guid.NewGuid().ToString("N");
