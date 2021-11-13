@@ -33,7 +33,7 @@ namespace Microsoft.Build
         /// The decoder used to translate from UTF8 (or whatever).
         /// </summary>
         private Decoder _decoder;
-
+        public static ICustomInterner OpportunisticIntern { get; set; }
         /// <summary>
         /// Comment about constructing.
         /// </summary>
@@ -164,7 +164,7 @@ namespace Microsoft.Build
         /// Create a BinaryReader. It will either be an interning reader or standard binary reader
         /// depending on whether the interning reader is possible given the buffer and stream.
         /// </summary>
-        public static BinaryReader Create(Stream stream, SharedReadBuffer sharedBuffer)
+        public static InterningBinaryReader Create(Stream stream, SharedReadBuffer sharedBuffer)
         {
             Buffer buffer = (Buffer)sharedBuffer;
 
@@ -179,7 +179,7 @@ namespace Microsoft.Build
         /// <summary>
         /// Holds thepreallocated buffer. 
         /// </summary>
-        private class Buffer : SharedReadBuffer
+        public class Buffer : SharedReadBuffer
         {
             /// <summary>
             /// Yes, we are constructing.
@@ -219,7 +219,11 @@ namespace Microsoft.Build
             }
         }
     }
-
+    public interface ICustomInterner
+    {
+        string CharArrayToString(char[] candidate, int count);
+        string StringBuilderToString(StringBuilder candidate);
+    }
     /// <summary>
     /// Opaque holder of shared buffer.
     /// </summary>

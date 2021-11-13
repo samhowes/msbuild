@@ -198,7 +198,7 @@ namespace Microsoft.Build.BackEnd
             /// </summary>
             /// <param name="byteArray">The array to be translated.</param>
             /// <param name="length">The length of array which will be used in translation. This parameter is not used when reading</param>
-            public void Translate(ref byte[] byteArray, ref int length) 
+            public void Translate(ref byte[] byteArray, ref int length)
             {
                 Translate(ref byteArray);
                 length = byteArray.Length;
@@ -271,7 +271,7 @@ namespace Microsoft.Build.BackEnd
             {
                 IList<T> listAsInterface = list;
                 Translate(ref listAsInterface, objectTranslator, count => new List<T>(count));
-                list = (List<T>) listAsInterface;
+                list = (List<T>)listAsInterface;
             }
 
             public void Translate<T, L>(ref IList<T> list, ObjectTranslator<T> objectTranslator, NodePacketCollectionCreator<L> collectionFactory) where L : IList<T>
@@ -500,7 +500,7 @@ namespace Microsoft.Build.BackEnd
                     ref copy,
                     count => new Dictionary<string, string>(count, comparer));
 
-                dictionary = (Dictionary<string, string>) copy;
+                dictionary = (Dictionary<string, string>)copy;
             }
 
             public void TranslateDictionary(ref IDictionary<string, string> dictionary, NodePacketCollectionCreator<IDictionary<string, string>> dictionaryCreator)
@@ -649,7 +649,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Implementation of ITranslator for writing to a stream.
         /// </summary>
-        private class BinaryWriteTranslator : ITranslator
+        public class BinaryWriteTranslator : ITranslator
         {
             /// <summary>
             /// The stream used as a source or destination for data.
@@ -660,7 +660,7 @@ namespace Microsoft.Build.BackEnd
             /// The binary writer used in write mode.
             /// </summary>
             private BinaryWriter _writer;
-
+            public static Func<Stream, BinaryWriter> BinaryWriterFactory { get; set; }
             /// <summary>
             /// Constructs a serializer from the specified stream, operating in the designated mode.
             /// </summary>
@@ -668,7 +668,7 @@ namespace Microsoft.Build.BackEnd
             public BinaryWriteTranslator(Stream packetStream)
             {
                 _packetStream = packetStream;
-                _writer = new BinaryWriter(packetStream);
+                _writer = BinaryWriterFactory(packetStream);
             }
 
             /// <summary>
@@ -1009,7 +1009,7 @@ namespace Microsoft.Build.BackEnd
             /// </summary>
             /// <param name="byteArray">The array to be translated.</param>
             /// <param name="length">The length of array which will be used in translation</param>
-            public void Translate(ref byte[] byteArray, ref int length) 
+            public void Translate(ref byte[] byteArray, ref int length)
             {
                 if (!TranslateNullable(byteArray))
                 {
