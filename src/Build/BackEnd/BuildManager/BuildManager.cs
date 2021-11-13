@@ -569,7 +569,7 @@ namespace Microsoft.Build.Execution
             _projectCacheService = ProjectCacheService.FromDescriptorAsync(
                 pluginDescriptor,
                 this,
-                ((IBuildComponentHost) this).LoggingService,
+                ((IBuildComponentHost)this).LoggingService,
                 cancellationToken);
         }
 
@@ -1399,7 +1399,7 @@ namespace Microsoft.Build.Execution
                 config.GlobalProperties,
                 config.ExplicitToolsVersionSpecified ? config.ToolsVersion : null,
                 _buildParameters,
-                ((IBuildComponentHost) this).LoggingService,
+                ((IBuildComponentHost)this).LoggingService,
                 request.BuildEventContext,
                 false /* loaded by solution parser*/,
                 config.TargetNames,
@@ -1417,7 +1417,8 @@ namespace Microsoft.Build.Execution
                 // metaproject as well.
                 var newConfig = new BuildRequestConfiguration(
                     GetNewConfigurationId(),
-                    instances[i]) { ExplicitlyLoaded = config.ExplicitlyLoaded };
+                    instances[i])
+                { ExplicitlyLoaded = config.ExplicitlyLoaded };
                 if (_configCache.GetMatchingConfiguration(newConfig) == null)
                 {
                     _configCache.AddConfiguration(newConfig);
@@ -1632,7 +1633,7 @@ namespace Microsoft.Build.Execution
                         }
                     }
 
-                    BuildRequestBlocker blocker = new BuildRequestBlocker(-1, Array.Empty<string>(), new[] {submission.BuildRequest});
+                    BuildRequestBlocker blocker = new BuildRequestBlocker(-1, Array.Empty<string>(), new[] { submission.BuildRequest });
 
                     HandleNewRequest(Scheduler.VirtualNode, blocker);
                 }
@@ -1802,7 +1803,7 @@ namespace Microsoft.Build.Execution
                     // Log each InvalidProjectFileException encountered during ProjectGraph creation
                     foreach (var innerException in aggregateException.InnerExceptions)
                     {
-                        var projectException = (InvalidProjectFileException) innerException;
+                        var projectException = (InvalidProjectFileException)innerException;
                         if (!projectException.HasBeenLogged)
                         {
                             BuildEventContext projectBuildEventContext = new BuildEventContext(submission.SubmissionId, 1, BuildEventContext.InvalidProjectInstanceId, BuildEventContext.InvalidProjectContextId, BuildEventContext.InvalidTargetId, BuildEventContext.InvalidTaskId);
@@ -1858,8 +1859,8 @@ namespace Microsoft.Build.Execution
                         i =>
                         {
                             var metadataDictionary = i.Metadata.ToDictionary(
-                                m => ((IKeyed) m).Key,
-                                m => ((IValued) m).EscapedValue);
+                                m => ((IKeyed)m).Key,
+                                m => ((IValued)m).EscapedValue);
 
                             var pluginPath = Path.Combine(i.Project.Directory, i.EvaluatedInclude);
 
@@ -2041,7 +2042,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Returns a new, valid configuration id.
         /// </summary>
-        private int GetNewConfigurationId()
+        public int GetNewConfigurationId()
         {
             int newId = Interlocked.Increment(ref s_nextBuildRequestConfigurationId);
 
@@ -2839,6 +2840,12 @@ namespace Microsoft.Build.Execution
             }
         }
 
+        public void ReuseOldCaches(IConfigCache configCache, IResultsCache resultsCache)
+        {
+            _componentFactories.ReplaceFactory(BuildComponentType.ConfigCache, configCache);
+            _componentFactories.ReplaceFactory(BuildComponentType.ResultsCache, resultsCache);
+        }
+
         private void LogMessage(string message)
         {
             var loggingService = ((IBuildComponentHost)this).LoggingService;
@@ -2899,7 +2906,7 @@ namespace Microsoft.Build.Execution
             public string Parameters
             {
                 get => String.Empty;
-                set{ }
+                set { }
             }
 
             /// <summary>
