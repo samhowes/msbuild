@@ -221,7 +221,7 @@ namespace Microsoft.Build.BackEnd
         /// Removes the results for a particular configuration.
         /// </summary>
         /// <param name="configurationId">The configuration</param>
-        public void ClearResultsForConfiguration(int configurationId)
+        public virtual void ClearResultsForConfiguration(int configurationId)
         {
             lock (_resultsByConfiguration)
             {
@@ -244,7 +244,7 @@ namespace Microsoft.Build.BackEnd
 
             if (translator.Mode == TranslationDirection.ReadFromStream)
             {
-                _resultsByConfiguration = (ConcurrentDictionary<int, BuildResult>) localReference;
+                _resultsByConfiguration = (ConcurrentDictionary<int, BuildResult>)localReference;
             }
         }
 
