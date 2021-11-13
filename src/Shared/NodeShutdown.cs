@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -8,7 +8,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// Reasons why the node shut down.
     /// </summary>
-    internal enum NodeShutdownReason
+    public enum NodeShutdownReason
     {
         /// <summary>
         /// The node shut down because it was requested to shut down.
@@ -31,7 +31,7 @@ namespace Microsoft.Build.BackEnd
     /// This is the last packet the BuildManager will receive from a Node, and as such can be used to trigger
     /// any appropriate cleanup behavior.
     /// </summary>
-    internal class NodeShutdown : INodePacket
+    public class NodeShutdown : INodePacket
     {
         /// <summary>
         /// The reason the node shut down.
@@ -109,7 +109,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Factory method for deserialization
         /// </summary>
-        internal static NodeShutdown FactoryForDeserialization(ITranslator translator)
+        public static NodeShutdown FactoryForDeserialization(ITranslator translator)
         {
             NodeShutdown shutdown = new NodeShutdown();
             shutdown.Translate(translator);

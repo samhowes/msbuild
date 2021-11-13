@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -52,7 +52,7 @@ namespace Microsoft.Build.BackEnd
     /// 
     /// For sensible semantics, only the current primary scope can be modified at any point.
     /// </summary>
-    internal class Lookup : IPropertyProvider<ProjectPropertyInstance>, IItemProvider<ProjectItemInstance>
+    public class Lookup : IPropertyProvider<ProjectPropertyInstance>, IItemProvider<ProjectItemInstance>
     {
         #region Fields
 
@@ -87,7 +87,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Construct a lookup over specified items and properties.
         /// </summary>
-        internal Lookup(ItemDictionary<ProjectItemInstance> projectItems, PropertyDictionary<ProjectPropertyInstance> properties)
+        public Lookup(ItemDictionary<ProjectItemInstance> projectItems, PropertyDictionary<ProjectPropertyInstance> properties)
         {
             ErrorUtilities.VerifyThrowInternalNull(projectItems, nameof(projectItems));
             ErrorUtilities.VerifyThrowInternalNull(properties, nameof(properties));
@@ -195,7 +195,7 @@ namespace Microsoft.Build.BackEnd
         /// When an override is detected a messages is generated to inform the users that the property is being changed between batches
         /// </summary>
         /// <returns>array or error messages to log </returns>
-        internal List<string> GetPropertyOverrideMessages(Dictionary<string, string> lookupHash)
+        public List<string> GetPropertyOverrideMessages(Dictionary<string, string> lookupHash)
         {
             List<string> errorMessages = null;
             // For each batch lookup list we need to compare the property items to see if they have already been set
@@ -233,7 +233,7 @@ namespace Microsoft.Build.BackEnd
         /// Clones this object, to create another one with its own list, but the same contents.
         /// Then the clone can enter scope and have its own fresh primary list without affecting the other object.
         /// </summary>
-        internal Lookup Clone()
+        public Lookup Clone()
         {
             return new Lookup(this);
         }
@@ -242,7 +242,7 @@ namespace Microsoft.Build.BackEnd
         /// Enters the scope using the specified description.
         /// Callers keep the scope in order to pass it to <see cref="LeaveScope">LeaveScope</see>.
         /// </summary>
-        internal Lookup.Scope EnterScope(string description)
+        public Lookup.Scope EnterScope(string description)
         {
             // We don't create the tables unless we need them
             Scope scope = new Scope(this, description, null, null);
@@ -591,7 +591,7 @@ namespace Microsoft.Build.BackEnd
         /// Should be used only by batching buckets, and if no items are passed,
         /// explicitly stores a marker for this item type indicating this.
         /// </summary>
-        internal void PopulateWithItems(string itemType, ICollection<ProjectItemInstance> group)
+        public void PopulateWithItems(string itemType, ICollection<ProjectItemInstance> group)
         {
             PrimaryTable ??= new ItemDictionary<ProjectItemInstance>();
             ICollection<ProjectItemInstance> existing = PrimaryTable[itemType];
@@ -611,7 +611,7 @@ namespace Microsoft.Build.BackEnd
         /// Populates with an item. This is done before the item lookup is used in this scope.
         /// There may or may not already be a group for it.
         /// </summary>
-        internal void PopulateWithItem(ProjectItemInstance item)
+        public void PopulateWithItem(ProjectItemInstance item)
         {
             PrimaryTable ??= new ItemDictionary<ProjectItemInstance>();
             PrimaryTable.Add(item);
@@ -620,7 +620,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Apply a property to this scope.
         /// </summary>
-        internal void SetProperty(ProjectPropertyInstance property)
+        public void SetProperty(ProjectPropertyInstance property)
         {
             // Setting in outer scope could be easily implemented, but our code does not do it at present
             MustNotBeOuterScope();
@@ -633,7 +633,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Implements a true add, an item that has been created in a batch.
         /// </summary>
-        internal void AddNewItemsOfItemType(string itemType, ICollection<ProjectItemInstance> group, bool doNotAddDuplicates = false)
+        public void AddNewItemsOfItemType(string itemType, ICollection<ProjectItemInstance> group, bool doNotAddDuplicates = false)
         {
             // Adding to outer scope could be easily implemented, but our code does not do it at present
             MustNotBeOuterScope();
@@ -672,7 +672,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Implements a true add, an item that has been created in a batch.
         /// </summary>
-        internal void AddNewItem(ProjectItemInstance item)
+        public void AddNewItem(ProjectItemInstance item)
         {
             // Adding to outer scope could be easily implemented, but our code does not do it at present
             MustNotBeOuterScope();
@@ -691,7 +691,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Remove a bunch of items from this scope
         /// </summary>
-        internal void RemoveItems(IEnumerable<ProjectItemInstance> items)
+        public void RemoveItems(IEnumerable<ProjectItemInstance> items)
         {
             foreach (ProjectItemInstance item in items)
             {
@@ -702,7 +702,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Remove an item from this scope
         /// </summary>
-        internal void RemoveItem(ProjectItemInstance item)
+        public void RemoveItem(ProjectItemInstance item)
         {
             // Removing from outer scope could be easily implemented, but our code does not do it at present
             MustNotBeOuterScope();
@@ -722,7 +722,7 @@ namespace Microsoft.Build.BackEnd
         /// Modifies items in this scope with the same set of metadata modifications.
         /// Assumes all the items in the group have the same, provided, type.
         /// </summary>
-        internal void ModifyItems(string itemType, ICollection<ProjectItemInstance> group, MetadataModifications metadataChanges)
+        public void ModifyItems(string itemType, ICollection<ProjectItemInstance> group, MetadataModifications metadataChanges)
         {
             // Modifying in outer scope could be easily implemented, but our code does not do it at present
             MustNotBeOuterScope();
@@ -1001,7 +1001,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// A class representing a set of additions, modifications or removal of metadata from items.
         /// </summary>
-        internal class MetadataModifications
+        public class MetadataModifications
         {
             /// <summary>
             /// Flag indicating if the modifications should be interpreted such that the lack of an explicit entry for a metadata name
@@ -1166,7 +1166,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// A type of metadata modification.
         /// </summary>
-        internal enum ModificationType
+        public enum ModificationType
         {
             /// <summary>
             /// Indicates the metadata value should be kept unchanged.
@@ -1187,7 +1187,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Represents a modification for a single metadata.
         /// </summary>
-        internal class MetadataModification
+        public class MetadataModification
         {
             /// <summary>
             /// When true, indicates the metadata should be removed from the target item.
@@ -1287,7 +1287,7 @@ namespace Microsoft.Build.BackEnd
         /// Represents an entry in the lookup list.
         /// Class rather than a struct so that it can be modified in the list.
         /// </summary>
-        internal class Scope
+        public class Scope
         {
             /// <summary>
             /// Contains all of the original items at this level in the Lookup
@@ -1341,7 +1341,7 @@ namespace Microsoft.Build.BackEnd
             /// </summary>
             private bool _truncateLookupsAtThisScope;
 
-            internal Scope(Lookup lookup, string description, ItemDictionary<ProjectItemInstance> items, PropertyDictionary<ProjectPropertyInstance> properties)
+            public Scope(Lookup lookup, string description, ItemDictionary<ProjectItemInstance> items, PropertyDictionary<ProjectPropertyInstance> properties)
             {
                 _owningLookup = lookup;
                 _description = description;
@@ -1361,7 +1361,7 @@ namespace Microsoft.Build.BackEnd
             /// include adds or removes unless it's the table in 
             /// the outermost scope.
             /// </summary>
-            internal ItemDictionary<ProjectItemInstance> Items
+            public ItemDictionary<ProjectItemInstance> Items
             {
                 get { return _items; }
                 set { _items = value; }
@@ -1369,7 +1369,7 @@ namespace Microsoft.Build.BackEnd
             /// <summary>
             /// Adds made in this scope or above.
             /// </summary>
-            internal ItemDictionary<ProjectItemInstance> Adds
+            public ItemDictionary<ProjectItemInstance> Adds
             {
                 get { return _adds; }
                 set { _adds = value; }
@@ -1377,7 +1377,7 @@ namespace Microsoft.Build.BackEnd
             /// <summary>
             /// Removes made in this scope or above.
             /// </summary>
-            internal ItemDictionary<ProjectItemInstance> Removes
+            public ItemDictionary<ProjectItemInstance> Removes
             {
                 get { return _removes; }
                 set { _removes = value; }
@@ -1385,7 +1385,7 @@ namespace Microsoft.Build.BackEnd
             /// <summary>
             /// Modifications made in this scope or above.
             /// </summary>
-            internal ItemTypeToItemsMetadataUpdateDictionary Modifies
+            public ItemTypeToItemsMetadataUpdateDictionary Modifies
             {
                 get { return _modifies; }
                 set { _modifies = value; }
@@ -1395,7 +1395,7 @@ namespace Microsoft.Build.BackEnd
             /// that are initially visible in this scope. Does not
             /// include sets unless it's the table in the outermost scope.
             /// </summary>
-            internal PropertyDictionary<ProjectPropertyInstance> Properties
+            public PropertyDictionary<ProjectPropertyInstance> Properties
             {
                 get { return _properties; }
                 set { _properties = value; }
@@ -1403,7 +1403,7 @@ namespace Microsoft.Build.BackEnd
             /// <summary>
             /// Properties set in this scope or above.
             /// </summary>
-            internal PropertyDictionary<ProjectPropertyInstance> PropertySets
+            public PropertyDictionary<ProjectPropertyInstance> PropertySets
             {
                 get { return _propertySets; }
                 set { _propertySets = value; }
@@ -1411,14 +1411,14 @@ namespace Microsoft.Build.BackEnd
             /// <summary>
             /// ID of thread owning this scope
             /// </summary>
-            internal int ThreadIdThatEnteredScope
+            public int ThreadIdThatEnteredScope
             {
                 get { return _threadIdThatEnteredScope; }
             }
             /// <summary>
             /// Whether to stop lookups going beyond this scope downwards
             /// </summary>
-            internal bool TruncateLookupsAtThisScope
+            public bool TruncateLookupsAtThisScope
             {
                 get { return _truncateLookupsAtThisScope; }
             }
@@ -1426,7 +1426,7 @@ namespace Microsoft.Build.BackEnd
             /// <summary>
             /// The description assigned to this scope.
             /// </summary>
-            internal string Description
+            public string Description
             {
                 get { return _description; }
             }
@@ -1434,7 +1434,7 @@ namespace Microsoft.Build.BackEnd
             /// <summary>
             /// Leaves the current lookup scope.
             /// </summary>
-            internal void LeaveScope()
+            public void LeaveScope()
             {
                 _owningLookup.LeaveScope(this);
             }

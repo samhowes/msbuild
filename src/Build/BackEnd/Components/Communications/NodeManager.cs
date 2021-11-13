@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -12,7 +12,7 @@ namespace Microsoft.Build.BackEnd
     /// The NodeManager class is responsible for marshalling data to/from the NodeProviders and organizing the 
     /// creation of new nodes on request.
     /// </summary>
-    internal class NodeManager : INodeManager
+    public class NodeManager : INodeManager
     {
         /// <summary>
         /// The invalid node id
@@ -280,7 +280,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Factory for component creation.
         /// </summary>
-        static internal IBuildComponent CreateComponent(BuildComponentType type)
+        static public IBuildComponent CreateComponent(BuildComponentType type)
         {
             ErrorUtilities.VerifyThrow(type == BuildComponentType.NodeManager, "Cannot create component of type {0}", type);
             return new NodeManager();

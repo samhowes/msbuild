@@ -33,7 +33,7 @@ namespace Microsoft.Build.UnitTests
      * Utility methods for unit tests that work through the object model.
      *
      */
-    internal static class ObjectModelHelpers
+    public static class ObjectModelHelpers
     {
         private const string msbuildNamespace = "http://schemas.microsoft.com/developer/msbuild/2003";
         private static string s_msbuildDefaultToolsVersion = MSBuildConstants.CurrentToolsVersion;
@@ -43,7 +43,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Return the current Visual Studio version
         /// </summary>
-        internal static string CurrentVisualStudioVersion
+        public static string CurrentVisualStudioVersion
         {
             get
             {
@@ -54,7 +54,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Return the default tools version
         /// </summary>
-        internal static string MSBuildDefaultToolsVersion
+        public static string MSBuildDefaultToolsVersion
         {
             get
             {
@@ -65,7 +65,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Return the current assembly version
         /// </summary>
-        internal static string MSBuildAssemblyVersion
+        public static string MSBuildAssemblyVersion
         {
             get
             {
@@ -98,7 +98,7 @@ namespace Microsoft.Build.UnitTests
         /// Gets an item list from the project and assert that it contains
         /// exactly one item with the supplied name.
         /// </summary>
-        internal static ProjectItem AssertSingleItem(Project p, string type, string itemInclude)
+        public static ProjectItem AssertSingleItem(Project p, string type, string itemInclude)
         {
             ProjectItem[] items = p.GetItems(type).ToArray();
             int count = 0;
@@ -113,7 +113,7 @@ namespace Microsoft.Build.UnitTests
             return items[0];
         }
 
-        internal static void AssertItemEvaluationFromProject(string projectContents, string[] inputFiles, string[] expectedInclude, Dictionary<string, string>[] expectedMetadataPerItem = null, bool normalizeSlashes = false, bool makeExpectedIncludeAbsolute = false)
+        public static void AssertItemEvaluationFromProject(string projectContents, string[] inputFiles, string[] expectedInclude, Dictionary<string, string>[] expectedMetadataPerItem = null, bool normalizeSlashes = false, bool makeExpectedIncludeAbsolute = false)
         {
             AssertItemEvaluationFromGenericItemEvaluator((p, c) =>
                 {
@@ -130,7 +130,7 @@ namespace Microsoft.Build.UnitTests
             normalizeSlashes);
         }
 
-        internal static void AssertItemEvaluationFromGenericItemEvaluator(Func<string, ProjectCollection, IList<TestItem>> itemEvaluator, string projectContents, string[] inputFiles, string[] expectedInclude, bool makeExpectedIncludeAbsolute = false, Dictionary<string, string>[] expectedMetadataPerItem = null, bool normalizeSlashes = false)
+        public static void AssertItemEvaluationFromGenericItemEvaluator(Func<string, ProjectCollection, IList<TestItem>> itemEvaluator, string projectContents, string[] inputFiles, string[] expectedInclude, bool makeExpectedIncludeAbsolute = false, Dictionary<string, string>[] expectedMetadataPerItem = null, bool normalizeSlashes = false)
         {
             using (var env = TestEnvironment.Create())
             using (var collection = new ProjectCollection())
@@ -154,20 +154,20 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        internal static string NormalizeSlashes(string path)
+        public static string NormalizeSlashes(string path)
         {
             return path.Replace('/', Path.DirectorySeparatorChar).Replace('\\', Path.DirectorySeparatorChar);
         }
 
         // todo Make IItem<M> public and add these new members to it.
-        internal interface TestItem
+        public interface TestItem
         {
             string EvaluatedInclude { get; }
             int DirectMetadataCount { get; }
             string GetMetadataValue(string key);
         }
 
-        internal class ProjectItemTestItemAdapter : TestItem
+        public class ProjectItemTestItemAdapter : TestItem
         {
             private readonly ProjectItem _projectInstance;
 
@@ -186,7 +186,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        internal class ProjectItemInstanceTestItemAdapter : TestItem
+        public class ProjectItemInstanceTestItemAdapter : TestItem
         {
             private readonly ProjectItemInstance _projectInstance;
 
@@ -205,7 +205,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        internal static void AssertItems(string[] expectedItems, ICollection<ProjectItem> items, Dictionary<string, string> expectedDirectMetadata = null, bool normalizeSlashes = false)
+        public static void AssertItems(string[] expectedItems, ICollection<ProjectItem> items, Dictionary<string, string> expectedDirectMetadata = null, bool normalizeSlashes = false)
         {
             var converteditems = items.Select(i => (TestItem) new ProjectItemTestItemAdapter(i)).ToList();
             AssertItems(expectedItems, converteditems, expectedDirectMetadata, normalizeSlashes);
@@ -214,7 +214,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Asserts that the list of items has the specified evaluated includes.
         /// </summary>
-        internal static void AssertItems(string[] expectedItems, IList<TestItem> items, Dictionary<string, string> expectedDirectMetadata = null, bool normalizeSlashes = false)
+        public static void AssertItems(string[] expectedItems, IList<TestItem> items, Dictionary<string, string> expectedDirectMetadata = null, bool normalizeSlashes = false)
         {
             if (expectedDirectMetadata == null)
             {
@@ -286,7 +286,7 @@ namespace Microsoft.Build.UnitTests
         /// </summary>
         /// <param name="expectedItemsString"></param>
         /// <param name="actualItems"></param>
-        internal static void AssertItemsMatch(string expectedItemsString, ITaskItem[] actualItems)
+        public static void AssertItemsMatch(string expectedItemsString, ITaskItem[] actualItems)
         {
             AssertItemsMatch(expectedItemsString, actualItems, true);
         }
@@ -309,7 +309,7 @@ namespace Microsoft.Build.UnitTests
         /// <param name="expectedItemsString"></param>
         /// <param name="actualItems"></param>
         /// <param name="orderOfItemsShouldMatch"></param>
-        internal static void AssertItemsMatch(string expectedItemsString, ITaskItem[] actualItems, bool orderOfItemsShouldMatch)
+        public static void AssertItemsMatch(string expectedItemsString, ITaskItem[] actualItems, bool orderOfItemsShouldMatch)
         {
             List<ITaskItem> expectedItems = ParseExpectedItemsString(expectedItemsString);
 
@@ -419,18 +419,18 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        internal static void AssertItemHasMetadata(Dictionary<string, string> expected, ProjectItem item)
+        public static void AssertItemHasMetadata(Dictionary<string, string> expected, ProjectItem item)
         {
             AssertItemHasMetadata(expected, new ProjectItemTestItemAdapter(item));
         }
 
-        internal static void AssertItemHasMetadata(string key, string value, ProjectItem item)
+        public static void AssertItemHasMetadata(string key, string value, ProjectItem item)
         {
             item.DirectMetadataCount.ShouldBe(1, () => $"Expected 1 metadata, ({key}), got {item.DirectMetadataCount}");
             item.GetMetadataValue(key).ShouldBe(value);
         }
 
-        internal static void AssertItemHasMetadata(Dictionary<string, string> expected, TestItem item)
+        public static void AssertItemHasMetadata(Dictionary<string, string> expected, TestItem item)
         {
             expected ??= new Dictionary<string, string>();
 
@@ -445,7 +445,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Used to compare the contents of two arrays.
         /// </summary>
-        internal static void AssertArrayContentsMatch(object[] expected, object[] actual)
+        public static void AssertArrayContentsMatch(object[] expected, object[] actual)
         {
             if (expected == null)
             {
@@ -525,7 +525,7 @@ namespace Microsoft.Build.UnitTests
         /// Assert that a given file exists within the temp project directory.
         /// </summary>
         /// <param name="fileRelativePath"></param>
-        internal static void AssertFileExistsInTempProjectDirectory(string fileRelativePath)
+        public static void AssertFileExistsInTempProjectDirectory(string fileRelativePath)
         {
             AssertFileExistsInTempProjectDirectory(fileRelativePath, null);
         }
@@ -535,7 +535,7 @@ namespace Microsoft.Build.UnitTests
         /// </summary>
         /// <param name="fileRelativePath"></param>
         /// <param name="message">Can be null.</param>
-        internal static void AssertFileExistsInTempProjectDirectory(string fileRelativePath, string message)
+        public static void AssertFileExistsInTempProjectDirectory(string fileRelativePath, string message)
         {
             if (message == null)
             {
@@ -552,7 +552,7 @@ namespace Microsoft.Build.UnitTests
         /// </summary>
         /// <param name="projectFileContents"></param>
         /// <returns></returns>
-        internal static string CleanupFileContents(string projectFileContents)
+        public static string CleanupFileContents(string projectFileContents)
         {
             // Replace reverse-single-quotes with double-quotes.
             projectFileContents = projectFileContents.Replace("`", "\"");
@@ -574,7 +574,7 @@ namespace Microsoft.Build.UnitTests
         /// Normalizes all the whitespace in an xml string so that two documents that
         /// differ only in whitespace can be easily compared to each other for sameness.
         /// </summary>
-        internal static string NormalizeXmlWhitespace(string xml)
+        public static string NormalizeXmlWhitespace(string xml)
         {
             XmlDocument xmldoc = new XmlDocument();
             xmldoc.LoadXml(xml);
@@ -604,7 +604,7 @@ namespace Microsoft.Build.UnitTests
         /// </summary>
         /// <param name="xml"></param>
         /// <returns></returns>
-        internal static string CreateTempFileOnDisk(string fileContents, params object[] args)
+        public static string CreateTempFileOnDisk(string fileContents, params object[] args)
         {
             return CreateTempFileOnDiskNoFormat(string.Format(fileContents, args));
         }
@@ -614,7 +614,7 @@ namespace Microsoft.Build.UnitTests
         /// </summary>
         /// <param name="xml"></param>
         /// <returns></returns>
-        internal static string CreateTempFileOnDiskNoFormat(string fileContents)
+        public static string CreateTempFileOnDiskNoFormat(string fileContents)
         {
             string projectFilePath = FileUtilities.GetTemporaryFile();
 
@@ -623,7 +623,7 @@ namespace Microsoft.Build.UnitTests
             return projectFilePath;
         }
 
-        internal static ProjectRootElement CreateInMemoryProjectRootElement(string projectContents, ProjectCollection collection = null, bool preserveFormatting = true)
+        public static ProjectRootElement CreateInMemoryProjectRootElement(string projectContents, ProjectCollection collection = null, bool preserveFormatting = true)
         {
             var cleanedProject = CleanupFileContents(projectContents);
 
@@ -638,7 +638,7 @@ namespace Microsoft.Build.UnitTests
         /// </summary>
         /// <param name="xml"></param>
         /// <returns></returns>
-        internal static Project CreateInMemoryProject(string xml)
+        public static Project CreateInMemoryProject(string xml)
         {
             return CreateInMemoryProject(xml, new ConsoleLogger());
         }
@@ -649,7 +649,7 @@ namespace Microsoft.Build.UnitTests
         /// <param name="xml"></param>
         /// <param name="logger"></param>
         /// <returns></returns>
-        internal static Project CreateInMemoryProject(string xml, ILogger logger /* May be null */)
+        public static Project CreateInMemoryProject(string xml, ILogger logger /* May be null */)
         {
             return CreateInMemoryProject(new ProjectCollection(), xml, logger);
         }
@@ -661,7 +661,7 @@ namespace Microsoft.Build.UnitTests
         /// <param name="xml"></param>
         /// <param name="logger">May be null</param>
         /// <returns></returns>
-        internal static Project CreateInMemoryProject(ProjectCollection e, string xml, ILogger logger /* May be null */)
+        public static Project CreateInMemoryProject(ProjectCollection e, string xml, ILogger logger /* May be null */)
         {
             return CreateInMemoryProject(e, xml, logger, null);
         }
@@ -671,7 +671,7 @@ namespace Microsoft.Build.UnitTests
         /// </summary>
         /// <param name="logger">May be null</param>
         /// <param name="toolsVersion">May be null</param>
-        internal static Project CreateInMemoryProject
+        public static Project CreateInMemoryProject
             (
             ProjectCollection projectCollection,
             string xml,
@@ -707,7 +707,7 @@ namespace Microsoft.Build.UnitTests
         /// </summary>
         /// <param name="projectContents"></param>
         /// <returns></returns>
-        internal static MockLogger BuildProjectExpectSuccess
+        public static MockLogger BuildProjectExpectSuccess
             (
             string projectContents,
             ITestOutputHelper testOutputHelper = null
@@ -718,7 +718,7 @@ namespace Microsoft.Build.UnitTests
             return logger;
         }
 
-        internal static void BuildProjectExpectSuccess
+        public static void BuildProjectExpectSuccess
             (
             string projectContents,
             params ILogger[] loggers
@@ -734,7 +734,7 @@ namespace Microsoft.Build.UnitTests
         /// </summary>
         /// <param name="projectContents"></param>
         /// <returns></returns>
-        internal static MockLogger BuildProjectExpectFailure
+        public static MockLogger BuildProjectExpectFailure
             (
             string projectContents
             )
@@ -745,7 +745,7 @@ namespace Microsoft.Build.UnitTests
             return logger;
         }
 
-        internal static void BuildProjectExpectFailure
+        public static void BuildProjectExpectFailure
             (
             string projectContents,
             ILogger logger
@@ -763,7 +763,7 @@ namespace Microsoft.Build.UnitTests
         /// </summary>
         /// <param name="project"></param>
         /// <param name="newExpectedProjectContents"></param>
-        internal static void CompareProjectContents
+        public static void CompareProjectContents
             (
             Project project,
             string newExpectedProjectContents
@@ -790,7 +790,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Creates and returns a unique path under temp
         /// </summary>
-        internal static string TempProjectDir
+        public static string TempProjectDir
         {
             get
             {
@@ -808,7 +808,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Deletes the directory %TEMP%\TempDirForMSBuildUnitTests, and all its contents.
         /// </summary>
-        internal static void DeleteTempProjectDirectory()
+        public static void DeleteTempProjectDirectory()
         {
             DeleteDirectory(TempProjectDir);
         }
@@ -816,7 +816,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Deletes the directory and all its contents.
         /// </summary>
-        internal static void DeleteDirectory(string dir)
+        public static void DeleteDirectory(string dir)
         {
             // Manually deleting all children, but intentionally leaving the
             // Temp project directory behind due to locking issues which were causing
@@ -864,7 +864,7 @@ namespace Microsoft.Build.UnitTests
         /// up the file contents (replacing single-back-quote with double-quote, etc.).
         /// Silently OVERWRITES existing file.
         /// </summary>
-        internal static string CreateFileInTempProjectDirectory(string fileRelativePath, string fileContents, Encoding encoding = null)
+        public static string CreateFileInTempProjectDirectory(string fileRelativePath, string fileContents, Encoding encoding = null)
         {
             Assert.False(string.IsNullOrEmpty(fileRelativePath));
             string fullFilePath = Path.Combine(TempProjectDir, fileRelativePath);
@@ -913,7 +913,7 @@ namespace Microsoft.Build.UnitTests
         /// </summary>
         /// <param name="projectFileRelativePath"></param>
         /// <returns></returns>
-        internal static void BuildTempProjectFileExpectSuccess(string projectFileRelativePath, MockLogger logger)
+        public static void BuildTempProjectFileExpectSuccess(string projectFileRelativePath, MockLogger logger)
         {
             BuildTempProjectFileWithTargetsExpectSuccess(projectFileRelativePath, null, null, logger);
         }
@@ -921,7 +921,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Builds a project file from disk, and asserts if the build does not succeed.
         /// </summary>
-        internal static void BuildTempProjectFileWithTargetsExpectSuccess(string projectFileRelativePath, string[] targets, IDictionary<string, string> additionalProperties, MockLogger logger)
+        public static void BuildTempProjectFileWithTargetsExpectSuccess(string projectFileRelativePath, string[] targets, IDictionary<string, string> additionalProperties, MockLogger logger)
         {
             BuildTempProjectFileWithTargets(projectFileRelativePath, targets, additionalProperties, logger)
                 .ShouldBeTrue("Build failed.  See test output (Attachments in Azure Pipelines) for details");
@@ -930,7 +930,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Builds a project file from disk, and asserts if the build succeeds.
         /// </summary>
-        internal static void BuildTempProjectFileExpectFailure(string projectFileRelativePath, MockLogger logger)
+        public static void BuildTempProjectFileExpectFailure(string projectFileRelativePath, MockLogger logger)
         {
             BuildTempProjectFileWithTargets(projectFileRelativePath, null, null, logger)
                 .ShouldBeFalse("Build unexpectedly succeeded.  See test output (Attachments in Azure Pipelines) for details");
@@ -941,7 +941,7 @@ namespace Microsoft.Build.UnitTests
         /// </summary>
         /// <param name="fileRelativePath"></param>
         /// <returns></returns>
-        internal static Project LoadProjectFileInTempProjectDirectory(string projectFileRelativePath)
+        public static Project LoadProjectFileInTempProjectDirectory(string projectFileRelativePath)
         {
             return LoadProjectFileInTempProjectDirectory(projectFileRelativePath, false /* don't touch project*/);
         }
@@ -951,7 +951,7 @@ namespace Microsoft.Build.UnitTests
         /// </summary>
         /// <param name="fileRelativePath"></param>
         /// <returns></returns>
-        internal static Project LoadProjectFileInTempProjectDirectory(string projectFileRelativePath, bool touchProject)
+        public static Project LoadProjectFileInTempProjectDirectory(string projectFileRelativePath, bool touchProject)
         {
             string projectFileFullPath = Path.Combine(TempProjectDir, projectFileRelativePath);
 
@@ -975,7 +975,7 @@ namespace Microsoft.Build.UnitTests
         /// <param name="additionalProperties">Can be null.</param>
         /// <param name="logger"></param>
         /// <returns></returns>
-        internal static bool BuildTempProjectFileWithTargets
+        public static bool BuildTempProjectFileWithTargets
         (
             string projectFileRelativePath,
             string[] targets,
@@ -1017,7 +1017,7 @@ namespace Microsoft.Build.UnitTests
         /// Delete any files in the list that currently exist.
         /// </summary>
         /// <param name="files"></param>
-        internal static void DeleteTempFiles(string[] files)
+        public static void DeleteTempFiles(string[] files)
         {
             for (int i = 0; i < files.Length; i++)
             {
@@ -1028,7 +1028,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Returns the requested number of temporary files.
         /// </summary>
-        internal static string[] GetTempFiles(int number)
+        public static string[] GetTempFiles(int number)
         {
             return GetTempFiles(number, DateTime.Now);
         }
@@ -1036,7 +1036,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Returns the requested number of temporary files, with the requested write time.
         /// </summary>
-        internal static string[] GetTempFiles(int number, DateTime lastWriteTime)
+        public static string[] GetTempFiles(int number, DateTime lastWriteTime)
         {
             string[] files = new string[number];
 
@@ -1051,7 +1051,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Get items of item type "i" with using the item xml fragment passed in
         /// </summary>
-        internal static IList<ProjectItem> GetItemsFromFragment(string fragment, bool allItems = false, bool ignoreCondition = false)
+        public static IList<ProjectItem> GetItemsFromFragment(string fragment, bool allItems = false, bool ignoreCondition = false)
         {
             string content = FormatProjectContentsWithItemGroupFragment(fragment);
 
@@ -1059,7 +1059,7 @@ namespace Microsoft.Build.UnitTests
             return items;
         }
 
-        internal static string GetConcatenatedItemsOfType(this Project project, string itemType, string itemSeparator = ";")
+        public static string GetConcatenatedItemsOfType(this Project project, string itemType, string itemSeparator = ";")
         {
             return string.Join(itemSeparator, project.Items.Where(i => i.ItemType.Equals(itemType)).Select(i => i.EvaluatedInclude));
         }
@@ -1067,7 +1067,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Get the items of type "i" in the project provided
         /// </summary>
-        internal static IList<ProjectItem> GetItems(string content, bool allItems = false, bool ignoreCondition = false)
+        public static IList<ProjectItem> GetItems(string content, bool allItems = false, bool ignoreCondition = false)
         {
             var projectXml = ProjectRootElement.Create(XmlReader.Create(new StringReader(CleanupFileContents(content))));
             Project project = new Project(projectXml);
@@ -1079,7 +1079,7 @@ namespace Microsoft.Build.UnitTests
             return item;
         }
 
-        internal static string FormatProjectContentsWithItemGroupFragment(string fragment)
+        public static string FormatProjectContentsWithItemGroupFragment(string fragment)
         {
             return
                 $@"
@@ -1095,16 +1095,16 @@ namespace Microsoft.Build.UnitTests
     /// <summary>
     /// Various generic unit test helper methods
     /// </summary>
-    internal static partial class Helpers
+    public static partial class Helpers
     {
-        internal static string Format(this string s, params object[] formatItems)
+        public static string Format(this string s, params object[] formatItems)
         {
             ErrorUtilities.VerifyThrowArgumentNull(s, nameof(s));
 
             return string.Format(s, formatItems);
         }
 
-        internal static string GetOSPlatformAsString()
+        public static string GetOSPlatformAsString()
         {
             var currentPlatformString = string.Empty;
 
@@ -1131,7 +1131,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Returns the count of objects returned by an enumerator
         /// </summary>
-        internal static int Count(IEnumerable enumerable)
+        public static int Count(IEnumerable enumerable)
         {
             int i = 0;
             foreach (object _ in enumerable)
@@ -1145,7 +1145,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Makes a temporary list out of an enumerable
         /// </summary>
-        internal static List<T> MakeList<T>(IEnumerable<T> enumerable)
+        public static List<T> MakeList<T>(IEnumerable<T> enumerable)
         {
             List<T> list = new List<T>();
             foreach (T item in enumerable)
@@ -1158,7 +1158,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Gets the first element in the enumeration, or null if there are none
         /// </summary>
-        internal static T GetFirst<T>(IEnumerable<T> enumerable)
+        public static T GetFirst<T>(IEnumerable<T> enumerable)
             where T : class
         {
             T first = null;
@@ -1175,7 +1175,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Gets the last element in the enumeration, or null if there are none
         /// </summary>
-        internal static T GetLast<T>(IEnumerable<T> enumerable)
+        public static T GetLast<T>(IEnumerable<T> enumerable)
             where T : class
         {
             T last = null;
@@ -1191,7 +1191,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Makes a temporary dictionary out of an enumerable of keyvaluepairs.
         /// </summary>
-        internal static Dictionary<string, V> MakeDictionary<V>(IEnumerable<KeyValuePair<string, V>> enumerable)
+        public static Dictionary<string, V> MakeDictionary<V>(IEnumerable<KeyValuePair<string, V>> enumerable)
         {
             Dictionary<string, V> dictionary = new Dictionary<string, V>(StringComparer.OrdinalIgnoreCase);
             foreach (KeyValuePair<string, V> item in enumerable)
@@ -1204,7 +1204,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify that the two lists are value identical
         /// </summary>
-        internal static void AssertListsValueEqual<T>(IList<T> one, IList<T> two)
+        public static void AssertListsValueEqual<T>(IList<T> one, IList<T> two)
         {
             Assert.Equal(one.Count, two.Count);
 
@@ -1217,7 +1217,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify that the two collections are value identical
         /// </summary>
-        internal static void AssertCollectionsValueEqual<T>(ICollection<T> one, ICollection<T> two)
+        public static void AssertCollectionsValueEqual<T>(ICollection<T> one, ICollection<T> two)
         {
             Assert.Equal(one.Count, two.Count);
 
@@ -1232,7 +1232,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        internal static void AssertDictionariesEqual<K, V>(IDictionary<K, V> x, IDictionary<K, V> y, Action<KeyValuePair<K, V>, KeyValuePair<K, V>> assertPairsEqual)
+        public static void AssertDictionariesEqual<K, V>(IDictionary<K, V> x, IDictionary<K, V> y, Action<KeyValuePair<K, V>, KeyValuePair<K, V>> assertPairsEqual)
         {
             if (x == null || y == null)
             {
@@ -1251,7 +1251,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        internal static void AssertDictionariesEqual(IDictionary<string, string> x, IDictionary<string, string> y)
+        public static void AssertDictionariesEqual(IDictionary<string, string> x, IDictionary<string, string> y)
         {
             AssertDictionariesEqual(x, y,
                 (xPair, yPair) =>
@@ -1261,21 +1261,21 @@ namespace Microsoft.Build.UnitTests
                 });
         }
 
-        internal static void ShouldBeSameIgnoringOrder<K, V>(this IDictionary<K, V> a, IReadOnlyDictionary<K, V> b)
+        public static void ShouldBeSameIgnoringOrder<K, V>(this IDictionary<K, V> a, IReadOnlyDictionary<K, V> b)
         {
             a.ShouldBeSubsetOf(b);
             b.ShouldBeSubsetOf(a);
             a.Count.ShouldBe(b.Count);
         }
 
-        internal static void ShouldBeSameIgnoringOrder<K>(this IEnumerable<K> a, IEnumerable<K> b)
+        public static void ShouldBeSameIgnoringOrder<K>(this IEnumerable<K> a, IEnumerable<K> b)
         {
             a.ShouldBeSubsetOf(b);
             b.ShouldBeSubsetOf(a);
             a.Count().ShouldBe(b.Count());
         }
 
-        internal static void ShouldBeSetEquivalentTo<K>(this IEnumerable<K> a, IEnumerable<K> b)
+        public static void ShouldBeSetEquivalentTo<K>(this IEnumerable<K> a, IEnumerable<K> b)
         {
             a.ShouldBeSubsetOf(b);
             b.ShouldBeSubsetOf(a);
@@ -1284,7 +1284,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify that the two enumerables are value identical
         /// </summary>
-        internal static void AssertEnumerationsValueEqual<T>(IEnumerable<T> one, IEnumerable<T> two)
+        public static void AssertEnumerationsValueEqual<T>(IEnumerable<T> one, IEnumerable<T> two)
         {
             List<T> listOne = new List<T>();
             List<T> listTwo = new List<T>();
@@ -1306,7 +1306,7 @@ namespace Microsoft.Build.UnitTests
         /// Build a project with the provided content in memory.
         /// Assert that it succeeded, and return the mock logger with the output.
         /// </summary>
-        internal static MockLogger BuildProjectWithNewOMExpectSuccess(string content, Dictionary<string, string> globalProperties = null, MockLogger logger = null)
+        public static MockLogger BuildProjectWithNewOMExpectSuccess(string content, Dictionary<string, string> globalProperties = null, MockLogger logger = null)
         {
             BuildProjectWithNewOM(content, ref logger, out bool result, false, globalProperties);
             Assert.True(result);
@@ -1388,7 +1388,7 @@ namespace Microsoft.Build.UnitTests
         /// Build a project with the provided content in memory.
         /// Assert that it fails, and return the mock logger with the output.
         /// </summary>
-        internal static MockLogger BuildProjectWithNewOMExpectFailure(string content, bool allowTaskCrash, MockLogger logger = null)
+        public static MockLogger BuildProjectWithNewOMExpectFailure(string content, bool allowTaskCrash, MockLogger logger = null)
         {
             bool result;
             BuildProjectWithNewOM(content, ref logger, out result, allowTaskCrash);
@@ -1402,7 +1402,7 @@ namespace Microsoft.Build.UnitTests
         /// </summary>
         /// <param name="newExpectedProjectContents"></param>
         /// <param name="newActualProjectContents"></param>
-        internal static void CompareProjectXml(string newExpectedProjectContents, string newActualProjectContents)
+        public static void CompareProjectXml(string newExpectedProjectContents, string newActualProjectContents)
         {
             // Replace single-quotes with double-quotes, and normalize whitespace.
             newExpectedProjectContents =
@@ -1425,7 +1425,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify that the saved project content matches the provided content
         /// </summary>
-        internal static void VerifyAssertProjectContent(string expected, Project project)
+        public static void VerifyAssertProjectContent(string expected, Project project)
         {
             VerifyAssertProjectContent(expected, project.Xml);
         }
@@ -1433,7 +1433,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify that the saved project content matches the provided content
         /// </summary>
-        internal static void VerifyAssertProjectContent(string expected, ProjectRootElement project, bool ignoreFirstLineOfActual = true)
+        public static void VerifyAssertProjectContent(string expected, ProjectRootElement project, bool ignoreFirstLineOfActual = true)
         {
             VerifyAssertLineByLine(expected, project.RawXml, ignoreFirstLineOfActual);
         }
@@ -1441,7 +1441,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify that the expected content matches the actual content
         /// </summary>
-        internal static void VerifyAssertLineByLine(string expected, string actual)
+        public static void VerifyAssertLineByLine(string expected, string actual)
         {
             VerifyAssertLineByLine(expected, actual, false /* do not ignore first line */);
         }
@@ -1450,7 +1450,7 @@ namespace Microsoft.Build.UnitTests
         /// Write the given <see cref="projectContents"/> in a new temp directory and create the given <see cref="files"/> relative to the project
         /// </summary>
         /// <returns>the path to the temp root directory that contains the project and files</returns>
-        internal static string CreateProjectInTempDirectoryWithFiles(string projectContents, string[] files, out string createdProjectFile, out string[] createdFiles, string relativePathFromRootToProject = ".")
+        public static string CreateProjectInTempDirectoryWithFiles(string projectContents, string[] files, out string createdProjectFile, out string[] createdFiles, string relativePathFromRootToProject = ".")
         {
             var root = GetTempDirectoryWithGuid();
             Directory.CreateDirectory(root);
@@ -1475,7 +1475,7 @@ namespace Microsoft.Build.UnitTests
         /// Creates a bunch of temporary files with the specified names and returns
         /// their full paths (so they can ultimately be cleaned up)
         /// </summary>
-        internal static string[] CreateFiles(params string[] files)
+        public static string[] CreateFiles(params string[] files)
         {
             string directory = GetTempDirectoryWithGuid();
             Directory.CreateDirectory(directory);
@@ -1487,7 +1487,7 @@ namespace Microsoft.Build.UnitTests
         /// Creates a bunch of temporary files in the given directory with the specified names and returns
         /// their full paths (so they can ultimately be cleaned up)
         /// </summary>
-        internal static string[] CreateFilesInDirectory(string rootDirectory, params string[] files)
+        public static string[] CreateFilesInDirectory(string rootDirectory, params string[] files)
         {
             if (files == null)
             {
@@ -1522,7 +1522,7 @@ namespace Microsoft.Build.UnitTests
             return result;
         }
 
-        internal delegate TransientTestFile CreateProjectFileDelegate(
+        public delegate TransientTestFile CreateProjectFileDelegate(
             TestEnvironment env,
             int projectNumber,
             int[] projectReferences = null,
@@ -1530,7 +1530,7 @@ namespace Microsoft.Build.UnitTests
             string defaultTargets = null,
             string extraContent = null);
 
-        internal static TransientTestFile CreateProjectFile(
+        public static TransientTestFile CreateProjectFile(
             TestEnvironment env,
             int projectNumber,
             int[] projectReferences = null,
@@ -1579,7 +1579,7 @@ namespace Microsoft.Build.UnitTests
             return env.CreateFile(projectNumber + ".proj", sb.ToString());
         }
 
-        internal static ProjectGraph CreateProjectGraph(
+        public static ProjectGraph CreateProjectGraph(
             TestEnvironment env,
             IDictionary<int, int[]> dependencyEdges,
             IDictionary<int, string> extraContentPerProjectNumber,
@@ -1607,7 +1607,7 @@ namespace Microsoft.Build.UnitTests
                 });
         }
 
-        internal static ProjectGraph CreateProjectGraph(
+        public static ProjectGraph CreateProjectGraph(
             TestEnvironment env,
             // direct dependencies that the kvp.key node has on the nodes represented by kvp.value
             IDictionary<int, int[]> dependencyEdges,
@@ -1695,7 +1695,7 @@ namespace Microsoft.Build.UnitTests
         /// Deletes a bunch of files, including their containing directories
         /// if they become empty
         /// </summary>
-        internal static void DeleteFiles(params string[] paths)
+        public static void DeleteFiles(params string[] paths)
         {
             foreach (string path in paths)
             {
@@ -1716,7 +1716,7 @@ namespace Microsoft.Build.UnitTests
         /// Given two methods accepting no parameters and returning none, verifies they
         /// both throw, and throw the same exception type.
         /// </summary>
-        internal static void VerifyAssertThrowsSameWay(Action method1, Action method2)
+        public static void VerifyAssertThrowsSameWay(Action method1, Action method2)
         {
             Exception ex1 = null;
             Exception ex2 = null;
@@ -1754,7 +1754,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify method throws invalid operation exception.
         /// </summary>
-        internal static void VerifyAssertThrowsInvalidOperation(Action method)
+        public static void VerifyAssertThrowsInvalidOperation(Action method)
         {
             Assert.Throws<InvalidOperationException>(method);
         }
@@ -1762,7 +1762,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Verify that the expected content matches the actual content
         /// </summary>
-        internal static void VerifyAssertLineByLine(string expected, string actual, bool ignoreFirstLineOfActual, ITestOutputHelper testOutput = null)
+        public static void VerifyAssertLineByLine(string expected, string actual, bool ignoreFirstLineOfActual, ITestOutputHelper testOutput = null)
         {
             Action<string> LogLine = testOutput == null ? (Action<string>) Console.WriteLine : testOutput.WriteLine;
 
@@ -1821,7 +1821,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Clear the dirty flag of a ProjectRootElement by saving to a dummy writer.
         /// </summary>
-        internal static void ClearDirtyFlag(ProjectRootElement project)
+        public static void ClearDirtyFlag(ProjectRootElement project)
         {
             project.Save(new StringWriter());
             Assert.False(project.HasUnsavedChanges);
@@ -1831,7 +1831,7 @@ namespace Microsoft.Build.UnitTests
         /// Gets a command that can be used by an Exec task to sleep for the specified amount of time.
         /// </summary>
         /// <param name="timeSpan">A <see cref="TimeSpan"/> representing the amount of time to sleep.</param>
-        internal static string GetSleepCommand(TimeSpan timeSpan)
+        public static string GetSleepCommand(TimeSpan timeSpan)
         {
             return string.Format(
                 GetSleepCommandTemplate(),
@@ -1843,7 +1843,7 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Gets a command template that can be used by an Exec task to sleep for the specified amount of time. The string has to be formatted with the number of seconds to sleep
         /// </summary>
-        internal static string GetSleepCommandTemplate()
+        public static string GetSleepCommandTemplate()
         {
             return
                 NativeMethodsShared.IsWindows
@@ -1865,12 +1865,12 @@ namespace Microsoft.Build.UnitTests
         /// Used for file matching tests
         /// MSBuild does not accept forward slashes on rooted paths, so those are returned unchanged
         /// </summary>
-        internal static string ToForwardSlash(string path) =>
+        public static string ToForwardSlash(string path) =>
             Path.IsPathRooted(path)
                 ? path
                 : path.ToSlash();
 
-        internal class ElementLocationComparerIgnoringType : IEqualityComparer<ElementLocation>
+        public class ElementLocationComparerIgnoringType : IEqualityComparer<ElementLocation>
         {
             public bool Equals(ElementLocation x, ElementLocation y)
             {
@@ -1898,7 +1898,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        internal class BuildManagerSession : IDisposable
+        public class BuildManagerSession : IDisposable
         {
             private readonly TestEnvironment _env;
             private readonly BuildManager _buildManager;
@@ -1964,7 +1964,7 @@ namespace Microsoft.Build.UnitTests
             }
         }
 
-        internal class LoggingFileSystem : MSBuildFileSystemBase
+        public class LoggingFileSystem : MSBuildFileSystemBase
         {
             private readonly IFileSystem _wrappingFileSystem;
             private int _fileSystemCalls;

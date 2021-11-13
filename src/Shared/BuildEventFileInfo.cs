@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,9 +10,9 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// This class encapsulates information about a file that is associated with a build event.
     /// </summary>
-    internal sealed class BuildEventFileInfo
+    public sealed class BuildEventFileInfo
     {
-        internal static BuildEventFileInfo Empty = new BuildEventFileInfo(ElementLocation.EmptyLocation);
+        public static BuildEventFileInfo Empty = new BuildEventFileInfo(ElementLocation.EmptyLocation);
 
         #region Constructors
 
@@ -25,7 +25,7 @@ namespace Microsoft.Build.Shared
         /// IF AN IELEMENTLOCATION IS AVAILABLE, USE THE OVERLOAD ACCEPTING THAT INSTEAD.
         /// </summary>
         /// <param name="file"></param>
-        internal BuildEventFileInfo(string file)
+        public BuildEventFileInfo(string file)
             : this(file, 0, 0, 0, 0)
         {
             // do nothing
@@ -36,7 +36,7 @@ namespace Microsoft.Build.Shared
         /// This does not provide end-line or end-column information.
         /// This is the preferred overload.
         /// </summary>
-        internal BuildEventFileInfo(IElementLocation location)
+        public BuildEventFileInfo(IElementLocation location)
             : this(location.File, location.Line, location.Column)
         {
             // do nothing
@@ -50,7 +50,7 @@ namespace Microsoft.Build.Shared
         /// <param name="file"></param>
         /// <param name="line">Set to zero if not available.</param>
         /// <param name="column">Set to zero if not available.</param>
-        internal BuildEventFileInfo(string file, int line, int column)
+        public BuildEventFileInfo(string file, int line, int column)
             : this(file, line, column, 0, 0)
         {
             // do nothing
@@ -66,7 +66,7 @@ namespace Microsoft.Build.Shared
         /// <param name="column">Set to zero if not available.</param>
         /// <param name="endLine">Set to zero if not available.</param>
         /// <param name="endColumn">Set to zero if not available.</param>
-        internal BuildEventFileInfo(string file, int line, int column, int endLine, int endColumn)
+        public BuildEventFileInfo(string file, int line, int column, int endLine, int endColumn)
         {
             // Projects that don't have a filename when the are built should use an empty string instead.
             _file = file ?? String.Empty;
@@ -80,7 +80,7 @@ namespace Microsoft.Build.Shared
         /// Creates an instance of this class using the information in the given XmlException.
         /// </summary>
         /// <param name="e"></param>
-        internal BuildEventFileInfo(XmlException e)
+        public BuildEventFileInfo(XmlException e)
         {
             ErrorUtilities.VerifyThrow(e != null, "Need exception context.");
 #if FEATURE_XML_SOURCE_URI
@@ -97,7 +97,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Creates an instance of this class using the information in the given XmlException and file location.
         /// </summary>
-        internal BuildEventFileInfo(string file, XmlException e) : this(e)
+        public BuildEventFileInfo(string file, XmlException e) : this(e)
         {
             ErrorUtilities.VerifyThrowArgumentNull(file, nameof(file));
 
@@ -112,7 +112,7 @@ namespace Microsoft.Build.Shared
         /// Gets the filename/path to be associated with some build event.
         /// </summary>
         /// <value>The filename/path string.</value>
-        internal string File
+        public string File
         {
             get
             {
@@ -124,7 +124,7 @@ namespace Microsoft.Build.Shared
         /// Gets the line number of interest in the file.
         /// </summary>
         /// <value>Line number, or zero if not available.</value>
-        internal int Line
+        public int Line
         {
             get
             {
@@ -136,7 +136,7 @@ namespace Microsoft.Build.Shared
         /// Gets the column number of interest in the file.
         /// </summary>
         /// <value>Column number, or zero if not available.</value>
-        internal int Column
+        public int Column
         {
             get
             {
@@ -148,7 +148,7 @@ namespace Microsoft.Build.Shared
         /// Gets the last line number of a range of interesting lines in the file.
         /// </summary>
         /// <value>Last line number, or zero if not available.</value>
-        internal int EndLine
+        public int EndLine
         {
             get
             {
@@ -160,7 +160,7 @@ namespace Microsoft.Build.Shared
         /// Gets the last column number of a range of interesting columns in the file.
         /// </summary>
         /// <value>Last column number, or zero if not available.</value>
-        internal int EndColumn
+        public int EndColumn
         {
             get
             {

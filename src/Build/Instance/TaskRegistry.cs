@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -48,7 +48,7 @@ namespace Microsoft.Build.Execution
     ///            AssemblyName="utiltasks.dll"
     ///            AssemblyFile="$(MyDownloadedTasks)\"/&gt;
     /// </example>
-    internal sealed class TaskRegistry : ITranslatable
+    public sealed class TaskRegistry : ITranslatable
     {
         /// <summary>
         /// The fallback task registry
@@ -145,13 +145,13 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// The cache to load the *.tasks files into
         /// </summary>
-        internal ProjectRootElementCacheBase RootElementCache { get; set; }
+        public ProjectRootElementCacheBase RootElementCache { get; set; }
 
         /// <summary>
         /// Creates a task registry that does not fall back to any other task registry.
         /// Default constructor does no work because the tables are initialized lazily when a task is registered
         /// </summary>
-        internal TaskRegistry(ProjectRootElementCacheBase projectRootElementCache)
+        public TaskRegistry(ProjectRootElementCacheBase projectRootElementCache)
         {
             ErrorUtilities.VerifyThrowInternalNull(projectRootElementCache, nameof(projectRootElementCache));
 
@@ -171,7 +171,7 @@ namespace Microsoft.Build.Execution
         /// </summary>
         /// <param name="toolset">The Toolset containing the toolser task registry</param>
         /// <param name="projectRootElementCache">The <see cref="ProjectRootElementCache"/> to use.</param>
-        internal TaskRegistry(Toolset toolset, ProjectRootElementCacheBase projectRootElementCache)
+        public TaskRegistry(Toolset toolset, ProjectRootElementCacheBase projectRootElementCache)
         {
             ErrorUtilities.VerifyThrowInternalNull(projectRootElementCache, nameof(projectRootElementCache));
             ErrorUtilities.VerifyThrowInternalNull(toolset, nameof(toolset));
@@ -183,7 +183,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Returns the toolset state used to initialize this registry, if any.
         /// </summary>
-        internal Toolset Toolset
+        public Toolset Toolset
         {
             [DebuggerStepThrough]
             get
@@ -194,7 +194,7 @@ namespace Microsoft.Build.Execution
         /// Access list of task registrations.
         /// FOR UNIT TESTING ONLY.
         /// </summary>
-        internal IDictionary<RegisteredTaskIdentity, List<RegisteredTaskRecord>> TaskRegistrations
+        public IDictionary<RegisteredTaskIdentity, List<RegisteredTaskRecord>> TaskRegistrations
         {
             get
             {
@@ -207,14 +207,14 @@ namespace Microsoft.Build.Execution
             }
         }
 
-        internal bool IsLoaded => RootElementCache != null;
+        public bool IsLoaded => RootElementCache != null;
 
         /// <summary>
         /// Evaluate the usingtask and add the result into the data passed in
         /// </summary>
         /// <typeparam name="P">A type derived from IProperty</typeparam>
         /// <typeparam name="I">A type derived from IItem</typeparam>
-        internal static void RegisterTasksFromUsingTaskElement<P, I>
+        public static void RegisterTasksFromUsingTaskElement<P, I>
             (
             ILoggingService loggingService,
             BuildEventContext buildEventContext,
@@ -398,7 +398,7 @@ namespace Microsoft.Build.Execution
         /// Given a task name, this method retrieves the task class. If the task has been requested before, it will be found in
         /// the class cache; otherwise, &lt;UsingTask&gt; declarations will be used to search the appropriate assemblies.
         /// </summary>
-        internal TaskFactoryWrapper GetRegisteredTask
+        public TaskFactoryWrapper GetRegisteredTask
         (
             string taskName,
             string taskProjectFile,
@@ -454,7 +454,7 @@ namespace Microsoft.Build.Execution
         /// <param name="elementLocation">The location of the task element in the project file.</param>
         /// <param name="retrievedFromCache">True if the record was retrieved from the cache.</param>
         /// <returns>The task registration record, or null if none was found.</returns>
-        internal RegisteredTaskRecord GetTaskRegistrationRecord
+        public RegisteredTaskRecord GetTaskRegistrationRecord
             (
             string taskName,
             string taskProjectFile,
@@ -699,7 +699,7 @@ namespace Microsoft.Build.Execution
         /// the set of identity parameters
         /// </summary>
         [DebuggerDisplay("{Name} ParameterCount = {TaskIdentityParameters.Count}")]
-        internal class RegisteredTaskIdentity : ITranslatable
+        public class RegisteredTaskIdentity : ITranslatable
         {
             private string _name;
             private IDictionary<string, string> _taskIdentityParameters;
@@ -707,7 +707,7 @@ namespace Microsoft.Build.Execution
             /// <summary>
             /// Constructor
             /// </summary>
-            internal RegisteredTaskIdentity(string name, IDictionary<string, string> taskIdentityParameters)
+            public RegisteredTaskIdentity(string name, IDictionary<string, string> taskIdentityParameters)
             {
                 _name = name;
 
@@ -755,7 +755,7 @@ namespace Microsoft.Build.Execution
             /// <summary>
             /// Comparer used to figure out whether two RegisteredTaskIdentities are equal or not.
             /// </summary>
-            internal class RegisteredTaskIdentityComparer : IEqualityComparer<RegisteredTaskIdentity>
+            public class RegisteredTaskIdentityComparer : IEqualityComparer<RegisteredTaskIdentity>
             {
                 /// <summary>
                 /// The singleton comparer to use when an exact match is desired
@@ -981,29 +981,29 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// A record for a task registration which also contains the factory which matches the record
         /// </summary>
-        internal class RegisteredTaskRecord : ITranslatable
+        public class RegisteredTaskRecord : ITranslatable
         {
             /// <summary>
             /// Default task factory to use if one is not specified
             /// </summary>
-            internal const string AssemblyTaskFactory = "AssemblyTaskFactory";
+            public const string AssemblyTaskFactory = "AssemblyTaskFactory";
 
             /// <summary>
             /// Default task factory to use if one is not specified and runtime or architecture is specified
             /// </summary>
-            internal const string TaskHostFactory = "TaskHostFactory";
+            public const string TaskHostFactory = "TaskHostFactory";
 
             /// <summary>
             /// Task factory used to create CodeDom-based inline tasks.  Special-cased as one of two officially
             /// supported task factories in Microsoft.Build.Tasks.vX.Y.dll to deal with versioning issue.
             /// </summary>
-            internal const string CodeTaskFactory = "CodeTaskFactory";
+            public const string CodeTaskFactory = "CodeTaskFactory";
 
             /// <summary>
             /// Task factory used to create CodeDom-based inline tasks.  Special-cased as one of two officially
             /// supported task factories in Microsoft.Build.Tasks.vX.Y.dll to deal with versioning issue.
             /// </summary>
-            internal const string XamlTaskFactory = "XamlTaskFactory";
+            public const string XamlTaskFactory = "XamlTaskFactory";
 
             /// <summary>
             /// Lock for the taskFactoryTypeLoader
@@ -1073,7 +1073,7 @@ namespace Microsoft.Build.Execution
             /// <summary>
             /// Constructor
             /// </summary>
-            internal RegisteredTaskRecord(string registeredName, AssemblyLoadInfo assemblyLoadInfo, string taskFactory, Dictionary<string, string> taskFactoryParameters, ParameterGroupAndTaskElementRecord inlineTask)
+            public RegisteredTaskRecord(string registeredName, AssemblyLoadInfo assemblyLoadInfo, string taskFactory, Dictionary<string, string> taskFactoryParameters, ParameterGroupAndTaskElementRecord inlineTask)
             {
                 ErrorUtilities.VerifyThrowArgumentNull(assemblyLoadInfo, "AssemblyLoadInfo");
                 _registeredName = registeredName;
@@ -1109,7 +1109,7 @@ namespace Microsoft.Build.Execution
             /// <summary>
             /// Gets the task name this record was registered with.
             /// </summary>
-            internal string RegisteredName
+            public string RegisteredName
             {
                 [DebuggerStepThrough]
                 get
@@ -1119,7 +1119,7 @@ namespace Microsoft.Build.Execution
             /// <summary>
             /// Gets the assembly load information.
             /// </summary>
-            internal AssemblyLoadInfo TaskFactoryAssemblyLoadInfo
+            public AssemblyLoadInfo TaskFactoryAssemblyLoadInfo
             {
                 [DebuggerStepThrough]
                 get
@@ -1129,7 +1129,7 @@ namespace Microsoft.Build.Execution
             /// <summary>
             /// Gets the task factory attribute value.
             /// </summary>
-            internal string TaskFactoryAttributeName
+            public string TaskFactoryAttributeName
             {
                 [DebuggerStepThrough]
                 get
@@ -1139,7 +1139,7 @@ namespace Microsoft.Build.Execution
             /// <summary>
             /// Gets the set of parameters for the task factory
             /// </summary>
-            internal IDictionary<string, string> TaskFactoryParameters
+            public IDictionary<string, string> TaskFactoryParameters
             {
                 [DebuggerStepThrough]
                 get
@@ -1149,7 +1149,7 @@ namespace Microsoft.Build.Execution
             /// <summary>
             /// Gets the inline task record
             /// </summary>
-            internal ParameterGroupAndTaskElementRecord ParameterGroupAndTaskBody
+            public ParameterGroupAndTaskElementRecord ParameterGroupAndTaskBody
             {
                 [DebuggerStepThrough]
                 get
@@ -1159,7 +1159,7 @@ namespace Microsoft.Build.Execution
             /// <summary>
             /// Identity of this task.
             /// </summary>
-            internal RegisteredTaskIdentity TaskIdentity => _taskIdentity;
+            public RegisteredTaskIdentity TaskIdentity => _taskIdentity;
 
             /// <summary>
             /// Ask the question, whether or not the task name can be created by the task factory.
@@ -1168,7 +1168,7 @@ namespace Microsoft.Build.Execution
             /// loads an external file and uses that to generate the tasks.
             /// </summary>
             /// <returns>true if the task can be created by the factory, false if it cannot be created</returns>
-            internal bool CanTaskBeCreatedByFactory(string taskName, string taskProjectFile, IDictionary<string, string> taskIdentityParameters, TargetLoggingContext targetLoggingContext, ElementLocation elementLocation)
+            public bool CanTaskBeCreatedByFactory(string taskName, string taskProjectFile, IDictionary<string, string> taskIdentityParameters, TargetLoggingContext targetLoggingContext, ElementLocation elementLocation)
             {
                 // Keep a cache of task identities which have been checked against the factory, this is useful because we ask this question everytime we get a registered task record or a taskFactory wrapper.
                 if (_taskNamesCreatableByFactory == null)
@@ -1263,7 +1263,7 @@ namespace Microsoft.Build.Execution
             /// Given a Registered task record and a task name. Check create an instance of the task factory using the record.
             /// If the factory is a assembly task factory see if the assemblyFile has the correct task inside of it.
             /// </summary>
-            internal TaskFactoryWrapper GetTaskFactoryFromRegistrationRecord(string taskName, string taskProjectFile, IDictionary<string, string> taskIdentityParameters, TargetLoggingContext targetLoggingContext, ElementLocation elementLocation)
+            public TaskFactoryWrapper GetTaskFactoryFromRegistrationRecord(string taskName, string taskProjectFile, IDictionary<string, string> taskIdentityParameters, TargetLoggingContext targetLoggingContext, ElementLocation elementLocation)
             {
                 if (CanTaskBeCreatedByFactory(taskName, taskProjectFile, taskIdentityParameters, targetLoggingContext, elementLocation))
                 {
@@ -1480,7 +1480,7 @@ namespace Microsoft.Build.Execution
             /// <summary>
             /// Keep track of the xml which will be sent to the inline task factory and the parameters if any which will also be passed in
             /// </summary>
-            internal class ParameterGroupAndTaskElementRecord : ITranslatable
+            public class ParameterGroupAndTaskElementRecord : ITranslatable
             {
                 /// <summary>
                 /// The list of parameters found in the using task along with a corosponding UsingTaskParameterInfo which contains the specific information about it
@@ -1508,7 +1508,7 @@ namespace Microsoft.Build.Execution
                 /// <summary>
                 /// The parameters from the ParameterGroup from the using task element which will be passed to the task factory.
                 /// </summary>
-                internal IDictionary<string, TaskPropertyInfo> UsingTaskParameters
+                public IDictionary<string, TaskPropertyInfo> UsingTaskParameters
                 {
                     get { return _usingTaskParameters ?? ReadOnlyEmptyDictionary<string, TaskPropertyInfo>.Instance; }
                 }
@@ -1516,7 +1516,7 @@ namespace Microsoft.Build.Execution
                 /// <summary>
                 /// The body of the task element which will be passed to the task factory.
                 /// </summary>
-                internal string InlineTaskXmlBody
+                public string InlineTaskXmlBody
                 {
                     get { return _inlineTaskXmlBody; }
                 }
@@ -1524,7 +1524,7 @@ namespace Microsoft.Build.Execution
                 /// <summary>
                 /// Has the task body been passed to the expander to be expanded
                 /// </summary>
-                internal bool TaskBodyEvaluated
+                public bool TaskBodyEvaluated
                 {
                     get { return _taskBodyEvaluated; }
                 }
@@ -1534,7 +1534,7 @@ namespace Microsoft.Build.Execution
                 /// </summary>
                 /// <typeparam name="P">Property type</typeparam>
                 /// <typeparam name="I">Item Type</typeparam>
-                internal void ExpandUsingTask<P, I>(ProjectUsingTaskElement projectUsingTaskXml, Expander<P, I> expander, ExpanderOptions expanderOptions)
+                public void ExpandUsingTask<P, I>(ProjectUsingTaskElement projectUsingTaskXml, Expander<P, I> expander, ExpanderOptions expanderOptions)
                     where P : class, IProperty
                     where I : class, IItem
                 {
@@ -1755,7 +1755,7 @@ namespace Microsoft.Build.Execution
                 }
             }
 
-            internal static RegisteredTaskRecord FactoryForDeserialization(ITranslator translator)
+            public static RegisteredTaskRecord FactoryForDeserialization(ITranslator translator)
             {
                 var instance = new RegisteredTaskRecord();
                 instance.Translate(translator);

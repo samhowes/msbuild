@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -13,7 +13,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// Implementation of the results cache.
     /// </summary>
-    internal class ResultsCache : IResultsCache
+    public class ResultsCache : IResultsCache
     {
         /// <summary>
         /// The table of all build results.  This table is indexed by configuration id and
@@ -37,7 +37,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Returns the internal cache for testing purposes.
         /// </summary>
-        internal IDictionary<int, BuildResult> ResultsDictionary
+        public IDictionary<int, BuildResult> ResultsDictionary
         {
             get
             {
@@ -288,7 +288,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Factory for component creation.
         /// </summary>
-        internal static IBuildComponent CreateComponent(BuildComponentType componentType)
+        public static IBuildComponent CreateComponent(BuildComponentType componentType)
         {
             ErrorUtilities.VerifyThrow(componentType == BuildComponentType.ResultsCache, "Cannot create components of type {0}", componentType);
             return new ResultsCache();

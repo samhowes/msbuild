@@ -1,4 +1,4 @@
-﻿
+
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
@@ -12,7 +12,7 @@ namespace Microsoft.Build
     /// <summary>
     /// Implements the WeakStringCache functionality on modern .NET versions where ConcurrentDictionary is available.
     /// </summary>
-    internal sealed partial class WeakStringCache : IDisposable
+    public sealed partial class WeakStringCache : IDisposable
     {
         private readonly ConcurrentDictionary<int, StringWeakHandle> _stringsByHashCode;
 

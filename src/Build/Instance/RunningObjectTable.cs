@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Runtime.InteropServices;
@@ -15,7 +15,7 @@ namespace Microsoft.Build.Execution
     /// <remarks>
     /// See https://docs.microsoft.com/en-us/windows/desktop/api/objidl/nn-objidl-irunningobjecttable.
     /// </remarks>
-    internal class RunningObjectTable : IRunningObjectTableWrapper
+    public class RunningObjectTable : IRunningObjectTableWrapper
     {
         private readonly Task<IRunningObjectTable> _rotTask;
 

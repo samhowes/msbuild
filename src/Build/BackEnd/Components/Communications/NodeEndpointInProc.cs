@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -19,7 +19,7 @@ namespace Microsoft.Build.BackEnd
     /// the way other kinds of endpoints work, as the recipient processes the packet on a different thread
     /// than that from which the packet originated, but with the cost of the extra thread.
     /// </summary>
-    internal class NodeEndpointInProc : INodeEndpoint
+    public class NodeEndpointInProc : INodeEndpoint
     {
         #region Private Data
         /// <summary>
@@ -124,7 +124,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Represents the style of communications used by the in-proc endpoint.
         /// </summary>
-        internal enum EndpointMode
+        public enum EndpointMode
         {
             /// <summary>
             /// The DataReceived event is raised on the same thread as that which called SendData.
@@ -227,7 +227,7 @@ namespace Microsoft.Build.BackEnd
         /// <param name="mode">The communications mode for the endpoints.</param>
         /// <param name="host">The component host.</param>
         /// <returns>A matched pair of endpoints.</returns>
-        internal static EndpointPair CreateInProcEndpoints(EndpointMode mode, IBuildComponentHost host)
+        public static EndpointPair CreateInProcEndpoints(EndpointMode mode, IBuildComponentHost host)
         {
             NodeEndpointInProc node = new NodeEndpointInProc(mode, host);
             NodeEndpointInProc manager = new NodeEndpointInProc(mode, host);
@@ -457,24 +457,24 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Used to return a matched pair of endpoints for in-proc nodes to use with the Build Manager.
         /// </summary>
-        internal struct EndpointPair
+        public struct EndpointPair
         {
             /// <summary>
             /// The endpoint destined for use by a node.
             /// </summary>
-            internal readonly NodeEndpointInProc NodeEndpoint;
+            public readonly NodeEndpointInProc NodeEndpoint;
 
             /// <summary>
             /// The endpoint destined for use by the Build Manager
             /// </summary>
-            internal readonly NodeEndpointInProc ManagerEndpoint;
+            public readonly NodeEndpointInProc ManagerEndpoint;
 
             /// <summary>
             /// Creates an endpoint pair
             /// </summary>
             /// <param name="node">The node-side endpoint.</param>
             /// <param name="manager">The manager-side endpoint.</param>
-            internal EndpointPair(NodeEndpointInProc node, NodeEndpointInProc manager)
+            public EndpointPair(NodeEndpointInProc node, NodeEndpointInProc manager)
             {
                 NodeEndpoint = node;
                 ManagerEndpoint = manager;

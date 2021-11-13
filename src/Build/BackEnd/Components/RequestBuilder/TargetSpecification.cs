@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using ElementLocation = Microsoft.Build.Construction.ElementLocation;
@@ -11,7 +11,7 @@ namespace Microsoft.Build.BackEnd
     /// Contains information about a target name and reference location.
     /// </summary>
     [DebuggerDisplay("Name={TargetName}")]
-    internal class TargetSpecification : ITranslatable
+    public class TargetSpecification : ITranslatable
     {
         private string _targetName;
         private ElementLocation _referenceLocation;
@@ -21,7 +21,7 @@ namespace Microsoft.Build.BackEnd
         /// </summary>
         /// <param name="targetName">The name of the target</param>
         /// <param name="referenceLocation">The location from which it was referred.</param>
-        internal TargetSpecification(string targetName, ElementLocation referenceLocation)
+        public TargetSpecification(string targetName, ElementLocation referenceLocation)
         {
             ErrorUtilities.VerifyThrowArgumentLength(targetName, nameof(targetName));
             ErrorUtilities.VerifyThrowArgumentNull(referenceLocation, nameof(referenceLocation));
@@ -50,7 +50,7 @@ namespace Microsoft.Build.BackEnd
             translator.Translate(ref _referenceLocation, ElementLocation.FactoryForDeserialization);
         }
 
-        internal static TargetSpecification FactoryForDeserialization(ITranslator translator)
+        public static TargetSpecification FactoryForDeserialization(ITranslator translator)
         {
             var instance = new TargetSpecification();
             ((ITranslatable) instance).Translate(translator);

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -11,7 +11,7 @@ namespace Microsoft.Build.BackEnd.Logging
     /// <summary>
     /// A logging context representing a task being built.
     /// </summary>
-    internal class TaskLoggingContext : BuildLoggingContext
+    public class TaskLoggingContext : BuildLoggingContext
     {
         /// <summary>
         /// The target context in which this task is being built.
@@ -31,7 +31,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Constructs a task logging context from a parent target context and a task node.
         /// </summary>
-        internal TaskLoggingContext(TargetLoggingContext targetLoggingContext, string projectFullPath, ProjectTargetInstanceChild task)
+        public TaskLoggingContext(TargetLoggingContext targetLoggingContext, string projectFullPath, ProjectTargetInstanceChild task)
             : base(targetLoggingContext)
         {
             _targetLoggingContext = targetLoggingContext;
@@ -76,7 +76,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Constructor used to support out-of-proc task host (proxy for in-proc logging service.)
         /// </summary>
-        internal TaskLoggingContext(ILoggingService loggingService, BuildEventContext outOfProcContext)
+        public TaskLoggingContext(ILoggingService loggingService, BuildEventContext outOfProcContext)
             : base(loggingService, outOfProcContext, true)
         {
             this.IsValid = true;
@@ -85,7 +85,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Retrieves the target logging context.
         /// </summary>
-        internal TargetLoggingContext TargetLoggingContext
+        public TargetLoggingContext TargetLoggingContext
         {
             get
             {
@@ -96,7 +96,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Retrieves the task node.
         /// </summary>
-        internal ProjectTargetInstanceChild Task
+        public ProjectTargetInstanceChild Task
         {
             get
             {
@@ -107,7 +107,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Retrieves the task node.
         /// </summary>
-        internal string TaskName
+        public string TaskName
         {
             get
             {
@@ -118,7 +118,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Log that a task has just completed
         /// </summary>
-        internal void LogTaskBatchFinished(string projectFullPath, bool success)
+        public void LogTaskBatchFinished(string projectFullPath, bool success)
         {
             ErrorUtilities.VerifyThrow(this.IsValid, "invalid");
 
@@ -139,7 +139,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <param name="exception">The exception to be logged as a warning</param>
         /// <param name="file">The file in which the warning occurred</param>
         /// <param name="taskName">The task in which the warning occurred</param>
-        internal void LogTaskWarningFromException(Exception exception, BuildEventFileInfo file, string taskName)
+        public void LogTaskWarningFromException(Exception exception, BuildEventFileInfo file, string taskName)
         {
             ErrorUtilities.VerifyThrow(IsValid, "must be valid");
             LoggingService.LogTaskWarningFromException(BuildEventContext, exception, file, taskName);

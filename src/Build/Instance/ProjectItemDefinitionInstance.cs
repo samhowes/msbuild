@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -36,7 +36,7 @@ namespace Microsoft.Build.Execution
         /// Constructs an empty project item definition instance.
         /// </summary>
         /// <param name="itemType">The type of item this definition object represents.</param>
-        internal ProjectItemDefinitionInstance(string itemType)
+        public ProjectItemDefinitionInstance(string itemType)
         {
             ErrorUtilities.VerifyThrowArgumentNull(itemType, nameof(itemType));
 
@@ -50,7 +50,7 @@ namespace Microsoft.Build.Execution
         /// Assumes that the itemType string originated in a ProjectItemDefinitionElement and therefore
         /// was already validated.
         /// </remarks>
-        internal ProjectItemDefinitionInstance(ProjectItemDefinition itemDefinition)
+        public ProjectItemDefinitionInstance(ProjectItemDefinition itemDefinition)
             : this(itemDefinition.ItemType)
         {
             if (itemDefinition.MetadataCount > 0)
@@ -208,7 +208,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Creates a ProjectItemDefinitionElement representing this instance.
         /// </summary>
-        internal ProjectItemDefinitionElement ToProjectItemDefinitionElement(ProjectElementContainer parent)
+        public ProjectItemDefinitionElement ToProjectItemDefinitionElement(ProjectElementContainer parent)
         {
             ProjectItemDefinitionElement element = parent.ContainingProject.CreateItemDefinitionElement(ItemType);
             parent.AppendChild(element);
@@ -226,7 +226,7 @@ namespace Microsoft.Build.Execution
             translator.TranslateDictionary(ref _metadata, ProjectMetadataInstance.FactoryForDeserialization);
         }
 
-        internal static ProjectItemDefinitionInstance FactoryForDeserialization(ITranslator translator)
+        public static ProjectItemDefinitionInstance FactoryForDeserialization(ITranslator translator)
         {
             var instance = new ProjectItemDefinitionInstance();
             ((ITranslatable) instance).Translate(translator);

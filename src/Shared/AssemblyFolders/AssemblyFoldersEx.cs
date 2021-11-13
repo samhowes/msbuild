@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 #if FEATURE_WIN32_REGISTRY
 
@@ -39,7 +39,7 @@ namespace Microsoft.Build.Shared
     ///     {AssemblyFoldersSuffix} = [ PocketPC | SmartPhone | WindowsCE]\AssemblyFoldersEx
     ///
     /// </summary>
-    internal class AssemblyFoldersEx : IEnumerable<AssemblyFoldersExInfo>
+    public class AssemblyFoldersEx : IEnumerable<AssemblyFoldersExInfo>
     {
         /// <summary>
         /// The list of directory names found from the registry.
@@ -63,7 +63,7 @@ namespace Microsoft.Build.Shared
         /// <param name="getRegistrySubKeyDefaultValue">Used to find registry key default values.</param>
         /// <param name="targetProcessorArchitecture">Architecture to seek.</param>
         /// <param name="openBaseKey">Key object to open.</param>
-        internal AssemblyFoldersEx
+        public AssemblyFoldersEx
         (
             string registryKeyRoot,
             string targetRuntimeVersion,
@@ -346,7 +346,7 @@ namespace Microsoft.Build.Shared
         ///
         ///         This way we have a reverse sorted list of all of the version keys.
         /// </summary>
-        internal static List<ExtensionFoldersRegistryKey> GatherVersionStrings(string targetRuntimeVersion, IEnumerable<string> versions)
+        public static List<ExtensionFoldersRegistryKey> GatherVersionStrings(string targetRuntimeVersion, IEnumerable<string> versions)
         {
             List<string> additionalToleratedKeys = new List<string>();
             Version targetVersion = VersionUtilities.ConvertToVersion(targetRuntimeVersion);
@@ -490,7 +490,7 @@ namespace Microsoft.Build.Shared
             return ((IEnumerable<AssemblyFoldersExInfo>)this).GetEnumerator();
         }
 
-        internal IEnumerable<string> UniqueDirectoryPaths
+        public IEnumerable<string> UniqueDirectoryPaths
         {
             get => _uniqueDirectoryPaths;
         }

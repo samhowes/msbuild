@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -16,7 +16,7 @@ namespace Microsoft.Build.BackEnd
     /// Flags requrned by ITaskExecutionHost.FindTask().
     /// </summary>
     [Flags]
-    internal enum TaskRequirements
+    public enum TaskRequirements
     {
         /// <summary>
         /// The task was not found.
@@ -42,7 +42,7 @@ namespace Microsoft.Build.BackEnd
     /// 
     /// REFACTOR - Eliminate this interface.
     /// </summary>
-    internal interface ITaskExecutionHost
+    public interface ITaskExecutionHost
     {
         /// <summary>
         /// The associated project.

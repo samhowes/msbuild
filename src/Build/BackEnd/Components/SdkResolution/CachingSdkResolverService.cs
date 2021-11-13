@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -12,7 +12,7 @@ using Microsoft.Build.Utilities;
 
 namespace Microsoft.Build.BackEnd.SdkResolution
 {
-    internal sealed class CachingSdkResolverService: SdkResolverService
+    public sealed class CachingSdkResolverService: SdkResolverService
     {
         /// <summary>
         /// Stores the cache in a set of concurrent dictionaries.  The main dictionary is by build submission ID and the inner dictionary contains a case-insensitive SDK name and the cached <see cref="SdkResult"/>.

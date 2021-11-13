@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Diagnostics;
@@ -20,12 +20,12 @@ namespace Microsoft.Build.Construction
     [DebuggerDisplay("{Name} Value={Value} Condition={Condition}")]
     public class ProjectPropertyElement : ProjectElement
     {
-        internal ProjectPropertyElementLink PropertyLink => (ProjectPropertyElementLink)Link;
+        public ProjectPropertyElementLink PropertyLink => (ProjectPropertyElementLink)Link;
 
         /// <summary>
         /// External projects support
         /// </summary>
-        internal ProjectPropertyElement(ProjectPropertyElementLink link)
+        public ProjectPropertyElement(ProjectPropertyElementLink link)
             : base(link)
         {
         }
@@ -33,7 +33,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Initialize a parented ProjectPropertyElement
         /// </summary>
-        internal ProjectPropertyElement(XmlElementWithLocation xmlElement, ProjectPropertyGroupElement parent, ProjectRootElement containingProject)
+        public ProjectPropertyElement(XmlElementWithLocation xmlElement, ProjectPropertyGroupElement parent, ProjectRootElement containingProject)
             : base(xmlElement, parent, containingProject)
         {
             ErrorUtilities.VerifyThrowArgumentNull(parent, nameof(parent));
@@ -87,7 +87,7 @@ namespace Microsoft.Build.Construction
         /// Validates name.
         /// Caller should then ensure the element is added to the XmlDocument in the appropriate location.
         /// </summary>
-        internal static ProjectPropertyElement CreateDisconnected(string name, ProjectRootElement containingProject)
+        public static ProjectPropertyElement CreateDisconnected(string name, ProjectRootElement containingProject)
         {
             XmlUtilities.VerifyThrowArgumentValidElementName(name);
 
@@ -104,7 +104,7 @@ namespace Microsoft.Build.Construction
         /// <remarks>
         /// The implementation has to actually replace the element to do this.
         /// </remarks>
-        internal void ChangeName(string newName)
+        public void ChangeName(string newName)
         {
             ErrorUtilities.VerifyThrowArgumentLength(newName, nameof(newName));
             XmlUtilities.VerifyThrowArgumentValidElementName(newName);
@@ -126,7 +126,7 @@ namespace Microsoft.Build.Construction
         /// Overridden to verify that the potential parent and siblings
         /// are acceptable. Throws InvalidOperationException if they are not.
         /// </summary>
-        internal override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
+        public override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
         {
             ErrorUtilities.VerifyThrowInvalidOperation(parent is ProjectPropertyGroupElement, "OM_CannotAcceptParent");
         }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -29,7 +29,7 @@ namespace Microsoft.Build.Evaluation
         /// </summary>
         private string _evaluatedValueEscaped;
 
-        internal ProjectProperty(Project project)
+        public ProjectProperty(Project project)
         {
             ErrorUtilities.VerifyThrowArgumentNull(project, nameof(project));
             _project = project;
@@ -38,7 +38,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Creates a property.
         /// </summary>
-        internal ProjectProperty(Project project, string evaluatedValueEscaped)
+        public ProjectProperty(Project project, string evaluatedValueEscaped)
         {
             ErrorUtilities.VerifyThrowArgumentNull(project, nameof(project));
             ErrorUtilities.VerifyThrowArgumentNull(evaluatedValueEscaped, nameof(evaluatedValueEscaped));
@@ -47,7 +47,7 @@ namespace Microsoft.Build.Evaluation
             _evaluatedValueEscaped = evaluatedValueEscaped;
         }
 
-        internal virtual string EvaluatedValueEscapedInternal => _evaluatedValueEscaped;
+        public virtual string EvaluatedValueEscapedInternal => _evaluatedValueEscaped;
 
         /// <summary>
         /// Name of the property.
@@ -235,7 +235,7 @@ namespace Microsoft.Build.Evaluation
         /// This is ONLY to be used by the Evaluator (and Project.SetGlobalProperty) and ONLY for Global, Environment, and Built-in properties.
         /// All other properties originate in XML, and should have a backing XML object.
         /// </summary>
-        internal static ProjectProperty Create(Project project, string name, string evaluatedValueEscaped, bool isGlobalProperty, bool mayBeReserved)
+        public static ProjectProperty Create(Project project, string name, string evaluatedValueEscaped, bool isGlobalProperty, bool mayBeReserved)
         {
             return new ProjectPropertyNotXmlBacked(project, name, evaluatedValueEscaped, isGlobalProperty, mayBeReserved);
         }
@@ -246,7 +246,7 @@ namespace Microsoft.Build.Evaluation
         /// Property MAY NOT have reserved name and MAY NOT overwrite a global property.
         /// Predecessor is any immediately previous property that was overridden by this one during evaluation and may be null.
         /// </summary>
-        internal static ProjectProperty Create(Project project, ProjectPropertyElement xml, string evaluatedValueEscaped, ProjectProperty predecessor)
+        public static ProjectProperty Create(Project project, ProjectPropertyElement xml, string evaluatedValueEscaped, ProjectProperty predecessor)
         {
             if (predecessor == null)
             {
@@ -265,7 +265,7 @@ namespace Microsoft.Build.Evaluation
         /// <remarks>
         /// Method instead of a setter on EvaluatedValue to try to make clear its limited purpose.
         /// </remarks>
-        internal void UpdateEvaluatedValue(string evaluatedValueEscaped)
+        public void UpdateEvaluatedValue(string evaluatedValueEscaped)
         {
             _evaluatedValueEscaped = evaluatedValueEscaped;
         }
@@ -314,7 +314,7 @@ namespace Microsoft.Build.Evaluation
             /// Property MAY NOT have reserved name and MAY NOT overwrite a global property.
             /// Predecessor is any immediately previous property that was overridden by this one during evaluation and may be null.
             /// </summary>
-            internal ProjectPropertyXmlBacked(Project project, ProjectPropertyElement xml, string evaluatedValueEscaped)
+            public ProjectPropertyXmlBacked(Project project, ProjectPropertyElement xml, string evaluatedValueEscaped)
                 : base(project, evaluatedValueEscaped)
             {
                 ErrorUtilities.VerifyThrowArgumentNull(xml, nameof(xml));
@@ -459,7 +459,7 @@ namespace Microsoft.Build.Evaluation
             /// Property MAY NOT have reserved name and MAY NOT overwrite a global property.
             /// Predecessor is any immediately previous property that was overridden by this one during evaluation and may be null.
             /// </summary>
-            internal ProjectPropertyXmlBackedWithPredecessor(Project project, ProjectPropertyElement xml, string evaluatedValueEscaped, ProjectProperty predecessor)
+            public ProjectPropertyXmlBackedWithPredecessor(Project project, ProjectPropertyElement xml, string evaluatedValueEscaped, ProjectProperty predecessor)
                 : base(project, xml, evaluatedValueEscaped)
             {
                 ErrorUtilities.VerifyThrowArgumentNull(predecessor, nameof(predecessor));
@@ -499,7 +499,7 @@ namespace Microsoft.Build.Evaluation
             /// This is ONLY to be used by the Evaluator (and Project.SetGlobalProperty) and ONLY for Global, Environment, and Built-in properties.
             /// All other properties originate in XML, and should have a backing XML object.
             /// </summary>
-            internal ProjectPropertyNotXmlBacked(Project project, string name, string evaluatedValueEscaped, bool isGlobalProperty, bool mayBeReserved)
+            public ProjectPropertyNotXmlBacked(Project project, string name, string evaluatedValueEscaped, bool isGlobalProperty, bool mayBeReserved)
                 : base(project, evaluatedValueEscaped)
             {
                 ErrorUtilities.VerifyThrowArgumentLength(name, nameof(name));

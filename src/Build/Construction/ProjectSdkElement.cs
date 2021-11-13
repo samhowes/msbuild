@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 //-----------------------------------------------------------------------
 
@@ -15,7 +15,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// External projects support
         /// </summary>
-        internal ProjectSdkElement(ProjectElementContainerLink link)
+        public ProjectSdkElement(ProjectElementContainerLink link)
             : base(link)
         {
         }
@@ -23,7 +23,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         ///     Initialize a parented ProjectSdkElement
         /// </summary>
-        internal ProjectSdkElement(XmlElementWithLocation xmlElement, ProjectRootElement parent,
+        public ProjectSdkElement(XmlElementWithLocation xmlElement, ProjectRootElement parent,
             ProjectRootElement containingProject)
             : base(xmlElement, parent, containingProject)
         {
@@ -75,7 +75,7 @@ namespace Microsoft.Build.Construction
         }
 
         /// <inheritdoc />
-        internal override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent,
+        public override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent,
             ProjectElement previousSibling, ProjectElement nextSibling)
         {
             ErrorUtilities.VerifyThrowInvalidOperation(parent is ProjectRootElement, "OM_CannotAcceptParent");
@@ -91,7 +91,7 @@ namespace Microsoft.Build.Construction
         ///     Creates a non-parented ProjectSdkElement, wrapping an non-parented XmlElement.
         ///     Caller should then ensure the element is added to a parent
         /// </summary>
-        internal static ProjectSdkElement CreateDisconnected(string sdkName, string sdkVersion,
+        public static ProjectSdkElement CreateDisconnected(string sdkName, string sdkVersion,
             ProjectRootElement containingProject)
         {
             var element = containingProject.CreateElement(XMakeElements.sdk);

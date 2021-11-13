@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections;
@@ -18,7 +18,7 @@ namespace Microsoft.Build.Evaluation
     ///  (3) Combination: @(foo->'xxx;xxx', 'xxx;xxx')
     ///  We must not split on semicolons in macro or separator expressions like these.
     /// </remarks>
-    internal struct SemiColonTokenizer : IEnumerable<string>
+    public struct SemiColonTokenizer : IEnumerable<string>
     {
         private readonly string _expression;
 
@@ -33,7 +33,7 @@ namespace Microsoft.Build.Evaluation
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        internal struct Enumerator : IEnumerator<string>
+        public struct Enumerator : IEnumerator<string>
         {
             private readonly string _expression;
             private string _current;

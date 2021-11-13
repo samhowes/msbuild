@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace Microsoft.Build.Evaluation
@@ -7,7 +7,7 @@ namespace Microsoft.Build.Evaluation
     /// Represents the parent of a ProjectMetadata object -
     /// either a ProjectItem or a ProjectItemDefinition.
     /// </summary>
-    internal interface IProjectMetadataParent : IMetadataTable
+    public interface IProjectMetadataParent : IMetadataTable
     {
         /// <summary>
         /// The owning project

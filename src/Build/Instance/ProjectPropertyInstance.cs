@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -167,7 +167,7 @@ namespace Microsoft.Build.Execution
         /// <remarks>
         /// Not public since the only creation scenario is setting on a project.
         /// </remarks>
-        internal static ProjectPropertyInstance Create(string name, string escapedValue)
+        public static ProjectPropertyInstance Create(string name, string escapedValue)
         {
             return Create(name, escapedValue, mayBeReserved: false, isImmutable: false);
         }
@@ -181,7 +181,7 @@ namespace Microsoft.Build.Execution
         /// <remarks>
         /// Not public since the only creation scenario is setting on a project.
         /// </remarks>
-        internal static ProjectPropertyInstance Create(string name, string escapedValue, bool mayBeReserved)
+        public static ProjectPropertyInstance Create(string name, string escapedValue, bool mayBeReserved)
         {
             return Create(name, escapedValue, mayBeReserved, isImmutable: false);
         }
@@ -192,7 +192,7 @@ namespace Microsoft.Build.Execution
         /// This flags should ONLY be set by the evaluator or by cloning; after the ProjectInstance is created, they must be illegal.
         /// If name is invalid or reserved, throws ArgumentException.
         /// </summary>
-        internal static ProjectPropertyInstance Create(string name, string escapedValue, bool mayBeReserved, bool isImmutable)
+        public static ProjectPropertyInstance Create(string name, string escapedValue, bool mayBeReserved, bool isImmutable)
         {
             return Create(name, escapedValue, mayBeReserved, null, isImmutable);
         }
@@ -202,7 +202,7 @@ namespace Microsoft.Build.Execution
         /// an invalid project file exception.
         /// Creates mutable object.
         /// </summary>
-        internal static ProjectPropertyInstance Create(string name, string escapedValue, ElementLocation location)
+        public static ProjectPropertyInstance Create(string name, string escapedValue, ElementLocation location)
         {
             return Create(name, escapedValue, false, location, isImmutable: false);
         }
@@ -211,7 +211,7 @@ namespace Microsoft.Build.Execution
         /// Called during project build time to create a property.  Reserved properties will cause
         /// an invalid project file exception.
         /// </summary>
-        internal static ProjectPropertyInstance Create(string name, string escapedValue, ElementLocation location, bool isImmutable)
+        public static ProjectPropertyInstance Create(string name, string escapedValue, ElementLocation location, bool isImmutable)
         {
             return Create(name, escapedValue, false, location, isImmutable);
         }
@@ -220,7 +220,7 @@ namespace Microsoft.Build.Execution
         /// Cloning constructor.
         /// Strings are immutable (copy on write) so there is no work to do
         /// </summary>
-        internal static ProjectPropertyInstance Create(ProjectPropertyInstance that)
+        public static ProjectPropertyInstance Create(ProjectPropertyInstance that)
         {
             return Create(that._name, that._escapedValue, mayBeReserved: true /* already validated */, isImmutable: that.IsImmutable);
         }
@@ -229,7 +229,7 @@ namespace Microsoft.Build.Execution
         /// Cloning constructor.
         /// Strings are immutable (copy on write) so there is no work to do
         /// </summary>
-        internal static ProjectPropertyInstance Create(ProjectPropertyInstance that, bool isImmutable)
+        public static ProjectPropertyInstance Create(ProjectPropertyInstance that, bool isImmutable)
         {
             return Create(that._name, that._escapedValue, mayBeReserved: true /* already validated */, isImmutable: isImmutable);
         }
@@ -237,7 +237,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Factory for serialization
         /// </summary>
-        internal static ProjectPropertyInstance FactoryForDeserialization(ITranslator translator)
+        public static ProjectPropertyInstance FactoryForDeserialization(ITranslator translator)
         {
             ErrorUtilities.VerifyThrow(translator.Mode == TranslationDirection.ReadFromStream, "read only");
 
@@ -254,7 +254,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Performs a deep clone
         /// </summary>
-        internal ProjectPropertyInstance DeepClone()
+        public ProjectPropertyInstance DeepClone()
         {
             return Create(this);
         }
@@ -262,7 +262,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Performs a deep clone, optionally changing mutability
         /// </summary>
-        internal ProjectPropertyInstance DeepClone(bool isImmutable)
+        public ProjectPropertyInstance DeepClone(bool isImmutable)
         {
             return Create(this, isImmutable);
         }
@@ -272,7 +272,7 @@ namespace Microsoft.Build.Execution
         /// </summary>
         /// <param name="parent">The root element to which this element will belong.</param>
         /// <returns>The new element.</returns>
-        internal ProjectPropertyElement ToProjectPropertyElement(ProjectElementContainer parent)
+        public ProjectPropertyElement ToProjectPropertyElement(ProjectElementContainer parent)
         {
             ProjectPropertyElement property = parent.ContainingProject.CreatePropertyElement(Name);
             property.Value = EvaluatedValue;
@@ -323,7 +323,7 @@ namespace Microsoft.Build.Execution
             /// Private constructor.
             /// Called by outer class factory method.
             /// </summary>
-            internal ProjectPropertyInstanceImmutable(string name, string escapedValue)
+            public ProjectPropertyInstanceImmutable(string name, string escapedValue)
                 : base(name, escapedValue)
             {
             }

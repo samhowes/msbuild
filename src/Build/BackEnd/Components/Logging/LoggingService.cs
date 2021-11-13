@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -21,7 +21,7 @@ namespace Microsoft.Build.BackEnd.Logging
     /// processing the buildEvents and raising them on the filters and sinks
     /// or should they be done synchronously
     /// </summary>
-    internal enum LoggerMode
+    public enum LoggerMode
     {
         /// <summary>
         /// Events are processed synchronously
@@ -38,7 +38,7 @@ namespace Microsoft.Build.BackEnd.Logging
     /// <summary>
     /// What is the current state of the logging service
     /// </summary>
-    internal enum LoggingServiceState
+    public enum LoggingServiceState
     {
         /// <summary>
         /// When the logging service has been instantiated but not yet initialized through a call
@@ -65,7 +65,7 @@ namespace Microsoft.Build.BackEnd.Logging
     /// <summary>
     /// Logging services is used as a helper class to assist logging messages in getting to the correct loggers.
     /// </summary>
-    internal partial class LoggingService : ILoggingService, INodePacketHandler, IBuildComponent
+    public partial class LoggingService : ILoggingService, INodePacketHandler, IBuildComponent
     {
         /// <summary>
         /// The default maximum size for the logging event queue.
@@ -1054,7 +1054,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <param name="buildEvent">BuildEventArgs to process</param>
         /// <param name="allowThrottling"><code>true</code> to allow throttling, otherwise <code>false</code>.</param>
         /// <exception cref="InternalErrorException">buildEvent is null</exception>
-        internal virtual void ProcessLoggingEvent(object buildEvent, bool allowThrottling = false)
+        public virtual void ProcessLoggingEvent(object buildEvent, bool allowThrottling = false)
         {
             ErrorUtilities.VerifyThrow(buildEvent != null, "buildEvent is null");
             if (_logMode == LoggerMode.Asynchronous)
@@ -1082,7 +1082,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// we need to make sure we process all of the events before the build finished event is raised
         /// and we need to make sure we process all of the logging events before we shutdown the component.
         /// </summary>
-        internal void WaitForThreadToProcessEvents()
+        public void WaitForThreadToProcessEvents()
         {
             // This method may be called in the shutdown submission callback, this callback may be called after the logging service has 
             // shutdown and nulled out the events we were going to wait on.
@@ -1097,7 +1097,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// Adds data to the EventArgs of the log packet that the main node is aware of, but doesn't
         /// get serialized for perf reasons.
         /// </summary>
-        internal void InjectNonSerializedData(LogMessagePacket loggingPacket)
+        public void InjectNonSerializedData(LogMessagePacket loggingPacket)
         {
             if (loggingPacket?.NodeBuildEvent != null && _componentHost != null)
             {

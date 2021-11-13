@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -291,11 +291,11 @@ namespace Microsoft.Build.Execution
         /// Whether the tools version used originated from an explicit specification,
         /// for example from an MSBuild task or /tv switch.
         /// </summary>
-        internal bool ExplicitToolsVersionSpecified => ExplicitlySpecifiedToolsVersion != null;
+        public bool ExplicitToolsVersionSpecified => ExplicitlySpecifiedToolsVersion != null;
 
         /// <summary>
         /// Returns the global properties as a dictionary.
         /// </summary>
-        internal PropertyDictionary<ProjectPropertyInstance> GlobalPropertiesDictionary { get; }
+        public PropertyDictionary<ProjectPropertyInstance> GlobalPropertiesDictionary { get; }
     }
 }

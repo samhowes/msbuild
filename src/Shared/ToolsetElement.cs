@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -17,9 +17,9 @@ namespace Microsoft.Build.Evaluation
     /// <summary>
     /// Helper class for reading toolsets out of the configuration file.
     /// </summary>
-    internal static class ToolsetConfigurationReaderHelpers
+    public static class ToolsetConfigurationReaderHelpers
     {
-        internal static ToolsetConfigurationSection ReadToolsetConfigurationSection(Configuration configuration)
+        public static ToolsetConfigurationSection ReadToolsetConfigurationSection(Configuration configuration)
         {
             ToolsetConfigurationSection configurationSection = null;
 
@@ -82,7 +82,7 @@ namespace Microsoft.Build.Evaluation
     /// <remarks>
     /// Internal for unit testing only
     /// </remarks>
-    internal sealed class ToolsetElement : ConfigurationElement
+    public sealed class ToolsetElement : ConfigurationElement
     {
         /// <summary>
         /// ToolsVersion attribute of the element
@@ -128,7 +128,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Class representing all the per-OS search paths for MSBuildExtensionsPath*
         /// </summary>
-        internal sealed class ExtensionsPathsElementCollection : ConfigurationElementCollection
+        public sealed class ExtensionsPathsElementCollection : ConfigurationElementCollection
         {
             /// <summary>
             /// We use this dictionary to track whether or not we've seen a given
@@ -266,7 +266,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Class representing searchPaths element for a single OS
         /// </summary>
-        internal sealed class ExtensionsPathElement : ConfigurationElement
+        public sealed class ExtensionsPathElement : ConfigurationElement
         {
             /// <summary>
             /// OS attribute of the element
@@ -301,7 +301,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Class representing collection of property elements
         /// </summary>
-        internal sealed class PropertyElementCollection : ConfigurationElementCollection
+        public sealed class PropertyElementCollection : ConfigurationElementCollection
         {
             #region Private Fields
 
@@ -438,7 +438,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// This class represents property element
         /// </summary>
-        internal sealed class PropertyElement : ConfigurationElement
+        public sealed class PropertyElement : ConfigurationElement
         {
             /// <summary>
             /// name attribute
@@ -482,7 +482,7 @@ namespace Microsoft.Build.Evaluation
     /// <remarks>
     /// Internal for unit testing only
     /// </remarks>
-    internal sealed class ToolsetElementCollection : ConfigurationElementCollection
+    public sealed class ToolsetElementCollection : ConfigurationElementCollection
     {
         /// <summary>
         /// We use this dictionary to track whether or not we've seen a given
@@ -624,7 +624,7 @@ namespace Microsoft.Build.Evaluation
     /// <remarks>
     /// Internal for unit testing only
     /// </remarks>
-    internal sealed class ToolsetConfigurationSection : ConfigurationSection
+    public sealed class ToolsetConfigurationSection : ConfigurationSection
     {
         /// <summary>
         /// toolsVersion element collection

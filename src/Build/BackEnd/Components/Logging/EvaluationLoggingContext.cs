@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.BackEnd.Logging;
@@ -10,7 +10,7 @@ namespace Microsoft.Build.BackEnd.Components.Logging
     /// <summary>
     ///     Logging context and helpers for evaluation logging
     /// </summary>
-    internal class EvaluationLoggingContext : LoggingContext
+    public class EvaluationLoggingContext : LoggingContext
     {
         private readonly string _projectFile;
 
@@ -31,7 +31,7 @@ namespace Microsoft.Build.BackEnd.Components.Logging
         /// <summary>
         /// Log that the project has finished
         /// </summary>
-        internal void LogProjectEvaluationFinished()
+        public void LogProjectEvaluationFinished()
         {
             ErrorUtilities.VerifyThrow(IsValid, "invalid");
             LoggingService.LogProjectEvaluationFinished(BuildEventContext, _projectFile);

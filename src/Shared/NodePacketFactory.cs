@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// Implementation of INodePacketFactory as a helper class for classes which expose this interface publicly.
     /// </summary>
-    internal class NodePacketFactory : INodePacketFactory
+    public class NodePacketFactory : INodePacketFactory
     {
         /// <summary>
         /// Mapping of packet types to factory information.

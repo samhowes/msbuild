@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -9,7 +9,7 @@ namespace Microsoft.Build.Internal
     /// <summary>
     /// Gets the <see cref="AssemblyFileVersionAttribute"/> of Microsoft.Build.dll.
     /// </summary>
-    internal sealed class MSBuildAssemblyFileVersion
+    public sealed class MSBuildAssemblyFileVersion
     {
         private static readonly Lazy<MSBuildAssemblyFileVersion> MSBuildAssemblyFileVersionLazy = new Lazy<MSBuildAssemblyFileVersion>(GetMSBuildAssemblyFileVersion, isThreadSafe: true);
 

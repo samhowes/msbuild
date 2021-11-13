@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Diagnostics;
@@ -47,7 +47,7 @@ namespace Microsoft.Build.Execution
         /// Constructor called by Evaluator.
         /// All parameters are in the unevaluated state.
         /// </summary>
-        internal ProjectOnErrorInstance
+        public ProjectOnErrorInstance
             (
             string executeTargets,
             string condition,
@@ -128,7 +128,7 @@ namespace Microsoft.Build.Execution
             translator.Translate(ref _executeTargetsLocation, ElementLocation.FactoryForDeserialization);
         }
 
-        internal new static ProjectOnErrorInstance FactoryForDeserialization(ITranslator translator)
+        public new static ProjectOnErrorInstance FactoryForDeserialization(ITranslator translator)
         {
             return translator.FactoryForDeserializingTypeWithName<ProjectOnErrorInstance>();
         }

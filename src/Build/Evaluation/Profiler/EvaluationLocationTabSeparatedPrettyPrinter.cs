@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,18 +10,18 @@ namespace Microsoft.Build.Evaluation
     /// <summary>
     /// Pretty prints an evaluation location in tab separated value (TSV) format
     /// </summary>
-    internal sealed class EvaluationLocationTabSeparatedPrettyPrinter : EvaluationLocationPrettyPrinterBase
+    public sealed class EvaluationLocationTabSeparatedPrettyPrinter : EvaluationLocationPrettyPrinterBase
     {
         private const string Separator = "\t";
 
         /// <inheritdoc/> 
-        internal override void AppendHeader(StringBuilder stringBuilder)
+        public override void AppendHeader(StringBuilder stringBuilder)
         {
             AppendDefaultHeaderWithSeparator(stringBuilder, Separator);
         }
 
         /// <inheritdoc/>
-        internal override void AppendLocation(StringBuilder stringBuilder, TimeSpan totalTime, EvaluationLocation evaluationLocation, ProfiledLocation profiledLocation)
+        public override void AppendLocation(StringBuilder stringBuilder, TimeSpan totalTime, EvaluationLocation evaluationLocation, ProfiledLocation profiledLocation)
         {
             AppendDefaultLocationWithSeparator(stringBuilder, totalTime, evaluationLocation, profiledLocation, Separator);
         }

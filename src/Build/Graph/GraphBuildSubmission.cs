@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -44,7 +44,7 @@ namespace Microsoft.Build.Graph
         /// <summary>
         /// Constructor
         /// </summary>
-        internal GraphBuildSubmission(BuildManager buildManager, int submissionId, GraphBuildRequestData requestData)
+        public GraphBuildSubmission(BuildManager buildManager, int submissionId, GraphBuildRequestData requestData)
         {
             ErrorUtilities.VerifyThrowArgumentNull(buildManager, nameof(buildManager));
             ErrorUtilities.VerifyThrowArgumentNull(requestData, nameof(requestData));
@@ -89,12 +89,12 @@ namespace Microsoft.Build.Graph
         /// <summary>
         /// The BuildRequestData being used for this submission.
         /// </summary>
-        internal GraphBuildRequestData BuildRequestData { get; }
+        public GraphBuildRequestData BuildRequestData { get; }
 
         /// <summary>
         /// Whether the graph build has started.
         /// </summary>
-        internal bool IsStarted { get; set; }
+        public bool IsStarted { get; set; }
 
         /// <summary>
         /// Starts the request and blocks until results are available.
@@ -123,7 +123,7 @@ namespace Microsoft.Build.Graph
         /// <summary>
         /// Sets the event signaling that the build is complete.
         /// </summary>
-        internal void CompleteResults(GraphBuildResult result)
+        public void CompleteResults(GraphBuildResult result)
         {
             ErrorUtilities.VerifyThrowArgumentNull(result, nameof(result));
             ErrorUtilities.VerifyThrow(result.SubmissionId == SubmissionId, "GraphBuildResult's submission id doesn't match GraphBuildSubmission's");

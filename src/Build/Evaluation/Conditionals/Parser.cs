@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -12,7 +12,7 @@ namespace Microsoft.Build.Evaluation
     using ILoggingService = Microsoft.Build.BackEnd.Logging.ILoggingService;
 
     [Flags]
-    internal enum ParserOptions
+    public enum ParserOptions
     {
         None = 0x0,
         AllowProperties = 0x1,
@@ -38,12 +38,12 @@ namespace Microsoft.Build.Evaluation
     /// <remarks>
     /// UNDONE: When we copied over the conditionals code, we didn't copy over the unit tests for scanner, parser, and expression tree.
     /// </remarks>
-    internal sealed class Parser
+    public sealed class Parser
     {
         private Scanner _lexer;
         private ParserOptions _options;
         private ElementLocation _elementLocation;
-        internal int errorPosition = 0; // useful for unit tests
+        public int errorPosition = 0; // useful for unit tests
 
         #region REMOVE_COMPAT_WARNING
 
@@ -54,7 +54,7 @@ namespace Microsoft.Build.Evaluation
         ///  Location contextual information which are attached to logging events to 
         ///  say where they are in relation to the process, engine, project, target,task which is executing
         /// </summary>
-        internal BuildEventContext LogBuildEventContext
+        public BuildEventContext LogBuildEventContext
         {
             get
             {
@@ -69,7 +69,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Engine Logging Service reference where events will be logged to
         /// </summary>
-        internal ILoggingService LoggingServices
+        public ILoggingService LoggingServices
         {
             set
             {
@@ -83,7 +83,7 @@ namespace Microsoft.Build.Evaluation
         }
         #endregion
 
-        internal Parser()
+        public Parser()
         {
             // nothing to see here, move along.
         }
@@ -93,7 +93,7 @@ namespace Microsoft.Build.Evaluation
         // You pass in the expression you want to parse, and you get an
         // ExpressionTree out the back end.
         //
-        internal GenericExpressionNode Parse(string expression, ParserOptions optionSettings, ElementLocation elementLocation)
+        public GenericExpressionNode Parse(string expression, ParserOptions optionSettings, ElementLocation elementLocation)
         {
             // We currently have no support (and no scenarios) for disallowing property references
             // in Conditions.

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -15,7 +15,7 @@ namespace Microsoft.Build.BackEnd.Logging
     /// and a new LoggingContext is returned.  This new LoggingContext should be used for all
     /// subsequent logging within the subcontext.
     /// </summary>
-    internal class BuildLoggingContext : LoggingContext
+    public class BuildLoggingContext : LoggingContext
     {
         /// <summary>
         /// True if this context comes from the in-proc node.
@@ -55,7 +55,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <param name="exception">The exception wich is to be logged</param>
         /// <param name="file">The file in which the error occurred</param>
         /// <param name="taskName">The task in which the error occurred</param>
-        internal void LogFatalTaskError(Exception exception, BuildEventFileInfo file, string taskName)
+        public void LogFatalTaskError(Exception exception, BuildEventFileInfo file, string taskName)
         {
             ErrorUtilities.VerifyThrow(IsValid, "must be valid");
             LoggingService.LogFatalTaskError(BuildEventContext, exception, file, taskName);

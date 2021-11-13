@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -16,7 +16,7 @@ namespace Microsoft.Build.Collections
     /// original strings.  The interner itself is also transmitted ahead of time, with the IDs, allowing
     /// reconstruction of the original strings.  This ensures each string is transmitted exactly once.
     /// </remarks>
-    internal class LookasideStringInterner : ITranslatable
+    public class LookasideStringInterner : ITranslatable
     {
         /// <summary>
         /// Index used for null strings.

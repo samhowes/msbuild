@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Execution;
@@ -11,13 +11,13 @@ namespace Microsoft.Build.BackEnd
     /// </summary>
     /// <param name="issuingEntry">The entry issuing the request.</param>
     /// <param name="requests">The request to be issued.</param>
-    internal delegate void NewBuildRequestsDelegate(BuildRequestEntry issuingEntry, FullyQualifiedBuildRequest[] requests);
+    public delegate void NewBuildRequestsDelegate(BuildRequestEntry issuingEntry, FullyQualifiedBuildRequest[] requests);
 
     /// <summary>
     /// Delegate for event raised when a build request has completed.
     /// </summary>
     /// <param name="completedEntry">The entry which completed.</param>
-    internal delegate void BuildRequestCompletedDelegate(BuildRequestEntry completedEntry);
+    public delegate void BuildRequestCompletedDelegate(BuildRequestEntry completedEntry);
 
     /// <summary>
     /// Delegate for event raised when a build request is blocked on another request which is in progress.
@@ -26,12 +26,12 @@ namespace Microsoft.Build.BackEnd
     /// <param name="blockingGlobalRequestId">The request on which we are blocked.</param>
     /// <param name="blockingTarget">The target on which we are blocked.</param>
     /// <param name="partialBuildResult">The partial build result on which we are blocked.</param>
-    internal delegate void BuildRequestBlockedDelegate(BuildRequestEntry issuingEntry, int blockingGlobalRequestId, string blockingTarget, BuildResult partialBuildResult);
+    public delegate void BuildRequestBlockedDelegate(BuildRequestEntry issuingEntry, int blockingGlobalRequestId, string blockingTarget, BuildResult partialBuildResult);
 
     /// <summary>
     /// Represents a class which is capable of building BuildRequestEntries.
     /// </summary>
-    internal interface IRequestBuilder
+    public interface IRequestBuilder
     {
         /// <summary>
         /// Raised when a new build request is to be issued.

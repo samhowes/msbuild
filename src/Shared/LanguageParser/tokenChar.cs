@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Globalization;
@@ -8,14 +8,14 @@ namespace Microsoft.Build.Shared.LanguageParser
     /// <summary>
     /// Utility functions for classifying characters that might be found in a sources file.
     /// </summary>
-    internal static class TokenChar
+    public static class TokenChar
     {
         /// <summary>
         /// Determine whether a given character is a newline character
         /// </summary>
         /// <param name="c"></param>
         /// <returns></returns>
-        static internal bool IsNewLine(char c)
+        static public bool IsNewLine(char c)
         {
             // From the C# spec and vb specs, newline characters are:
             return c == 0x000d        // Carriage return
@@ -30,7 +30,7 @@ namespace Microsoft.Build.Shared.LanguageParser
         /// </summary>
         /// <param name="c"></param>
         /// <returns></returns>
-        static internal bool IsLetter(char c)
+        static public bool IsLetter(char c)
         {
             UnicodeCategory cat = System.Globalization.CharUnicodeInfo.GetUnicodeCategory(c);
 
@@ -55,7 +55,7 @@ namespace Microsoft.Build.Shared.LanguageParser
         /// </summary>
         /// <param name="c"></param>
         /// <returns></returns>
-        static internal bool IsDecimalDigit(char c)
+        static public bool IsDecimalDigit(char c)
         {
             UnicodeCategory cat = System.Globalization.CharUnicodeInfo.GetUnicodeCategory(c);
 
@@ -75,7 +75,7 @@ namespace Microsoft.Build.Shared.LanguageParser
         /// </summary>
         /// <param name="c"></param>
         /// <returns></returns>
-        static internal bool IsConnecting(char c)
+        static public bool IsConnecting(char c)
         {
             UnicodeCategory cat = System.Globalization.CharUnicodeInfo.GetUnicodeCategory(c);
 
@@ -96,7 +96,7 @@ namespace Microsoft.Build.Shared.LanguageParser
         /// </summary>
         /// <param name="c"></param>
         /// <returns></returns>
-        static internal bool IsCombining(char c)
+        static public bool IsCombining(char c)
         {
             UnicodeCategory cat = System.Globalization.CharUnicodeInfo.GetUnicodeCategory(c);
 
@@ -117,7 +117,7 @@ namespace Microsoft.Build.Shared.LanguageParser
         /// </summary>
         /// <param name="c"></param>
         /// <returns></returns>
-        static internal bool IsFormatting(char c)
+        static public bool IsFormatting(char c)
         {
             UnicodeCategory cat = System.Globalization.CharUnicodeInfo.GetUnicodeCategory(c);
 
@@ -137,7 +137,7 @@ namespace Microsoft.Build.Shared.LanguageParser
         /// </summary>
         /// <param name="c"></param>
         /// <returns></returns>
-        static internal bool IsHexDigit(char c)
+        static public bool IsHexDigit(char c)
         {
             // From 2.4.4.2 of the C# Language Specification
             // hex-digit:
@@ -158,7 +158,7 @@ namespace Microsoft.Build.Shared.LanguageParser
         /// </summary>
         /// <param name="c"></param>
         /// <returns></returns>
-        static internal bool IsOctalDigit(char c)
+        static public bool IsOctalDigit(char c)
         {
             if
             (

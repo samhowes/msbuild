@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -14,7 +14,7 @@ namespace Microsoft.Build
     /// the cache has a reference to it and can match it to an internable. When the string is collected, it is also automatically "removed"
     /// from the cache by becoming unrecoverable from the GC handle. GC handles that do not reference a live string anymore are freed lazily.
     /// </summary>
-    internal sealed partial class WeakStringCache : IDisposable
+    public sealed partial class WeakStringCache : IDisposable
     {
         /// <summary>
         /// Debug stats returned by GetDebugInfo().
@@ -99,7 +99,7 @@ namespace Microsoft.Build
         /// </summary>
         /// <param name="internable">The internable to compute the hash code for.</param>
         /// <returns>The 32-bit hash code.</returns>
-        internal static int GetInternableHashCode<T>(T internable) where T : IInternable
+        public static int GetInternableHashCode<T>(T internable) where T : IInternable
         {
             int hashCode = 5381;
             for (int i = 0; i < internable.Length; i++)

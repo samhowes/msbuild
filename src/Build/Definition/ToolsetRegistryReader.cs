@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 #if FEATURE_WIN32_REGISTRY
@@ -39,7 +39,7 @@ namespace Microsoft.Build.Evaluation
     ///         @MSBuildBinPath = D:\SomeOtherFolder
     ///         @SomePropertyName = PropertyOtherValue
     /// </summary>
-    internal class ToolsetRegistryReader : ToolsetReader
+    public class ToolsetRegistryReader : ToolsetReader
     {
         /// <summary>
         /// Registry location for storing tools version dependent data for msbuild
@@ -54,7 +54,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Default constructor
         /// </summary>
-        internal ToolsetRegistryReader(PropertyDictionary<ProjectPropertyInstance> environmentProperties, PropertyDictionary<ProjectPropertyInstance> globalProperties)
+        public ToolsetRegistryReader(PropertyDictionary<ProjectPropertyInstance> environmentProperties, PropertyDictionary<ProjectPropertyInstance> globalProperties)
             : this(environmentProperties, globalProperties, new RegistryKeyWrapper(MSBuildRegistryPath))
         {
         }
@@ -62,7 +62,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Constructor overload accepting a registry wrapper for unit testing purposes only
         /// </summary>
-        internal ToolsetRegistryReader(PropertyDictionary<ProjectPropertyInstance> environmentProperties, PropertyDictionary<ProjectPropertyInstance> globalProperties, RegistryKeyWrapper msbuildRegistryWrapper)
+        public ToolsetRegistryReader(PropertyDictionary<ProjectPropertyInstance> environmentProperties, PropertyDictionary<ProjectPropertyInstance> globalProperties, RegistryKeyWrapper msbuildRegistryWrapper)
             : base(environmentProperties, globalProperties)
         {
             error.VerifyThrowArgumentNull(msbuildRegistryWrapper, nameof(msbuildRegistryWrapper));

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -15,7 +15,7 @@ namespace Microsoft.Build.Internal
         // that avoids unneeded GC pressure.
         //
         // Deliberately not implement IEnumerable/IEnumerator to avoid accidental boxing
-        internal struct XmlElementChildIterator
+        public struct XmlElementChildIterator
         {
             private readonly XmlElementWithLocation _element;
             private readonly bool _throwForInvalidNodeTypes;
@@ -26,7 +26,7 @@ namespace Microsoft.Build.Internal
             //  1: After first element
             private int _state;
 
-            internal XmlElementChildIterator(XmlElementWithLocation element, bool throwForInvalidNodeTypes)
+            public XmlElementChildIterator(XmlElementWithLocation element, bool throwForInvalidNodeTypes)
             {
                 Debug.Assert(element != null);
 

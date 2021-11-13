@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -17,12 +17,12 @@ namespace Microsoft.Build.Construction
     /// </summary>
     public class ProjectExtensionsElement : ProjectElement
     {
-        internal ProjectExtensionsElementLink ExtensionLink => (ProjectExtensionsElementLink)Link;
+        public ProjectExtensionsElementLink ExtensionLink => (ProjectExtensionsElementLink)Link;
 
         /// <summary>
         /// External projects support
         /// </summary>
-        internal ProjectExtensionsElement(ProjectExtensionsElementLink link)
+        public ProjectExtensionsElement(ProjectExtensionsElementLink link)
             : base(link)
         {
         }
@@ -30,7 +30,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Initialize a parented ProjectExtensionsElement instance
         /// </summary>
-        internal ProjectExtensionsElement(XmlElement xmlElement, ProjectRootElement parent, ProjectRootElement project)
+        public ProjectExtensionsElement(XmlElement xmlElement, ProjectRootElement parent, ProjectRootElement project)
             : base(xmlElement, parent, project)
         {
             ErrorUtilities.VerifyThrowArgumentNull(parent, nameof(parent));
@@ -178,7 +178,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Creates a ProjectExtensionsElement parented by a project
         /// </summary>
-        internal static ProjectExtensionsElement CreateParented(XmlElementWithLocation element, ProjectRootElement parent, ProjectRootElement containingProject)
+        public static ProjectExtensionsElement CreateParented(XmlElementWithLocation element, ProjectRootElement parent, ProjectRootElement containingProject)
         {
             return new ProjectExtensionsElement(element, parent, containingProject);
         }
@@ -187,7 +187,7 @@ namespace Microsoft.Build.Construction
         /// Creates an unparented ProjectExtensionsElement, wrapping an unparented XmlElement.
         /// Caller should then ensure the element is added to a parent
         /// </summary>
-        internal static ProjectExtensionsElement CreateDisconnected(ProjectRootElement containingProject)
+        public static ProjectExtensionsElement CreateDisconnected(ProjectRootElement containingProject)
         {
             XmlElementWithLocation element = containingProject.CreateElement(XMakeElements.projectExtensions);
 
@@ -198,7 +198,7 @@ namespace Microsoft.Build.Construction
         /// Overridden to verify that the potential parent and siblings
         /// are acceptable. Throws InvalidOperationException if they are not.
         /// </summary>
-        internal override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
+        public override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
         {
             ErrorUtilities.VerifyThrowInvalidOperation(parent is ProjectRootElement, "OM_CannotAcceptParent");
         }

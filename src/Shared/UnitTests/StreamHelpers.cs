@@ -5,14 +5,14 @@ using System.IO;
 
 namespace Microsoft.Build.UnitTests
 {
-    sealed internal class StreamHelpers
+    sealed public class StreamHelpers
     {
         /// <summary>
         /// Take a string and convert it to a StreamReader.
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        static internal StreamReader StringToStreamReader(string value)
+        static public StreamReader StringToStreamReader(string value)
         {
             MemoryStream m = new MemoryStream();
 #if FEATURE_ENCODING_DEFAULT

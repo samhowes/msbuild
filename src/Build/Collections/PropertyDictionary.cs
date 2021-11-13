@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -33,7 +33,7 @@ namespace Microsoft.Build.Collections
     /// </remarks>
     /// <typeparam name="T">Property or Metadata class type to store</typeparam>
     [DebuggerDisplay("#Entries={Count}")]
-    internal sealed class PropertyDictionary<T> : IEnumerable<T>, IEquatable<PropertyDictionary<T>>, IPropertyProvider<T>, IDictionary<string, T>
+    public sealed class PropertyDictionary<T> : IEnumerable<T>, IEquatable<PropertyDictionary<T>>, IPropertyProvider<T>, IDictionary<string, T>
         where T : class, IKeyed, IValued, IEquatable<T>
     {
         /// <summary>
@@ -53,7 +53,7 @@ namespace Microsoft.Build.Collections
         /// <summary>
         /// Creates empty dictionary, optionally specifying initial capacity
         /// </summary>
-        internal PropertyDictionary(int capacity)
+        public PropertyDictionary(int capacity)
         {
             _properties = new RetrievableEntryHashSet<T>(capacity, MSBuildNameIgnoreCaseComparer.Default);
         }
@@ -61,7 +61,7 @@ namespace Microsoft.Build.Collections
         /// <summary>
         /// Create a new dictionary from an enumerator
         /// </summary>
-        internal PropertyDictionary(IEnumerable<T> elements)
+        public PropertyDictionary(IEnumerable<T> elements)
             : this()
         {
             foreach (T element in elements)
@@ -73,7 +73,7 @@ namespace Microsoft.Build.Collections
         /// <summary>
         /// Creates empty dictionary, specifying a comparer
         /// </summary>
-        internal PropertyDictionary(MSBuildNameIgnoreCaseComparer comparer)
+        public PropertyDictionary(MSBuildNameIgnoreCaseComparer comparer)
         {
             _properties = new RetrievableEntryHashSet<T>(comparer);
         }
@@ -81,7 +81,7 @@ namespace Microsoft.Build.Collections
         /// <summary>
         /// Create a new dictionary from an enumerator
         /// </summary>
-        internal PropertyDictionary(int capacity, IEnumerable<T> elements)
+        public PropertyDictionary(int capacity, IEnumerable<T> elements)
             : this(capacity)
         {
             foreach (T element in elements)
@@ -144,7 +144,7 @@ namespace Microsoft.Build.Collections
         /// <summary>
         /// Returns the number of property in the collection.
         /// </summary>
-        internal int Count
+        public int Count
         {
             get
             {
@@ -179,7 +179,7 @@ namespace Microsoft.Build.Collections
         /// This better matches the semantics of property, which are considered to have a blank value if they
         /// are not defined.
         /// </remarks>
-        internal T this[string name]
+        public T this[string name]
         {
             get
             {
@@ -438,7 +438,7 @@ namespace Microsoft.Build.Collections
         /// Removes any property with the specified name.
         /// Returns true if the property was in the collection, otherwise false.
         /// </summary>
-        internal bool Remove(string name)
+        public bool Remove(string name)
         {
             ErrorUtilities.VerifyThrowArgumentLength(name, nameof(name));
 
@@ -454,7 +454,7 @@ namespace Microsoft.Build.Collections
         /// Overwrites any property with the same name already in the collection.
         /// To remove a property, use Remove(...) instead.
         /// </summary>
-        internal void Set(T projectProperty)
+        public void Set(T projectProperty)
         {
             ErrorUtilities.VerifyThrowArgumentNull(projectProperty, nameof(projectProperty));
 
@@ -468,7 +468,7 @@ namespace Microsoft.Build.Collections
         /// Adds the specified properties to this dictionary.
         /// </summary>
         /// <param name="other">An enumerator over the properties to add.</param>
-        internal void ImportProperties(IEnumerable<T> other)
+        public void ImportProperties(IEnumerable<T> other)
         {
             // The properties lock is locked in the set method
             foreach (T property in other)
@@ -481,7 +481,7 @@ namespace Microsoft.Build.Collections
         /// Removes the specified properties from this dictionary
         /// </summary>
         /// <param name="other">An enumerator over the properties to remove.</param>
-        internal void RemoveProperties(IEnumerable<T> other)
+        public void RemoveProperties(IEnumerable<T> other)
         {
             // The properties lock is locked in the set method
             foreach (T property in other)
@@ -493,7 +493,7 @@ namespace Microsoft.Build.Collections
         /// <summary>
         /// Helper to convert into a read-only dictionary of string, string.
         /// </summary>
-        internal Dictionary<string, string> ToDictionary()
+        public Dictionary<string, string> ToDictionary()
         {
             Dictionary<string, string> dictionary;
 

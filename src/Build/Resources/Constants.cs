@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -17,45 +17,45 @@ namespace Microsoft.Build.Internal
     /// <summary>
     /// Contains a list of the special (reserved) properties that are settable by MSBuild code only.
     /// </summary>
-    internal static class ReservedPropertyNames
+    public static class ReservedPropertyNames
     {
         // NOTE: if you add to this list, update the ReservedProperties hashtable below
-        internal const string projectDirectory = "MSBuildProjectDirectory";
-        internal const string projectDirectoryNoRoot = "MSBuildProjectDirectoryNoRoot";
-        internal const string projectFile = "MSBuildProjectFile";
-        internal const string projectExtension = "MSBuildProjectExtension";
-        internal const string projectFullPath = "MSBuildProjectFullPath";
-        internal const string projectName = "MSBuildProjectName";
-        internal const string thisFileDirectory = "MSBuildThisFileDirectory";
-        internal const string thisFileDirectoryNoRoot = "MSBuildThisFileDirectoryNoRoot";
-        internal const string thisFile = "MSBuildThisFile"; // "MSBuildThisFileFile" sounds silly!
-        internal const string thisFileExtension = "MSBuildThisFileExtension";
-        internal const string thisFileFullPath = "MSBuildThisFileFullPath";
-        internal const string thisFileName = "MSBuildThisFileName";
-        internal const string binPath = "MSBuildBinPath";
-        internal const string projectDefaultTargets = "MSBuildProjectDefaultTargets";
-        internal const string extensionsPath = "MSBuildExtensionsPath";
-        internal const string extensionsPath32 = "MSBuildExtensionsPath32";
-        internal const string extensionsPath64 = "MSBuildExtensionsPath64";
-        internal const string userExtensionsPath = "MSBuildUserExtensionsPath";
-        internal const string toolsPath = MSBuildConstants.ToolsPath;
-        internal const string toolsVersion = "MSBuildToolsVersion";
-        internal const string msbuildRuntimeType = "MSBuildRuntimeType";
-        internal const string overrideTasksPath = "MSBuildOverrideTasksPath";
-        internal const string defaultOverrideToolsVersion = "DefaultOverrideToolsVersion";
-        internal const string startupDirectory = "MSBuildStartupDirectory";
-        internal const string buildNodeCount = "MSBuildNodeCount";
-        internal const string lastTaskResult = "MSBuildLastTaskResult";
-        internal const string extensionsPathSuffix = "MSBuild";
-        internal const string userExtensionsPathSuffix = "Microsoft\\MSBuild";
-        internal const string programFiles32 = "MSBuildProgramFiles32";
-        internal const string localAppData = "LocalAppData";
-        internal const string assemblyVersion = "MSBuildAssemblyVersion";
-        internal const string version = "MSBuildVersion";
-        internal const string osName = "OS";
-        internal const string frameworkToolsRoot = "MSBuildFrameworkToolsRoot";
-        internal const string interactive = "MSBuildInteractive";
-        internal const string msbuilddisablefeaturesfromversion = "MSBuildDisableFeaturesFromVersion";
+        public const string projectDirectory = "MSBuildProjectDirectory";
+        public const string projectDirectoryNoRoot = "MSBuildProjectDirectoryNoRoot";
+        public const string projectFile = "MSBuildProjectFile";
+        public const string projectExtension = "MSBuildProjectExtension";
+        public const string projectFullPath = "MSBuildProjectFullPath";
+        public const string projectName = "MSBuildProjectName";
+        public const string thisFileDirectory = "MSBuildThisFileDirectory";
+        public const string thisFileDirectoryNoRoot = "MSBuildThisFileDirectoryNoRoot";
+        public const string thisFile = "MSBuildThisFile"; // "MSBuildThisFileFile" sounds silly!
+        public const string thisFileExtension = "MSBuildThisFileExtension";
+        public const string thisFileFullPath = "MSBuildThisFileFullPath";
+        public const string thisFileName = "MSBuildThisFileName";
+        public const string binPath = "MSBuildBinPath";
+        public const string projectDefaultTargets = "MSBuildProjectDefaultTargets";
+        public const string extensionsPath = "MSBuildExtensionsPath";
+        public const string extensionsPath32 = "MSBuildExtensionsPath32";
+        public const string extensionsPath64 = "MSBuildExtensionsPath64";
+        public const string userExtensionsPath = "MSBuildUserExtensionsPath";
+        public const string toolsPath = MSBuildConstants.ToolsPath;
+        public const string toolsVersion = "MSBuildToolsVersion";
+        public const string msbuildRuntimeType = "MSBuildRuntimeType";
+        public const string overrideTasksPath = "MSBuildOverrideTasksPath";
+        public const string defaultOverrideToolsVersion = "DefaultOverrideToolsVersion";
+        public const string startupDirectory = "MSBuildStartupDirectory";
+        public const string buildNodeCount = "MSBuildNodeCount";
+        public const string lastTaskResult = "MSBuildLastTaskResult";
+        public const string extensionsPathSuffix = "MSBuild";
+        public const string userExtensionsPathSuffix = "Microsoft\\MSBuild";
+        public const string programFiles32 = "MSBuildProgramFiles32";
+        public const string localAppData = "LocalAppData";
+        public const string assemblyVersion = "MSBuildAssemblyVersion";
+        public const string version = "MSBuildVersion";
+        public const string osName = "OS";
+        public const string frameworkToolsRoot = "MSBuildFrameworkToolsRoot";
+        public const string interactive = "MSBuildInteractive";
+        public const string msbuilddisablefeaturesfromversion = "MSBuildDisableFeaturesFromVersion";
 
         /// <summary>
         /// Lookup for reserved property names. Intentionally do not include MSBuildExtensionsPath* or MSBuildUserExtensionsPath in this list.  We need tasks to be able to override those.
@@ -95,7 +95,7 @@ namespace Microsoft.Build.Internal
         /// Indicates if the given property is a reserved property.
         /// </summary>
         /// <returns>true, if specified property is reserved</returns>
-        internal static bool IsReservedProperty(string property)
+        public static bool IsReservedProperty(string property)
         {
             return ReservedProperties.Contains(property);
         }
@@ -104,44 +104,44 @@ namespace Microsoft.Build.Internal
     /// <summary>
     /// Constants used by the Engine
     /// </summary>
-    internal static class Constants
+    public static class Constants
     {
         /// <summary>
         /// If no default tools version is specified in the config file or registry, we'll use 2.0.
         /// The engine will use its binpath for the matching toolset path.
         /// </summary>
-        internal const string defaultToolsVersion = "2.0";
+        public const string defaultToolsVersion = "2.0";
 
         /// <summary>
         /// The toolsversion we will fall back to as a last resort if the default one cannot be found, this fallback should be the most current toolsversion known
         /// </summary>
-        internal static string defaultFallbackToolsVersion = MSBuildConstants.CurrentToolsVersion;
+        public static string defaultFallbackToolsVersion = MSBuildConstants.CurrentToolsVersion;
 
         /// <summary>
         /// The toolsversion we will use when we construct the solution wrapper metaprojects; this should be the most current toolsversion known
         /// </summary>
-        internal static string defaultSolutionWrapperProjectToolsVersion = MSBuildConstants.CurrentToolsVersion;
+        public static string defaultSolutionWrapperProjectToolsVersion = MSBuildConstants.CurrentToolsVersion;
 
         /// <summary>
         /// Name of the property used to specify a Visual Studio version.
         /// </summary>
-        internal const string VisualStudioVersionPropertyName = "VisualStudioVersion";
+        public const string VisualStudioVersionPropertyName = "VisualStudioVersion";
 
         /// <summary>
         /// Name of the property used to select which sub-toolset to use. 
         /// </summary>
-        internal const string SubToolsetVersionPropertyName = VisualStudioVersionPropertyName;
+        public const string SubToolsetVersionPropertyName = VisualStudioVersionPropertyName;
 
         /// <summary>
         /// Value we should be setting VisualStudioVersion as the ultimate fallback when Dev10 is installed. 
         /// </summary>
-        internal const string Dev10SubToolsetValue = "10.0";
+        public const string Dev10SubToolsetValue = "10.0";
 
         /// <summary>
         /// Current version of this MSBuild Engine assembly in the 
         /// form, e.g, "4.0"
         /// </summary>
-        internal static string AssemblyVersion
+        public static string AssemblyVersion
         {
             get
             {
@@ -150,9 +150,9 @@ namespace Microsoft.Build.Internal
         }
 
         // Name of the environment variable that always points to 32-bit program files.
-        internal const string programFilesx86 = "ProgramFiles(x86)";
+        public const string programFilesx86 = "ProgramFiles(x86)";
 
-        internal const string MSBuildAllProjectsPropertyName = "MSBuildAllProjects";
+        public const string MSBuildAllProjectsPropertyName = "MSBuildAllProjects";
     }
 
     /// <summary>
@@ -164,7 +164,7 @@ namespace Microsoft.Build.Internal
     /// <remarks>
     /// Placed here to avoid StyleCop error.
     /// </remarks>
-    internal static class AvailableStaticMethods
+    public static class AvailableStaticMethods
     {
         /// <summary>
         /// Static methods that are allowed in constants. Key = Type or Type::Method, Value = Tuple of AssemblyQualifiedTypeName (where null = mscorlib) or the actual type object
@@ -184,7 +184,7 @@ namespace Microsoft.Build.Internal
         /// <summary>
         /// Whether a key is present
         /// </summary>
-        internal static bool ContainsKey(string key)
+        public static bool ContainsKey(string key)
         {
             return s_availableStaticMethods.ContainsKey(key);
         }
@@ -192,7 +192,7 @@ namespace Microsoft.Build.Internal
         /// <summary>
         /// Add an entry if not already present
         /// </summary>
-        internal static bool TryAdd(string key, Tuple<string, Type> value)
+        public static bool TryAdd(string key, Tuple<string, Type> value)
         {
             return s_availableStaticMethods.TryAdd(key, value);
         }
@@ -212,7 +212,7 @@ namespace Microsoft.Build.Internal
         /// <summary>
         /// Get an entry if present
         /// </summary>
-        internal static bool TryGetValue(string key, out Tuple<string, Type> value)
+        public static bool TryGetValue(string key, out Tuple<string, Type> value)
         {
             return s_availableStaticMethods.TryGetValue(key, out value);
         }
@@ -220,7 +220,7 @@ namespace Microsoft.Build.Internal
         /// <summary>
         /// Get an entry or null if not present
         /// </summary>
-        internal static Tuple<string, Type> GetValue(string key)
+        public static Tuple<string, Type> GetValue(string key)
         {
             Tuple<string, Type> typeInformation;
             return s_availableStaticMethods.TryGetValue(key, out typeInformation) ? typeInformation : null;
@@ -237,7 +237,7 @@ namespace Microsoft.Build.Internal
         /// <param name="typeFullName">namespace qualified type name</param>
         /// <param name="simpleMethodName">name of the method</param>
         /// <returns></returns>
-        internal static Tuple<string, Type> GetTypeInformationFromTypeCache(string typeFullName, string simpleMethodName)
+        public static Tuple<string, Type> GetTypeInformationFromTypeCache(string typeFullName, string simpleMethodName)
         {
             return
                 GetValue(typeFullName) ??
@@ -261,7 +261,7 @@ namespace Microsoft.Build.Internal
         /// Unit tests need this when they enable "unsafe" methods -- which will then go in the collection,
         /// and mess up subsequent tests.
         /// </summary>
-        internal static void Reset_ForUnitTestsOnly()
+        public static void Reset_ForUnitTestsOnly()
         {
             lock (s_locker)
             {

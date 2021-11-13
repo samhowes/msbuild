@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Execution;
@@ -16,7 +16,7 @@ namespace Microsoft.Build.BackEnd
     /// A standard Build Request only specifies the configuration id, so to get the configuration requires an additional lookup
     /// in a configuration cache.
     /// </remarks>
-    internal class FullyQualifiedBuildRequest
+    public class FullyQualifiedBuildRequest
     {
         /// <summary>
         /// Initializes a build request.

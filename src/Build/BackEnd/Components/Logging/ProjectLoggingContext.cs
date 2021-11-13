@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -15,7 +15,7 @@ namespace Microsoft.Build.BackEnd.Logging
     /// <summary>
     /// A logging context for a project.
     /// </summary>
-    internal class ProjectLoggingContext : BuildLoggingContext
+    public class ProjectLoggingContext : BuildLoggingContext
     {
         /// <summary>
         /// The project's full path
@@ -30,7 +30,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Constructs a project logging context.
         /// </summary>
-        internal ProjectLoggingContext(NodeLoggingContext nodeLoggingContext, BuildRequestEntry requestEntry, BuildEventContext parentBuildEventContext)
+        public ProjectLoggingContext(NodeLoggingContext nodeLoggingContext, BuildRequestEntry requestEntry, BuildEventContext parentBuildEventContext)
             : this
             (
             nodeLoggingContext,
@@ -50,7 +50,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Constructs a project logging context.
         /// </summary>
-        internal ProjectLoggingContext(NodeLoggingContext nodeLoggingContext, BuildRequest request, string projectFullPath, string toolsVersion, BuildEventContext parentBuildEventContext, int evaluationId = BuildEventContext.InvalidEvaluationId)
+        public ProjectLoggingContext(NodeLoggingContext nodeLoggingContext, BuildRequest request, string projectFullPath, string toolsVersion, BuildEventContext parentBuildEventContext, int evaluationId = BuildEventContext.InvalidEvaluationId)
             : this
             (
             nodeLoggingContext,
@@ -137,7 +137,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Retrieves the node logging context.
         /// </summary>
-        internal NodeLoggingContext NodeLoggingContext
+        public NodeLoggingContext NodeLoggingContext
         {
             get
             {
@@ -149,7 +149,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// Log that the project has finished
         /// </summary>
         /// <param name="success">Did the build succeede or not</param>
-        internal void LogProjectFinished(bool success)
+        public void LogProjectFinished(bool success)
         {
             ErrorUtilities.VerifyThrow(this.IsValid, "invalid");
             LoggingService.LogProjectFinished(BuildEventContext, _projectFullPath, success);
@@ -159,7 +159,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Log that a target has started
         /// </summary>
-        internal TargetLoggingContext LogTargetBatchStarted(string projectFullPath, ProjectTargetInstance target, string parentTargetName, TargetBuiltReason buildReason)
+        public TargetLoggingContext LogTargetBatchStarted(string projectFullPath, ProjectTargetInstance target, string parentTargetName, TargetBuiltReason buildReason)
         {
             ErrorUtilities.VerifyThrow(this.IsValid, "invalid");
             return new TargetLoggingContext(this, projectFullPath, target, parentTargetName, buildReason);
@@ -186,7 +186,7 @@ namespace Microsoft.Build.BackEnd.Logging
             /// Constructor
             /// </summary>
             /// <param name="backingItems">Enumerator this class should proxy</param>
-            internal ProjectItemInstanceEnumeratorProxy(IEnumerable<ProjectItemInstance> backingItems)
+            public ProjectItemInstanceEnumeratorProxy(IEnumerable<ProjectItemInstance> backingItems)
             {
                 _backingItems = backingItems;
             }
@@ -236,7 +236,7 @@ namespace Microsoft.Build.BackEnd.Logging
             /// Constructor
             /// </summary>
             /// <param name="backingProperties">Enumerator this class should proxy</param>
-            internal ProjectPropertyInstanceEnumeratorProxy(IEnumerable<ProjectPropertyInstance> backingProperties)
+            public ProjectPropertyInstanceEnumeratorProxy(IEnumerable<ProjectPropertyInstance> backingProperties)
             {
                 _backingProperties = backingProperties;
             }

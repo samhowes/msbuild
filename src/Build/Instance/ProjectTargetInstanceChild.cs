@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.BackEnd;
@@ -47,7 +47,7 @@ namespace Microsoft.Build.Execution
             ErrorUtilities.ThrowInternalErrorUnreachable();
         }
 
-        internal static ProjectTargetInstanceChild FactoryForDeserialization(ITranslator translator)
+        public static ProjectTargetInstanceChild FactoryForDeserialization(ITranslator translator)
         {
             return translator.FactoryForDeserializingTypeWithName<ProjectTargetInstanceChild>();
         }

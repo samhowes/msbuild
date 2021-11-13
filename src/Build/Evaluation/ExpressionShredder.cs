@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -15,7 +15,7 @@ namespace Microsoft.Build.Evaluation
     /// What the shredder should be looking for.
     /// </summary>
     [Flags]
-    internal enum ShredderOptions
+    public enum ShredderOptions
     {
         /// <summary>
         /// Don't use
@@ -41,7 +41,7 @@ namespace Microsoft.Build.Evaluation
     /// <summary>
     /// A class which interprets and splits MSBuild expressions
     /// </summary>
-    internal static class ExpressionShredder
+    public static class ExpressionShredder
     {
         /// <summary>
         /// Splits an expression into fragments at semi-colons, except where the
@@ -53,7 +53,7 @@ namespace Microsoft.Build.Evaluation
         /// </remarks>
         /// <param name="expression">List expression to split</param>
         /// <returns>Array of non-empty strings from split list.</returns>
-        internal static SemiColonTokenizer SplitSemiColonSeparatedList(string expression)
+        public static SemiColonTokenizer SplitSemiColonSeparatedList(string expression)
         {
             return new SemiColonTokenizer(expression);
         }
@@ -65,7 +65,7 @@ namespace Microsoft.Build.Evaluation
         /// where metadata key is like "itemname.metadataname" or "metadataname".
         /// PERF: Tables are null if there are no entries, because this is quite a common case.
         /// </summary>
-        internal static ItemsAndMetadataPair GetReferencedItemNamesAndMetadata(List<string> expressions)
+        public static ItemsAndMetadataPair GetReferencedItemNamesAndMetadata(List<string> expressions)
         {
             ItemsAndMetadataPair pair = new ItemsAndMetadataPair(null, null);
 
@@ -80,7 +80,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Returns true if there is a metadata expression (outside of a transform) in the expression.
         /// </summary>
-        internal static bool ContainsMetadataExpressionOutsideTransform(string expression)
+        public static bool ContainsMetadataExpressionOutsideTransform(string expression)
         {
             ItemsAndMetadataPair pair = new ItemsAndMetadataPair(null, null);
 
@@ -96,7 +96,7 @@ namespace Microsoft.Build.Evaluation
         /// itemName and separator will be null if they are not found
         /// return value will be null if no transform expressions are found
         /// </summary>
-        internal static List<ItemExpressionCapture> GetReferencedItemExpressions(string expression)
+        public static List<ItemExpressionCapture> GetReferencedItemExpressions(string expression)
         {
             return GetReferencedItemExpressions(expression, 0, expression.Length);
         }
@@ -106,7 +106,7 @@ namespace Microsoft.Build.Evaluation
         /// itemName and separator will be null if they are not found
         /// return value will be null if no transform expressions are found
         /// </summary>
-        internal static List<ItemExpressionCapture> GetReferencedItemExpressions(string expression, int start, int end)
+        public static List<ItemExpressionCapture> GetReferencedItemExpressions(string expression, int start, int end)
         {
             List<ItemExpressionCapture> subExpressions = null;
 
@@ -688,7 +688,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Represents one substring for a single successful capture.
         /// </summary>
-        internal class ItemExpressionCapture
+        public class ItemExpressionCapture
         {
             /// <summary>
             /// Captures within this capture

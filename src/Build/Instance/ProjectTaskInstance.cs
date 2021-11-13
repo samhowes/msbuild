@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -92,7 +92,7 @@ namespace Microsoft.Build.Execution
         /// All parameters are in the unevaluated state.
         /// Locations other than the main location may be null.
         /// </summary>
-        internal ProjectTaskInstance
+        public ProjectTaskInstance
             (
             ProjectTaskElement element,
             IList<ProjectTaskInstanceChild> outputs
@@ -125,7 +125,7 @@ namespace Microsoft.Build.Execution
         /// <param name="continueOnError">The unevaluated continue on error.</param>
         /// <param name="msbuildRuntime">The MSBuild runtime.</param>
         /// <param name="msbuildArchitecture">The MSBuild architecture.</param>
-        internal ProjectTaskInstance(
+        public ProjectTaskInstance(
             string name,
             ElementLocation location,
             string condition,
@@ -148,7 +148,7 @@ namespace Microsoft.Build.Execution
         {
         }
 
-        internal ProjectTaskInstance
+        public ProjectTaskInstance
             (
             string name,
             string condition,
@@ -247,7 +247,7 @@ namespace Microsoft.Build.Execution
             }
         }
 
-        internal IDictionary<string, (string, ElementLocation)> TestGetParameters => _parameters;
+        public IDictionary<string, (string, ElementLocation)> TestGetParameters => _parameters;
 
         /// <summary>
         /// Ordered set of output property and item objects.
@@ -301,7 +301,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Retrieves the parameters dictionary as used during the build.
         /// </summary>
-        internal IDictionary<string, (string, ElementLocation)> ParametersForBuild
+        public IDictionary<string, (string, ElementLocation)> ParametersForBuild
         {
             get { return _parameters; }
         }
@@ -311,7 +311,7 @@ namespace Microsoft.Build.Execution
         /// </summary>
         /// <param name="parameterName">The name of the parameter to retrieve.</param>
         /// <returns>The parameter value, or null if it does not exist.</returns>
-        internal string GetParameter(string parameterName)
+        public string GetParameter(string parameterName)
         {
             if (_parameters.TryGetValue(parameterName, out var parameterValue))
             {
@@ -326,7 +326,7 @@ namespace Microsoft.Build.Execution
         /// </summary>
         /// <param name="parameterName">The name of the parameter to set.</param>
         /// <param name="unevaluatedValue">The unevaluated value for the parameter.</param>
-        internal void SetParameter(string parameterName, string unevaluatedValue)
+        public void SetParameter(string parameterName, string unevaluatedValue)
         {
             _parameters[parameterName] = (unevaluatedValue, ElementLocation.EmptyLocation);
         }
@@ -337,7 +337,7 @@ namespace Microsoft.Build.Execution
         /// <param name="taskOutputParameterName">The name of the parameter on the task which produces the output.</param>
         /// <param name="itemName">The item which will receive the output.</param>
         /// <param name="condition">The condition.</param>
-        internal void AddOutputItem(string taskOutputParameterName, string itemName, string condition)
+        public void AddOutputItem(string taskOutputParameterName, string itemName, string condition)
         {
             ErrorUtilities.VerifyThrowArgumentLength(taskOutputParameterName, nameof(taskOutputParameterName));
             ErrorUtilities.VerifyThrowArgumentLength(itemName, nameof(itemName));
@@ -350,7 +350,7 @@ namespace Microsoft.Build.Execution
         /// <param name="taskOutputParameterName">The name of the parameter on the task which produces the output.</param>
         /// <param name="propertyName">The property which will receive the output.</param>
         /// <param name="condition">The condition.</param>
-        internal void AddOutputProperty(string taskOutputParameterName, string propertyName, string condition)
+        public void AddOutputProperty(string taskOutputParameterName, string propertyName, string condition)
         {
             ErrorUtilities.VerifyThrowArgumentLength(taskOutputParameterName, nameof(taskOutputParameterName));
             ErrorUtilities.VerifyThrowArgumentLength(propertyName, nameof(propertyName));
@@ -417,7 +417,7 @@ namespace Microsoft.Build.Execution
             }
         }
 
-        internal new static ProjectTaskInstance FactoryForDeserialization(ITranslator translator)
+        public new static ProjectTaskInstance FactoryForDeserialization(ITranslator translator)
         {
             return translator.FactoryForDeserializingTypeWithName<ProjectTaskInstance>();
         }

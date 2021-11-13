@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
+// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
 
 using Microsoft.Build.Shared.FileSystem;
 using Microsoft.Build.Utilities;
@@ -14,7 +14,7 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// CoreCLR-compatible wrapper for loading task assemblies.
     /// </summary>
-    internal sealed class CoreClrAssemblyLoader
+    public sealed class CoreClrAssemblyLoader
     {
         private readonly Dictionary<string, Assembly> _pathsToAssemblies = new Dictionary<string, Assembly>(StringComparer.OrdinalIgnoreCase);
         private readonly Dictionary<string, Assembly> _namesToAssemblies = new Dictionary<string, Assembly>();

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -8,12 +8,12 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// Compare the version numbers only for an AssemblyNameExtension and make sure they are in reverse order. This assumes the names are the same.
     /// </summary>
-    sealed internal class AssemblyNameReverseVersionComparer : IComparer<AssemblyNameExtension>
+    sealed public class AssemblyNameReverseVersionComparer : IComparer<AssemblyNameExtension>
     {
         /// <summary>
         /// A static instance of the comparer for use in a sort method
         /// </summary>
-        internal readonly static IComparer<AssemblyNameExtension> GenericComparer = new AssemblyNameReverseVersionComparer();
+        public readonly static IComparer<AssemblyNameExtension> GenericComparer = new AssemblyNameReverseVersionComparer();
 
         /// <summary>
         /// Compare x and y by version only.

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Microsoft.Build.Logging
 {
@@ -6,7 +6,7 @@ namespace Microsoft.Build.Logging
     /// A bitmask to specify which fields on a BuildEventArgs object are present; used in serialization
     /// </summary>
     [Flags]
-    internal enum BuildEventArgsFieldFlags
+    public enum BuildEventArgsFieldFlags
     {
         None = 0,
         BuildEventContext = 1 << 0,

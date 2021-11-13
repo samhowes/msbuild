@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -6,12 +6,12 @@ using System;
 namespace Microsoft.Build.Execution
 {
     [Serializable]
-    internal sealed class HostObjectException : Exception
+    public sealed class HostObjectException : Exception
     {
         private const string ErrorMessagePrefix = "Error for HostObject:";
         private const string ErrorMessageProjectTargetTask = "In Project '{0}', Target '{1}', Task '{2}'.";
 
-        internal HostObjectException() : base()
+        public HostObjectException() : base()
         {
             // do nothing
         }
@@ -19,7 +19,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Creates an instance of this exception using the given message.
         /// </summary>
-        internal HostObjectException
+        public HostObjectException
         (
             string message
         ) :
@@ -32,7 +32,7 @@ namespace Microsoft.Build.Execution
         /// Adds the inner exception's details to the exception message because most bug reporters don't bother
         /// to provide the inner exception details which is typically what we care about.
         /// </summary>
-        internal HostObjectException
+        public HostObjectException
         (
             string projectFile,
             string targetName,
@@ -49,7 +49,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Creates an instance of this exception using projectFile, targetName, taskName and message.
         /// </summary>
-        internal HostObjectException
+        public HostObjectException
         (
             string projectFile,
             string targetName,

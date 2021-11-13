@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -12,7 +12,7 @@ namespace Microsoft.Build.BackEnd.Logging
     /// <summary>
     /// Stores and manages projects and targets events for logging purposes
     /// </summary>
-    internal class BuildEventManager
+    public class BuildEventManager
     {
         #region Data
         private Dictionary<BuildEventContext, ProjectStartedEventMinimumFields> _projectStartedEvents;
@@ -25,7 +25,7 @@ namespace Microsoft.Build.BackEnd.Logging
         #endregion
 
         #region Constructors
-        internal BuildEventManager()
+        public BuildEventManager()
         {
             _projectStartedEvents = new Dictionary<BuildEventContext, ProjectStartedEventMinimumFields>(s_compareContextNodeId);
             _targetStartedEvents = new Dictionary<BuildEventContext, TargetStartedEventMinimumFields>(s_compareContextNodeIdTargetId);
@@ -37,7 +37,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         ///  Adds a new project to the list of project started events which have been fired
         /// </summary>
-        internal void AddProjectStartedEvent(ProjectStartedEventArgs e, bool requireTimestamp)
+        public void AddProjectStartedEvent(ProjectStartedEventArgs e, bool requireTimestamp)
         {   //Parent event can be null if this is the root project
             ProjectStartedEventMinimumFields parentEvent = GetProjectStartedEvent(e.ParentProjectBuildEventContext);
             lock (_projectStartedEvents)
@@ -83,7 +83,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         ///  Adds a new target to the list of project started events which have been fired
         /// </summary>
-        internal void AddTargetStartedEvent(TargetStartedEventArgs e, bool requireTimeStamp)
+        public void AddTargetStartedEvent(TargetStartedEventArgs e, bool requireTimeStamp)
         {
             if (!_targetStartedEvents.ContainsKey(e.BuildEventContext))
             {
@@ -94,7 +94,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Get a call stack of event contexts for a starting point event context
         /// </summary>
-        internal List<ProjectStartedEventMinimumFields> GetProjectCallStack(BuildEventContext e)
+        public List<ProjectStartedEventMinimumFields> GetProjectCallStack(BuildEventContext e)
         {
             List<ProjectStartedEventMinimumFields> stackTrace = new List<ProjectStartedEventMinimumFields>();
 
@@ -121,7 +121,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Set an error flag on all projects in the call stack of a given event context
         /// </summary>
-        internal void SetErrorWarningFlagOnCallStack(BuildEventContext e)
+        public void SetErrorWarningFlagOnCallStack(BuildEventContext e)
         {
             List<ProjectStartedEventMinimumFields> projectStackTrace = GetProjectCallStack(e);
             foreach (ProjectStartedEventMinimumFields startedEvent in projectStackTrace)
@@ -137,7 +137,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Retrieve the project call stack based on the starting point of buildEventContext e
         /// </summary>
-        internal string[] ProjectCallStackFromProject(BuildEventContext e)
+        public string[] ProjectCallStackFromProject(BuildEventContext e)
         {
             BuildEventContext currentKey = e;
 
@@ -171,7 +171,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Get a deferred project started event based on a given event context
         /// </summary>
-        internal ProjectStartedEventMinimumFields GetProjectStartedEvent(BuildEventContext e)
+        public ProjectStartedEventMinimumFields GetProjectStartedEvent(BuildEventContext e)
         {
             ProjectStartedEventMinimumFields buildEvent;
             if (_projectStartedEvents.ContainsKey(e))
@@ -188,7 +188,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         ///  Get a deferred target started event based on a given event context
         /// </summary>
-        internal TargetStartedEventMinimumFields GetTargetStartedEvent(BuildEventContext e)
+        public TargetStartedEventMinimumFields GetTargetStartedEvent(BuildEventContext e)
         {
             TargetStartedEventMinimumFields buildEvent;
             if (_targetStartedEvents.ContainsKey(e))
@@ -205,7 +205,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Will remove a project started event from the list of deferred project started events
         /// </summary>
-        internal void RemoveProjectStartedEvent(BuildEventContext e)
+        public void RemoveProjectStartedEvent(BuildEventContext e)
         {
             ProjectStartedEventMinimumFields startedEvent = GetProjectStartedEvent(e);
             // Only remove the project from the event list if it is in the list, and no errors have occurred in the project
@@ -218,7 +218,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Will remove a project started event from the list of deferred project started events
         /// </summary>
-        internal void RemoveTargetStartedEvent(BuildEventContext e)
+        public void RemoveTargetStartedEvent(BuildEventContext e)
         {
             TargetStartedEventMinimumFields startedEvent = GetTargetStartedEvent(e);
             // Only remove the project from the event list if it is in the list, and no errors have occurred in the project
@@ -233,7 +233,7 @@ namespace Microsoft.Build.BackEnd.Logging
     /// <summary>
     /// Compares two event contexts on ProjectContextId and NodeId only
     /// </summary>
-    internal class ComparerContextNodeId<T> : IEqualityComparer<T>
+    public class ComparerContextNodeId<T> : IEqualityComparer<T>
     {
         #region Methods
         public bool Equals(T x, T y)
@@ -262,7 +262,7 @@ namespace Microsoft.Build.BackEnd.Logging
     /// <summary>
     /// Compares two event contexts based on the ProjectContextId, NodeId, and TargetId only
     /// </summary>
-    internal class ComparerContextNodeIdTargetId<T> : IEqualityComparer<T>
+    public class ComparerContextNodeIdTargetId<T> : IEqualityComparer<T>
     {
         #region Methods
         public bool Equals(T x, T y)
@@ -294,7 +294,7 @@ namespace Microsoft.Build.BackEnd.Logging
     /// This class stands in for a full project started event because it contains only the 
     /// minimum amount of inforomation needed for the logger
     /// </summary>
-    internal class ProjectStartedEventMinimumFields
+    public class ProjectStartedEventMinimumFields
     {
         #region Data
         private DateTime _timeStamp;
@@ -310,7 +310,7 @@ namespace Microsoft.Build.BackEnd.Logging
 
         #region Properties
 
-        internal DateTime TimeStamp
+        public DateTime TimeStamp
         {
             get
             {
@@ -318,7 +318,7 @@ namespace Microsoft.Build.BackEnd.Logging
             }
         }
 
-        internal int ProjectKey
+        public int ProjectKey
         {
             get
             {
@@ -326,7 +326,7 @@ namespace Microsoft.Build.BackEnd.Logging
             }
         }
 
-        internal int EntryPointKey
+        public int EntryPointKey
         {
             get
             {
@@ -334,7 +334,7 @@ namespace Microsoft.Build.BackEnd.Logging
             }
         }
 
-        internal string FullProjectKey
+        public string FullProjectKey
         {
             get
             {
@@ -342,7 +342,7 @@ namespace Microsoft.Build.BackEnd.Logging
             }
         }
 
-        internal ProjectStartedEventMinimumFields ParentProjectStartedEvent
+        public ProjectStartedEventMinimumFields ParentProjectStartedEvent
         {
             get
             {
@@ -350,7 +350,7 @@ namespace Microsoft.Build.BackEnd.Logging
             }
         }
 
-        internal string TargetNames
+        public string TargetNames
         {
             get
             {
@@ -358,7 +358,7 @@ namespace Microsoft.Build.BackEnd.Logging
             }
         }
 
-        internal int ProjectId
+        public int ProjectId
         {
             get
             {
@@ -366,7 +366,7 @@ namespace Microsoft.Build.BackEnd.Logging
             }
         }
 
-        internal string ProjectFile
+        public string ProjectFile
         {
             get
             {
@@ -374,7 +374,7 @@ namespace Microsoft.Build.BackEnd.Logging
             }
         }
 
-        internal bool ShowProjectFinishedEvent
+        public bool ShowProjectFinishedEvent
         {
             get
             {
@@ -387,7 +387,7 @@ namespace Microsoft.Build.BackEnd.Logging
             }
         }
 
-        internal bool ErrorInProject
+        public bool ErrorInProject
         {
             get
             {
@@ -400,7 +400,7 @@ namespace Microsoft.Build.BackEnd.Logging
             }
         }
 
-        internal BuildEventContext ProjectBuildEventContext
+        public BuildEventContext ProjectBuildEventContext
         {
             get
             {
@@ -410,7 +410,7 @@ namespace Microsoft.Build.BackEnd.Logging
         #endregion
 
         #region Constructors
-        internal ProjectStartedEventMinimumFields(int projectKey, int entryPointKey, ProjectStartedEventArgs startedEvent, ProjectStartedEventMinimumFields parentProjectStartedEvent, bool requireTimeStamp)
+        public ProjectStartedEventMinimumFields(int projectKey, int entryPointKey, ProjectStartedEventArgs startedEvent, ProjectStartedEventMinimumFields parentProjectStartedEvent, bool requireTimeStamp)
         {
             _targetNames = startedEvent.TargetNames;
             _projectFile = startedEvent.ProjectFile;
@@ -432,7 +432,7 @@ namespace Microsoft.Build.BackEnd.Logging
     /// This class stands in for a full target started event because it contains only the 
     /// minimum amount of inforomation needed for the logger
     /// </summary>
-    internal class TargetStartedEventMinimumFields
+    public class TargetStartedEventMinimumFields
     {
         #region Data
         private DateTime _timeStamp;
@@ -447,7 +447,7 @@ namespace Microsoft.Build.BackEnd.Logging
         #endregion
 
         #region Properties
-        internal DateTime TimeStamp
+        public DateTime TimeStamp
         {
             get
             {
@@ -455,7 +455,7 @@ namespace Microsoft.Build.BackEnd.Logging
             }
         }
 
-        internal string TargetName
+        public string TargetName
         {
             get
             {
@@ -463,7 +463,7 @@ namespace Microsoft.Build.BackEnd.Logging
             }
         }
 
-        internal string TargetFile
+        public string TargetFile
         {
             get
             {
@@ -471,7 +471,7 @@ namespace Microsoft.Build.BackEnd.Logging
             }
         }
 
-        internal string ProjectFile
+        public string ProjectFile
         {
             get
             {
@@ -479,7 +479,7 @@ namespace Microsoft.Build.BackEnd.Logging
             }
         }
 
-        internal string Message
+        public string Message
         {
             get
             {
@@ -487,7 +487,7 @@ namespace Microsoft.Build.BackEnd.Logging
             }
         }
 
-        internal bool ShowTargetFinishedEvent
+        public bool ShowTargetFinishedEvent
         {
             get
             {
@@ -500,7 +500,7 @@ namespace Microsoft.Build.BackEnd.Logging
             }
         }
 
-        internal bool ErrorInTarget
+        public bool ErrorInTarget
         {
             get
             {
@@ -512,7 +512,7 @@ namespace Microsoft.Build.BackEnd.Logging
                 _errorInTarget = value;
             }
         }
-        internal BuildEventContext ProjectBuildEventContext
+        public BuildEventContext ProjectBuildEventContext
         {
             get
             {
@@ -520,7 +520,7 @@ namespace Microsoft.Build.BackEnd.Logging
             }
         }
 
-        internal string ParentTarget
+        public string ParentTarget
         {
             get
             {
@@ -530,7 +530,7 @@ namespace Microsoft.Build.BackEnd.Logging
         #endregion
 
         #region Constructors
-        internal TargetStartedEventMinimumFields(TargetStartedEventArgs startedEvent, bool requireTimeStamp)
+        public TargetStartedEventMinimumFields(TargetStartedEventArgs startedEvent, bool requireTimeStamp)
         {
             _targetName = startedEvent.TargetName;
             _targetFile = startedEvent.TargetFile;
@@ -552,7 +552,7 @@ namespace Microsoft.Build.BackEnd.Logging
     /// This class is used as a key to group warnings and errors by the project entry point and the target they 
     /// error or warning was in
     /// </summary>
-    internal class ErrorWarningSummaryDictionaryKey
+    public class ErrorWarningSummaryDictionaryKey
     {
         #region Data
         private BuildEventContext _entryPointContext;
@@ -561,7 +561,7 @@ namespace Microsoft.Build.BackEnd.Logging
         #endregion
 
         #region Constructor
-        internal ErrorWarningSummaryDictionaryKey(BuildEventContext entryPoint, string targetName)
+        public ErrorWarningSummaryDictionaryKey(BuildEventContext entryPoint, string targetName)
         {
             _entryPointContext = entryPoint;
             _targetName = targetName ?? string.Empty;
@@ -569,7 +569,7 @@ namespace Microsoft.Build.BackEnd.Logging
         #endregion
 
         #region Properties
-        internal BuildEventContext EntryPointContext
+        public BuildEventContext EntryPointContext
         {
             get
             {
@@ -577,7 +577,7 @@ namespace Microsoft.Build.BackEnd.Logging
             }
         }
 
-        internal string TargetName
+        public string TargetName
         {
             get
             {
@@ -610,7 +610,7 @@ namespace Microsoft.Build.BackEnd.Logging
     /// <summary>
     /// Structure that holds both project and entrypoint keys
     /// </summary>
-    internal class ProjectFullKey
+    public class ProjectFullKey
     {
         #region Data
         private int _projectKey;
@@ -618,13 +618,13 @@ namespace Microsoft.Build.BackEnd.Logging
         #endregion
 
         #region Properties
-        internal int ProjectKey
+        public int ProjectKey
         {
             get { return _projectKey; }
             set { _projectKey = value; }
         }
 
-        internal int EntryPointKey
+        public int EntryPointKey
         {
             get { return _entryPointKey; }
             set { _entryPointKey = value; }
@@ -632,7 +632,7 @@ namespace Microsoft.Build.BackEnd.Logging
         #endregion
 
         #region Constructor
-        internal ProjectFullKey(int projectKey, int entryPointKey)
+        public ProjectFullKey(int projectKey, int entryPointKey)
         {
             _projectKey = projectKey;
             _entryPointKey = entryPointKey;

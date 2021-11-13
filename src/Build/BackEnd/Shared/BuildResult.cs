@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -126,7 +126,7 @@ namespace Microsoft.Build.Execution
         /// Constructor creates an empty build result
         /// </summary>
         /// <param name="request">The build request to which these results should be associated.</param>
-        internal BuildResult(BuildRequest request)
+        public BuildResult(BuildRequest request)
             : this(request, null)
         {
         }
@@ -136,7 +136,7 @@ namespace Microsoft.Build.Execution
         /// </summary>
         /// <param name="request">The build request to which these results should be associated.</param>
         /// <param name="exception">The exception, if any.</param>
-        internal BuildResult(BuildRequest request, Exception exception)
+        public BuildResult(BuildRequest request, Exception exception)
             : this(request, null, exception)
         {
         }
@@ -146,7 +146,7 @@ namespace Microsoft.Build.Execution
         /// </summary>
         /// <param name="request">The build request to which these results should be associated.</param>
         /// <param name="circularDependency">Set to true if a circular dependency was detected.</param>
-        internal BuildResult(BuildRequest request, bool circularDependency)
+        public BuildResult(BuildRequest request, bool circularDependency)
             : this(request, null)
         {
             _circularDependency = circularDependency;
@@ -157,7 +157,7 @@ namespace Microsoft.Build.Execution
         /// </summary>
         /// <param name="existingResults">The existing results.</param>
         /// <param name="targetNames">The target names whose results we will take from the existing results, if they exist.</param>
-        internal BuildResult(BuildResult existingResults, string[] targetNames)
+        public BuildResult(BuildResult existingResults, string[] targetNames)
         {
             _submissionId = existingResults._submissionId;
             _configurationId = existingResults._configurationId;
@@ -177,7 +177,7 @@ namespace Microsoft.Build.Execution
         /// <param name="request">The build request with which these results should be associated.</param>
         /// <param name="existingResults">The existing results, if any.</param>
         /// <param name="exception">The exception, if any</param>
-        internal BuildResult(BuildRequest request, BuildResult existingResults, Exception exception)
+        public BuildResult(BuildRequest request, BuildResult existingResults, Exception exception)
             : this(request, existingResults, null, exception)
         {
         }
@@ -189,7 +189,7 @@ namespace Microsoft.Build.Execution
         /// <param name="existingResults">The existing results, if any.</param>
         /// <param name="targetNames">The list of target names that are the subset of results that should be returned.</param>
         /// <param name="exception">The exception, if any</param>
-        internal BuildResult(BuildRequest request, BuildResult existingResults, string[] targetNames, Exception exception)
+        public BuildResult(BuildRequest request, BuildResult existingResults, string[] targetNames, Exception exception)
         {
             ErrorUtilities.VerifyThrow(request != null, "Must specify a request.");
             _submissionId = request.SubmissionId;
@@ -215,7 +215,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Constructor which allows reporting results for a different nodeRequestId
         /// </summary>
-        internal BuildResult(BuildResult result, int nodeRequestId)
+        public BuildResult(BuildResult result, int nodeRequestId)
         {
             _configurationId = result._configurationId;
             _globalRequestId = result._globalRequestId;
@@ -229,7 +229,7 @@ namespace Microsoft.Build.Execution
             _baseOverallResult = result.OverallResult == BuildResultCode.Success;
         }
 
-        internal BuildResult(BuildResult result, int submissionId, int configurationId, int requestId, int parentRequestId, int nodeRequestId)
+        public BuildResult(BuildResult result, int submissionId, int configurationId, int requestId, int parentRequestId, int nodeRequestId)
         {
             _submissionId = submissionId;
             _configurationId = configurationId;
@@ -313,7 +313,7 @@ namespace Microsoft.Build.Execution
             { return _requestException; }
 
             [DebuggerStepThrough]
-            internal set
+            set
             { _requestException = value; }
         }
 
@@ -406,7 +406,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Returns the initial targets for the configuration which requested these results.
         /// </summary>
-        internal List<string> InitialTargets
+        public List<string> InitialTargets
         {
             [DebuggerStepThrough]
             get
@@ -420,7 +420,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Returns the default targets for the configuration which requested these results.
         /// </summary>
-        internal List<string> DefaultTargets
+        public List<string> DefaultTargets
         {
             [DebuggerStepThrough]
             get
@@ -435,7 +435,7 @@ namespace Microsoft.Build.Execution
         /// Container used to transport errors from the scheduler (issued while computing a build result)
         /// to the TaskHost that has the proper logging context (project id, target id, task id, file location)
         /// </summary>
-        internal string SchedulerInducedError
+        public string SchedulerInducedError
         {
             get => _schedulerInducedError;
             set => _schedulerInducedError = value;
@@ -548,7 +548,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Factory for serialization
         /// </summary>
-        internal static BuildResult FactoryForDeserialization(ITranslator translator)
+        public static BuildResult FactoryForDeserialization(ITranslator translator)
         {
             return new BuildResult(translator);
         }
@@ -558,7 +558,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Caches all of the targets results we can.
         /// </summary>
-        internal void CacheIfPossible()
+        public void CacheIfPossible()
         {
             foreach (string target in _resultsByTarget.Keys)
             {
@@ -569,7 +569,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Clear cached files from disk.
         /// </summary>
-        internal void ClearCachedFiles()
+        public void ClearCachedFiles()
         {
             string resultsDirectory = TargetResult.GetCacheDirectory(_configurationId, "None" /*Does not matter because we just need the directory name not the file*/);
             if (FileSystems.Default.DirectoryExists(resultsDirectory))
@@ -581,7 +581,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Clones the build result (the resultsByTarget field is only a shallow copy).
         /// </summary>
-        internal BuildResult Clone()
+        public BuildResult Clone()
         {
             BuildResult result = new BuildResult
             {
@@ -605,7 +605,7 @@ namespace Microsoft.Build.Execution
         /// Sets the overall result.
         /// </summary>
         /// <param name="overallResult"><code>true</code> if the result is success, otherwise <code>false</code>.</param>
-        internal void SetOverallResult(bool overallResult)
+        public void SetOverallResult(bool overallResult)
         {
             _baseOverallResult = false;
         }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ namespace Microsoft.Build.Evaluation
     /// <summary>
     /// Wrapper of two tables for a convenient method return value.
     /// </summary>
-    internal struct ItemsAndMetadataPair
+    public struct ItemsAndMetadataPair
     {
         /// <summary>
         /// The item set
@@ -27,7 +27,7 @@ namespace Microsoft.Build.Evaluation
         /// </summary>
         /// <param name="items">The item set</param>
         /// <param name="metadata">The metadata dictionary</param>
-        internal ItemsAndMetadataPair(HashSet<string> items, Dictionary<string, MetadataReference> metadata)
+        public ItemsAndMetadataPair(HashSet<string> items, Dictionary<string, MetadataReference> metadata)
         {
             _items = items;
             _metadata = metadata;
@@ -36,7 +36,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Gets or sets the item set
         /// </summary>
-        internal HashSet<string> Items
+        public HashSet<string> Items
         {
             get
             {
@@ -54,7 +54,7 @@ namespace Microsoft.Build.Evaluation
         /// The key is the possibly qualified metadata name, for example
         /// "EmbeddedResource.Culture" or "Culture"
         /// </summary>
-        internal Dictionary<string, MetadataReference> Metadata
+        public Dictionary<string, MetadataReference> Metadata
         {
             get
             {

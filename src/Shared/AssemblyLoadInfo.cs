@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -15,12 +15,12 @@ namespace Microsoft.Build.Shared
     /// <remarks>
     /// Uses factory to instantiate correct private class to save space: only one field is ever used of the two.
     /// </remarks>
-    internal abstract class AssemblyLoadInfo : ITranslatable, IEquatable<AssemblyLoadInfo>
+    public abstract class AssemblyLoadInfo : ITranslatable, IEquatable<AssemblyLoadInfo>
     {
         /// <summary>
         /// This constructor initializes the assembly information.
         /// </summary>
-        internal static AssemblyLoadInfo Create(string assemblyName, string assemblyFile)
+        public static AssemblyLoadInfo Create(string assemblyName, string assemblyFile)
         {
             ErrorUtilities.VerifyThrow((!string.IsNullOrEmpty(assemblyName)) || (!string.IsNullOrEmpty(assemblyFile)),
                 "We must have either the assembly name or the assembly file/path.");
@@ -56,7 +56,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Get the assembly location
         /// </summary>
-        internal abstract string AssemblyLocation
+        public abstract string AssemblyLocation
         {
             get;
         }
@@ -128,7 +128,7 @@ namespace Microsoft.Build.Shared
             /// <summary>
             /// Constructor
             /// </summary>
-            internal AssemblyLoadInfoWithName(string assemblyName)
+            public AssemblyLoadInfoWithName(string assemblyName)
             {
                 _assemblyName = assemblyName;
             }
@@ -152,7 +152,7 @@ namespace Microsoft.Build.Shared
             /// <summary>
             /// Get the assembly location
             /// </summary>
-            internal override string AssemblyLocation
+            public override string AssemblyLocation
             {
                 get { return _assemblyName; }
             }
@@ -172,7 +172,7 @@ namespace Microsoft.Build.Shared
             /// <summary>
             /// Constructor
             /// </summary>
-            internal AssemblyLoadInfoWithFile(string assemblyFile)
+            public AssemblyLoadInfoWithFile(string assemblyFile)
             {
                 ErrorUtilities.VerifyThrow(Path.IsPathRooted(assemblyFile), "Assembly file path should be rooted");
 
@@ -198,7 +198,7 @@ namespace Microsoft.Build.Shared
             /// <summary>
             /// Get the assembly location
             /// </summary>
-            internal override string AssemblyLocation
+            public override string AssemblyLocation
             {
                 get { return _assemblyFile; }
             }

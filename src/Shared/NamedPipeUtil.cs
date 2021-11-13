@@ -6,9 +6,9 @@ using System.IO;
 
 namespace Microsoft.Build.Shared
 {
-    internal static class NamedPipeUtil
+    public static class NamedPipeUtil
     {
-        internal static string GetPipeNameOrPath(string pipeName)
+        public static string GetPipeNameOrPath(string pipeName)
         {
             if (NativeMethodsShared.IsUnixLike)
             {

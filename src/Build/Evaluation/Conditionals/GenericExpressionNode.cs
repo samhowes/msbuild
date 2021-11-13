@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,14 +10,14 @@ namespace Microsoft.Build.Evaluation
     /// <summary>
     /// Base class for all expression nodes.
     /// </summary>
-    internal abstract class GenericExpressionNode
+    public abstract class GenericExpressionNode
     {
-        internal abstract bool CanBoolEvaluate(ConditionEvaluator.IConditionEvaluationState state);
-        internal abstract bool CanNumericEvaluate(ConditionEvaluator.IConditionEvaluationState state);
-        internal abstract bool CanVersionEvaluate(ConditionEvaluator.IConditionEvaluationState state);
-        internal abstract bool BoolEvaluate(ConditionEvaluator.IConditionEvaluationState state);
-        internal abstract double NumericEvaluate(ConditionEvaluator.IConditionEvaluationState state);
-        internal abstract Version VersionEvaluate(ConditionEvaluator.IConditionEvaluationState state);
+        public abstract bool CanBoolEvaluate(ConditionEvaluator.IConditionEvaluationState state);
+        public abstract bool CanNumericEvaluate(ConditionEvaluator.IConditionEvaluationState state);
+        public abstract bool CanVersionEvaluate(ConditionEvaluator.IConditionEvaluationState state);
+        public abstract bool BoolEvaluate(ConditionEvaluator.IConditionEvaluationState state);
+        public abstract double NumericEvaluate(ConditionEvaluator.IConditionEvaluationState state);
+        public abstract Version VersionEvaluate(ConditionEvaluator.IConditionEvaluationState state);
 
         /// <summary>
         /// Returns true if this node evaluates to an empty string,
@@ -26,7 +26,7 @@ namespace Microsoft.Build.Evaluation
         /// to empty than to fully evaluate it.)
         /// Implementations should cache the result so that calls after the first are free.
         /// </summary>
-        internal virtual bool EvaluatesToEmpty(ConditionEvaluator.IConditionEvaluationState state)
+        public virtual bool EvaluatesToEmpty(ConditionEvaluator.IConditionEvaluationState state)
         {
             return false;
         }
@@ -35,26 +35,26 @@ namespace Microsoft.Build.Evaluation
         /// Value after any item and property expressions are expanded
         /// </summary>
         /// <returns></returns>
-        internal abstract string GetExpandedValue(ConditionEvaluator.IConditionEvaluationState state);
+        public abstract string GetExpandedValue(ConditionEvaluator.IConditionEvaluationState state);
 
         /// <summary>
         /// Value before any item and property expressions are expanded
         /// </summary>
         /// <returns></returns>
-        internal abstract string GetUnexpandedValue(ConditionEvaluator.IConditionEvaluationState state);
+        public abstract string GetUnexpandedValue(ConditionEvaluator.IConditionEvaluationState state);
 
         /// <summary>
         /// If any expression nodes cache any state for the duration of evaluation, 
         /// now's the time to clean it up
         /// </summary>
-        internal abstract void ResetState();
+        public abstract void ResetState();
 
         /// <summary>
         /// The main evaluate entry point for expression trees
         /// </summary>
         /// <param name="state"></param>
         /// <returns></returns>
-        internal bool Evaluate(ConditionEvaluator.IConditionEvaluationState state)
+        public bool Evaluate(ConditionEvaluator.IConditionEvaluationState state)
         {
             ProjectErrorUtilities.VerifyThrowInvalidProject(
                 CanBoolEvaluate(state),
@@ -69,23 +69,23 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Get display string for this node for use in the debugger.
         /// </summary>
-        internal virtual string DebuggerDisplay { get; }
+        public virtual string DebuggerDisplay { get; }
 
 
         #region REMOVE_COMPAT_WARNING
-        internal virtual bool PossibleAndCollision
+        public virtual bool PossibleAndCollision
         {
             set { /* do nothing */ }
             get { return false; }
         }
 
-        internal virtual bool PossibleOrCollision
+        public virtual bool PossibleOrCollision
         {
             set { /* do nothing */ }
             get { return false; }
         }
 
-        internal bool PotentialAndOrConflict()
+        public bool PotentialAndOrConflict()
         {
             // The values of the functions are assigned to boolean locals
             // in order to force evaluation of the functions even when the 
@@ -95,8 +95,8 @@ namespace Microsoft.Build.Evaluation
             return detectOr && detectAnd;
         }
 
-        internal abstract bool DetectOr();
-        internal abstract bool DetectAnd();
+        public abstract bool DetectOr();
+        public abstract bool DetectAnd();
         #endregion
 
     }

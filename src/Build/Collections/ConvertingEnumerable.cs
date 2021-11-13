@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -13,7 +13,7 @@ namespace Microsoft.Build.Collections
     /// </summary>
     /// <typeparam name="TFrom">Type of underlying enumerator</typeparam>
     /// <typeparam name="TTo">Type returned</typeparam>
-    internal class ConvertingEnumerable<TFrom, TTo> : IEnumerable<TTo>
+    public class ConvertingEnumerable<TFrom, TTo> : IEnumerable<TTo>
     {
         /// <summary>
         /// Enumerable behind this one
@@ -28,7 +28,7 @@ namespace Microsoft.Build.Collections
         /// <summary>
         /// Constructor
         /// </summary>
-        internal ConvertingEnumerable(IEnumerable<TFrom> backingEnumerable, Func<TFrom, TTo> converter)
+        public ConvertingEnumerable(IEnumerable<TFrom> backingEnumerable, Func<TFrom, TTo> converter)
         {
             _backingEnumerable = backingEnumerable;
             _converter = converter;
@@ -71,7 +71,7 @@ namespace Microsoft.Build.Collections
             /// <summary>
             /// Constructor
             /// </summary>
-            internal ConvertingEnumerator(IEnumerator<TFrom2> backingEnumerator, Func<TFrom2, TTo2> converter)
+            public ConvertingEnumerator(IEnumerator<TFrom2> backingEnumerator, Func<TFrom2, TTo2> converter)
             {
                 _backingEnumerator = backingEnumerator;
                 _converter = converter;

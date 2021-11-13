@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -18,7 +18,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// External projects support
         /// </summary>
-        internal ProjectOutputElement(ProjectOutputElementLink link)
+        public ProjectOutputElement(ProjectOutputElementLink link)
             : base(link)
         {
         }
@@ -26,7 +26,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Initialize a parented ProjectOutputElement
         /// </summary>
-        internal ProjectOutputElement(XmlElement xmlElement, ProjectTaskElement parent, ProjectRootElement containingProject)
+        public ProjectOutputElement(XmlElement xmlElement, ProjectTaskElement parent, ProjectRootElement containingProject)
             : base(xmlElement, parent, containingProject)
         {
             ErrorUtilities.VerifyThrowArgumentNull(parent, nameof(parent));
@@ -134,7 +134,7 @@ namespace Microsoft.Build.Construction
         /// Exactly one of item name and property name must have a value.
         /// Caller should then ensure the element is added to a parent
         /// </summary>
-        internal static ProjectOutputElement CreateDisconnected(string taskParameter, string itemType, string propertyName, ProjectRootElement containingProject)
+        public static ProjectOutputElement CreateDisconnected(string taskParameter, string itemType, string propertyName, ProjectRootElement containingProject)
         {
             ErrorUtilities.VerifyThrowArgument
                 (
@@ -165,7 +165,7 @@ namespace Microsoft.Build.Construction
         /// Overridden to verify that the potential parent and siblings
         /// are acceptable. Throws InvalidOperationException if they are not.
         /// </summary>
-        internal override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
+        public override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
         {
             ErrorUtilities.VerifyThrowInvalidOperation(parent is ProjectTaskElement, "OM_CannotAcceptParent");
         }

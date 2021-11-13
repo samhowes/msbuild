@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -67,7 +67,7 @@ namespace Microsoft.Build.BackEnd
     /// a={.} b={b4.}
     /// 
     /// </remarks>
-    internal static class BatchingEngine
+    public static class BatchingEngine
     {
         #region Methods
 
@@ -76,7 +76,7 @@ namespace Microsoft.Build.BackEnd
         /// buckets of items to pass to the object in each batch.
         /// </summary>
         /// <returns>List containing ItemBucket objects, each one representing an execution batch.</returns>
-        internal static List<ItemBucket> PrepareBatchingBuckets
+        public static List<ItemBucket> PrepareBatchingBuckets
         (
             List<string> batchableObjectParameters,
             Lookup lookup,
@@ -96,7 +96,7 @@ namespace Microsoft.Build.BackEnd
         /// <param name="implicitBatchableItemType">Any item type that can be considered an implicit input to this batchable object.
         /// This is useful for items inside targets, where the item name is plainly an item type that's an "input" to the object.</param>
         /// <returns>List containing ItemBucket objects, each one representing an execution batch.</returns>
-        internal static List<ItemBucket> PrepareBatchingBuckets
+        public static List<ItemBucket> PrepareBatchingBuckets
         (
             List<string> batchableObjectParameters,
             Lookup lookup,

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -30,7 +30,7 @@ namespace Microsoft.Build.Evaluation
     /// Indicates to the expander what exactly it should expand.
     /// </summary>
     [Flags]
-    internal enum ExpanderOptions
+    public enum ExpanderOptions
     {
         /// <summary>
         /// Invalid
@@ -117,7 +117,7 @@ namespace Microsoft.Build.Evaluation
     /// </remarks>
     /// <typeparam name="P">Type of the properties used.</typeparam>
     /// <typeparam name="I">Type of the items used.</typeparam>
-    internal class Expander<P, I>
+    public class Expander<P, I>
         where P : class, IProperty
         where I : class, IItem
     {
@@ -173,7 +173,7 @@ namespace Microsoft.Build.Evaluation
         /// Creates an expander passing it some properties to use.
         /// Properties may be null.
         /// </summary>
-        internal Expander(IPropertyProvider<P> properties, IFileSystem fileSystem)
+        public Expander(IPropertyProvider<P> properties, IFileSystem fileSystem)
         {
             _properties = properties;
             _usedUninitializedProperties = new UsedUninitializedProperties();
@@ -184,7 +184,7 @@ namespace Microsoft.Build.Evaluation
         /// Creates an expander passing it some properties and items to use.
         /// Either or both may be null.
         /// </summary>
-        internal Expander(IPropertyProvider<P> properties, IItemProvider<I> items, IFileSystem fileSystem)
+        public Expander(IPropertyProvider<P> properties, IItemProvider<I> items, IFileSystem fileSystem)
             : this(properties, fileSystem)
         {
             _items = items;
@@ -194,7 +194,7 @@ namespace Microsoft.Build.Evaluation
         /// Creates an expander passing it some properties, items, and/or metadata to use.
         /// Any or all may be null.
         /// </summary>
-        internal Expander(IPropertyProvider<P> properties, IItemProvider<I> items, IMetadataTable metadata, IFileSystem fileSystem)
+        public Expander(IPropertyProvider<P> properties, IItemProvider<I> items, IMetadataTable metadata, IFileSystem fileSystem)
             : this(properties, items, fileSystem)
         {
             _metadata = metadata;
@@ -204,7 +204,7 @@ namespace Microsoft.Build.Evaluation
         /// Whether to warn when we set a property for the first time, after it was previously used.
         /// Default is false, unless MSBUILDWARNONUNINITIALIZEDPROPERTY is set.
         /// </summary>
-        internal bool WarnForUninitializedProperties
+        public bool WarnForUninitializedProperties
         {
             get { return _usedUninitializedProperties.Warn; }
             set { _usedUninitializedProperties.Warn = value; }
@@ -214,7 +214,7 @@ namespace Microsoft.Build.Evaluation
         /// Accessor for the metadata.
         /// Set temporarily during item metadata evaluation.
         /// </summary>
-        internal IMetadataTable Metadata
+        public IMetadataTable Metadata
         {
             get { return _metadata; }
             set { _metadata = value; }
@@ -224,7 +224,7 @@ namespace Microsoft.Build.Evaluation
         /// If a property is expanded but evaluates to null then it is considered to be un-initialized.
         /// We want to keep track of these properties so that we can warn if the property gets set later on.
         /// </summary>
-        internal UsedUninitializedProperties UsedUninitializedProperties
+        public UsedUninitializedProperties UsedUninitializedProperties
         {
             get { return _usedUninitializedProperties; }
             set { _usedUninitializedProperties = value; }
@@ -234,7 +234,7 @@ namespace Microsoft.Build.Evaluation
         /// Tests to see if the expression may contain expandable expressions, i.e.
         /// contains $, % or @.
         /// </summary>
-        internal static bool ExpressionMayContainExpandableExpressions(string expression)
+        public static bool ExpressionMayContainExpandableExpressions(string expression)
         {
             return expression.IndexOfAny(s_expandableChars) > -1;
         }
@@ -243,7 +243,7 @@ namespace Microsoft.Build.Evaluation
         /// Returns true if the expression contains an item vector pattern, else returns false.
         /// Used to flag use of item expressions where they are illegal.
         /// </summary>
-        internal static bool ExpressionContainsItemVector(string expression)
+        public static bool ExpressionContainsItemVector(string expression)
         {
             List<ExpressionShredder.ItemExpressionCapture> transforms = ExpressionShredder.GetReferencedItemExpressions(expression);
 
@@ -256,7 +256,7 @@ namespace Microsoft.Build.Evaluation
         /// 
         /// If ExpanderOptions.BreakOnNotEmpty was passed, expression was going to be non-empty, and it broke out early, returns null. Otherwise the result can be trusted.        
         /// </summary>
-        internal string ExpandIntoStringAndUnescape(string expression, ExpanderOptions options, IElementLocation elementLocation)
+        public string ExpandIntoStringAndUnescape(string expression, ExpanderOptions options, IElementLocation elementLocation)
         {
             string result = ExpandIntoStringLeaveEscaped(expression, options, elementLocation);
 
@@ -270,7 +270,7 @@ namespace Microsoft.Build.Evaluation
         /// 
         /// If ExpanderOptions.BreakOnNotEmpty was passed, expression was going to be non-empty, and it broke out early, returns null. Otherwise the result can be trusted.
         /// </summary>
-        internal string ExpandIntoStringLeaveEscaped(string expression, ExpanderOptions options, IElementLocation elementLocation)
+        public string ExpandIntoStringLeaveEscaped(string expression, ExpanderOptions options, IElementLocation elementLocation)
         {
             if (expression.Length == 0)
             {
@@ -291,7 +291,7 @@ namespace Microsoft.Build.Evaluation
         /// Used only for unit tests. Expands the property expression (including any metadata expressions) and returns
         /// the result typed (i.e. not converted into a string if the result is a function return).
         /// </summary>
-        internal object ExpandPropertiesLeaveTypedAndEscaped(string expression, ExpanderOptions options, IElementLocation elementLocation)
+        public object ExpandPropertiesLeaveTypedAndEscaped(string expression, ExpanderOptions options, IElementLocation elementLocation)
         {
             if (expression.Length == 0)
             {
@@ -310,7 +310,7 @@ namespace Microsoft.Build.Evaluation
         /// Use this form when the result is going to be processed further, for example by matching against the file system,
         /// so literals must be distinguished, and you promise to unescape after that.
         /// </summary>
-        internal SemiColonTokenizer ExpandIntoStringListLeaveEscaped(string expression, ExpanderOptions options, IElementLocation elementLocation)
+        public SemiColonTokenizer ExpandIntoStringListLeaveEscaped(string expression, ExpanderOptions options, IElementLocation elementLocation)
         {
             ErrorUtilities.VerifyThrow((options & ExpanderOptions.BreakOnNotEmpty) == 0, "not supported");
 
@@ -323,7 +323,7 @@ namespace Microsoft.Build.Evaluation
         /// If the expression is empty, returns an empty list.
         /// If ExpanderOptions.BreakOnNotEmpty was passed, expression was going to be non-empty, and it broke out early, returns null. Otherwise the result can be trusted.
         /// </summary>
-        internal IList<TaskItem> ExpandIntoTaskItemsLeaveEscaped(string expression, ExpanderOptions options, IElementLocation elementLocation)
+        public IList<TaskItem> ExpandIntoTaskItemsLeaveEscaped(string expression, ExpanderOptions options, IElementLocation elementLocation)
         {
             return ExpandIntoItemsLeaveEscaped(expression, (IItemFactory<I, TaskItem>)TaskItemFactory.Instance, options, elementLocation);
         }
@@ -338,7 +338,7 @@ namespace Microsoft.Build.Evaluation
         /// so literals must be distinguished, and you promise to unescape after that.
         /// </summary>
         /// <typeparam name="T">Type of items to return.</typeparam>
-        internal IList<T> ExpandIntoItemsLeaveEscaped<T>(string expression, IItemFactory<I, T> itemFactory, ExpanderOptions options, IElementLocation elementLocation)
+        public IList<T> ExpandIntoItemsLeaveEscaped<T>(string expression, IItemFactory<I, T> itemFactory, ExpanderOptions options, IElementLocation elementLocation)
             where T : class, IItem
         {
             if (expression.Length == 0)
@@ -411,7 +411,7 @@ namespace Microsoft.Build.Evaluation
         /// have an item type set on it, it will be given the item type of the item vector to use.
         /// </summary>
         /// <typeparam name="T">Type of the items that should be returned.</typeparam>
-        internal IList<T> ExpandSingleItemVectorExpressionIntoItems<T>(string expression, IItemFactory<I, T> itemFactory, ExpanderOptions options, bool includeNullItems, out bool isTransformExpression, IElementLocation elementLocation)
+        public IList<T> ExpandSingleItemVectorExpressionIntoItems<T>(string expression, IItemFactory<I, T> itemFactory, ExpanderOptions options, bool includeNullItems, out bool isTransformExpression, IElementLocation elementLocation)
             where T : class, IItem
         {
             if (expression.Length == 0)
@@ -425,13 +425,13 @@ namespace Microsoft.Build.Evaluation
             return ItemExpander.ExpandSingleItemVectorExpressionIntoItems(this, expression, _items, itemFactory, options, includeNullItems, out isTransformExpression, elementLocation);
         }
 
-        internal static ExpressionShredder.ItemExpressionCapture ExpandSingleItemVectorExpressionIntoExpressionCapture(
+        public static ExpressionShredder.ItemExpressionCapture ExpandSingleItemVectorExpressionIntoExpressionCapture(
                 string expression, ExpanderOptions options, IElementLocation elementLocation)
         {
             return ItemExpander.ExpandSingleItemVectorExpressionIntoExpressionCapture(expression, options, elementLocation);
         }
 
-        internal IList<T> ExpandExpressionCaptureIntoItems<S, T>(
+        public IList<T> ExpandExpressionCaptureIntoItems<S, T>(
                 ExpressionShredder.ItemExpressionCapture expressionCapture, IItemProvider<S> items, IItemFactory<S, T> itemFactory,
                 ExpanderOptions options, bool includeNullEntries, out bool isTransformExpression, IElementLocation elementLocation)
             where S : class, IItem
@@ -441,7 +441,7 @@ namespace Microsoft.Build.Evaluation
                 includeNullEntries, out isTransformExpression, elementLocation);
         }
 
-        internal bool ExpandExpressionCapture(
+        public bool ExpandExpressionCapture(
             ExpressionShredder.ItemExpressionCapture expressionCapture,
             IElementLocation elementLocation,
             ExpanderOptions options,
@@ -726,7 +726,7 @@ namespace Microsoft.Build.Evaluation
             /// <param name="options">Used to specify what to expand.</param>
             /// <param name="elementLocation">The location information for error reporting purposes.</param>
             /// <returns>The string with item metadata expanded in-place, escaped.</returns>
-            internal static string ExpandMetadataLeaveEscaped(string expression, IMetadataTable metadata, ExpanderOptions options, IElementLocation elementLocation)
+            public static string ExpandMetadataLeaveEscaped(string expression, IMetadataTable metadata, ExpanderOptions options, IElementLocation elementLocation)
             {
                 try
                 {
@@ -852,7 +852,7 @@ namespace Microsoft.Build.Evaluation
                 /// <summary>
                 /// Constructor taking a source of metadata.
                 /// </summary>
-                internal MetadataMatchEvaluator(IMetadataTable metadata, ExpanderOptions options)
+                public MetadataMatchEvaluator(IMetadataTable metadata, ExpanderOptions options)
                 {
                     _metadata = metadata;
                     _options = options & (ExpanderOptions.ExpandMetadata | ExpanderOptions.Truncate);
@@ -863,7 +863,7 @@ namespace Microsoft.Build.Evaluation
                 /// <summary>
                 /// Expands a single item metadata, which may be qualified with an item type.
                 /// </summary>
-                internal string ExpandSingleMetadata(Match itemMetadataMatch)
+                public string ExpandSingleMetadata(Match itemMetadataMatch)
                 {
                     ErrorUtilities.VerifyThrow(itemMetadataMatch.Success, "Need a valid item metadata.");
 
@@ -926,7 +926,7 @@ namespace Microsoft.Build.Evaluation
             ///
             /// This method leaves the result escaped.  Callers may need to unescape on their own as appropriate.
             /// </summary>
-            internal static string ExpandPropertiesLeaveEscaped(
+            public static string ExpandPropertiesLeaveEscaped(
                 string expression,
                 IPropertyProvider<T> properties,
                 ExpanderOptions options,
@@ -962,7 +962,7 @@ namespace Microsoft.Build.Evaluation
             ///
             /// This method leaves the result typed and escaped.  Callers may need to convert to string, and unescape on their own as appropriate.
             /// </summary>
-            internal static object ExpandPropertiesLeaveTypedAndEscaped(
+            public static object ExpandPropertiesLeaveTypedAndEscaped(
                 string expression,
                 IPropertyProvider<T> properties,
                 ExpanderOptions options,
@@ -1178,7 +1178,7 @@ namespace Microsoft.Build.Evaluation
             /// <summary>
             /// Expand the body of the property, including any functions that it may contain.
             /// </summary>
-            internal static object ExpandPropertyBody(
+            public static object ExpandPropertyBody(
                 string propertyBody,
                 object propertyValue,
                 IPropertyProvider<T> properties,
@@ -1298,7 +1298,7 @@ namespace Microsoft.Build.Evaluation
             /// Arrays are supported.
             /// Will not return NULL.
             /// </summary>
-            internal static string ConvertToString(object valueToConvert)
+            public static string ConvertToString(object valueToConvert)
             {
                 if (valueToConvert != null)
                 {
@@ -1630,7 +1630,7 @@ namespace Microsoft.Build.Evaluation
             /// Execute the list of transform functions.
             /// </summary>
             /// <typeparam name="S">class, IItem.</typeparam>
-            internal static IEnumerable<Pair<string, S>> Transform<S>(Expander<P, I> expander, bool includeNullEntries, Stack<TransformFunction<S>> transformFunctionStack, IEnumerable<Pair<string, S>> itemsOfType)
+            public static IEnumerable<Pair<string, S>> Transform<S>(Expander<P, I> expander, bool includeNullEntries, Stack<TransformFunction<S>> transformFunctionStack, IEnumerable<Pair<string, S>> itemsOfType)
                 where S : class, IItem
             {
                 // If we have transforms on our stack, then we'll execute those first
@@ -1678,7 +1678,7 @@ namespace Microsoft.Build.Evaluation
             /// </summary>
             /// <typeparam name="S">Type of the items provided by the item source used for expansion.</typeparam>
             /// <typeparam name="T">Type of the items that should be returned.</typeparam>
-            internal static IList<T> ExpandSingleItemVectorExpressionIntoItems<S, T>(
+            public static IList<T> ExpandSingleItemVectorExpressionIntoItems<S, T>(
                     Expander<P, I> expander, string expression, IItemProvider<S> items, IItemFactory<S, T> itemFactory, ExpanderOptions options,
                     bool includeNullEntries, out bool isTransformExpression, IElementLocation elementLocation)
                 where S : class, IItem
@@ -1696,7 +1696,7 @@ namespace Microsoft.Build.Evaluation
                     out isTransformExpression, elementLocation);
             }
 
-            internal static ExpressionShredder.ItemExpressionCapture ExpandSingleItemVectorExpressionIntoExpressionCapture(
+            public static ExpressionShredder.ItemExpressionCapture ExpandSingleItemVectorExpressionIntoExpressionCapture(
                     string expression, ExpanderOptions options, IElementLocation elementLocation)
             {
                 if (((options & ExpanderOptions.ExpandItems) == 0) || (expression.Length == 0))
@@ -1731,7 +1731,7 @@ namespace Microsoft.Build.Evaluation
                 return match;
             }
 
-            internal static IList<T> ExpandExpressionCaptureIntoItems<S, T>(
+            public static IList<T> ExpandExpressionCaptureIntoItems<S, T>(
                     ExpressionShredder.ItemExpressionCapture expressionCapture, Expander<P, I> expander, IItemProvider<S> items, IItemFactory<S, T> itemFactory,
                     ExpanderOptions options, bool includeNullEntries, out bool isTransformExpression, IElementLocation elementLocation)
                 where S : class, IItem
@@ -1841,7 +1841,7 @@ namespace Microsoft.Build.Evaluation
             /// <param name="elementLocation">Location of the xml element containing the <paramref name="expressionCapture"/>.</param>
             /// <param name="options">expander options.</param>
             /// <param name="includeNullEntries">Wether to include items that evaluated to empty / null.</param>
-            internal static bool ExpandExpressionCapture<S>(
+            public static bool ExpandExpressionCapture<S>(
                 Expander<P, I> expander,
                 ExpressionShredder.ItemExpressionCapture expressionCapture,
                 IItemProvider<S> evaluatedItems,
@@ -1924,7 +1924,7 @@ namespace Microsoft.Build.Evaluation
             /// If ExpanderOptions.BreakOnNotEmpty was passed, expression was going to be non-empty, and it broke out early, returns null. Otherwise the result can be trusted.
             /// </summary>
             /// <typeparam name="T">Type of the items provided.</typeparam>
-            internal static string ExpandItemVectorsIntoString<T>(Expander<P, I> expander, string expression, IItemProvider<T> items, ExpanderOptions options, IElementLocation elementLocation)
+            public static string ExpandItemVectorsIntoString<T>(Expander<P, I> expander, string expression, IItemProvider<T> items, ExpanderOptions options, IElementLocation elementLocation)
                 where T : class, IItem
             {
                 if ((options & ExpanderOptions.ExpandItems) == 0 || expression.Length == 0)
@@ -2083,7 +2083,7 @@ namespace Microsoft.Build.Evaluation
             /// The set of functions that called during an item transformation, e.g. @(CLCompile->ContainsMetadata('MetaName', 'metaValue')).
             /// </summary>
             /// <typeparam name="S">class, IItem.</typeparam>
-            internal static class IntrinsicItemFunctions<S>
+            public static class IntrinsicItemFunctions<S>
                 where S : class, IItem
             {
                 /// <summary>
@@ -2101,7 +2101,7 @@ namespace Microsoft.Build.Evaluation
                 /// Get a delegate to the given item transformation function by supplying the name and the
                 /// Item type that should be used.
                 /// </summary>
-                internal static ItemTransformFunction GetItemTransformFunction(IElementLocation elementLocation, string functionName, Type itemType)
+                public static ItemTransformFunction GetItemTransformFunction(IElementLocation elementLocation, string functionName, Type itemType)
                 {
                     ItemTransformFunction transformFunction = null;
                     string qualifiedFunctionName = itemType.FullName + "::" + functionName;
@@ -2116,12 +2116,12 @@ namespace Microsoft.Build.Evaluation
                         }
                         else
                         {
-                            MethodInfo itemFunctionInfo = typeof(IntrinsicItemFunctions<S>).GetMethod(functionName, BindingFlags.IgnoreCase | BindingFlags.NonPublic | BindingFlags.Static);
+                            MethodInfo itemFunctionInfo = typeof(IntrinsicItemFunctions<S>).GetMethod(functionName, BindingFlags.IgnoreCase | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static);
 
                             if (itemFunctionInfo == null)
                             {
                                 functionName = "ExecuteStringFunction";
-                                itemFunctionInfo = typeof(IntrinsicItemFunctions<S>).GetMethod(functionName, BindingFlags.IgnoreCase | BindingFlags.NonPublic | BindingFlags.Static);
+                                itemFunctionInfo = typeof(IntrinsicItemFunctions<S>).GetMethod(functionName, BindingFlags.IgnoreCase | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static);
                                 if (itemFunctionInfo == null)
                                 {
                                     ProjectErrorUtilities.ThrowInvalidProject(elementLocation, "UnknownItemFunction", functionName);
@@ -2158,7 +2158,7 @@ namespace Microsoft.Build.Evaluation
                 /// Create an enumerator from a base IEnumerable of items into an enumerable
                 /// of transformation result which includes the new itemspec and the base item.
                 /// </summary>
-                internal static IEnumerable<Pair<string, S>> GetItemPairEnumerable(IEnumerable<S> itemsOfType)
+                public static IEnumerable<Pair<string, S>> GetItemPairEnumerable(IEnumerable<S> itemsOfType)
                 {
                     // iterate over the items, and yield out items in the tuple format
                     foreach (var item in itemsOfType)
@@ -2185,7 +2185,7 @@ namespace Microsoft.Build.Evaluation
                 /// <summary>
                 /// Intrinsic function that returns the number of items in the list.
                 /// </summary>
-                internal static IEnumerable<Pair<string, S>> Count(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
+                public static IEnumerable<Pair<string, S>> Count(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
                 {
                     yield return new Pair<string, S>(Convert.ToString(itemsOfType.Count(), CultureInfo.InvariantCulture), null /* no base item */);
                 }
@@ -2194,7 +2194,7 @@ namespace Microsoft.Build.Evaluation
                 /// Intrinsic function that returns the specified built-in modifer value of the items in itemsOfType
                 /// Tuple is {current item include, item under transformation}.
                 /// </summary>
-                internal static IEnumerable<Pair<string, S>> ItemSpecModifierFunction(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
+                public static IEnumerable<Pair<string, S>> ItemSpecModifierFunction(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
                 {
                     ProjectErrorUtilities.VerifyThrowInvalidProject(arguments == null || arguments.Length == 0, elementLocation, "InvalidItemFunctionSyntax", functionName, arguments == null ? 0 : arguments.Length);
 
@@ -2247,7 +2247,7 @@ namespace Microsoft.Build.Evaluation
                 /// <summary>
                 /// Intrinsic function that returns the subset of items that actually exist on disk.
                 /// </summary>
-                internal static IEnumerable<Pair<string, S>> Exists(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
+                public static IEnumerable<Pair<string, S>> Exists(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
                 {
                     ProjectErrorUtilities.VerifyThrowInvalidProject(arguments == null || arguments.Length == 0, elementLocation, "InvalidItemFunctionSyntax", functionName, arguments == null ? 0 : arguments.Length);
 
@@ -2294,7 +2294,7 @@ namespace Microsoft.Build.Evaluation
                 /// <summary>
                 /// Intrinsic function that combines the existing paths of the input items with a given relative path.
                 /// </summary>
-                internal static IEnumerable<Pair<string, S>> Combine(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
+                public static IEnumerable<Pair<string, S>> Combine(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
                 {
                     ProjectErrorUtilities.VerifyThrowInvalidProject(arguments?.Length == 1, elementLocation, "InvalidItemFunctionSyntax", functionName, arguments == null ? 0 : arguments.Length);
 
@@ -2318,7 +2318,7 @@ namespace Microsoft.Build.Evaluation
                 /// <summary>
                 /// Intrinsic function that returns all ancestor directories of the given items.
                 /// </summary>
-                internal static IEnumerable<Pair<string, S>> GetPathsOfAllDirectoriesAbove(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
+                public static IEnumerable<Pair<string, S>> GetPathsOfAllDirectoriesAbove(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
                 {
                     ProjectErrorUtilities.VerifyThrowInvalidProject(arguments == null || arguments.Length == 0, elementLocation, "InvalidItemFunctionSyntax", functionName, arguments == null ? 0 : arguments.Length);
 
@@ -2394,7 +2394,7 @@ namespace Microsoft.Build.Evaluation
                 /// Intrinsic function that returns the DirectoryName of the items in itemsOfType
                 /// UNDONE: This can be removed in favor of a built-in %(DirectoryName) metadata in future.
                 /// </summary>
-                internal static IEnumerable<Pair<string, S>> DirectoryName(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
+                public static IEnumerable<Pair<string, S>> DirectoryName(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
                 {
                     ProjectErrorUtilities.VerifyThrowInvalidProject(arguments == null || arguments.Length == 0, elementLocation, "InvalidItemFunctionSyntax", functionName, arguments == null ? 0 : arguments.Length);
 
@@ -2461,7 +2461,7 @@ namespace Microsoft.Build.Evaluation
                 /// <summary>
                 /// Intrinsic function that returns the contents of the metadata in specified in argument[0].
                 /// </summary>
-                internal static IEnumerable<Pair<string, S>> Metadata(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
+                public static IEnumerable<Pair<string, S>> Metadata(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
                 {
                     ProjectErrorUtilities.VerifyThrowInvalidProject(arguments?.Length == 1, elementLocation, "InvalidItemFunctionSyntax", functionName, arguments == null ? 0 : arguments.Length);
 
@@ -2518,7 +2518,7 @@ namespace Microsoft.Build.Evaluation
                 /// Intrinsic function that returns only the items from itemsOfType that have distinct Item1 in the Tuple
                 /// Using a case sensitive comparison.
                 /// </summary>
-                internal static IEnumerable<Pair<string, S>> DistinctWithCase(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
+                public static IEnumerable<Pair<string, S>> DistinctWithCase(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
                 {
                     return DistinctWithComparer(expander, elementLocation, includeNullEntries, functionName, itemsOfType, arguments, StringComparer.Ordinal);
                 }
@@ -2527,7 +2527,7 @@ namespace Microsoft.Build.Evaluation
                 /// Intrinsic function that returns only the items from itemsOfType that have distinct Item1 in the Tuple
                 /// Using a case insensitive comparison.
                 /// </summary>
-                internal static IEnumerable<Pair<string, S>> Distinct(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
+                public static IEnumerable<Pair<string, S>> Distinct(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
                 {
                     return DistinctWithComparer(expander, elementLocation, includeNullEntries, functionName, itemsOfType, arguments, StringComparer.OrdinalIgnoreCase);
                 }
@@ -2536,7 +2536,7 @@ namespace Microsoft.Build.Evaluation
                 /// Intrinsic function that returns only the items from itemsOfType that have distinct Item1 in the Tuple
                 /// Using a case insensitive comparison.
                 /// </summary>
-                internal static IEnumerable<Pair<string, S>> DistinctWithComparer(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments, StringComparer comparer)
+                public static IEnumerable<Pair<string, S>> DistinctWithComparer(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments, StringComparer comparer)
                 {
                     ProjectErrorUtilities.VerifyThrowInvalidProject(arguments == null || arguments.Length == 0, elementLocation, "InvalidItemFunctionSyntax", functionName, arguments == null ? 0 : arguments.Length);
 
@@ -2557,7 +2557,7 @@ namespace Microsoft.Build.Evaluation
                 /// <summary>
                 /// Intrinsic function reverses the item list.
                 /// </summary>
-                internal static IEnumerable<Pair<string, S>> Reverse(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
+                public static IEnumerable<Pair<string, S>> Reverse(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
                 {
                     ProjectErrorUtilities.VerifyThrowInvalidProject(arguments == null || arguments.Length == 0, elementLocation, "InvalidItemFunctionSyntax", functionName, arguments == null ? 0 : arguments.Length);
                     foreach (Pair<String, S> item in itemsOfType.Reverse())
@@ -2569,7 +2569,7 @@ namespace Microsoft.Build.Evaluation
                 /// <summary>
                 /// Intrinsic function that transforms expressions like the %(foo) in @(Compile->'%(foo)').
                 /// </summary>
-                internal static IEnumerable<Pair<string, S>> ExpandQuotedExpressionFunction(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
+                public static IEnumerable<Pair<string, S>> ExpandQuotedExpressionFunction(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
                 {
                     ProjectErrorUtilities.VerifyThrowInvalidProject(arguments?.Length == 1, elementLocation, "InvalidItemFunctionSyntax", functionName, arguments == null ? 0 : arguments.Length);
 
@@ -2609,7 +2609,7 @@ namespace Microsoft.Build.Evaluation
                 /// Intrinsic function that transforms expressions by invoking methods of System.String on the itemspec
                 /// of the item in the pipeline.
                 /// </summary>
-                internal static IEnumerable<Pair<string, S>> ExecuteStringFunction(
+                public static IEnumerable<Pair<string, S>> ExecuteStringFunction(
                     Expander<P, I> expander,
                     IElementLocation elementLocation,
                     bool includeNullEntries,
@@ -2651,7 +2651,7 @@ namespace Microsoft.Build.Evaluation
                 /// <summary>
                 /// Intrinsic function that returns the items from itemsOfType with their metadata cleared, i.e. only the itemspec is retained.
                 /// </summary>
-                internal static IEnumerable<Pair<string, S>> ClearMetadata(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
+                public static IEnumerable<Pair<string, S>> ClearMetadata(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
                 {
                     ProjectErrorUtilities.VerifyThrowInvalidProject(arguments == null || arguments.Length == 0, elementLocation, "InvalidItemFunctionSyntax", functionName, arguments == null ? 0 : arguments.Length);
 
@@ -2668,7 +2668,7 @@ namespace Microsoft.Build.Evaluation
                 /// Intrinsic function that returns only those items that have a not-blank value for the metadata specified
                 /// Using a case insensitive comparison.
                 /// </summary>
-                internal static IEnumerable<Pair<string, S>> HasMetadata(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
+                public static IEnumerable<Pair<string, S>> HasMetadata(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
                 {
                     ProjectErrorUtilities.VerifyThrowInvalidProject(arguments?.Length == 1, elementLocation, "InvalidItemFunctionSyntax", functionName, arguments == null ? 0 : arguments.Length);
 
@@ -2705,7 +2705,7 @@ namespace Microsoft.Build.Evaluation
                 /// Intrinsic function that returns only those items have the given metadata value
                 /// Using a case insensitive comparison.
                 /// </summary>
-                internal static IEnumerable<Pair<string, S>> WithMetadataValue(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
+                public static IEnumerable<Pair<string, S>> WithMetadataValue(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
                 {
                     ProjectErrorUtilities.VerifyThrowInvalidProject(arguments?.Length == 2, elementLocation, "InvalidItemFunctionSyntax", functionName, arguments == null ? 0 : arguments.Length);
 
@@ -2741,7 +2741,7 @@ namespace Microsoft.Build.Evaluation
                 /// Intrinsic function that returns a boolean to indicate if any of the items have the given metadata value
                 /// Using a case insensitive comparison.
                 /// </summary>
-                internal static IEnumerable<Pair<string, S>> AnyHaveMetadataValue(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
+                public static IEnumerable<Pair<string, S>> AnyHaveMetadataValue(Expander<P, I> expander, IElementLocation elementLocation, bool includeNullEntries, string functionName, IEnumerable<Pair<string, S>> itemsOfType, string[] arguments)
                 {
                     ProjectErrorUtilities.VerifyThrowInvalidProject(arguments?.Length == 2, elementLocation, "InvalidItemFunctionSyntax", functionName, arguments == null ? 0 : arguments.Length);
 
@@ -2793,7 +2793,7 @@ namespace Microsoft.Build.Evaluation
             /// Represents all the components of a transform function, including the ability to execute it. 
             /// </summary>
             /// <typeparam name="S">class, IItem.</typeparam>
-            internal class TransformFunction<S>
+            public class TransformFunction<S>
                 where S : class, IItem
             {
                 /// <summary>
@@ -2877,7 +2877,7 @@ namespace Microsoft.Build.Evaluation
                 /// <summary>
                 /// Constructor.
                 /// </summary>
-                internal MetadataMatchEvaluator(string itemSpec, IItem sourceOfMetadata, IElementLocation elementLocation)
+                public MetadataMatchEvaluator(string itemSpec, IItem sourceOfMetadata, IElementLocation elementLocation)
                 {
                     _itemSpec = itemSpec;
                     _sourceOfMetadata = sourceOfMetadata;
@@ -2889,7 +2889,7 @@ namespace Microsoft.Build.Evaluation
                 /// The match is expected to be the content of a transform.
                 /// For example, representing "%(Filename.obj)" in the original expression "@(Compile->'%(Filename.obj)')".
                 /// </summary>
-                internal string GetMetadataValueFromMatch(Match match)
+                public string GetMetadataValueFromMatch(Match match)
                 {
                     string name = match.Groups[RegularExpressions.NameGroup].Value;
 
@@ -2938,30 +2938,30 @@ namespace Microsoft.Build.Evaluation
             /// Regular expression used to match item metadata references embedded in strings.
             /// For example, %(Compile.DependsOn) or %(DependsOn).
             /// </summary> 
-            internal static readonly Lazy<Regex> ItemMetadataPattern = new Lazy<Regex>(
+            public static readonly Lazy<Regex> ItemMetadataPattern = new Lazy<Regex>(
                 () => new Regex(ItemMetadataSpecification,
                     RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture | RegexOptions.Compiled));
 
             /// <summary>
             /// Name of the group matching the "name" of a metadatum.
             /// </summary>
-            internal const string NameGroup = "NAME";
+            public const string NameGroup = "NAME";
 
             /// <summary>
             /// Name of the group matching the prefix on a metadata expression, for example "Compile." in "%(Compile.Object)".
             /// </summary>
-            internal const string ItemSpecificationGroup = "ITEM_SPECIFICATION";
+            public const string ItemSpecificationGroup = "ITEM_SPECIFICATION";
 
             /// <summary>
             /// Name of the group matching the item type in an item expression or metadata expression.
             /// </summary>
-            internal const string ItemTypeGroup = "ITEM_TYPE";
+            public const string ItemTypeGroup = "ITEM_TYPE";
 
             /// <summary>
             /// regular expression used to match item metadata references outside of item vector transforms.
             /// </summary>
             /// <remarks>PERF WARNING: this Regex is complex and tends to run slowly.</remarks>
-            internal static readonly Lazy<Regex> NonTransformItemMetadataPattern = new Lazy<Regex>(
+            public static readonly Lazy<Regex> NonTransformItemMetadataPattern = new Lazy<Regex>(
                 () => new Regex
                     (
                     @"((?<=" + ItemVectorWithTransformLHS + @")" + ItemMetadataSpecification + @"(?!" +
@@ -3038,7 +3038,7 @@ namespace Microsoft.Build.Evaluation
             /// </summary>
             public UsedUninitializedProperties UsedUninitializedProperties { get; set; }
 
-            internal Function<T> Build()
+            public Function<T> Build()
             {
                 return new Function<T>(
                     ReceiverType,
@@ -3107,7 +3107,7 @@ namespace Microsoft.Build.Evaluation
             /// <summary>
             /// Construct a function that will be executed during property evaluation.
             /// </summary>
-            internal Function(
+            public Function(
                 Type receiverType,
                 string expression,
                 string receiver,
@@ -3144,7 +3144,7 @@ namespace Microsoft.Build.Evaluation
             ///     [System.Diagnostics.Process]::Start
             ///     SomeMSBuildProperty.
             /// </summary>
-            internal string Receiver
+            public string Receiver
             {
                 get { return _receiver; }
             }
@@ -3152,7 +3152,7 @@ namespace Microsoft.Build.Evaluation
             /// <summary>
             /// Extract the function details from the given property function expression.
             /// </summary>
-            internal static Function<T> ExtractPropertyFunction(
+            public static Function<T> ExtractPropertyFunction(
                 string expressionFunction,
                 IElementLocation elementLocation,
                 object propertyValue,
@@ -3276,7 +3276,7 @@ namespace Microsoft.Build.Evaluation
             /// <summary>
             /// Execute the function on the given instance.
             /// </summary>
-            internal object Execute(object objectInstance, IPropertyProvider<T> properties, ExpanderOptions options, IElementLocation elementLocation)
+            public object Execute(object objectInstance, IPropertyProvider<T> properties, ExpanderOptions options, IElementLocation elementLocation)
             {
                 object functionResult = String.Empty;
                 object[] args = null;
@@ -3298,7 +3298,7 @@ namespace Microsoft.Build.Evaluation
                         // since we don't want them to be public
                         if (_receiverType == typeof(Microsoft.Build.Evaluation.IntrinsicFunctions))
                         {
-                            _bindingFlags |= BindingFlags.NonPublic;
+                            _bindingFlags |= BindingFlags.NonPublic | BindingFlags.Public;
                         }
                     }
                     else
@@ -5067,12 +5067,12 @@ namespace Microsoft.Build.Evaluation
     /// <summary>
     /// This class wraps information about properties which have been used before they are initialized. 
     /// </summary>
-    internal class UsedUninitializedProperties
+    public class UsedUninitializedProperties
     {
         /// <summary>
         /// This class wraps information about properties which have been used before they are initialized.
         /// </summary>
-        internal UsedUninitializedProperties()
+        public UsedUninitializedProperties()
         {
             Properties = new Dictionary<string, IElementLocation>(StringComparer.OrdinalIgnoreCase);
         }
@@ -5080,7 +5080,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Hash set of properties which have been used before being initialized.
         /// </summary>
-        internal IDictionary<string, IElementLocation> Properties
+        public IDictionary<string, IElementLocation> Properties
         {
             get;
             set;
@@ -5089,7 +5089,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         ///  Are we currently supposed to warn if we used an uninitialized property.
         /// </summary>
-        internal bool Warn
+        public bool Warn
         {
             get;
             set;
@@ -5098,7 +5098,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         ///  What is the currently evaluating property element, this is so that we do not add a un initialized property if we are evaluating that property.
         /// </summary>
-        internal string CurrentlyEvaluatingPropertyElementName
+        public string CurrentlyEvaluatingPropertyElementName
         {
             get;
             set;

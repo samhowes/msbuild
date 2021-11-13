@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -13,7 +13,7 @@ namespace Microsoft.Build.Logging
     /// The .zip file can be used to correlate the file names and positions in the build log file with the
     /// actual sources.
     /// </summary>
-    internal class ProjectImportsCollector
+    public class ProjectImportsCollector
     {
         private Stream _stream;
         public byte[] GetAllBytes()

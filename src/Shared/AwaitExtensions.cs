@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -12,7 +12,7 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// Class defining extension methods for awaitable objects.
     /// </summary>
-    internal static class AwaitExtensions
+    public static class AwaitExtensions
     {
         /// <summary>
         /// Synchronizes access to the staScheduler field.
@@ -27,7 +27,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Gets the STA scheduler.
         /// </summary>
-        internal static TaskScheduler OneSTAThreadPerTaskSchedulerInstance
+        public static TaskScheduler OneSTAThreadPerTaskSchedulerInstance
         {
             get
             {
@@ -51,7 +51,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="handle">The handle to wait on.</param>
         /// <returns>The awaiter.</returns>
-        internal static TaskAwaiter GetAwaiter(this WaitHandle handle)
+        public static TaskAwaiter GetAwaiter(this WaitHandle handle)
         {
             ErrorUtilities.VerifyThrowArgumentNull(handle, nameof(handle));
             return handle.ToTask().GetAwaiter();
@@ -62,7 +62,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="handles">The handles to wait on.</param>
         /// <returns>The awaiter.</returns>
-        internal static TaskAwaiter<int> GetAwaiter(this WaitHandle[] handles)
+        public static TaskAwaiter<int> GetAwaiter(this WaitHandle[] handles)
         {
             ErrorUtilities.VerifyThrowArgumentNull(handles, "handle");
             return handles.ToTask().GetAwaiter();
@@ -77,7 +77,7 @@ namespace Microsoft.Build.Shared
         /// <remarks>
         /// There is a (brief) time delay between when the handle is signaled and when the task is marked as completed.
         /// </remarks>
-        internal static Task ToTask(this WaitHandle handle, int timeout = Timeout.Infinite)
+        public static Task ToTask(this WaitHandle handle, int timeout = Timeout.Infinite)
         {
             return ToTask(new WaitHandle[1] { handle }, timeout);
         }
@@ -91,7 +91,7 @@ namespace Microsoft.Build.Shared
         /// <remarks>
         /// There is a (brief) time delay between when the handles are signaled and when the task is marked as completed.
         /// </remarks>
-        internal static Task<int> ToTask(this WaitHandle[] handles, int timeout = Timeout.Infinite)
+        public static Task<int> ToTask(this WaitHandle[] handles, int timeout = Timeout.Infinite)
         {
             ErrorUtilities.VerifyThrowArgumentNull(handles, "handle");
 

@@ -21,7 +21,7 @@ namespace Microsoft.Build.UnitTests
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        internal delegate AssemblyNameExtension ProduceAssemblyNameEx(string name);
+        public delegate AssemblyNameExtension ProduceAssemblyNameEx(string name);
 
         private static string[] s_assemblyStrings =
         {

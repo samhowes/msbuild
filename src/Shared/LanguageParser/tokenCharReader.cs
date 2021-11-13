@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -13,7 +13,7 @@ namespace Microsoft.Build.Shared.LanguageParser
      * Provides utility functions for skipping and checking the value of characters.
      *
      */
-    internal class TokenCharReader
+    public class TokenCharReader
     {
         // The sources 
         private StreamMappedString _sources;
@@ -27,7 +27,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Construct
          */
-        internal TokenCharReader(Stream binaryStream, bool forceANSI)
+        public TokenCharReader(Stream binaryStream, bool forceANSI)
         {
             Reset();
             _sources = new StreamMappedString(binaryStream, forceANSI);
@@ -38,7 +38,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Reset to the top of the sources.
          */
-        internal void Reset()
+        public void Reset()
         {
             _position = 0;
             _currentLine = 1;    // One-relative
@@ -49,7 +49,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * The current line number   
          */
-        internal int CurrentLine
+        public int CurrentLine
         {
             get { return _currentLine; }
         }
@@ -59,7 +59,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * The character offset within the sources.
          */
-        internal int Position
+        public int Position
         {
             get { return _position; }
             // Having a set operator makes this class not forward-only.
@@ -102,7 +102,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Get the current character.
          */
-        internal char CurrentCharacter
+        public char CurrentCharacter
         {
             get { return _sources.GetAt(_position); }
         }
@@ -112,7 +112,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Return true if we've reached the end of sources.
          */
-        internal bool EndOfLines
+        public bool EndOfLines
         {
             get { return _sources.IsPastEnd(_position); }
         }
@@ -122,7 +122,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Get the string that starts with the given start position and ends with this.position.
          */
-        internal string GetCurrentMatchedString(int startPosition)
+        public string GetCurrentMatchedString(int startPosition)
         {
             return _sources.Substring(startPosition, _position - startPosition);
         }
@@ -133,7 +133,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * See if the next characters match the given string. If they do,
          * sink this string.
          */
-        internal bool Sink(string match)
+        public bool Sink(string match)
         {
             return Sink(match, false);
         }
@@ -176,7 +176,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Sink and return one character.
          */
-        internal char SinkCharacter()
+        public char SinkCharacter()
         {
             char c = CurrentCharacter;
             Skip();
@@ -188,7 +188,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * See if the next characters match the given string without case.
          */
-        internal bool SinkIgnoreCase(string match)
+        public bool SinkIgnoreCase(string match)
         {
             return Sink(match, true);
         }
@@ -199,7 +199,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * Determine whether a given character is a C# or VB identifier start character.
          * Both languages agree on this format.
          */
-        internal bool MatchNextIdentifierStart()
+        public bool MatchNextIdentifierStart()
         {
             // From 2.4.2 of the C# Language Specification
             // identifier-start-letter-character:
@@ -216,7 +216,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * Determine whether a given character is a C# or VB identifier start character.
          * Both languages agree on this format.
          */
-        internal bool SinkIdentifierStart()
+        public bool SinkIdentifierStart()
         {
             if (MatchNextIdentifierStart())
             {
@@ -232,7 +232,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * Determine whether a given character is a C# or VB identifier part character
          * Both languages agree on this format.
          */
-        internal bool SinkIdentifierPart()
+        public bool SinkIdentifierPart()
         {
             // From 2.4.2 of the C# Language Specification
             // identifier-part-letter-character:
@@ -255,7 +255,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Sink a newline.
          */
-        internal bool SinkNewLine()
+        public bool SinkNewLine()
         {
             if (EndOfLines)
             {
@@ -286,7 +286,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Sink from the current position to the first end-of-line.
          */
-        internal bool SinkToEndOfLine()
+        public bool SinkToEndOfLine()
         {
             while (!TokenChar.IsNewLine(CurrentCharacter))
             {
@@ -300,7 +300,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Sink until the given string is found. Match including the given string.
          */
-        internal bool SinkUntil(string find)
+        public bool SinkUntil(string find)
         {
             bool found = false;
             while (!EndOfLines && !found)
@@ -323,7 +323,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Sink multiple hex digits.
          */
-        internal bool SinkMultipleHexDigits()
+        public bool SinkMultipleHexDigits()
         {
             int count = 0;
             while (TokenChar.IsHexDigit(CurrentCharacter))
@@ -339,7 +339,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Sink multiple decimal digits.
          */
-        internal bool SinkMultipleDecimalDigits()
+        public bool SinkMultipleDecimalDigits()
         {
             int count = 0;
             while (TokenChar.IsDecimalDigit(CurrentCharacter))

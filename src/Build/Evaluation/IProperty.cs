@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Collections;
@@ -8,7 +8,7 @@ namespace Microsoft.Build.Evaluation
     /// <summary>
     /// An interface representing an object which can act as a property.
     /// </summary>
-    internal interface IProperty : IKeyed
+    public interface IProperty : IKeyed
     {
         /// <summary>
         /// Name of the property

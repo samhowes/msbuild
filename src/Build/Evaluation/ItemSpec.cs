@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -14,11 +14,11 @@ namespace Microsoft.Build.Evaluation
     ///     Represents the elements of an item specification string (e.g. Include="*.cs;foo;@(i)") and
     ///     provides some operations over them (like matching items against a given ItemSpec)
     /// </summary>
-    internal class ItemSpec<P, I>
+    public class ItemSpec<P, I>
         where P : class, IProperty
         where I : class, IItem, IMetadataTable
     {
-        internal readonly struct ReferencedItem
+        public readonly struct ReferencedItem
         {
             public I Item { get; }
             public ValueFragment ItemAsValueFragment { get; }
@@ -30,7 +30,7 @@ namespace Microsoft.Build.Evaluation
             }
         }
 
-        internal class ItemExpressionFragment : ItemSpecFragment
+        public class ItemExpressionFragment : ItemSpecFragment
         {
             private readonly ItemSpec<P, I> _containingItemSpec;
             private Expander<P, I> _expander;
@@ -398,7 +398,7 @@ namespace Microsoft.Build.Evaluation
         }
     }
 
-    internal abstract class ItemSpecFragment
+    public abstract class ItemSpecFragment
     {
         private FileSpecMatcherTester _fileMatcher;
 
@@ -414,7 +414,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         ///     Path of the project the itemspec is coming from
         /// </summary>
-        internal string ProjectDirectory { get; }
+        public string ProjectDirectory { get; }
 
         // not a Lazy to reduce memory
         private ref FileSpecMatcherTester FileMatcher
@@ -480,7 +480,7 @@ namespace Microsoft.Build.Evaluation
         }
     }
 
-    internal class ValueFragment : ItemSpecFragment
+    public class ValueFragment : ItemSpecFragment
     {
         public ValueFragment(string textFragment, string projectDirectory)
             : base(textFragment, projectDirectory)
@@ -488,7 +488,7 @@ namespace Microsoft.Build.Evaluation
         }
     }
 
-    internal class GlobFragment : ItemSpecFragment
+    public class GlobFragment : ItemSpecFragment
     {
         public GlobFragment(string textFragment, string projectDirectory)
             : base(textFragment, projectDirectory)

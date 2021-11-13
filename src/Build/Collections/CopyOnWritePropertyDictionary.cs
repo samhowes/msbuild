@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -41,7 +41,7 @@ namespace Microsoft.Build.Collections
     /// </remarks>
     /// <typeparam name="T">Property or Metadata class type to store</typeparam>
     [DebuggerDisplay("#Entries={Count}")]
-    internal sealed class CopyOnWritePropertyDictionary<T> : IEnumerable<T>, IEquatable<CopyOnWritePropertyDictionary<T>>, IDictionary<string, T>
+    public sealed class CopyOnWritePropertyDictionary<T> : IEnumerable<T>, IEquatable<CopyOnWritePropertyDictionary<T>>, IDictionary<string, T>
         where T : class, IKeyed, IValued, IEquatable<T>, IImmutable
     {
         /// <summary>
@@ -116,7 +116,7 @@ namespace Microsoft.Build.Collections
         /// <summary>
         /// Returns the number of property in the collection.
         /// </summary>
-        internal int Count
+        public int Count
         {
             get
             {
@@ -130,7 +130,7 @@ namespace Microsoft.Build.Collections
         /// <summary>
         /// Retrieves a collection containing the names of all the properties present in the dictionary.
         /// </summary>
-        internal ICollection<string> PropertyNames
+        public ICollection<string> PropertyNames
         {
             get
             {
@@ -166,7 +166,7 @@ namespace Microsoft.Build.Collections
         /// This better matches the semantics of property, which are considered to have a blank value if they
         /// are not defined.
         /// </remarks>
-        internal T this[string name]
+        public T this[string name]
         {
             get
             {
@@ -395,7 +395,7 @@ namespace Microsoft.Build.Collections
         /// Removes any property with the specified name.
         /// Returns true if the property was in the collection, otherwise false.
         /// </summary>
-        internal bool Remove(string name)
+        public bool Remove(string name)
         {
             return Remove(name, clearIfEmpty: false);
         }
@@ -404,7 +404,7 @@ namespace Microsoft.Build.Collections
         /// Removes any property with the specified name.
         /// Returns true if the property was in the collection, otherwise false.
         /// </summary>
-        internal bool Remove(string name, bool clearIfEmpty)
+        public bool Remove(string name, bool clearIfEmpty)
         {
             ErrorUtilities.VerifyThrowArgumentLength(name, nameof(name));
 
@@ -424,7 +424,7 @@ namespace Microsoft.Build.Collections
         /// Overwrites any property with the same name already in the collection.
         /// To remove a property, use Remove(...) instead.
         /// </summary>
-        internal void Set(T projectProperty)
+        public void Set(T projectProperty)
         {
             ErrorUtilities.VerifyThrowArgumentNull(projectProperty, nameof(projectProperty));
 
@@ -438,7 +438,7 @@ namespace Microsoft.Build.Collections
         /// Adds the specified properties to this dictionary.
         /// </summary>
         /// <param name="other">An enumerator over the properties to add.</param>
-        internal void ImportProperties(IEnumerable<T> other)
+        public void ImportProperties(IEnumerable<T> other)
         {
             // Properties are locked in the set method
             foreach (T property in other)
@@ -451,7 +451,7 @@ namespace Microsoft.Build.Collections
         /// Removes the specified properties from this dictionary
         /// </summary>
         /// <param name="other">An enumerator over the properties to remove.</param>
-        internal void RemoveProperties(IEnumerable<T> other)
+        public void RemoveProperties(IEnumerable<T> other)
         {
             // Properties are locked in the remove method
             foreach (T property in other)
@@ -463,7 +463,7 @@ namespace Microsoft.Build.Collections
         /// <summary>
         /// Helper to convert into a read-only dictionary of string, string.
         /// </summary>
-        internal IDictionary<string, string> ToDictionary()
+        public IDictionary<string, string> ToDictionary()
         {
             Dictionary<string, string> dictionary;
 
@@ -483,7 +483,7 @@ namespace Microsoft.Build.Collections
         /// Clone. As we're copy on write, this 
         /// should be cheap.
         /// </summary>
-        internal CopyOnWritePropertyDictionary<T> DeepClone()
+        public CopyOnWritePropertyDictionary<T> DeepClone()
         {
             return new CopyOnWritePropertyDictionary<T>(this);
         }

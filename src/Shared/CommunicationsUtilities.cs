@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -24,7 +24,7 @@ namespace Microsoft.Build.Internal
     /// Enumeration of all possible (currently supported) options for handshakes.
     /// </summary>
     [Flags]
-    internal enum HandshakeOptions
+    public enum HandshakeOptions
     {
         None = 0,
 
@@ -59,7 +59,7 @@ namespace Microsoft.Build.Internal
         Administrator = 32
     }
 
-    internal readonly struct Handshake
+    public readonly struct Handshake
     {
         readonly int options;
         readonly int salt;
@@ -69,7 +69,7 @@ namespace Microsoft.Build.Internal
         readonly int fileVersionPrivate;
         readonly int sessionId;
 
-        internal Handshake(HandshakeOptions nodeType)
+        public Handshake(HandshakeOptions nodeType)
         {
             // We currently use 6 bits of this 32-bit integer. Very old builds will instantly reject any handshake that does not start with F5 or 06; slightly old builds always lead with 00.
             // This indicates in the first byte that we are a modern build.
@@ -93,7 +93,7 @@ namespace Microsoft.Build.Internal
             return String.Format("{0} {1} {2} {3} {4} {5} {6}", options, salt, fileVersionMajor, fileVersionMinor, fileVersionBuild, fileVersionPrivate, sessionId);
         }
 
-        internal int[] RetrieveHandshakeComponents()
+        public int[] RetrieveHandshakeComponents()
         {
             return new int[]
             {
@@ -111,7 +111,7 @@ namespace Microsoft.Build.Internal
     /// <summary>
     /// This class contains utility methods for the MSBuild engine.
     /// </summary>
-    static internal class CommunicationsUtilities
+    static public class CommunicationsUtilities
     {
         /// <summary>
         /// Indicates to the NodeEndpoint that all the various parts of the Handshake have been sent.
@@ -121,7 +121,7 @@ namespace Microsoft.Build.Internal
         /// <summary>
         /// The version of the handshake. This should be updated each time the handshake structure is altered.
         /// </summary>
-        internal const byte handshakeVersion = 0x01;
+        public const byte handshakeVersion = 0x01;
 
         /// <summary>
         /// The timeout to connect to a node.
@@ -146,12 +146,12 @@ namespace Microsoft.Build.Internal
         /// <summary>
         /// Delegate to debug the communication utilities.
         /// </summary>
-        internal delegate void LogDebugCommunications(string format, params object[] stuff);
+        public delegate void LogDebugCommunications(string format, params object[] stuff);
 
         /// <summary>
         /// Gets or sets the node connection timeout.
         /// </summary>
-        static internal int NodeConnectionTimeout
+        static public int NodeConnectionTimeout
         {
             get { return GetIntegerVariableOrDefault("MSBUILDNODECONNECTIONTIMEOUT", DefaultNodeConnectionTimeout); }
         }
@@ -160,20 +160,20 @@ namespace Microsoft.Build.Internal
         /// Get environment block
         /// </summary>
         [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        internal static unsafe extern char* GetEnvironmentStrings();
+        public static unsafe extern char* GetEnvironmentStrings();
 
         /// <summary>
         /// Free environment block
         /// </summary>
         [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        internal static unsafe extern bool FreeEnvironmentStrings(char* pStrings);
+        public static unsafe extern bool FreeEnvironmentStrings(char* pStrings);
 
         /// <summary>
         /// Copied from the BCL implementation to eliminate some expensive security asserts.
         /// Returns key value pairs of environment variables in a new dictionary
         /// with a case-insensitive key comparer.
         /// </summary>
-        internal static Dictionary<string, string> GetEnvironmentVariables()
+        public static Dictionary<string, string> GetEnvironmentVariables()
         {
             Dictionary<string, string> table = new Dictionary<string, string>(200, StringComparer.OrdinalIgnoreCase); // Razzle has 150 environment variables
 
@@ -282,7 +282,7 @@ namespace Microsoft.Build.Internal
         /// <summary>
         /// Updates the environment to match the provided dictionary.
         /// </summary>
-        internal static void SetEnvironment(IDictionary<string, string> newEnvironment)
+        public static void SetEnvironment(IDictionary<string, string> newEnvironment)
         {
             if (newEnvironment != null)
             {
@@ -307,7 +307,7 @@ namespace Microsoft.Build.Internal
         /// <summary>
         /// Indicate to the client that all elements of the Handshake have been sent.
         /// </summary>
-        internal static void WriteEndOfHandshakeSignal(this PipeStream stream)
+        public static void WriteEndOfHandshakeSignal(this PipeStream stream)
         {
             stream.WriteIntForHandshake(EndOfHandshakeSignal);
         }
@@ -315,7 +315,7 @@ namespace Microsoft.Build.Internal
         /// <summary>
         /// Extension method to write a series of bytes to a stream
         /// </summary>
-        internal static void WriteIntForHandshake(this PipeStream stream, int value)
+        public static void WriteIntForHandshake(this PipeStream stream, int value)
         {
             byte[] bytes = BitConverter.GetBytes(value);
 
@@ -331,7 +331,7 @@ namespace Microsoft.Build.Internal
             stream.Write(bytes, 0, bytes.Length);
         }
 
-        internal static void ReadEndOfHandshakeSignal(this PipeStream stream, bool isProvider
+        public static void ReadEndOfHandshakeSignal(this PipeStream stream, bool isProvider
 #if NETCOREAPP2_1 || MONO
             , int timeout
 #endif
@@ -362,7 +362,7 @@ namespace Microsoft.Build.Internal
         /// Extension method to read a series of bytes from a stream.
         /// If specified, leading byte matches one in the supplied array if any, returns rejection byte and throws IOException.
         /// </summary>
-        internal static int ReadIntForHandshake(this PipeStream stream, byte? byteToAccept
+        public static int ReadIntForHandshake(this PipeStream stream, byte? byteToAccept
 #if NETCOREAPP2_1 || MONO
             , int timeout
 #endif
@@ -442,7 +442,7 @@ namespace Microsoft.Build.Internal
 #nullable disable
 
 #if !FEATURE_APM
-        internal static async Task<int> ReadAsync(Stream stream, byte[] buffer, int bytesToRead)
+        public static async Task<int> ReadAsync(Stream stream, byte[] buffer, int bytesToRead)
         {
             int totalBytesRead = 0;
             while (totalBytesRead < bytesToRead)
@@ -461,7 +461,7 @@ namespace Microsoft.Build.Internal
         /// <summary>
         /// Given the appropriate information, return the equivalent HandshakeOptions.
         /// </summary>
-        internal static HandshakeOptions GetHandshakeOptions(bool taskHost, bool is64Bit = false, bool nodeReuse = false, bool lowPriority = false, IDictionary<string, string> taskHostParameters = null)
+        public static HandshakeOptions GetHandshakeOptions(bool taskHost, bool is64Bit = false, bool nodeReuse = false, bool lowPriority = false, IDictionary<string, string> taskHostParameters = null)
         {
             HandshakeOptions context = taskHost ? HandshakeOptions.TaskHost : HandshakeOptions.None;
 
@@ -518,7 +518,7 @@ namespace Microsoft.Build.Internal
         /// <summary>
         /// Gets the value of an integer environment variable, or returns the default if none is set or it cannot be converted.
         /// </summary>
-        internal static int GetIntegerVariableOrDefault(string environmentVariable, int defaultValue)
+        public static int GetIntegerVariableOrDefault(string environmentVariable, int defaultValue)
         {
             string environmentValue = Environment.GetEnvironmentVariable(environmentVariable);
             if (String.IsNullOrEmpty(environmentValue))
@@ -538,7 +538,7 @@ namespace Microsoft.Build.Internal
         /// <summary>
         /// Writes trace information to a log file
         /// </summary>
-        internal static void Trace(string format, params object[] args)
+        public static void Trace(string format, params object[] args)
         {
             Trace(/* nodeId */ -1, format, args);
         }
@@ -546,7 +546,7 @@ namespace Microsoft.Build.Internal
         /// <summary>
         /// Writes trace information to a log file
         /// </summary>
-        internal static void Trace(int nodeId, string format, params object[] args)
+        public static void Trace(int nodeId, string format, params object[] args)
         {
             if (s_trace)
             {
@@ -597,7 +597,7 @@ namespace Microsoft.Build.Internal
         /// but stripped out architecture specific defines
         /// that causes the hashcode to be different and this causes problem in cross-architecture handshaking
         /// </summary>
-        internal static int GetHashCode(string fileVersion)
+        public static int GetHashCode(string fileVersion)
         {
             unsafe
             {
@@ -626,7 +626,7 @@ namespace Microsoft.Build.Internal
             }
         }
 
-        internal static int AvoidEndOfHandshakeSignal(int x)
+        public static int AvoidEndOfHandshakeSignal(int x)
         {
             return x == EndOfHandshakeSignal ? ~x : x;
         }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Framework;
@@ -10,7 +10,7 @@ namespace Microsoft.Build.BackEnd.Logging
     /// This class will throw an exception when it receives any event except for the build started or build finished event
     /// this logger is good to use if a distributed logger is attached but does not want to forward any events
     /// </summary>
-    internal class NullCentralLogger : INodeLogger
+    public class NullCentralLogger : INodeLogger
     {
         #region Data
         private string _parameters;

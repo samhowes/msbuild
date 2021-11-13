@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -26,7 +26,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// Represents which state the target entry is currently in.
     /// </summary>
-    internal enum TargetEntryState
+    public enum TargetEntryState
     {
         /// <summary>
         /// The target's dependencies need to be evaluated and pushed onto the target stack.
@@ -66,7 +66,7 @@ namespace Microsoft.Build.BackEnd
     /// relevant information on outputs generated while a target is running.
     /// </summary>
     [DebuggerDisplay("Name={_targetSpecification.TargetName} State={_state} Result={_targetResult.ResultCode}")]
-    internal class TargetEntry : IEquatable<TargetEntry>
+    public class TargetEntry : IEquatable<TargetEntry>
     {
         /// <summary>
         /// The BuildRequestEntry to which this target invocation belongs
@@ -159,7 +159,7 @@ namespace Microsoft.Build.BackEnd
         /// <param name="buildReason">The reason the parent built this target.</param>
         /// <param name="host">The Build Component Host to use.</param>
         /// <param name="stopProcessingOnCompletion">True if the target builder should stop processing the current target stack when this target is complete.</param>
-        internal TargetEntry(BuildRequestEntry requestEntry, ITargetBuilderCallback targetBuilderCallback, TargetSpecification targetSpecification, Lookup baseLookup, TargetEntry parentTarget, TargetBuiltReason buildReason, IBuildComponentHost host, bool stopProcessingOnCompletion)
+        public TargetEntry(BuildRequestEntry requestEntry, ITargetBuilderCallback targetBuilderCallback, TargetSpecification targetSpecification, Lookup baseLookup, TargetEntry parentTarget, TargetBuiltReason buildReason, IBuildComponentHost host, bool stopProcessingOnCompletion)
         {
             ErrorUtilities.VerifyThrowArgumentNull(requestEntry, nameof(requestEntry));
             ErrorUtilities.VerifyThrowArgumentNull(targetBuilderCallback, nameof(targetBuilderCallback));
@@ -183,7 +183,7 @@ namespace Microsoft.Build.BackEnd
         /// Gets or sets a flag indicating if this entry is the result of being listed as an error target in
         /// an OnError clause.
         /// </summary>
-        internal bool ErrorTarget
+        public bool ErrorTarget
         {
             get;
             set;
@@ -192,7 +192,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Sets or sets the location from which this target was referred.
         /// </summary>
-        internal ElementLocation ReferenceLocation
+        public ElementLocation ReferenceLocation
         {
             get { return _targetSpecification.ReferenceLocation; }
         }
@@ -201,7 +201,7 @@ namespace Microsoft.Build.BackEnd
         /// Gets or sets a flag indicating that the target builder should stop processing the target
         /// stack when this target completes.
         /// </summary>
-        internal bool StopProcessingOnCompletion
+        public bool StopProcessingOnCompletion
         {
             get;
             set;
@@ -210,7 +210,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Retrieves the name of the target.
         /// </summary>
-        internal string Name
+        public string Name
         {
             get
             {
@@ -221,7 +221,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Gets the current state of the target
         /// </summary>
-        internal TargetEntryState State
+        public TargetEntryState State
         {
             get
             {
@@ -232,7 +232,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// The result of this target.
         /// </summary>
-        internal TargetResult Result
+        public TargetResult Result
         {
             get
             {
@@ -244,7 +244,7 @@ namespace Microsoft.Build.BackEnd
         /// Retrieves the Lookup this target was initialized with, including any modifications which have
         /// been made to it while running.
         /// </summary>
-        internal Lookup Lookup
+        public Lookup Lookup
         {
             get
             {
@@ -255,7 +255,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// The target contained by the entry.
         /// </summary>
-        internal ProjectTargetInstance Target
+        public ProjectTargetInstance Target
         {
             get
             {
@@ -271,7 +271,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// The build request entry to which this target belongs.
         /// </summary>
-        internal BuildRequestEntry RequestEntry
+        public BuildRequestEntry RequestEntry
         {
             get
             {
@@ -282,7 +282,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// The target entry for which we are a dependency.
         /// </summary>
-        internal TargetEntry ParentEntry
+        public TargetEntry ParentEntry
         {
             get
             {
@@ -293,7 +293,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Why the parent target built this target.
         /// </summary>
-        internal TargetBuiltReason BuildReason
+        public TargetBuiltReason BuildReason
         {
             get
             {
@@ -321,7 +321,7 @@ namespace Microsoft.Build.BackEnd
         /// Never returns null.
         /// </summary>
         /// <returns>A collection of targets on which this target depends.</returns>
-        internal List<TargetSpecification> GetDependencies(ProjectLoggingContext projectLoggingContext)
+        public List<TargetSpecification> GetDependencies(ProjectLoggingContext projectLoggingContext)
         {
             VerifyState(_state, TargetEntryState.Dependencies);
 
@@ -403,7 +403,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Runs all of the tasks for this target, batched as necessary.
         /// </summary>
-        internal async Task ExecuteTarget(ITaskBuilder taskBuilder, BuildRequestEntry requestEntry, ProjectLoggingContext projectLoggingContext, CancellationToken cancellationToken)
+        public async Task ExecuteTarget(ITaskBuilder taskBuilder, BuildRequestEntry requestEntry, ProjectLoggingContext projectLoggingContext, CancellationToken cancellationToken)
         {
 #if MSBUILDENABLEVSPROFILING 
             try
@@ -679,7 +679,7 @@ namespace Microsoft.Build.BackEnd
         /// </summary>
         /// <param name="projectLoggingContext">The project logging context.</param>
         /// <returns>A list of error targets.</returns>
-        internal List<TargetSpecification> GetErrorTargets(ProjectLoggingContext projectLoggingContext)
+        public List<TargetSpecification> GetErrorTargets(ProjectLoggingContext projectLoggingContext)
         {
             VerifyState(_state, TargetEntryState.ErrorExecution);
             ErrorUtilities.VerifyThrow(_legacyCallTargetScopes == null, "We should have already left any legacy call target scopes.");
@@ -727,7 +727,7 @@ namespace Microsoft.Build.BackEnd
         /// Gathers the results from the target into the base lookup of the target.
         /// </summary>
         /// <returns>The base lookup for this target.</returns>
-        internal TargetResult GatherResults()
+        public TargetResult GatherResults()
         {
             VerifyState(_state, TargetEntryState.Completed);
             ErrorUtilities.VerifyThrow(_legacyCallTargetScopes == null, "We should have already left any legacy call target scopes.");
@@ -740,7 +740,7 @@ namespace Microsoft.Build.BackEnd
         /// Enters a legacy calltarget scope.
         /// </summary>
         /// <param name="lookup">The lookup to enter with.</param>
-        internal void EnterLegacyCallTargetScope(Lookup lookup)
+        public void EnterLegacyCallTargetScope(Lookup lookup)
         {
             if (_legacyCallTargetScopes == null)
             {
@@ -753,7 +753,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// This method is used by the Target Builder to indicate that the target should run in error mode rather than normal mode.
         /// </summary>
-        internal void MarkForError()
+        public void MarkForError()
         {
             ErrorUtilities.VerifyThrow(_state != TargetEntryState.Completed, "State must not be Completed. State is {0}.", _state);
             _state = TargetEntryState.ErrorExecution;
@@ -764,7 +764,7 @@ namespace Microsoft.Build.BackEnd
         /// continue in Completed / Skipped mode. We do not want to mark the state to run in ErrorExecution mode so that the
         /// OnError targets do not run (the target was skipped due to condition so OnError targets should not run).
         /// </summary>
-        internal void MarkForStop()
+        public void MarkForStop()
         {
             ErrorUtilities.VerifyThrow(_state == TargetEntryState.Completed, "State must be Completed. State is {0}.", _state);
             ErrorUtilities.VerifyThrow(_targetResult.ResultCode == TargetResultCode.Skipped, "ResultCode must be Skipped. ResultCode is {0}.", _state);
@@ -776,7 +776,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Leaves all the call target scopes in the order they were entered.
         /// </summary>
-        internal void LeaveLegacyCallTargetScopes()
+        public void LeaveLegacyCallTargetScopes()
         {
             if (_legacyCallTargetScopes != null)
             {

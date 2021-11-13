@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,7 +13,7 @@ namespace Microsoft.Build.Logging
     /// <summary>
     /// Serializes BuildEventArgs-derived objects into a provided BinaryWriter
     /// </summary>
-    internal class BuildEventArgsWriter
+    public class BuildEventArgsWriter
     {
         private readonly BinaryWriter binaryWriter;
 

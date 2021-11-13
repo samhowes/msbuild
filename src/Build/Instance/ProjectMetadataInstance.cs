@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -39,7 +39,7 @@ namespace Microsoft.Build.Execution
         /// <remarks>
         /// Not public since the only creation scenario is setting on an item
         /// </remarks>
-        internal ProjectMetadataInstance(string name, string escapedValue)
+        public ProjectMetadataInstance(string name, string escapedValue)
             : this(name, escapedValue, false)
         {
         }
@@ -57,7 +57,7 @@ namespace Microsoft.Build.Execution
         /// <remarks>
         /// Not public since the only creation scenario is setting on an item
         /// </remarks>
-        internal ProjectMetadataInstance(string name, string escapedValue, bool allowItemSpecModifiers)
+        public ProjectMetadataInstance(string name, string escapedValue, bool allowItemSpecModifiers)
         {
             ErrorUtilities.VerifyThrowArgumentLength(name, nameof(name));
 
@@ -79,7 +79,7 @@ namespace Microsoft.Build.Execution
         /// Called when a ProjectInstance is created.
         /// IMMUTABLE OBJECT.
         /// </summary>
-        internal ProjectMetadataInstance(ProjectMetadata metadatum)
+        public ProjectMetadataInstance(ProjectMetadata metadatum)
             : this(metadatum.Name, metadatum.EvaluatedValueEscaped, false)
         {
         }
@@ -148,7 +148,7 @@ namespace Microsoft.Build.Execution
         /// Never null.
         /// </summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        internal string EvaluatedValueEscaped
+        public string EvaluatedValueEscaped
         {
             [DebuggerStepThrough]
             get
@@ -222,7 +222,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Factory for serialization.
         /// </summary>
-        internal static ProjectMetadataInstance FactoryForDeserialization(ITranslator translator)
+        public static ProjectMetadataInstance FactoryForDeserialization(ITranslator translator)
         {
             return new ProjectMetadataInstance(translator);
         }

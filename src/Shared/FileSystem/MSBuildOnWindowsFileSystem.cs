@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -11,7 +11,7 @@ namespace Microsoft.Build.Shared.FileSystem
     /// Implementation of file system operations on windows. Combination of native and managed implementations.
     /// TODO Remove this class and replace with WindowsFileSystem. Test perf to ensure no regressions.
     /// </summary>
-    internal class MSBuildOnWindowsFileSystem : IFileSystem
+    public class MSBuildOnWindowsFileSystem : IFileSystem
     {
         private static readonly MSBuildOnWindowsFileSystem Instance = new MSBuildOnWindowsFileSystem();
 

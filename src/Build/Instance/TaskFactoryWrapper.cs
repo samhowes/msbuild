@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -13,7 +13,7 @@ namespace Microsoft.Build.Execution
     /// <summary>
     /// This class packages information about task which has been loaded from a task factory.
     /// </summary>
-    internal sealed class TaskFactoryWrapper
+    public sealed class TaskFactoryWrapper
     {
         #region Data
 
@@ -60,7 +60,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Creates an instance of this class for the given type.
         /// </summary>
-        internal TaskFactoryWrapper(ITaskFactory taskFactory, LoadedType taskFactoryLoadInfo, string taskName, IDictionary<string, string> factoryIdentityParameters)
+        public TaskFactoryWrapper(ITaskFactory taskFactory, LoadedType taskFactoryLoadInfo, string taskName, IDictionary<string, string> factoryIdentityParameters)
         {
             ErrorUtilities.VerifyThrowArgumentNull(taskFactory, nameof(taskFactory));
             ErrorUtilities.VerifyThrowArgumentLength(taskName, nameof(taskName));
@@ -180,7 +180,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Sets the given property on the task.
         /// </summary>
-        internal void SetPropertyValue(ITask task, TaskPropertyInfo property, object value)
+        public void SetPropertyValue(ITask task, TaskPropertyInfo property, object value)
         {
             ErrorUtilities.VerifyThrowArgumentNull(task, nameof(task));
             ErrorUtilities.VerifyThrowArgumentNull(property, nameof(property));
@@ -200,7 +200,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Gets the value of a given property on the given task.
         /// </summary>
-        internal object GetPropertyValue(ITask task, TaskPropertyInfo property)
+        public object GetPropertyValue(ITask task, TaskPropertyInfo property)
         {
             ErrorUtilities.VerifyThrowArgumentNull(task, nameof(task));
             ErrorUtilities.VerifyThrowArgumentNull(property, nameof(property));
@@ -232,7 +232,7 @@ namespace Microsoft.Build.Execution
         /// <returns>
         /// <c>true</c> if this factory can instantiate such a task; otherwise, <c>false</c>.
         /// </returns>
-        internal bool IsCreatableByFactory(string taskName)
+        public bool IsCreatableByFactory(string taskName)
         {
             return String.Equals(_taskName, taskName, StringComparison.OrdinalIgnoreCase);
         }

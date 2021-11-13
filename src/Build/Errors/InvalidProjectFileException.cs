@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -67,7 +67,7 @@ namespace Microsoft.Build.Exceptions
         /// This is used in order to wrap and exception rather than rethrow it verbatim, which would reset the callstack.
         /// The assumption is that all the metadata for the outer exception comes from the inner exception, eg., they have the same error code.
         /// </summary>
-        internal InvalidProjectFileException(string message, InvalidProjectFileException innerException)
+        public InvalidProjectFileException(string message, InvalidProjectFileException innerException)
             : this(innerException.ProjectFile, innerException.LineNumber, innerException.ColumnNumber, innerException.EndLineNumber, innerException.EndColumnNumber, message, innerException.ErrorSubcategory, innerException.ErrorCode, innerException.HelpKeyword)
         {
         }
@@ -167,7 +167,7 @@ namespace Microsoft.Build.Exceptions
         /// <param name="errorCode">The error code (can be null).</param>
         /// <param name="helpKeyword">The F1-help keyword for the host IDE (can be null).</param>
         /// <param name="innerException">Any inner exception. May be null.</param>
-        internal InvalidProjectFileException
+        public InvalidProjectFileException
         (
             string projectFile,
             int lineNumber,
@@ -345,7 +345,7 @@ namespace Microsoft.Build.Exceptions
             {
                 return hasBeenLogged;
             }
-            internal set
+            set
             {
                 hasBeenLogged = value;
             }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -24,7 +24,7 @@ namespace Microsoft.Build.Tasks
     /// Helper logging class for tasks, used for dealing with two resource streams.
     /// </summary>
 #if BUILD_ENGINE
-    internal
+    public
 #else
     public
 #endif

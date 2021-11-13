@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -20,7 +20,7 @@ namespace Microsoft.Build.Collections
     /// <typeparam name="K">Type of key</typeparam>
     /// <typeparam name="V">Type of value</typeparam>
     [DebuggerDisplay("#Keys={KeyCount} #Values={ValueCount}")]
-    internal class MultiDictionary<K, V>
+    public class MultiDictionary<K, V>
         where K : class
         where V : class
     {
@@ -61,7 +61,7 @@ namespace Microsoft.Build.Collections
         /// <summary>
         /// Constructor taking a specified comparer for the keys
         /// </summary>
-        internal MultiDictionary(IEqualityComparer<K> keyComparer)
+        public MultiDictionary(IEqualityComparer<K> keyComparer)
         {
             _backing = new Dictionary<K, SmallList<V>>(keyComparer);
         }
@@ -69,22 +69,22 @@ namespace Microsoft.Build.Collections
         /// <summary>
         /// Number of keys
         /// </summary>
-        internal int KeyCount => _backing.Count;
+        public int KeyCount => _backing.Count;
 
         /// <summary>
         /// Number of values over all keys
         /// </summary>
-        internal int ValueCount => _valueCount;
+        public int ValueCount => _valueCount;
 
         /// <summary>
         /// return keys in the dictionary
         /// </summary>
-        internal IEnumerable<K> Keys => _backing.Keys;
+        public IEnumerable<K> Keys => _backing.Keys;
 
         /// <summary>
         /// Enumerator over values that have the specified key.
         /// </summary>
-        internal IEnumerable<V> this[K key]
+        public IEnumerable<V> this[K key]
         {
             get
             {
@@ -104,7 +104,7 @@ namespace Microsoft.Build.Collections
         /// Add a single value under the specified key.
         /// Value may not be null.
         /// </summary>
-        internal void Add(K key, V value)
+        public void Add(K key, V value)
         {
             ErrorUtilities.VerifyThrow(value != null, "Null value not allowed");
 
@@ -124,7 +124,7 @@ namespace Microsoft.Build.Collections
         /// Removes an entry with the specified key and value.
         /// Returns true if found, false otherwise.
         /// </summary>
-        internal bool Remove(K key, V value)
+        public bool Remove(K key, V value)
         {
             ErrorUtilities.VerifyThrow(value != null, "Null value not allowed");
 
@@ -151,7 +151,7 @@ namespace Microsoft.Build.Collections
         /// <summary>
         /// Empty the collection
         /// </summary>
-        internal void Clear()
+        public void Clear()
         {
             _backing = new Dictionary<K, SmallList<V>>();
             _valueCount = 0;
@@ -173,7 +173,7 @@ namespace Microsoft.Build.Collections
             /// <summary>
             /// Constructor taking the initial object
             /// </summary>
-            internal SmallList(TT first)
+            public SmallList(TT first)
             {
                 _entry = first;
             }
@@ -181,7 +181,7 @@ namespace Microsoft.Build.Collections
             /// <summary>
             /// Number of entries in this multivalue.
             /// </summary>
-            internal int Count
+            public int Count
             {
                 get
                 {

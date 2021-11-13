@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -22,7 +22,7 @@ namespace Microsoft.Build.BackEnd
     /// A build request configuration represents all of the data necessary to know which project to build
     /// and the environment in which it should be built.
     /// </summary>
-    internal class BuildRequestConfiguration : IEquatable<BuildRequestConfiguration>,
+    public class BuildRequestConfiguration : IEquatable<BuildRequestConfiguration>,
                                                INodePacket
     {
         /// <summary>
@@ -138,7 +138,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// The target names that were requested to execute.
         /// </summary>
-        internal IReadOnlyCollection<string> TargetNames { get; }
+        public IReadOnlyCollection<string> TargetNames { get; }
 
         /// <summary>
         /// Initializes a configuration from a BuildRequestData structure.  Used by the BuildManager.
@@ -147,7 +147,7 @@ namespace Microsoft.Build.BackEnd
         /// </summary>
         /// <param name="data">The data containing the configuration information.</param>
         /// <param name="defaultToolsVersion">The default ToolsVersion to use as a fallback</param>
-        internal BuildRequestConfiguration(BuildRequestData data, string defaultToolsVersion)
+        public BuildRequestConfiguration(BuildRequestData data, string defaultToolsVersion)
             : this(0, data, defaultToolsVersion)
         {
         }
@@ -160,7 +160,7 @@ namespace Microsoft.Build.BackEnd
         /// <param name="configId">The configuration ID to assign to this new configuration.</param>
         /// <param name="data">The data containing the configuration information.</param>
         /// <param name="defaultToolsVersion">The default ToolsVersion to use as a fallback</param>
-        internal BuildRequestConfiguration(int configId, BuildRequestData data, string defaultToolsVersion)
+        public BuildRequestConfiguration(int configId, BuildRequestData data, string defaultToolsVersion)
         {
             ErrorUtilities.VerifyThrowArgumentNull(data, nameof(data));
             ErrorUtilities.VerifyThrowInternalLength(data.ProjectFullPath, "data.ProjectFullPath");
@@ -203,7 +203,7 @@ namespace Microsoft.Build.BackEnd
         /// </summary>
         /// <param name="configId">The configuration id</param>
         /// <param name="instance">The project instance.</param>
-        internal BuildRequestConfiguration(int configId, ProjectInstance instance)
+        public BuildRequestConfiguration(int configId, ProjectInstance instance)
         {
             ErrorUtilities.VerifyThrowArgumentNull(instance, nameof(instance));
 
@@ -251,7 +251,7 @@ namespace Microsoft.Build.BackEnd
             Translate(translator);
         }
 
-        internal BuildRequestConfiguration()
+        public BuildRequestConfiguration()
         {
         }
 
@@ -422,7 +422,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Loads the project specified by the configuration's parameters into the configuration block.
         /// </summary>
-        internal void LoadProjectIntoConfiguration(
+        public void LoadProjectIntoConfiguration(
             IBuildComponentHost componentHost,
             BuildRequestDataFlags buildRequestDataFlags,
             int submissionId,
@@ -504,7 +504,7 @@ namespace Microsoft.Build.BackEnd
             ErrorUtilities.VerifyThrow(IsLoaded, $"This {nameof(BuildRequestConfiguration)} must be loaded at the end of this method");
         }
 
-        internal void CreateUniqueGlobalProperty()
+        public void CreateUniqueGlobalProperty()
         {
             // create a copy so the mutation does not leak into the ProjectInstance
             _globalProperties = new PropertyDictionary<ProjectPropertyInstance>(_globalProperties);
@@ -607,7 +607,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Gets or sets the node on which this configuration's results are stored.
         /// </summary>
-        internal int ResultsNodeId
+        public int ResultsNodeId
         {
             get => _resultsNodeId;
 
@@ -888,7 +888,7 @@ namespace Microsoft.Build.BackEnd
             }
         }
 
-        internal void TranslateForFutureUse(ITranslator translator)
+        public void TranslateForFutureUse(ITranslator translator)
         {
             translator.Translate(ref _configId);
             translator.Translate(ref _projectFullPath);
@@ -902,7 +902,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Factory for serialization.
         /// </summary>
-        internal static BuildRequestConfiguration FactoryForDeserialization(ITranslator translator)
+        public static BuildRequestConfiguration FactoryForDeserialization(ITranslator translator)
         {
             return new BuildRequestConfiguration(translator);
         }
@@ -915,7 +915,7 @@ namespace Microsoft.Build.BackEnd
         /// <remarks>
         /// Used when we transfer results and state from a previous node to the current one.
         /// </remarks>
-        internal void ApplyTransferredState(ProjectInstance instance)
+        public void ApplyTransferredState(ProjectInstance instance)
         {
             if (instance != null)
             {
@@ -926,7 +926,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Gets the name of the cache file for this configuration.
         /// </summary>
-        internal string GetCacheFile()
+        public string GetCacheFile()
         {
             string filename = Path.Combine(FileUtilities.GetCacheDirectory(), String.Format(CultureInfo.InvariantCulture, "Configuration{0}.cache", _configId));
             return filename;
@@ -935,7 +935,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Deletes the cache file
         /// </summary>
-        internal void ClearCacheFile()
+        public void ClearCacheFile()
         {
             string cacheFile = GetCacheFile();
             if (FileSystems.Default.FileExists(cacheFile))
@@ -947,7 +947,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Clones this BuildRequestConfiguration but sets a new configuration id.
         /// </summary>
-        internal BuildRequestConfiguration ShallowCloneWithNewId(int newId)
+        public BuildRequestConfiguration ShallowCloneWithNewId(int newId)
         {
             return new BuildRequestConfiguration(newId, this);
         }

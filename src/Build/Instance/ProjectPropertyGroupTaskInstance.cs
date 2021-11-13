@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -43,7 +43,7 @@ namespace Microsoft.Build.Execution
         /// Constructor called by the Evaluator.
         /// Assumes ProjectPropertyGroupTaskPropertyInstance is an immutable type.
         /// </summary>
-        internal ProjectPropertyGroupTaskInstance
+        public ProjectPropertyGroupTaskInstance
             (
             string condition,
             ElementLocation location,
@@ -119,7 +119,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Deep clone
         /// </summary>
-        internal ProjectPropertyGroupTaskInstance DeepClone()
+        public ProjectPropertyGroupTaskInstance DeepClone()
         {
             return new ProjectPropertyGroupTaskInstance(this);
         }

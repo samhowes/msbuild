@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -19,13 +19,13 @@ namespace Microsoft.Build.BackEnd
     /// Each class implements a Translate method on INodePacket which takes this class
     /// as a parameter, and uses it to store and retrieve fields to the stream.
     /// </summary>
-    static internal class BinaryTranslator
+    static public class BinaryTranslator
     {
         /// <summary>
         /// Returns a read-only serializer.
         /// </summary>
         /// <returns>The serializer.</returns>
-        static internal ITranslator GetReadTranslator(Stream stream, SharedReadBuffer buffer)
+        static public ITranslator GetReadTranslator(Stream stream, SharedReadBuffer buffer)
         {
             return new BinaryReadTranslator(stream, buffer);
         }
@@ -35,7 +35,7 @@ namespace Microsoft.Build.BackEnd
         /// </summary>
         /// <param name="stream">The stream containing data to serialize.</param>
         /// <returns>The serializer.</returns>
-        static internal ITranslator GetWriteTranslator(Stream stream)
+        static public ITranslator GetWriteTranslator(Stream stream)
         {
             return new BinaryWriteTranslator(stream);
         }

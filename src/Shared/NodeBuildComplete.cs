@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Diagnostics;
@@ -9,7 +9,7 @@ namespace Microsoft.Build.BackEnd
     /// The NodeBuildComplete packet is used to indicate to a node that it should clean up its current build and 
     /// possibly prepare for node reuse.
     /// </summary>
-    internal class NodeBuildComplete : INodePacket
+    public class NodeBuildComplete : INodePacket
     {
         /// <summary>
         /// Flag indicating if the node should prepare for reuse after cleanup.
@@ -69,7 +69,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Factory for deserialization.
         /// </summary>
-        internal static NodeBuildComplete FactoryForDeserialization(ITranslator translator)
+        public static NodeBuildComplete FactoryForDeserialization(ITranslator translator)
         {
             NodeBuildComplete packet = new NodeBuildComplete();
             packet.Translate(translator);

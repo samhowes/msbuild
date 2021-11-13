@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -16,7 +16,7 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// This is a cache of objects which are registered to be disposed of at a specified time.
     /// </summary>
-    internal class RegisteredTaskObjectCacheBase
+    public class RegisteredTaskObjectCacheBase
     {
         /// <summary>
         /// The cache for AppDomain lifetime objects.

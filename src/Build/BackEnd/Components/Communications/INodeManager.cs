@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Execution;
@@ -9,7 +9,7 @@ namespace Microsoft.Build.BackEnd
     /// Represents a collection of all node providers in the system.  Reports events concerning
     /// the topology of the system and provides a means to send and receive data to nodes.
     /// </summary>
-    internal interface INodeManager : IBuildComponent,
+    public interface INodeManager : IBuildComponent,
                                       INodePacketFactory
     {
         #region Methods

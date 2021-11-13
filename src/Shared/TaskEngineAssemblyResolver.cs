@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -17,7 +17,7 @@ namespace Microsoft.Build.BackEnd.Logging
     /// <summary>
     /// This is a helper class to install an AssemblyResolver event handler in whatever AppDomain this class is created in.
     /// </summary>
-    internal class TaskEngineAssemblyResolver
+    public class TaskEngineAssemblyResolver
 #if FEATURE_APPDOMAIN
         : MarshalByRefObject
 #endif
@@ -25,7 +25,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// This public default constructor is needed so that instances of this class can be created by NDP.
         /// </summary>
-        internal TaskEngineAssemblyResolver()
+        public TaskEngineAssemblyResolver()
         {
             // do nothing
         }
@@ -34,7 +34,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// Initializes the instance.
         /// </summary>
         /// <param name="taskAssemblyFileToResolve"></param>
-        internal void Initialize(string taskAssemblyFileToResolve)
+        public void Initialize(string taskAssemblyFileToResolve)
         {
             _taskAssemblyFile = taskAssemblyFileToResolve;
         }
@@ -46,7 +46,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// should only be called once before a corresponding call to RemoveHandler (not that it would make sense to do 
         /// anything else).
         /// </summary>
-        internal void InstallHandler()
+        public void InstallHandler()
         {
 #if FEATURE_APPDOMAIN
             Debug.Assert(_eventHandler == null, "The TaskEngineAssemblyResolver.InstallHandler method should only be called once!");
@@ -66,7 +66,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Removes the event handler.
         /// </summary>
-        internal void RemoveHandler()
+        public void RemoveHandler()
         {
             if (_eventHandler != null)
             {
@@ -93,7 +93,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <param name="sender"></param>
         /// <param name="args"></param>
         /// <returns></returns>
-        internal Assembly ResolveAssembly(object sender, ResolveEventArgs args)
+        public Assembly ResolveAssembly(object sender, ResolveEventArgs args)
 #else
         private Assembly ResolveAssembly(AssemblyLoadContext assemblyLoadContext, AssemblyName assemblyName)
 #endif

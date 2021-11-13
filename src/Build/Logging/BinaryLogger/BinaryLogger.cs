@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.IO.Compression;
 using Microsoft.Build.Framework;
@@ -35,7 +35,7 @@ namespace Microsoft.Build.Logging
         //   - This was used in a now-reverted change but is the same as 9.
         // version 9:
         //   - new record kinds: EnvironmentVariableRead, PropertyReassignment, UninitializedPropertyRead
-        internal const int FileFormatVersion = 9;
+        public const int FileFormatVersion = 9;
 
         private Stream stream;
         private BinaryWriter binaryWriter;

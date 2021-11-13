@@ -12,7 +12,7 @@ namespace Microsoft.Build.Shared
     /// This class contains only static methods, which are useful throughout many
     /// of the MSBuild classes and don't really belong in any specific class.   
     /// </summary>
-    internal static class ConversionUtilities
+    public static class ConversionUtilities
     {
         /// <summary>
         /// Converts a string to a bool.  We consider "true/false", "on/off", and 
@@ -20,7 +20,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="parameterValue">The string to convert.</param>
         /// <returns>Boolean true or false, corresponding to the string.</returns>
-        internal static bool ConvertStringToBool(string parameterValue)
+        public static bool ConvertStringToBool(string parameterValue)
         {
             if (ValidBooleanTrue(parameterValue))
             {
@@ -38,7 +38,7 @@ namespace Microsoft.Build.Shared
             }
         }
 
-        internal static bool ConvertStringToBool(string parameterValue, bool nullOrWhitespaceIsFalse)
+        public static bool ConvertStringToBool(string parameterValue, bool nullOrWhitespaceIsFalse)
         {
             if (nullOrWhitespaceIsFalse && string.IsNullOrWhiteSpace(parameterValue))
             {
@@ -53,7 +53,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="bytes">The bytes to convert</param>
         /// <returns>A string byte types formated as X2.</returns>
-        internal static string ConvertByteArrayToHex(byte[] bytes)
+        public static string ConvertByteArrayToHex(byte[] bytes)
         {
             var sb = new StringBuilder();
             foreach (var b in bytes)
@@ -68,7 +68,7 @@ namespace Microsoft.Build.Shared
         /// Returns true if the string can be successfully converted to a bool,
         /// such as "on" or "yes"
         /// </summary>
-        internal static bool CanConvertStringToBool(string parameterValue)
+        public static bool CanConvertStringToBool(string parameterValue)
         {
             return ValidBooleanTrue(parameterValue) || ValidBooleanFalse(parameterValue);
         }
@@ -104,7 +104,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Converts a string like "123.456" into a double. Leading sign is allowed.
         /// </summary>
-        internal static double ConvertDecimalToDouble(string number)
+        public static double ConvertDecimalToDouble(string number)
         {
             return Double.Parse(number, NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture.NumberFormat);
         }
@@ -112,7 +112,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Converts a hex string like "0xABC" into a double.
         /// </summary>
-        internal static double ConvertHexToDouble(string number)
+        public static double ConvertHexToDouble(string number)
         {
             return (double)Int32.Parse(number.Substring(2), NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture.NumberFormat);
         }
@@ -121,7 +121,7 @@ namespace Microsoft.Build.Shared
         /// Converts a string like "123.456" or "0xABC" into a double.
         /// Tries decimal conversion first.
         /// </summary>
-        internal static double ConvertDecimalOrHexToDouble(string number)
+        public static double ConvertDecimalOrHexToDouble(string number)
         {
             if (ConversionUtilities.ValidDecimalNumber(number))
             {
@@ -164,7 +164,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Returns true if the string is a valid decimal or hex number
         /// </summary>
-        internal static bool ValidDecimalOrHexNumber(string number)
+        public static bool ValidDecimalOrHexNumber(string number)
         {
             return ValidDecimalNumber(number) || ValidHexNumber(number);
         }

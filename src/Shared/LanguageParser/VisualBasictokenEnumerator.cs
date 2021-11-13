@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -12,7 +12,7 @@ namespace Microsoft.Build.Shared.LanguageParser
     * Given vb sources, enumerate over all tokens.
     *
     */
-    sealed internal class VisualBasicTokenEnumerator : TokenEnumerator
+    sealed public class VisualBasicTokenEnumerator : TokenEnumerator
     {
         // Reader over the sources.
         private VisualBasicTokenCharReader _reader = null;
@@ -22,7 +22,7 @@ namespace Microsoft.Build.Shared.LanguageParser
         * 
         * Construct
         */
-        internal VisualBasicTokenEnumerator(Stream binaryStream, bool forceANSI)
+        public VisualBasicTokenEnumerator(Stream binaryStream, bool forceANSI)
         {
             _reader = new VisualBasicTokenCharReader(binaryStream, forceANSI);
         }

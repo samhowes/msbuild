@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Construction;
@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace Microsoft.Build.Evaluation
 {
-    internal partial class LazyItemEvaluator<P, I, M, D>
+    public partial class LazyItemEvaluator<P, I, M, D>
     {
         private abstract class LazyItemOperation : IItemOperation
         {
@@ -30,7 +30,7 @@ namespace Microsoft.Build.Evaluation
             //  This is used only when evaluating an expression, which instantiates
             //  the items and then removes them
             protected readonly IItemFactory<I, I> _itemFactory;
-            internal ItemSpec<P, I> Spec => _itemSpec;
+            public ItemSpec<P, I> Spec => _itemSpec;
             
             protected LazyItemOperation(OperationBuilder builder, LazyItemEvaluator<P, I, M, D> lazyEvaluator)
             {

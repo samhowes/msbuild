@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -13,7 +13,7 @@ namespace Microsoft.Build.Shared.FileSystem
     /// <summary>
     /// Native implementation of file system operations
     /// </summary>
-    internal static class WindowsNative
+    public static class WindowsNative
     {
         /// <summary>
         /// Maximum path length.
@@ -273,6 +273,6 @@ namespace Microsoft.Build.Shared.FileSystem
         /// <nodoc/>
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool FindClose(IntPtr findFileHandle);
+        public static extern bool FindClose(IntPtr findFileHandle);
     }
 }

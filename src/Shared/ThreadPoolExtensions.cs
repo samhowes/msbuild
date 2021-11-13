@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,12 +10,12 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// Class to wrap the saving and restoring of the culture of a threadpool thread
     /// </summary>
-    internal static class ThreadPoolExtensions
+    public static class ThreadPoolExtensions
     {
         /// <summary>
         /// Queue a threadpool thread and set it to a certain culture.
         /// </summary>
-        internal static bool QueueThreadPoolWorkItemWithCulture(WaitCallback callback, CultureInfo culture, CultureInfo uiCulture)
+        public static bool QueueThreadPoolWorkItemWithCulture(WaitCallback callback, CultureInfo culture, CultureInfo uiCulture)
         {
             bool success = ThreadPool.QueueUserWorkItem(
               delegate (Object state)

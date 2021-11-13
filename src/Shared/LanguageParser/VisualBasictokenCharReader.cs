@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -13,14 +13,14 @@ namespace Microsoft.Build.Shared.LanguageParser
      * Provides utility functions for dealing with VB-specific tokens.
      *
      */
-    sealed internal class VisualBasicTokenCharReader : TokenCharReader
+    sealed public class VisualBasicTokenCharReader : TokenCharReader
     {
         /*
          * Method:  VisualBasicTokenCharReader
          * 
          * Construct
          */
-        internal VisualBasicTokenCharReader(Stream binaryStream, bool forceANSI)
+        public VisualBasicTokenCharReader(Stream binaryStream, bool forceANSI)
             : base(binaryStream, forceANSI)
         {
         }
@@ -30,7 +30,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Matches a vb separator character.
          */
-        internal bool SinkSeparatorCharacter()
+        public bool SinkSeparatorCharacter()
         {
             if
             (
@@ -57,7 +57,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Matches a vb line continuation character.
          */
-        internal bool SinkLineContinuationCharacter()
+        public bool SinkLineContinuationCharacter()
         {
             if
             (
@@ -76,7 +76,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Matches a vb start of comment indicator
          */
-        internal bool SinkLineCommentStart()
+        public bool SinkLineCommentStart()
         {
             if (Sink("\'"))
             {
@@ -106,7 +106,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Matches a vb hex integer prefix
          */
-        internal bool SinkHexIntegerPrefix()
+        public bool SinkHexIntegerPrefix()
         {
             if (SinkIgnoreCase("&H"))
             {
@@ -121,7 +121,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Matches a vb octal integer prefix
          */
-        internal bool SinkOctalIntegerPrefix()
+        public bool SinkOctalIntegerPrefix()
         {
             if (SinkIgnoreCase("&O"))
             {
@@ -137,7 +137,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * Sink a single whitespace character.
          * In vb, newlines are not considered whitespace.
          */
-        internal bool SinkWhiteSpace()
+        public bool SinkWhiteSpace()
         {
             if (Char.IsWhiteSpace(CurrentCharacter) && !TokenChar.IsNewLine(CurrentCharacter))
             {
@@ -152,7 +152,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Sink a vb integer suffix.
          */
-        internal bool SinkIntegerSuffix()
+        public bool SinkIntegerSuffix()
         {
             switch (CurrentCharacter)
             {
@@ -175,7 +175,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * Couldn't find this documented anywhere, but a decimal (as opposed to hex or octal)
          * is also allowed a trailing '@', '!', '#' or '&'
          */
-        internal bool SinkDecimalIntegerSuffix()
+        public bool SinkDecimalIntegerSuffix()
         {
             switch (CurrentCharacter)
             {
@@ -203,7 +203,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Sink multiple octal digits.
          */
-        internal bool SinkMultipleOctalDigits()
+        public bool SinkMultipleOctalDigits()
         {
             int count = 0;
             while (TokenChar.IsOctalDigit(CurrentCharacter))
@@ -219,7 +219,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Determine whether this is a vb operator.
          */
-        internal bool SinkOperator()
+        public bool SinkOperator()
         {
             const string operators = @"&|*+-/\^<=>";
             if (operators.IndexOf(CurrentCharacter) == -1)
@@ -241,7 +241,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          *   DoubleTypeCharacter ::= #
          *   StringTypeCharacter ::= $
          */
-        internal bool SinkTypeCharacter()
+        public bool SinkTypeCharacter()
         {
             const string types = @"%&@!#$";
             if (types.IndexOf(CurrentCharacter) == -1)

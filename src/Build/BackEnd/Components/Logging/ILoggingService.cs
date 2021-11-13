@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -18,14 +18,14 @@ namespace Microsoft.Build.BackEnd.Logging
     /// Delegate for an event which will take an exception and raise it on the registered event handlers.
     /// </summary>
     /// <param name="e">Exception to be raised with registered event handlers</param>
-    internal delegate void LoggingExceptionDelegate(Exception e);
+    public delegate void LoggingExceptionDelegate(Exception e);
     #endregion
 
     /// <summary>
     /// Interface representing logging services in the build system.
     /// Implementations should be thread-safe.
     /// </summary>
-    internal interface ILoggingService
+    public interface ILoggingService
     {
         #region Events
         /// <summary>
@@ -506,7 +506,7 @@ namespace Microsoft.Build.BackEnd.Logging
     /// <summary>
     /// Acts as an endpoint for a buildEventArg. The objects which implement this interface are intended to consume the BuildEventArg. 
     /// </summary>
-    internal interface IBuildEventSink
+    public interface IBuildEventSink
     {
         #region Properties
         /// <summary>

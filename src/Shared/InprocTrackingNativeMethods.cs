@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 #if FEATURE_FILE_TRACKER
@@ -30,7 +30,7 @@ namespace Microsoft.Build.Shared
     /// majority of this code was lifted from ndp\fx\src\CLRCompression\ZLibNative.cs, which does the same thing for
     /// that assembly.
     /// </comments>
-    internal static class InprocTrackingNativeMethods
+    public static class InprocTrackingNativeMethods
     {
         #region Delegates for the tracking functions
 
@@ -92,55 +92,55 @@ namespace Microsoft.Build.Shared
 
         #region Public API
 
-        internal static void StartTrackingContext([In, MarshalAs(UnmanagedType.LPWStr)] string intermediateDirectory, [In, MarshalAs(UnmanagedType.LPWStr)] string taskName)
+        public static void StartTrackingContext([In, MarshalAs(UnmanagedType.LPWStr)] string intermediateDirectory, [In, MarshalAs(UnmanagedType.LPWStr)] string taskName)
         {
             int hresult = FileTrackerDllStub.startTrackingContextDelegate(intermediateDirectory, taskName);
             Marshal.ThrowExceptionForHR(hresult, new IntPtr(-1));
         }
 
-        internal static void StartTrackingContextWithRoot([In, MarshalAs(UnmanagedType.LPWStr)] string intermediateDirectory, [In, MarshalAs(UnmanagedType.LPWStr)] string taskName, [In, MarshalAs(UnmanagedType.LPWStr)] string rootMarker)
+        public static void StartTrackingContextWithRoot([In, MarshalAs(UnmanagedType.LPWStr)] string intermediateDirectory, [In, MarshalAs(UnmanagedType.LPWStr)] string taskName, [In, MarshalAs(UnmanagedType.LPWStr)] string rootMarker)
         {
             int hresult = FileTrackerDllStub.startTrackingContextWithRootDelegate(intermediateDirectory, taskName, rootMarker);
             Marshal.ThrowExceptionForHR(hresult, new IntPtr(-1));
         }
 
-        internal static void EndTrackingContext()
+        public static void EndTrackingContext()
         {
             int hresult = FileTrackerDllStub.endTrackingContextDelegate();
             Marshal.ThrowExceptionForHR(hresult, new IntPtr(-1));
         }
 
-        internal static void StopTrackingAndCleanup()
+        public static void StopTrackingAndCleanup()
         {
             int hresult = FileTrackerDllStub.stopTrackingAndCleanupDelegate();
             Marshal.ThrowExceptionForHR(hresult, new IntPtr(-1));
         }
 
-        internal static void SuspendTracking()
+        public static void SuspendTracking()
         {
             int hresult = FileTrackerDllStub.suspendTrackingDelegate();
             Marshal.ThrowExceptionForHR(hresult, new IntPtr(-1));
         }
 
-        internal static void ResumeTracking()
+        public static void ResumeTracking()
         {
             int hresult = FileTrackerDllStub.resumeTrackingDelegate();
             Marshal.ThrowExceptionForHR(hresult, new IntPtr(-1));
         }
 
-        internal static void WriteAllTLogs([In, MarshalAs(UnmanagedType.LPWStr)] string intermediateDirectory, [In, MarshalAs(UnmanagedType.LPWStr)] string tlogRootName)
+        public static void WriteAllTLogs([In, MarshalAs(UnmanagedType.LPWStr)] string intermediateDirectory, [In, MarshalAs(UnmanagedType.LPWStr)] string tlogRootName)
         {
             int hresult = FileTrackerDllStub.writeAllTLogsDelegate(intermediateDirectory, tlogRootName);
             Marshal.ThrowExceptionForHR(hresult, new IntPtr(-1));
         }
 
-        internal static void WriteContextTLogs([In, MarshalAs(UnmanagedType.LPWStr)] string intermediateDirectory, [In, MarshalAs(UnmanagedType.LPWStr)] string tlogRootName)
+        public static void WriteContextTLogs([In, MarshalAs(UnmanagedType.LPWStr)] string intermediateDirectory, [In, MarshalAs(UnmanagedType.LPWStr)] string tlogRootName)
         {
             int hresult = FileTrackerDllStub.writeContextTLogsDelegate(intermediateDirectory, tlogRootName);
             Marshal.ThrowExceptionForHR(hresult, new IntPtr(-1));
         }
 
-        internal static void SetThreadCount(int threadCount)
+        public static void SetThreadCount(int threadCount)
         {
             int hresult = FileTrackerDllStub.setThreadCountDelegate(threadCount);
             Marshal.ThrowExceptionForHR(hresult, new IntPtr(-1));
@@ -158,23 +158,23 @@ namespace Microsoft.Build.Shared
 
             #region Function pointers to native functions
 
-            internal static StartTrackingContextDelegate startTrackingContextDelegate;
+            public static StartTrackingContextDelegate startTrackingContextDelegate;
 
-            internal static StartTrackingContextWithRootDelegate startTrackingContextWithRootDelegate;
+            public static StartTrackingContextWithRootDelegate startTrackingContextWithRootDelegate;
 
-            internal static EndTrackingContextDelegate endTrackingContextDelegate;
+            public static EndTrackingContextDelegate endTrackingContextDelegate;
 
-            internal static StopTrackingAndCleanupDelegate stopTrackingAndCleanupDelegate;
+            public static StopTrackingAndCleanupDelegate stopTrackingAndCleanupDelegate;
 
-            internal static SuspendTrackingDelegate suspendTrackingDelegate;
+            public static SuspendTrackingDelegate suspendTrackingDelegate;
 
-            internal static ResumeTrackingDelegate resumeTrackingDelegate;
+            public static ResumeTrackingDelegate resumeTrackingDelegate;
 
-            internal static WriteAllTLogsDelegate writeAllTLogsDelegate;
+            public static WriteAllTLogsDelegate writeAllTLogsDelegate;
 
-            internal static WriteContextTLogsDelegate writeContextTLogsDelegate;
+            public static WriteContextTLogsDelegate writeContextTLogsDelegate;
 
-            internal static SetThreadCountDelegate setThreadCountDelegate;
+            public static SetThreadCountDelegate setThreadCountDelegate;
 
             #endregion  // Function pointers to native functions
 
@@ -277,7 +277,7 @@ namespace Microsoft.Build.Shared
             [SecurityCritical]
             private class SafeLibraryHandle : SafeHandle
             {
-                internal SafeLibraryHandle()
+                public SafeLibraryHandle()
                     : base(IntPtr.Zero, true)
                 {
                 }

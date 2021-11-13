@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace Microsoft.Build.BackEnd
     /// The provider for out-of-proc nodes.  This manages the lifetime of external MSBuild.exe processes
     /// which act as child nodes for the build system.
     /// </summary>
-    internal class NodeProviderOutOfProc : NodeProviderOutOfProcBase, INodeProvider
+    public class NodeProviderOutOfProc : NodeProviderOutOfProcBase, INodeProvider
     {
         /// <summary>
         /// A mapping of all the nodes managed by this provider.
@@ -63,7 +63,7 @@ namespace Microsoft.Build.BackEnd
         /// </summary>
         /// <param name="enableNodeReuse">Is reuse of build nodes allowed?</param>
         /// <param name="enableLowPriority">Is the build running at low priority?</param>
-        internal static Handshake GetHandshake(bool enableNodeReuse, bool enableLowPriority)
+        public static Handshake GetHandshake(bool enableNodeReuse, bool enableLowPriority)
         {
             CommunicationsUtilities.Trace("MSBUILDNODEHANDSHAKESALT=\"{0}\", msbuildDirectory=\"{1}\", enableNodeReuse={2}, enableLowPriority={3}", Traits.MSBuildNodeHandshakeSalt, BuildEnvironmentHelper.Instance.MSBuildToolsDirectory32, enableNodeReuse, enableLowPriority);
             return new Handshake(CommunicationsUtilities.GetHandshakeOptions(taskHost: false, nodeReuse: enableNodeReuse, lowPriority: enableLowPriority, is64Bit: EnvironmentUtilities.Is64BitProcess));
@@ -183,7 +183,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Static factory for component creation.
         /// </summary>
-        static internal IBuildComponent CreateComponent(BuildComponentType componentType)
+        static public IBuildComponent CreateComponent(BuildComponentType componentType)
         {
             ErrorUtilities.VerifyThrow(componentType == BuildComponentType.OutOfProcNodeProvider, "Factory cannot create components of type {0}", componentType);
             return new NodeProviderOutOfProc();

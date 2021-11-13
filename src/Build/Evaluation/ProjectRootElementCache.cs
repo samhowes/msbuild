@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -53,7 +53,7 @@ namespace Microsoft.Build.Evaluation
     /// collection.
     /// 
     /// </summary>
-    internal class ProjectRootElementCache : ProjectRootElementCacheBase
+    public class ProjectRootElementCache : ProjectRootElementCacheBase
     {
         /// <summary>
         /// The maximum number of entries to keep strong references to.
@@ -121,7 +121,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Creates an empty cache.
         /// </summary>
-        internal ProjectRootElementCache(bool autoReloadFromDisk, bool loadProjectsReadOnly = false)
+        public ProjectRootElementCache(bool autoReloadFromDisk, bool loadProjectsReadOnly = false)
         {
             DebugTraceCache("Constructing with autoreload from disk: ", autoReloadFromDisk);
 
@@ -152,7 +152,7 @@ namespace Microsoft.Build.Evaluation
         /// <param name="isExplicitlyLoaded"><code>true</code> if the project is explicitly loaded, otherwise <code>false</code>.</param>
         /// <param name="preserveFormatting"><code>true</code> to the project was loaded with the formated preserved, otherwise <code>false</code>.</param>
         /// <returns>The ProjectRootElement instance if one exists.  Null otherwise.</returns>
-        internal override ProjectRootElement Get(string projectFile, OpenProjectRootElement openProjectRootElement, bool isExplicitlyLoaded,
+        public override ProjectRootElement Get(string projectFile, OpenProjectRootElement openProjectRootElement, bool isExplicitlyLoaded,
             bool? preserveFormatting)
         {
             // Should already have been canonicalized
@@ -248,7 +248,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Add an entry to the cache.
         /// </summary>
-        internal override void AddEntry(ProjectRootElement projectRootElement)
+        public override void AddEntry(ProjectRootElement projectRootElement)
         {
             lock (_locker)
             {
@@ -262,7 +262,7 @@ namespace Microsoft.Build.Evaluation
         /// Rename an entry in the cache.
         /// Entry must already be in the cache.
         /// </summary>
-        internal override void RenameEntry(string oldFullPath, ProjectRootElement projectRootElement)
+        public override void RenameEntry(string oldFullPath, ProjectRootElement projectRootElement)
         {
             lock (_locker)
             {
@@ -275,7 +275,7 @@ namespace Microsoft.Build.Evaluation
         /// Returns any a ProjectRootElement in the cache with the provided full path,
         /// otherwise null.
         /// </summary>
-        internal override ProjectRootElement TryGet(string projectFile)
+        public override ProjectRootElement TryGet(string projectFile)
         {
             return TryGet(projectFile, preserveFormatting: null);
         }
@@ -284,7 +284,7 @@ namespace Microsoft.Build.Evaluation
         /// Returns any a ProjectRootElement in the cache with the provided full path,
         /// otherwise null.
         /// </summary>
-        internal override ProjectRootElement TryGet(string projectFile, bool? preserveFormatting)
+        public override ProjectRootElement TryGet(string projectFile, bool? preserveFormatting)
         {
             ProjectRootElement result = Get(
                 projectFile,
@@ -303,7 +303,7 @@ namespace Microsoft.Build.Evaluation
         /// has two ProjectRootElement's for a particular file. Attempts to clear out the weak cache
         /// resulted in this guarantee being broken and subtle bugs popping up everywhere.
         /// </remarks>
-        internal override void DiscardStrongReferences()
+        public override void DiscardStrongReferences()
         {
             lock (_locker)
             {
@@ -326,7 +326,7 @@ namespace Microsoft.Build.Evaluation
         /// Clears out the cache.
         /// Called when all projects are unloaded and possibly when a build is done.
         /// </summary>
-        internal override void Clear()
+        public override void Clear()
         {
             lock (_locker)
             {
@@ -344,7 +344,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Discard any entries (weak and strong) which do not have the explicitlyLoaded flag set.
         /// </summary>
-        internal override void DiscardImplicitReferences()
+        public override void DiscardImplicitReferences()
         {
             lock (_locker)
             {
@@ -392,7 +392,7 @@ namespace Microsoft.Build.Evaluation
         /// The assumption is that when they instruct the project collection to unload it, which
         /// leads to this being called, they are releasing their strong references too (or it doesn't matter)
         /// </remarks>
-        internal override void DiscardAnyWeakReference(ProjectRootElement projectRootElement)
+        public override void DiscardAnyWeakReference(ProjectRootElement projectRootElement)
         {
             ErrorUtilities.VerifyThrowArgumentNull(projectRootElement, nameof(projectRootElement));
 

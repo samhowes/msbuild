@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.IO;
 using System.Text;
 
@@ -8,7 +8,7 @@ namespace Microsoft.Build.Shared
     /// StringWriter class that allows Encoding to be specified. In the standard StringWriter
     /// class only UTF16 is allowed.
     /// </summary>
-    internal class EncodingStringWriter : StringWriter
+    public class EncodingStringWriter : StringWriter
     {
         /// <summary>
         /// Default ctor (Encoding = UTF8)

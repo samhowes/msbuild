@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 #nullable enable
@@ -63,9 +63,9 @@ namespace Microsoft.Build.Experimental.ProjectCache
             ProxyTargets = proxyTargets;
         }
 
-        internal CacheResultType ResultType { get; }
-        internal BuildResult? BuildResult { get; }
-        internal ProxyTargets? ProxyTargets { get; }
+        public CacheResultType ResultType { get; }
+        public BuildResult? BuildResult { get; }
+        public ProxyTargets? ProxyTargets { get; }
 
         public static CacheResult IndicateCacheHit(BuildResult buildResult)
         {

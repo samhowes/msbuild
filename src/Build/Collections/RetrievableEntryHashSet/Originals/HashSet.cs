@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -1289,7 +1289,7 @@ namespace System.Collections.Generic {
         /// Copies this to an array. Used for DebugView
         /// </summary>
         /// <returns></returns>
-        internal T[] ToArray() {
+        public T[] ToArray() {
             T[] newArray = new T[Count];
             CopyTo(newArray);
             return newArray;
@@ -1306,7 +1306,7 @@ namespace System.Collections.Generic {
         /// <param name="set2"></param>
         /// <param name="comparer"></param>
         /// <returns></returns>
-        internal static bool HashSetEquals(HashSet<T> set1, HashSet<T> set2, IEqualityComparer<T> comparer) {
+        public static bool HashSetEquals(HashSet<T> set1, HashSet<T> set2, IEqualityComparer<T> comparer) {
             // handle null cases first
             if (set1 == null) {
                 return (set2 == null);
@@ -1373,15 +1373,15 @@ namespace System.Collections.Generic {
         #endregion
 
         // used for set checking operations (using enumerables) that rely on counting
-        internal struct ElementCount {
-            internal int uniqueCount;
-            internal int unfoundCount;
+        public struct ElementCount {
+            public int uniqueCount;
+            public int unfoundCount;
         }
 
-        internal struct Slot {
-            internal int hashCode;      // Lower 31 bits of hash code, -1 if unused
-            internal T value;
-            internal int next;          // Index of next entry, -1 if last
+        public struct Slot {
+            public int hashCode;      // Lower 31 bits of hash code, -1 if unused
+            public T value;
+            public int next;          // Index of next entry, -1 if last
         }
 
 #if !SILVERLIGHT
@@ -1394,7 +1394,7 @@ namespace System.Collections.Generic {
             private int version;
             private T current;
 
-            internal Enumerator(HashSet<T> set) {
+            public Enumerator(HashSet<T> set) {
                 this.set = set;
                 index = 0;
                 version = set.m_version;

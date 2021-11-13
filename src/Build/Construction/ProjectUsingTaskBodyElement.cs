@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Diagnostics;
@@ -15,12 +15,12 @@ namespace Microsoft.Build.Construction
     [DebuggerDisplay("Evaluate={Evaluate} TaskBody={TaskBody}")]
     public class ProjectUsingTaskBodyElement : ProjectElement
     {
-        internal ProjectUsingTaskBodyElementLink UsingTaskBodyLink => (ProjectUsingTaskBodyElementLink)Link;
+        public ProjectUsingTaskBodyElementLink UsingTaskBodyLink => (ProjectUsingTaskBodyElementLink)Link;
 
         /// <summary>
         /// External projects support
         /// </summary>
-        internal ProjectUsingTaskBodyElement(ProjectUsingTaskBodyElementLink link)
+        public ProjectUsingTaskBodyElement(ProjectUsingTaskBodyElementLink link)
             : base(link)
         {
         }
@@ -28,7 +28,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Initialize a parented ProjectUsingTaskBodyElement
         /// </summary>
-        internal ProjectUsingTaskBodyElement(XmlElementWithLocation xmlElement, ProjectUsingTaskElement parent, ProjectRootElement containingProject)
+        public ProjectUsingTaskBodyElement(XmlElementWithLocation xmlElement, ProjectUsingTaskElement parent, ProjectRootElement containingProject)
             : base(xmlElement, parent, containingProject)
         {
             ErrorUtilities.VerifyThrowArgumentNull(parent, nameof(parent));
@@ -123,7 +123,7 @@ namespace Microsoft.Build.Construction
         /// Validates name.
         /// Caller should then ensure the element is added to the XmlDocument in the appropriate location.
         /// </summary>
-        internal static ProjectUsingTaskBodyElement CreateDisconnected(string evaluate, string body, ProjectRootElement containingProject)
+        public static ProjectUsingTaskBodyElement CreateDisconnected(string evaluate, string body, ProjectRootElement containingProject)
         {
             XmlElementWithLocation element = containingProject.CreateElement(XMakeElements.usingTaskBody);
             var taskElement = new ProjectUsingTaskBodyElement(element, containingProject)
@@ -138,7 +138,7 @@ namespace Microsoft.Build.Construction
         /// Overridden to verify that the potential parent and siblings
         /// are acceptable. Throws InvalidOperationException if they are not.
         /// </summary>
-        internal override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
+        public override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
         {
             VerifyCorrectParent(parent);
         }

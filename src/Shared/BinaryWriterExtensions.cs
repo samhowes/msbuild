@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Runtime.CompilerServices;
 
 namespace Microsoft.Build.Shared
 {
-    internal static class BinaryWriterExtensions
+    public static class BinaryWriterExtensions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void WriteOptionalString(this BinaryWriter writer, string value)

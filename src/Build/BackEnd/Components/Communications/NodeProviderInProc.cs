@@ -15,7 +15,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// An implementation of a node provider for in-proc nodes.
     /// </summary>
-    internal class NodeProviderInProc : INodeProvider, INodePacketFactory, IDisposable
+    public class NodeProviderInProc : INodeProvider, INodePacketFactory, IDisposable
     {
         #region Private Data
 
@@ -320,7 +320,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Factory for component creation.
         /// </summary>
-        static internal IBuildComponent CreateComponent(BuildComponentType type)
+        static public IBuildComponent CreateComponent(BuildComponentType type)
         {
             ErrorUtilities.VerifyThrow(type == BuildComponentType.InProcNodeProvider, "Cannot create component of type {0}", type);
             return new NodeProviderInProc();

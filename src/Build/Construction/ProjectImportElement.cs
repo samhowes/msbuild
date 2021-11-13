@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Diagnostics;
@@ -14,7 +14,7 @@ namespace Microsoft.Build.Construction
     [DebuggerDisplay("Project={Project} Condition={Condition}")]
     public class ProjectImportElement : ProjectElement
     {
-        internal ProjectImportElementLink ImportLink => (ProjectImportElementLink)Link;
+        public ProjectImportElementLink ImportLink => (ProjectImportElementLink)Link;
 
         private ImplicitImportLocation _implicitImportLocation;
         private ProjectElement _originalElement;
@@ -22,7 +22,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// External projects support
         /// </summary>
-        internal ProjectImportElement(ProjectImportElementLink link)
+        public ProjectImportElement(ProjectImportElementLink link)
             : base(link)
         {
         }
@@ -30,7 +30,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Initialize a parented ProjectImportElement
         /// </summary>
-        internal ProjectImportElement(XmlElementWithLocation xmlElement, ProjectElementContainer parent, ProjectRootElement containingProject, SdkReference sdkReference = null)
+        public ProjectImportElement(XmlElementWithLocation xmlElement, ProjectElementContainer parent, ProjectRootElement containingProject, SdkReference sdkReference = null)
             : base(xmlElement, parent, containingProject)
         {
             ErrorUtilities.VerifyThrowArgumentNull(parent, nameof(parent));
@@ -40,7 +40,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Initialize an unparented ProjectImportElement
         /// </summary>
-        internal ProjectImportElement(XmlElementWithLocation xmlElement, ProjectRootElement containingProject)
+        public ProjectImportElement(XmlElementWithLocation xmlElement, ProjectRootElement containingProject)
             : base(xmlElement, null, containingProject)
         {
         }
@@ -132,14 +132,14 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// <see cref="Framework.SdkReference"/> if applicable to this import element.
         /// </summary>
-        internal SdkReference SdkReference { get; set; }
+        public SdkReference SdkReference { get; set; }
 
         /// <summary>
         /// Creates an unparented ProjectImportElement, wrapping an unparented XmlElement.
         /// Validates the project value.
         /// Caller should then ensure the element is added to a parent
         /// </summary>
-        internal static ProjectImportElement CreateDisconnected(string project, ProjectRootElement containingProject)
+        public static ProjectImportElement CreateDisconnected(string project, ProjectRootElement containingProject)
         {
             XmlElementWithLocation element = containingProject.CreateElement(XMakeElements.import);
             return new ProjectImportElement(element, containingProject) {Project = project};
@@ -149,7 +149,7 @@ namespace Microsoft.Build.Construction
         /// Creates an implicit ProjectImportElement as if it was in the project.
         /// </summary>
         /// <returns></returns>
-        internal static ProjectImportElement CreateImplicit(
+        public static ProjectImportElement CreateImplicit(
             string project,
             ProjectRootElement containingProject,
             ImplicitImportLocation implicitImportLocation,
@@ -171,7 +171,7 @@ namespace Microsoft.Build.Construction
         /// Overridden to verify that the potential parent and siblings
         /// are acceptable. Throws InvalidOperationException if they are not.
         /// </summary>
-        internal override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
+        public override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
         {
             ErrorUtilities.VerifyThrowInvalidOperation(parent is ProjectRootElement || parent is ProjectImportGroupElement, "OM_CannotAcceptParent");
         }

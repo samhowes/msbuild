@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -11,12 +11,12 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// A result of executing a target or task.
     /// </summary>
-    internal class OutOfProcTaskHostTaskResult
+    public class OutOfProcTaskHostTaskResult
     {
         /// <summary>
         /// Constructor 
         /// </summary>
-        internal OutOfProcTaskHostTaskResult(TaskCompleteType result)
+        public OutOfProcTaskHostTaskResult(TaskCompleteType result)
             : this(result, null /* no final parameters */, null /* no exception */, null /* no exception message */, null /* and no args to go with it */)
         {
             // do nothing else
@@ -25,7 +25,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Constructor
         /// </summary>
-        internal OutOfProcTaskHostTaskResult(TaskCompleteType result, IDictionary<string, Object> finalParams)
+        public OutOfProcTaskHostTaskResult(TaskCompleteType result, IDictionary<string, Object> finalParams)
             : this(result, finalParams, null /* no exception */, null /* no exception message */, null /* and no args to go with it */)
         {
             // do nothing else
@@ -34,7 +34,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Constructor
         /// </summary>
-        internal OutOfProcTaskHostTaskResult(TaskCompleteType result, Exception taskException)
+        public OutOfProcTaskHostTaskResult(TaskCompleteType result, Exception taskException)
             : this(result, taskException, null /* no exception message */, null /* and no args to go with it */)
         {
             // do nothing else
@@ -43,7 +43,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Constructor
         /// </summary>
-        internal OutOfProcTaskHostTaskResult(TaskCompleteType result, Exception taskException, string exceptionMessage, string[] exceptionMessageArgs)
+        public OutOfProcTaskHostTaskResult(TaskCompleteType result, Exception taskException, string exceptionMessage, string[] exceptionMessageArgs)
             : this(result, null /* no final parameters */, taskException, exceptionMessage, exceptionMessageArgs)
         {
             // do nothing else
@@ -52,7 +52,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Constructor
         /// </summary>
-        internal OutOfProcTaskHostTaskResult(TaskCompleteType result, IDictionary<string, Object> finalParams, Exception taskException, string exceptionMessage, string[] exceptionMessageArgs)
+        public OutOfProcTaskHostTaskResult(TaskCompleteType result, IDictionary<string, Object> finalParams, Exception taskException, string exceptionMessage, string[] exceptionMessageArgs)
         {
             // If we're returning a crashing result, we should always also be returning the exception that caused the crash, although 
             // we may not always be returning an accompanying message. 

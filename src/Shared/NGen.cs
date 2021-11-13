@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace Microsoft.Build.Shared
@@ -14,7 +14,7 @@ namespace Microsoft.Build.Shared
     /// It works because although this is a value type, it is not defined in mscorlib.
     /// </comment>
     /// <typeparam name="T">Wrapped type</typeparam>
-    internal struct NGen<T> where T : struct
+    public struct NGen<T> where T : struct
     {
         /// <summary>
         /// Wrapped value

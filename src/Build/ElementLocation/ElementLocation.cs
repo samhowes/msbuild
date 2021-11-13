@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Shared;
@@ -78,7 +78,7 @@ namespace Microsoft.Build.Construction
         /// It is to be used for the project location when the project has not been given a name.
         /// In that case, it exists, but can't have a specific location.
         /// </summary>
-        internal static ElementLocation EmptyLocation
+        public static ElementLocation EmptyLocation
         {
             get { return s_emptyElementLocation; }
         }
@@ -152,7 +152,7 @@ namespace Microsoft.Build.Construction
         /// Factory for serialization.
         /// Custom factory is needed because this class is abstract and uses a factory pattern.
         /// </summary>
-        internal static ElementLocation FactoryForDeserialization(ITranslator translator)
+        public static ElementLocation FactoryForDeserialization(ITranslator translator)
         {
             string file = null;
             int line = 0;
@@ -169,7 +169,7 @@ namespace Microsoft.Build.Construction
         /// This is the case when we are creating a new item, for example, and it has
         /// not been evaluated from some XML.
         /// </summary>
-        internal static ElementLocation Create(string file)
+        public static ElementLocation Create(string file)
         {
             return Create(file, 0, 0);
         }
@@ -183,7 +183,7 @@ namespace Microsoft.Build.Construction
         /// In AG there are 600 locations that have a file but zero line and column.
         /// In theory yet another derived class could be made for these to save 4 bytes each.
         /// </remarks>
-        internal static ElementLocation Create(string file, int line, int column)
+        public static ElementLocation Create(string file, int line, int column)
         {
             if (string.IsNullOrEmpty(file) && line == 0 && column == 0)
             {
@@ -250,7 +250,7 @@ namespace Microsoft.Build.Construction
             /// Numerical values must be 1-based, non-negative; 0 indicates unknown
             /// File may be null, indicating the file was not loaded from disk.
             /// </summary>
-            internal RegularElementLocation(string file, int line, int column)
+            public RegularElementLocation(string file, int line, int column)
             {
                 ErrorUtilities.VerifyThrowArgumentLengthIfNotNull(file, nameof(file));
                 ErrorUtilities.VerifyThrow(line > -1 && column > -1, "Use zero for unknown");
@@ -326,7 +326,7 @@ namespace Microsoft.Build.Construction
             /// Numerical values must be 1-based, non-negative; 0 indicates unknown
             /// File may be null or empty, indicating the file was not loaded from disk.
             /// </summary>
-            internal SmallElementLocation(string file, int line, int column)
+            public SmallElementLocation(string file, int line, int column)
             {
                 ErrorUtilities.VerifyThrow(line > -1 && column > -1, "Use zero for unknown");
                 ErrorUtilities.VerifyThrow(line <= 65535 && column <= 65535, "Use ElementLocation instead");

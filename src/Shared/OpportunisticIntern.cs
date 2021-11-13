@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -32,7 +32,7 @@ namespace Microsoft.Build
     ///
     /// The new implementation interns all strings but maintains only weak references so it doesn't keep the strings alive.
     /// </summary>
-    internal sealed class OpportunisticIntern
+    public sealed class OpportunisticIntern
     {
         /// <summary>
         /// Defines the interner interface as we currently implement more than one.
@@ -56,7 +56,7 @@ namespace Microsoft.Build
         /// The singleton instance of OpportunisticIntern.
         /// </summary>
         private static OpportunisticIntern _instance = new OpportunisticIntern();
-        internal static OpportunisticIntern Instance => _instance;
+        public static OpportunisticIntern Instance => _instance;
 
         private readonly bool _useLegacyInterner = Traits.Instance.UseLegacyStringInterner;
         private readonly bool _useSimpleConcurrency = Traits.Instance.UseSimpleInternConcurrency;
@@ -143,7 +143,7 @@ namespace Microsoft.Build
         /// <summary>
         /// Recreates the singleton instance based on the current environment (test only).
         /// </summary>
-        internal static void ResetForTests()
+        public static void ResetForTests()
         {
             Debug.Assert(BuildEnvironmentHelper.Instance.RunningTests);
             _instance = new OpportunisticIntern();
@@ -169,7 +169,7 @@ namespace Microsoft.Build
         /// <summary>
         /// Turn on statistics gathering.
         /// </summary>
-        internal void EnableStatisticsGathering()
+        public void EnableStatisticsGathering()
         {
             if (_useLegacyInterner)
             {
@@ -189,7 +189,7 @@ namespace Microsoft.Build
         /// <summary>
         /// Intern the given internable.
         /// </summary>
-        internal static string InternableToString<T>(T candidate) where T : IInternable
+        public static string InternableToString<T>(T candidate) where T : IInternable
         {
             return Instance.InternableToStringImpl(candidate);
         }
@@ -197,7 +197,7 @@ namespace Microsoft.Build
         /// <summary>
         /// Potentially Intern the given string builder.
         /// </summary>
-        internal static string StringBuilderToString(StringBuilder candidate)
+        public static string StringBuilderToString(StringBuilder candidate)
         {
             return Instance.InternableToStringImpl(new StringBuilderInternTarget(candidate));
         }
@@ -205,7 +205,7 @@ namespace Microsoft.Build
         /// <summary>
         /// Potentially Intern the given char array.
         /// </summary>
-        internal static string CharArrayToString(char[] candidate, int count)
+        public static string CharArrayToString(char[] candidate, int count)
         {
             return Instance.InternableToStringImpl(new CharArrayInternTarget(candidate, count));
         }
@@ -213,7 +213,7 @@ namespace Microsoft.Build
         /// <summary>
         /// Potentially Intern the given char array.
         /// </summary>
-        internal static string CharArrayToString(char[] candidate, int startIndex, int count)
+        public static string CharArrayToString(char[] candidate, int startIndex, int count)
         {
             return Instance.InternableToStringImpl(new CharArrayInternTarget(candidate, startIndex, count));
         }
@@ -223,7 +223,7 @@ namespace Microsoft.Build
         /// </summary>
         /// <param name="candidate">The string to intern.</param>
         /// <returns>The interned string, or the same string if it could not be interned.</returns>
-        internal static string InternStringIfPossible(string candidate)
+        public static string InternStringIfPossible(string candidate)
         {
             return Instance.InternableToStringImpl(new StringInternTarget(candidate));
         }
@@ -261,7 +261,7 @@ namespace Microsoft.Build
         /// <summary>
         /// Report statistics about interning. Don't call unless GatherStatistics has been called beforehand.
         /// </summary>
-        internal void ReportStatistics()
+        public void ReportStatistics()
         {
             _interner.ReportStatistics("Main");
             if (_useLegacyInterner)
@@ -697,7 +697,7 @@ namespace Microsoft.Build
             /// <summary>
             /// Construct.
             /// </summary>
-            internal BucketedPrioritizedStringList(bool gatherStatistics, int smallMruSize, int largeMruSize, int hugeMruSize, int smallMruThreshold, int largeMruThreshold, int hugeMruThreshold, int ginormousThreshold, bool useSimpleConcurrency)
+            public BucketedPrioritizedStringList(bool gatherStatistics, int smallMruSize, int largeMruSize, int hugeMruSize, int smallMruThreshold, int largeMruThreshold, int hugeMruThreshold, int ginormousThreshold, bool useSimpleConcurrency)
             {
                 if (smallMruSize == 0 && largeMruSize == 0 && hugeMruSize == 0)
                 {
@@ -957,7 +957,7 @@ namespace Microsoft.Build
                 /// <summary>
                 /// Construct an Mru list with a fixed maximum size.
                 /// </summary>
-                internal PrioritizedStringList(int size)
+                public PrioritizedStringList(int size)
                 {
                     _size = size;
                 }
@@ -966,7 +966,7 @@ namespace Microsoft.Build
                 /// Try to get one element from the list. Upon leaving the function 'candidate' will be at the head of the Mru list.
                 /// This function is not thread-safe.
                 /// </summary>
-                internal bool TryGet<T>(T candidate, out string interned) where T : IInternable
+                public bool TryGet<T>(T candidate, out string interned) where T : IInternable
                 {
                     if (_size == 0)
                     {
@@ -1049,7 +1049,7 @@ namespace Microsoft.Build
                 /// <summary>
                 /// Returns the number of strings held and the total number of chars held.
                 /// </summary>
-                internal KeyValuePair<int, int> Statistics()
+                public KeyValuePair<int, int> Statistics()
                 {
                     Node head = _mru;
                     int chars = 0;
@@ -1072,7 +1072,7 @@ namespace Microsoft.Build
                     /// <summary>
                     /// Construct a Node
                     /// </summary>
-                    internal Node(string value)
+                    public Node(string value)
                     {
                         Value = value;
                     }
@@ -1080,12 +1080,12 @@ namespace Microsoft.Build
                     /// <summary>
                     /// The next node in the list.
                     /// </summary>
-                    internal Node Next { get; set; }
+                    public Node Next { get; set; }
 
                     /// <summary>
                     /// The held string.
                     /// </summary>
-                    internal string Value { get; }
+                    public string Value { get; }
                 }
             }
         }

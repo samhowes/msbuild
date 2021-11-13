@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -78,7 +78,7 @@ namespace Microsoft.Build.Exceptions
         /// <param name="errorCode"></param>
         /// <param name="helpKeyword"></param>
         /// <param name="initializationException"></param>
-        internal InternalLoggerException
+        public InternalLoggerException
         (
             string message,
             Exception innerException,
@@ -214,7 +214,7 @@ namespace Microsoft.Build.Exceptions
         /// <param name="messageResourceName"></param>
         /// <param name="initializationException"></param>
         /// <param name="messageArgs"></param>
-        internal static void Throw
+        public static void Throw
         (
             Exception innerException,
             BuildEventArgs e,

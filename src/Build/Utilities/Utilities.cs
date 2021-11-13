@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -20,7 +20,7 @@ namespace Microsoft.Build.Internal
     /// <summary>
     /// This class contains utility methods for the MSBuild engine.
     /// </summary>
-    static internal class Utilities
+    static public class Utilities
     {
         /// <summary>
         /// Save off the contents of the environment variable that specifies whether we should treat higher toolsversions as the current 
@@ -49,7 +49,7 @@ namespace Microsoft.Build.Internal
         /// <summary>
         /// Delegate for a method that, given a ToolsVersion string, returns the matching Toolset.
         /// </summary>
-        internal delegate Toolset GetToolset(string toolsVersion);
+        public delegate Toolset GetToolset(string toolsVersion);
 
         /// <summary>
         /// INTERNAL FOR UNIT-TESTING ONLY
@@ -58,7 +58,7 @@ namespace Microsoft.Build.Internal
         /// reasonably change, but we need some way of refreshing their values so that we can modify them for 
         /// unit testing purposes. 
         /// </summary>
-        internal static void RefreshInternalEnvironmentValues()
+        public static void RefreshInternalEnvironmentValues()
         {
             s_shouldTreatHigherToolsVersionsAsCurrent = (Environment.GetEnvironmentVariable("MSBUILDTREATHIGHERTOOLSVERSIONASCURRENT") != null);
             s_shouldTreatOtherToolsVersionsAsCurrent = (Environment.GetEnvironmentVariable("MSBUILDTREATALLTOOLSVERSIONSASCURRENT") != null);
@@ -71,7 +71,7 @@ namespace Microsoft.Build.Internal
         /// </summary>
         /// <param name="node"></param>
         /// <param name="s">Can be empty string, but not null.</param>
-        internal static void SetXmlNodeInnerContents(XmlElementWithLocation node, string s)
+        public static void SetXmlNodeInnerContents(XmlElementWithLocation node, string s)
         {
             ErrorUtilities.VerifyThrow(s != null, "Need value to set.");
 
@@ -101,7 +101,7 @@ namespace Microsoft.Build.Internal
         /// </summary>
         /// <param name="node"></param>
         /// <returns>Inner XML/text of specified node.</returns>
-        internal static string GetXmlNodeInnerContents(XmlElementWithLocation node)
+        public static string GetXmlNodeInnerContents(XmlElementWithLocation node)
         {
             // XmlNode.InnerXml gives back a string that consists of the set of characters
             // in between the opening and closing elements of the XML node, without doing any
@@ -296,7 +296,7 @@ namespace Microsoft.Build.Internal
         /// </summary>
         /// <param name="xml">XML string to process.</param>
         /// <returns>The modified XML string.</returns>
-        internal static string RemoveXmlNamespace(string xml)
+        public static string RemoveXmlNamespace(string xml)
         {
             return s_xmlnsPattern.Replace(xml, String.Empty);
         }
@@ -304,7 +304,7 @@ namespace Microsoft.Build.Internal
         /// <summary>
         /// Creates a comma separated list of valid tools versions suitable for an error message.
         /// </summary>
-        internal static string CreateToolsVersionListString(IEnumerable<Toolset> toolsets)
+        public static string CreateToolsVersionListString(IEnumerable<Toolset> toolsets)
         {
             string toolsVersionList = String.Empty;
             foreach (Toolset toolset in toolsets)
@@ -331,7 +331,7 @@ namespace Microsoft.Build.Internal
         /// <param name="defaultToolsVersion">The default ToolsVersion</param>
         /// <param name="usingDifferentToolsVersionFromProjectFile">true if the project file specifies an explicit toolsversion but a different one is chosen</param>
         /// <returns>The ToolsVersion we should use to build this project.  Should never be null.</returns>
-        internal static string GenerateToolsVersionToUse(string explicitToolsVersion, string toolsVersionFromProject, GetToolset getToolset, string defaultToolsVersion, out bool usingDifferentToolsVersionFromProjectFile)
+        public static string GenerateToolsVersionToUse(string explicitToolsVersion, string toolsVersionFromProject, GetToolset getToolset, string defaultToolsVersion, out bool usingDifferentToolsVersionFromProjectFile)
         {
             string toolsVersionToUse = explicitToolsVersion;
 
@@ -459,7 +459,7 @@ namespace Microsoft.Build.Internal
         /// Retrieves properties derived from the current
         /// environment variables.
         /// </summary>
-        internal static PropertyDictionary<ProjectPropertyInstance> GetEnvironmentProperties()
+        public static PropertyDictionary<ProjectPropertyInstance> GetEnvironmentProperties()
         {
             IDictionary<string, string> environmentVariablesBag = CommunicationsUtilities.GetEnvironmentVariables();
 

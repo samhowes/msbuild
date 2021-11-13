@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 #if FEATURE_VISUALSTUDIOSETUP
@@ -12,7 +12,7 @@ namespace Microsoft.Build.Shared
     /// Visual Studio setup for instances installed on the machine.
     /// Code derived from sample: https://code.msdn.microsoft.com/Visual-Studio-Setup-0cedd331
     /// </summary>
-    internal class VisualStudioLocationHelper
+    public class VisualStudioLocationHelper
     {
 #if FEATURE_VISUALSTUDIOSETUP
         private const int REGDB_E_CLASSNOTREG = unchecked((int) 0x80040154);
@@ -23,7 +23,7 @@ namespace Microsoft.Build.Shared
         /// on the machine. Will not include anything before Visual Studio "15".
         /// </summary>
         /// <returns>Enumerable list of Visual Studio instances</returns>
-        internal static IList<VisualStudioInstance> GetInstances()
+        public static IList<VisualStudioInstance> GetInstances()
         {
             var validInstances = new List<VisualStudioInstance>();
 
@@ -108,24 +108,24 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// Wrapper class to represent an installed instance of Visual Studio.
     /// </summary>
-    internal class VisualStudioInstance
+    public class VisualStudioInstance
     {
         /// <summary>
         /// Version of the Visual Studio Instance
         /// </summary>
-        internal Version Version { get; }
+        public Version Version { get; }
 
         /// <summary>
         /// Path to the Visual Studio installation
         /// </summary>
-        internal string Path { get; }
+        public string Path { get; }
 
         /// <summary>
         /// Full name of the Visual Studio instance with SKU name
         /// </summary>
-        internal string Name { get; }
+        public string Name { get; }
 
-        internal VisualStudioInstance(string name, string path, Version version)
+        public VisualStudioInstance(string name, string path, Version version)
         {
             Name = name;
             Path = path;

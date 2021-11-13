@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Shared;
@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace Microsoft.Build.Internal
 {
-    internal readonly struct FileSpecMatcherTester
+    public readonly struct FileSpecMatcherTester
     {
         private readonly string _currentDirectory;
         private readonly string _unescapedFileSpec;

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -124,7 +124,7 @@ namespace Microsoft.Build.Exceptions
         /// </summary>
         /// <param name="resourceName"></param>
         /// <param name="args"></param>
-        internal static void Throw
+        public static void Throw
         (
             string resourceName,
             params string[] args
@@ -141,7 +141,7 @@ namespace Microsoft.Build.Exceptions
         /// is expensive, because memory is allocated for the array of arguments -- do
         /// not call this method repeatedly in performance-critical scenarios
         /// </summary>
-        internal static void Throw
+        public static void Throw
         (
             Exception innerException,
             string resourceName,

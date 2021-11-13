@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -16,7 +16,7 @@ namespace Microsoft.Build.Evaluation
     /// Accumulates ProjectMetadataElement objects and their evaluated value,
     /// overwriting any previous metadata with that name.
     /// </summary>
-    internal class EvaluatorMetadataTable : IMetadataTable
+    public class EvaluatorMetadataTable : IMetadataTable
     {
         /// <summary>
         /// The actual metadata dictionary.
@@ -39,7 +39,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Enumerator over the entries in this table
         /// </summary>
-        internal IEnumerable<EvaluatorMetadata> Entries => _metadata?.Values ?? Enumerable.Empty<EvaluatorMetadata>();
+        public IEnumerable<EvaluatorMetadata> Entries => _metadata?.Values ?? Enumerable.Empty<EvaluatorMetadata>();
 
         /// <summary>
         /// Retrieves any value we have in our metadata table for the metadata name specified,
@@ -90,7 +90,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Adds a metadata entry to the table
         /// </summary>
-        internal void SetValue(ProjectMetadataElement xml, string evaluatedValueEscaped)
+        public void SetValue(ProjectMetadataElement xml, string evaluatedValueEscaped)
         {
             if (_metadata == null)
             {
@@ -137,7 +137,7 @@ namespace Microsoft.Build.Evaluation
             /// <summary>
             /// Gets or sets the evaluated value, escaped as necessary
             /// </summary>
-            internal string EvaluatedValueEscaped
+            public string EvaluatedValueEscaped
             {
                 get;
                 private set;

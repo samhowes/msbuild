@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Collections;
@@ -34,7 +34,7 @@ namespace Microsoft.Build.BackEnd
     /// Target has completed.  This is considered erroneous behavior and 'normal' version of CallTarget will be implemented which does not exhibit
     /// this.
     /// </remarks>
-    internal class TargetBuilder : ITargetBuilder, ITargetBuilderCallback, IBuildComponent
+    public class TargetBuilder : ITargetBuilder, ITargetBuilderCallback, IBuildComponent
     {
         /// <summary>
         /// The cancellation token.
@@ -368,7 +368,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Class factory for component creation.
         /// </summary>
-        internal static IBuildComponent CreateComponent(BuildComponentType type)
+        public static IBuildComponent CreateComponent(BuildComponentType type)
         {
             ErrorUtilities.VerifyThrow(type == BuildComponentType.TargetBuilder, "Cannot create components of type {0}", type);
             return new TargetBuilder();

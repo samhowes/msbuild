@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -17,7 +17,7 @@ namespace Microsoft.Build.BackEnd
     /// id validation checks to fail.
     /// </remarks>
     [RunInMTA]
-    internal class CallTarget : ITask
+    public class CallTarget : ITask
     {
         /// <summary>
         /// The task logging helper

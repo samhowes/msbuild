@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -29,7 +29,7 @@ namespace Microsoft.Build.Construction
     /// Event handler for the event fired after this project file is named or renamed.
     /// If the project file has not previously had a name, oldFullPath is null.
     /// </summary>
-    internal delegate void RenameHandlerDelegate(string oldFullPath);
+    public delegate void RenameHandlerDelegate(string oldFullPath);
 
     /// <summary>
     /// ProjectRootElement class represents an MSBuild project, an MSBuild targets file or any other file that conforms to MSBuild
@@ -47,7 +47,7 @@ namespace Microsoft.Build.Construction
         private const string EmptyProjectFileContent = "{0}<Project{1}{2}>\r\n</Project>";
         private const string EmptyProjectFileXmlDeclaration = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n";
         private const string EmptyProjectFileToolsVersion = " ToolsVersion=\"" + MSBuildConstants.CurrentToolsVersion + "\"";
-        internal const string EmptyProjectFileXmlNamespace = " xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\"";
+        public const string EmptyProjectFileXmlNamespace = " xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\"";
 
         /// <summary>
         /// The singleton delegate that loads projects into the ProjectRootElement
@@ -98,7 +98,7 @@ namespace Microsoft.Build.Construction
         /// XML namespace specified and used by this project file. If a namespace was not specified in the project file, this
         /// value will be string.Empty.
         /// </summary>
-        internal string XmlNamespace { get; set; }
+        public string XmlNamespace { get; set; }
 
         /// <summary>
         /// The project file's location. It can be null if the project is not directly loaded from a file.
@@ -142,12 +142,12 @@ namespace Microsoft.Build.Construction
         /// </summary>
         private string _dirtyParameter = String.Empty;
 
-        internal ProjectRootElementLink RootLink => (ProjectRootElementLink)Link;
+        public ProjectRootElementLink RootLink => (ProjectRootElementLink)Link;
 
         /// <summary>
         /// External projects support
         /// </summary>
-        internal ProjectRootElement(ProjectRootElementLink link)
+        public ProjectRootElement(ProjectRootElementLink link)
             : base(link)
         {
         }
@@ -158,7 +158,7 @@ namespace Microsoft.Build.Construction
         /// Leaves the project dirty, indicating there are unsaved changes.
         /// Used to create a root element for solutions loaded by the 3.5 version of the solution wrapper.
         /// </summary>
-        internal ProjectRootElement(XmlReader xmlReader, ProjectRootElementCacheBase projectRootElementCache, bool isExplicitlyLoaded,
+        public ProjectRootElement(XmlReader xmlReader, ProjectRootElementCacheBase projectRootElementCache, bool isExplicitlyLoaded,
             bool preserveFormatting)
         {
             ErrorUtilities.VerifyThrowArgumentNull(xmlReader, nameof(xmlReader));
@@ -261,12 +261,12 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Event raised after this project is renamed
         /// </summary>
-        internal event RenameHandlerDelegate OnAfterProjectRename;
+        public event RenameHandlerDelegate OnAfterProjectRename;
 
         /// <summary>
         /// Event raised after the project XML is changed.
         /// </summary>
-        internal event EventHandler<ProjectXmlChangedEventArgs> OnProjectXmlChanged;
+        public event EventHandler<ProjectXmlChangedEventArgs> OnProjectXmlChanged;
 
         /// <summary>
         /// Condition should never be set, but the getter returns null instead of throwing 
@@ -374,7 +374,7 @@ namespace Microsoft.Build.Construction
         public string DirectoryPath
         {
             get => Link != null ? RootLink.DirectoryPath : _directory ?? String.Empty;
-            internal set => _directory = value;
+            set => _directory = value;
             // Used during solution load to ensure solutions which were created from a file have a location.
         }
 
@@ -618,7 +618,7 @@ namespace Microsoft.Build.Construction
         /// </summary>
         public DateTime LastWriteTimeWhenRead => Link != null ? RootLink.LastWriteTimeWhenRead : _lastWriteTimeWhenReadUtc.ToLocalTime();
 
-        internal DateTime? StreamTimeUtc = null;
+        public DateTime? StreamTimeUtc = null;
 
         /// <summary>
         /// This does not allow conditions, so it should not be called.
@@ -672,17 +672,17 @@ namespace Microsoft.Build.Construction
         /// Internal code that wants to set this to true should call <see cref="MarkAsExplicitlyLoaded"/>.
         /// The setter is private to make it more difficult to downgrade an existing PRE to an implicitly loaded state, which should never happen.
         /// </remarks>
-        internal bool IsExplicitlyLoaded { get; private set; }
+        public bool IsExplicitlyLoaded { get; private set; }
 
         /// <summary>
         /// Retrieves the root element cache with which this root element is associated.
         /// </summary>
-        internal ProjectRootElementCacheBase ProjectRootElementCache { get; }
+        public ProjectRootElementCacheBase ProjectRootElementCache { get; }
 
         /// <summary>
         /// Gets a value indicating whether this PRE is known by its containing collection.
         /// </summary>
-        internal bool IsMemberOfProjectCollection => _projectFileLocation != null;
+        public bool IsMemberOfProjectCollection => _projectFileLocation != null;
 
         /// <summary>
         /// Indicates whether there are any targets in this project 
@@ -691,7 +691,7 @@ namespace Microsoft.Build.Construction
         /// for targets without Returns attributes changes from using the Outputs to 
         /// returning nothing by default. 
         /// </summary>
-        internal bool ContainsTargetsWithReturnsAttribute { get; set; }
+        public bool ContainsTargetsWithReturnsAttribute { get; set; }
 
         /// <summary>
         /// Gets the ProjectExtensions child, if any, otherwise null.
@@ -699,7 +699,7 @@ namespace Microsoft.Build.Construction
         /// <remarks>
         /// Not public as we do not wish to encourage the use of ProjectExtensions.
         /// </remarks>
-        internal ProjectExtensionsElement ProjectExtensions
+        public ProjectExtensionsElement ProjectExtensions
             => ChildrenReversed.OfType<ProjectExtensionsElement>().FirstOrDefault();
 
         /// <summary>
@@ -707,7 +707,7 @@ namespace Microsoft.Build.Construction
         /// This is for debugging purposes only.
         /// String formatting only occurs when retrieved.
         /// </summary>
-        internal string LastDirtyReason
+        public string LastDirtyReason
             => _dirtyReason == null ? null : String.Format(CultureInfo.InvariantCulture, _dirtyReason, _dirtyParameter);
 
         /// <summary>
@@ -1705,12 +1705,12 @@ namespace Microsoft.Build.Construction
         /// Initialize an in-memory, empty ProjectRootElement instance that can be saved later.
         /// Uses the specified project root element cache.
         /// </summary>
-        internal static ProjectRootElement Create(ProjectRootElementCacheBase projectRootElementCache)
+        public static ProjectRootElement Create(ProjectRootElementCacheBase projectRootElementCache)
         {
             return new ProjectRootElement(projectRootElementCache, Project.DefaultNewProjectTemplateOptions);
         }
 
-        internal static ProjectRootElement Create(ProjectRootElementCacheBase projectRootElementCache, NewProjectFileOptions projectFileOptions)
+        public static ProjectRootElement Create(ProjectRootElementCacheBase projectRootElementCache, NewProjectFileOptions projectFileOptions)
         {
             return new ProjectRootElement(projectRootElementCache, projectFileOptions);
         }
@@ -1721,7 +1721,7 @@ namespace Microsoft.Build.Construction
         /// Uses the specified project root element cache.
         /// May throw InvalidProjectFileException.
         /// </summary>
-        internal static ProjectRootElement Open(string path, ProjectRootElementCacheBase projectRootElementCache, bool isExplicitlyLoaded,
+        public static ProjectRootElement Open(string path, ProjectRootElementCacheBase projectRootElementCache, bool isExplicitlyLoaded,
             bool? preserveFormatting)
         {
             ErrorUtilities.VerifyThrowInternalRooted(path);
@@ -1742,7 +1742,7 @@ namespace Microsoft.Build.Construction
         /// This is ultimately for unit testing.
         /// Do not make public: we do not wish to expose particular XML API's.
         /// </remarks>
-        internal static ProjectRootElement Open(XmlDocumentWithLocation document)
+        public static ProjectRootElement Open(XmlDocumentWithLocation document)
         {
             ErrorUtilities.VerifyThrow(document.FullPath == null, "Only virtual documents supported");
 
@@ -1754,7 +1754,7 @@ namespace Microsoft.Build.Construction
         /// Path provided must be a canonicalized full path.
         /// May throw InvalidProjectFileException or an IO-related exception.
         /// </summary>
-        internal static ProjectRootElement OpenProjectOrSolution(string fullPath, IDictionary<string, string> globalProperties, string toolsVersion, ProjectRootElementCacheBase projectRootElementCache, bool isExplicitlyLoaded)
+        public static ProjectRootElement OpenProjectOrSolution(string fullPath, IDictionary<string, string> globalProperties, string toolsVersion, ProjectRootElementCacheBase projectRootElementCache, bool isExplicitlyLoaded)
         {
             ErrorUtilities.VerifyThrowInternalRooted(fullPath);
 
@@ -1772,7 +1772,7 @@ namespace Microsoft.Build.Construction
         /// Creates a XmlElement with the specified name in the document
         /// containing this project.
         /// </summary>
-        internal XmlElementWithLocation CreateElement(string name)
+        public XmlElementWithLocation CreateElement(string name)
         {
             ErrorUtilities.VerifyThrow(Link == null, "External project");
             return (XmlElementWithLocation)XmlDocument.CreateElement(name, XmlNamespace);
@@ -1782,7 +1782,7 @@ namespace Microsoft.Build.Construction
         /// Overridden to verify that the potential parent and siblings
         /// are acceptable. Throws InvalidOperationException if they are not.
         /// </summary>
-        internal override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
+        public override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
         {
             ErrorUtilities.ThrowInvalidOperation("OM_CannotAcceptParent");
         }
@@ -1798,7 +1798,7 @@ namespace Microsoft.Build.Construction
         /// unconstructed state.
         /// Should be protected+internal.
         /// </remarks>
-        internal sealed override void MarkDirty(string reason, string param)
+        public sealed override void MarkDirty(string reason, string param)
         {
             if (Link != null)
             {
@@ -1828,7 +1828,7 @@ namespace Microsoft.Build.Construction
         /// Bubbles a Project dirty notification up to the ProjectRootElementCacheBase and ultimately to the ProjectCollection.
         /// </summary>
         /// <param name="project">The dirtied project.</param>
-        internal void MarkProjectDirty(Project project)
+        public void MarkProjectDirty(Project project)
         {
             ErrorUtilities.VerifyThrowArgumentNull(project, nameof(project));
             ErrorUtilities.VerifyThrow(Link == null, "External project");
@@ -1845,7 +1845,7 @@ namespace Microsoft.Build.Construction
         /// Sets the <see cref="IsExplicitlyLoaded"/> property to <c>true</c> to indicate that this PRE
         /// should not be removed from the cache until it is explicitly unloaded by some MSBuild client.
         /// </summary>
-        internal void MarkAsExplicitlyLoaded()
+        public void MarkAsExplicitlyLoaded()
         {
             IsExplicitlyLoaded = true;
         }
@@ -1856,7 +1856,7 @@ namespace Microsoft.Build.Construction
         /// </summary>
         /// <param name="currentProjectOrImport">Current project</param>
         /// <returns>An <see cref="IEnumerable{SdkReference}"/> containing details of the SDKs referenced by the project.</returns>
-        internal List<ProjectImportElement> GetImplicitImportNodes(ProjectRootElement currentProjectOrImport)
+        public List<ProjectImportElement> GetImplicitImportNodes(ProjectRootElement currentProjectOrImport)
         {
             var nodes = new List<ProjectImportElement>();
 
@@ -1903,7 +1903,7 @@ namespace Microsoft.Build.Construction
         /// </summary>
         /// <param name="path">The full path to a file to check.</param>
         /// <returns><code>true</code> if the file is an empty XML file, otherwise <code>false</code>.</returns>
-        internal static bool IsEmptyXmlFile(string path)
+        public static bool IsEmptyXmlFile(string path)
         {
             // The maximum number of characters of the file to read to check if its empty or not.  Ideally we
             // would only look at zero-length files but empty XML files can contain just an xml declaration:

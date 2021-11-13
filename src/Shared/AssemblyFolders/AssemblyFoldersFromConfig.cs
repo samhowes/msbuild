@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -12,7 +12,7 @@ using ProcessorArchitecture = System.Reflection.ProcessorArchitecture;
 
 namespace Microsoft.Build.Tasks.AssemblyFoldersFromConfig
 {
-    internal class AssemblyFoldersFromConfig : IEnumerable<AssemblyFoldersFromConfigInfo>
+    public class AssemblyFoldersFromConfig : IEnumerable<AssemblyFoldersFromConfigInfo>
     {
         /// <summary>
         /// The list of directory names found from the config file.
@@ -25,7 +25,7 @@ namespace Microsoft.Build.Tasks.AssemblyFoldersFromConfig
         /// <param name="configFile">The path to the config file.</param>
         /// <param name="targetRuntimeVersion">The runtime version property from the project file.</param>
         /// <param name="targetArchitecture">The <see cref="ProcessorArchitecture"/> to target.</param>
-        internal AssemblyFoldersFromConfig(string configFile, string targetRuntimeVersion, ProcessorArchitecture targetArchitecture)
+        public AssemblyFoldersFromConfig(string configFile, string targetRuntimeVersion, ProcessorArchitecture targetArchitecture)
         {
             ErrorUtilities.VerifyThrowArgumentNull(configFile, nameof(configFile));
             ErrorUtilities.VerifyThrowArgumentNull(targetRuntimeVersion, nameof(targetRuntimeVersion));

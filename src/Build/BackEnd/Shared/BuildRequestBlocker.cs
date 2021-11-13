@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Diagnostics;
@@ -9,7 +9,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// Indicates what the action is for requests which are yielding.
     /// </summary>
-    internal enum YieldAction : byte
+    public enum YieldAction : byte
     {
         /// <summary>
         /// The request is yielding its control of the node.
@@ -34,7 +34,7 @@ namespace Microsoft.Build.BackEnd
     ///    another request.
     /// 2) The request may be blocked because it has child requests which need to be satisfied to proceed.
     /// </summary>
-    internal class BuildRequestBlocker : INodePacket
+    public class BuildRequestBlocker : INodePacket
     {
         /// <summary>
         /// The yield action, if any.
@@ -71,7 +71,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Constructor for deserialization.
         /// </summary>
-        internal BuildRequestBlocker(ITranslator translator)
+        public BuildRequestBlocker(ITranslator translator)
         {
             Translate(translator);
         }
@@ -79,7 +79,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Constructor for the blocker where we are blocked waiting for a target.
         /// </summary>
-        internal BuildRequestBlocker(int blockedGlobalRequestId, string[] targetsInProgress, int blockingGlobalRequestId, string blockingTarget)
+        public BuildRequestBlocker(int blockedGlobalRequestId, string[] targetsInProgress, int blockingGlobalRequestId, string blockingTarget)
             : this(blockedGlobalRequestId, targetsInProgress)
         {
             _blockingGlobalRequestId = blockingGlobalRequestId;
@@ -89,7 +89,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Constructor for the blocker where we are blocked waiting for requests to be satisfied.
         /// </summary>
-        internal BuildRequestBlocker(int blockedGlobalRequestId, string[] targetsInProgress, BuildRequest[] buildRequests)
+        public BuildRequestBlocker(int blockedGlobalRequestId, string[] targetsInProgress, BuildRequest[] buildRequests)
             : this(blockedGlobalRequestId, targetsInProgress)
         {
             _buildRequests = buildRequests;
@@ -98,7 +98,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Constructor for a blocker used by yielding requests.
         /// </summary>
-        internal BuildRequestBlocker(int blockedGlobalRequestId, string[] targetsInProgress, YieldAction action)
+        public BuildRequestBlocker(int blockedGlobalRequestId, string[] targetsInProgress, YieldAction action)
             : this(blockedGlobalRequestId, targetsInProgress)
         {
             _yieldAction = action;
@@ -109,7 +109,7 @@ namespace Microsoft.Build.BackEnd
         /// Constructor for a blocker used by results-transfer requests
         /// </summary>
         /// <param name="blockedGlobalRequestId">The request needing results transferred</param>
-        internal BuildRequestBlocker(int blockedGlobalRequestId)
+        public BuildRequestBlocker(int blockedGlobalRequestId)
         {
             _blockedGlobalRequestId = blockedGlobalRequestId;
             _blockingGlobalRequestId = blockedGlobalRequestId;
@@ -239,7 +239,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Factory for serialization.
         /// </summary>
-        internal static INodePacket FactoryForDeserialization(ITranslator translator)
+        public static INodePacket FactoryForDeserialization(ITranslator translator)
         {
             return new BuildRequestBlocker(translator);
         }

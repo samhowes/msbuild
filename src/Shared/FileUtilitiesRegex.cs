@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Runtime.CompilerServices;
@@ -11,7 +11,7 @@ namespace Microsoft.Build.Shared
     /// PERF\COVERAGE NOTE: Try to keep classes in 'shared' as granular as possible. All the methods in 
     /// each class get pulled into the resulting assembly.
     /// </summary>
-    internal static class FileUtilitiesRegex
+    public static class FileUtilitiesRegex
     {
         private static readonly char _backSlash = '\\';
         private static readonly char _forwardSlash = '/';
@@ -21,7 +21,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="pattern">Input to check for drive pattern.</param>
         /// <returns>true if follows the drive pattern, false otherwise.</returns>
-        internal static bool IsDrivePattern(string pattern)
+        public static bool IsDrivePattern(string pattern)
         {
             // Format must be two characters long: "<drive letter>:"
             return pattern.Length == 2 &&
@@ -33,7 +33,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="pattern">Input to check for drive pattern with slash.</param>
         /// <returns>true if follows the drive pattern with slash, false otherwise.</returns>
-        internal static bool IsDrivePatternWithSlash(string pattern)
+        public static bool IsDrivePatternWithSlash(string pattern)
         {
             return pattern.Length == 3 &&
                     StartsWithDrivePatternWithSlash(pattern);
@@ -44,7 +44,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="pattern">Input to check for drive pattern.</param>
         /// <returns>true if starts with drive pattern, false otherwise.</returns>
-        internal static bool StartsWithDrivePattern(string pattern)
+        public static bool StartsWithDrivePattern(string pattern)
         {
             // Format dictates a length of at least 2,
             // first character must be a letter,
@@ -59,7 +59,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="pattern">Input to check for drive pattern.</param>
         /// <returns>true if starts with drive pattern with slash, false otherwise.</returns>
-        internal static bool StartsWithDrivePatternWithSlash(string pattern)
+        public static bool StartsWithDrivePatternWithSlash(string pattern)
         {
             // Format dictates a length of at least 3,
             // first character must be a letter,
@@ -75,7 +75,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="pattern">Input to check for UNC pattern.</param>
         /// <returns>true if comprises UNC pattern.</returns>
-        internal static bool IsUncPattern(string pattern)
+        public static bool IsUncPattern(string pattern)
         {
             //Return value == pattern.length means:
             //  meets minimum unc requirements
@@ -89,7 +89,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="pattern">Input to check for UNC pattern.</param>
         /// <returns>true if starts with UNC pattern.</returns>
-        internal static bool StartsWithUncPattern(string pattern)
+        public static bool StartsWithUncPattern(string pattern)
         {
             //Any non -1 value returned means there was a match, therefore is begins with the pattern.
             return StartsWithUncPatternMatchLength(pattern) != -1;
@@ -100,7 +100,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="pattern">Input to check for UNC pattern.</param>
         /// <returns>length of the match, -1 if no match.</returns>
-        internal static int StartsWithUncPatternMatchLength(string pattern)
+        public static int StartsWithUncPatternMatchLength(string pattern)
         {
             if (!MeetsUncPatternMinimumRequirements(pattern))
             {
@@ -153,7 +153,7 @@ namespace Microsoft.Build.Shared
 #if !NET35
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
-        internal static bool MeetsUncPatternMinimumRequirements(string pattern)
+        public static bool MeetsUncPatternMinimumRequirements(string pattern)
         {
             return pattern.Length >= 5 &&
                 (pattern[0] == _backSlash ||

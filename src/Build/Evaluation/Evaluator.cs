@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -48,7 +48,7 @@ namespace Microsoft.Build.Evaluation
     /// <remarks>
     /// This class could be improved to do partial (minimal) reevaluation: at present we wipe all state and start over.
     /// </remarks>
-    internal class Evaluator<P, I, M, D>
+    public class Evaluator<P, I, M, D>
         where P : class, IProperty, IEquatable<P>, IValued
         where I : class, IItem<M>, IMetadataTable
         where M : class, IMetadatum
@@ -265,13 +265,13 @@ namespace Microsoft.Build.Evaluation
         /// Delegate passed to methods to provide basic expression evaluation
         /// ability, without having a language service.
         /// </summary>
-        internal delegate string ExpandExpression(string unexpandedString);
+        public delegate string ExpandExpression(string unexpandedString);
 
         /// <summary>
         /// Delegate passed to methods to provide basic expression evaluation
         /// ability, without having a language service.
         /// </summary>
-        internal delegate bool EvaluateConditionalExpression(string unexpandedExpression);
+        public delegate bool EvaluateConditionalExpression(string unexpandedExpression);
 
         /// <summary>
         /// Evaluates the project data passed in.
@@ -281,7 +281,7 @@ namespace Microsoft.Build.Evaluation
         /// This is a helper static method so that the caller can just do "Evaluator.Evaluate(..)" without
         /// newing one up, yet the whole class need not be static.
         /// </remarks>
-        internal static void Evaluate(
+        public static void Evaluate(
             IEvaluatorData<P, I, M, D> data,
             ProjectRootElement root,
             ProjectLoadSettings loadSettings,
@@ -324,7 +324,7 @@ namespace Microsoft.Build.Evaluation
         /// Helper that creates a list of ProjectItem's given an unevaluated Include and a ProjectRootElement.
         /// Used by both Evaluator.EvaluateItemElement and by Project.AddItem.
         /// </summary>
-        internal static List<I> CreateItemsFromInclude(string rootDirectory, ProjectItemElement itemElement, IItemFactory<I, I> itemFactory, string unevaluatedIncludeEscaped, Expander<P, I> expander)
+        public static List<I> CreateItemsFromInclude(string rootDirectory, ProjectItemElement itemElement, IItemFactory<I, I> itemFactory, string unevaluatedIncludeEscaped, Expander<P, I> expander)
         {
             ErrorUtilities.VerifyThrowArgumentLength(unevaluatedIncludeEscaped, nameof(unevaluatedIncludeEscaped));
 
@@ -2505,7 +2505,7 @@ namespace Microsoft.Build.Evaluation
     /// <summary>
     /// Represents result of attempting to load imports (ExpandAndLoadImportsFromUnescapedImportExpression*)
     /// </summary>
-    internal enum LoadImportsResult
+    public enum LoadImportsResult
     {
         ProjectsImported,
         FoundFilesToImportButIgnored,

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -9,89 +9,89 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// Contains the names of the known attributes in the XML project file.
     /// </summary>
-    internal static class XMakeAttributes
+    public static class XMakeAttributes
     {
-        internal const string condition = "Condition";
-        internal const string executeTargets = "ExecuteTargets";
-        internal const string name = "Name";
-        internal const string msbuildVersion = "MSBuildVersion";
-        internal const string xmlns = "xmlns";
-        internal const string defaultTargets = "DefaultTargets";
-        internal const string initialTargets = "InitialTargets";
-        internal const string treatAsLocalProperty = "TreatAsLocalProperty";
-        internal const string dependsOnTargets = "DependsOnTargets";
-        internal const string beforeTargets = "BeforeTargets";
-        internal const string afterTargets = "AfterTargets";
-        internal const string include = "Include";
-        internal const string exclude = "Exclude";
-        internal const string remove = "Remove";
-        internal const string update = "Update";
-        internal const string matchOnMetadata = "MatchOnMetadata";
-        internal const string matchOnMetadataOptions = "MatchOnMetadataOptions";
-        internal const string keepMetadata = "KeepMetadata";
-        internal const string removeMetadata = "RemoveMetadata";
-        internal const string keepDuplicates = "KeepDuplicates";
-        internal const string inputs = "Inputs";
-        internal const string outputs = "Outputs";
-        internal const string keepDuplicateOutputs = "KeepDuplicateOutputs";
-        internal const string assemblyName = "AssemblyName";
-        internal const string assemblyFile = "AssemblyFile";
-        internal const string taskName = "TaskName";
-        internal const string continueOnError = "ContinueOnError";
-        internal const string project = "Project";
-        internal const string taskParameter = "TaskParameter";
-        internal const string itemName = "ItemName";
-        internal const string propertyName = "PropertyName";
-        internal const string sdk = "Sdk";
-        internal const string sdkName = "Name";
-        internal const string sdkVersion = "Version";
-        internal const string sdkMinimumVersion = "MinimumVersion";
-        internal const string toolsVersion = "ToolsVersion";
-        internal const string runtime = "Runtime";
-        internal const string msbuildRuntime = "MSBuildRuntime";
-        internal const string architecture = "Architecture";
-        internal const string msbuildArchitecture = "MSBuildArchitecture";
-        internal const string taskFactory = "TaskFactory";
-        internal const string parameterType = "ParameterType";
-        internal const string required = "Required";
-        internal const string output = "Output";
-        internal const string defaultValue = "DefaultValue";
-        internal const string evaluate = "Evaluate";
-        internal const string label = "Label";
-        internal const string returns = "Returns";
+        public const string condition = "Condition";
+        public const string executeTargets = "ExecuteTargets";
+        public const string name = "Name";
+        public const string msbuildVersion = "MSBuildVersion";
+        public const string xmlns = "xmlns";
+        public const string defaultTargets = "DefaultTargets";
+        public const string initialTargets = "InitialTargets";
+        public const string treatAsLocalProperty = "TreatAsLocalProperty";
+        public const string dependsOnTargets = "DependsOnTargets";
+        public const string beforeTargets = "BeforeTargets";
+        public const string afterTargets = "AfterTargets";
+        public const string include = "Include";
+        public const string exclude = "Exclude";
+        public const string remove = "Remove";
+        public const string update = "Update";
+        public const string matchOnMetadata = "MatchOnMetadata";
+        public const string matchOnMetadataOptions = "MatchOnMetadataOptions";
+        public const string keepMetadata = "KeepMetadata";
+        public const string removeMetadata = "RemoveMetadata";
+        public const string keepDuplicates = "KeepDuplicates";
+        public const string inputs = "Inputs";
+        public const string outputs = "Outputs";
+        public const string keepDuplicateOutputs = "KeepDuplicateOutputs";
+        public const string assemblyName = "AssemblyName";
+        public const string assemblyFile = "AssemblyFile";
+        public const string taskName = "TaskName";
+        public const string continueOnError = "ContinueOnError";
+        public const string project = "Project";
+        public const string taskParameter = "TaskParameter";
+        public const string itemName = "ItemName";
+        public const string propertyName = "PropertyName";
+        public const string sdk = "Sdk";
+        public const string sdkName = "Name";
+        public const string sdkVersion = "Version";
+        public const string sdkMinimumVersion = "MinimumVersion";
+        public const string toolsVersion = "ToolsVersion";
+        public const string runtime = "Runtime";
+        public const string msbuildRuntime = "MSBuildRuntime";
+        public const string architecture = "Architecture";
+        public const string msbuildArchitecture = "MSBuildArchitecture";
+        public const string taskFactory = "TaskFactory";
+        public const string parameterType = "ParameterType";
+        public const string required = "Required";
+        public const string output = "Output";
+        public const string defaultValue = "DefaultValue";
+        public const string evaluate = "Evaluate";
+        public const string label = "Label";
+        public const string returns = "Returns";
 
         // Obsolete
-        internal const string requiredRuntime = "RequiredRuntime";
-        internal const string requiredPlatform = "RequiredPlatform";
+        public const string requiredRuntime = "RequiredRuntime";
+        public const string requiredPlatform = "RequiredPlatform";
 
-        internal struct ContinueOnErrorValues
+        public struct ContinueOnErrorValues
         {
-            internal const string errorAndContinue = "ErrorAndContinue";
-            internal const string errorAndStop = "ErrorAndStop";
-            internal const string warnAndContinue = "WarnAndContinue";
+            public const string errorAndContinue = "ErrorAndContinue";
+            public const string errorAndStop = "ErrorAndStop";
+            public const string warnAndContinue = "WarnAndContinue";
         }
 
-        internal struct MSBuildRuntimeValues
+        public struct MSBuildRuntimeValues
         {
-            internal const string clr2 = "CLR2";
-            internal const string clr4 = "CLR4";
-            internal const string currentRuntime = "CurrentRuntime";
-            internal const string any = "*";
+            public const string clr2 = "CLR2";
+            public const string clr4 = "CLR4";
+            public const string currentRuntime = "CurrentRuntime";
+            public const string any = "*";
         }
 
-        internal struct MSBuildArchitectureValues
+        public struct MSBuildArchitectureValues
         {
-            internal const string x86 = "x86";
-            internal const string x64 = "x64";
-            internal const string currentArchitecture = "CurrentArchitecture";
-            internal const string any = "*";
+            public const string x86 = "x86";
+            public const string x64 = "x64";
+            public const string currentArchitecture = "CurrentArchitecture";
+            public const string any = "*";
         }
 
         /////////////////////////////////////////////////////////////////////////////////////////////
         // If we ever add a new MSBuild namespace (or change this one) we must update the registry key
         // we set during install to disable the XSL debugger from working on MSBuild format files.
         /////////////////////////////////////////////////////////////////////////////////////////////
-        internal const string defaultXmlNamespace = "http://schemas.microsoft.com/developer/msbuild/2003";
+        public const string defaultXmlNamespace = "http://schemas.microsoft.com/developer/msbuild/2003";
 
         private static readonly HashSet<string> KnownSpecialTaskAttributes = new HashSet<string> { condition, continueOnError, msbuildRuntime, msbuildArchitecture, xmlns };
 
@@ -109,7 +109,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="attribute"></param>
         /// <returns>true, if given attribute is a reserved task attribute</returns>
-        internal static bool IsSpecialTaskAttribute(string attribute)
+        public static bool IsSpecialTaskAttribute(string attribute)
         {
             // Currently the known "special" attributes for a task are:
             //  Condition, ContinueOnError
@@ -123,7 +123,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="attribute"></param>
         /// <returns>true, if the given attribute is reserved and badly cased</returns>
-        internal static bool IsBadlyCasedSpecialTaskAttribute(string attribute)
+        public static bool IsBadlyCasedSpecialTaskAttribute(string attribute)
         {
             return !IsSpecialTaskAttribute(attribute) && KnownSpecialTaskAttributesIgnoreCase.Contains(attribute);
         }
@@ -133,7 +133,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="attribute"></param>
         /// <returns>true, if a target cannot batch on the given attribute</returns>
-        internal static bool IsNonBatchingTargetAttribute(string attribute)
+        public static bool IsNonBatchingTargetAttribute(string attribute)
         {
             return KnownBatchingTargetAttributes.Contains(attribute);
         }
@@ -141,7 +141,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Returns true if the given string is a valid member of the MSBuildRuntimeValues set
         /// </summary>
-        internal static bool IsValidMSBuildRuntimeValue(string runtime)
+        public static bool IsValidMSBuildRuntimeValue(string runtime)
         {
             return runtime == null || ValidMSBuildRuntimeValues.Contains(runtime);
         }
@@ -149,7 +149,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Returns true if the given string is a valid member of the MSBuildArchitectureValues set
         /// </summary>
-        internal static bool IsValidMSBuildArchitectureValue(string architecture)
+        public static bool IsValidMSBuildArchitectureValue(string architecture)
         {
             return architecture == null || ValidMSBuildArchitectureValues.Contains(architecture);
         }
@@ -157,7 +157,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Compares two members of MSBuildRuntimeValues, returning true if they count as a match, and false otherwise.  
         /// </summary>
-        internal static bool RuntimeValuesMatch(string runtimeA, string runtimeB)
+        public static bool RuntimeValuesMatch(string runtimeA, string runtimeB)
         {
             ErrorUtilities.VerifyThrow(runtimeA != String.Empty && runtimeB != String.Empty, "We should never get an empty string passed to this method");
 
@@ -201,7 +201,7 @@ namespace Microsoft.Build.Shared
         /// If both specify "don't care", then defaults to the current runtime -- CLR4. 
         /// A null or empty string is interpreted as "don't care".
         /// </summary>
-        internal static bool TryMergeRuntimeValues(string runtimeA, string runtimeB, out string mergedRuntime)
+        public static bool TryMergeRuntimeValues(string runtimeA, string runtimeB, out string mergedRuntime)
         {
             ErrorUtilities.VerifyThrow(runtimeA != String.Empty && runtimeB != String.Empty, "We should never get an empty string passed to this method");
 
@@ -274,7 +274,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Compares two members of MSBuildArchitectureValues, returning true if they count as a match, and false otherwise.  
         /// </summary>
-        internal static bool ArchitectureValuesMatch(string architectureA, string architectureB)
+        public static bool ArchitectureValuesMatch(string architectureA, string architectureB)
         {
             ErrorUtilities.VerifyThrow(architectureA != String.Empty && architectureB != String.Empty, "We should never get an empty string passed to this method");
 
@@ -314,7 +314,7 @@ namespace Microsoft.Build.Shared
         /// to any known runtime, just return it as is -- maybe someone else knows what to do with it; if 
         /// not, they'll certainly have more context on logging or throwing the error. 
         /// </summary>
-        internal static string GetExplicitMSBuildRuntime(string runtime)
+        public static string GetExplicitMSBuildRuntime(string runtime)
         {
             if (runtime == null ||
                 MSBuildRuntimeValues.any.Equals(runtime, StringComparison.OrdinalIgnoreCase) ||
@@ -341,7 +341,7 @@ namespace Microsoft.Build.Shared
         /// A null or empty string is interpreted as "don't care".
         /// If both specify "don't care", then defaults to whatever the current process architecture is.  
         /// </summary>
-        internal static bool TryMergeArchitectureValues(string architectureA, string architectureB, out string mergedArchitecture)
+        public static bool TryMergeArchitectureValues(string architectureA, string architectureB, out string mergedArchitecture)
         {
             ErrorUtilities.VerifyThrow(architectureA != String.Empty && architectureB != String.Empty, "We should never get an empty string passed to this method");
 
@@ -419,7 +419,7 @@ namespace Microsoft.Build.Shared
         /// <comments>
         /// Revisit if we ever run on something other than Intel.  
         /// </comments>
-        internal static string GetCurrentMSBuildArchitecture()
+        public static string GetCurrentMSBuildArchitecture()
         {
             string currentArchitecture = (IntPtr.Size == sizeof(Int64)) ? MSBuildArchitectureValues.x64 : MSBuildArchitectureValues.x86;
             return currentArchitecture;
@@ -431,7 +431,7 @@ namespace Microsoft.Build.Shared
         /// to any known architecture, just return it as is -- maybe someone else knows what to do with it; if 
         /// not, they'll certainly have more context on logging or throwing the error. 
         /// </summary>
-        internal static string GetExplicitMSBuildArchitecture(string architecture)
+        public static string GetExplicitMSBuildArchitecture(string architecture)
         {
             if (architecture == null ||
                 MSBuildArchitectureValues.any.Equals(architecture, StringComparison.OrdinalIgnoreCase) ||

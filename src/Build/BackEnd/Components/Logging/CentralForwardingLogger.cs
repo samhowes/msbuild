@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Framework;
@@ -9,7 +9,7 @@ namespace Microsoft.Build.BackEnd.Logging
     /// <summary>
     /// Logger that forwards events to loggers registered with the LoggingServices
     /// </summary>
-    internal class CentralForwardingLogger : IForwardingLogger
+    public class CentralForwardingLogger : IForwardingLogger
     {
         #region Properties
 

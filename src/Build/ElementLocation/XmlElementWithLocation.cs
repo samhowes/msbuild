@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -17,7 +17,7 @@ namespace Microsoft.Build.Construction
     /// C# doesn't currently allow covariance in method overloading, only on delegates.
     /// The caller must bravely downcast.
     /// </remarks>
-    internal class XmlElementWithLocation : XmlElement, IXmlLineInfo, ILinkedXml
+    public class XmlElementWithLocation : XmlElement, IXmlLineInfo, ILinkedXml
     {
         /// <summary>
         /// Line, column, file information
@@ -86,7 +86,7 @@ namespace Microsoft.Build.Construction
         /// even if it wasn't loaded from disk, or has been edited since. That's because we set that
         /// path on our XmlDocumentWithLocation wrapper class.
         /// </remarks>
-        internal ElementLocation Location
+        public ElementLocation Location
         {
             get
             {
@@ -146,7 +146,7 @@ namespace Microsoft.Build.Construction
         /// Gets the location of any attribute on this element with the specified name.
         /// If there is no such attribute, returns null.
         /// </summary>
-        internal ElementLocation GetAttributeLocation(string name)
+        public ElementLocation GetAttributeLocation(string name)
         {
             XmlAttributeWithLocation attributeWithLocation = GetAttributeWithLocation(name);
 

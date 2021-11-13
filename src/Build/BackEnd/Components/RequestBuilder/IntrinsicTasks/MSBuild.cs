@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -18,7 +18,7 @@ namespace Microsoft.Build.BackEnd
     /// <remarks>
     /// This class implements the "MSBuild" task, which hands off child project files to the MSBuild engine to be built.
     /// </remarks>
-    internal class MSBuild : ITask
+    public class MSBuild : ITask
     {
         /// <summary>
         /// Enum describing the behavior when a project doesn't exist on disk.
@@ -472,7 +472,7 @@ namespace Microsoft.Build.BackEnd
             }
         }
 
-        internal static List<string[]> CreateTargetLists
+        public static List<string[]> CreateTargetLists
             (
             string[] targets,
             bool runEachTargetSeparately
@@ -501,7 +501,7 @@ namespace Microsoft.Build.BackEnd
             return targetLists;
         }
 
-        internal static async Task<bool> ExecuteTargets(
+        public static async Task<bool> ExecuteTargets(
             ITaskItem[] projects,
             Dictionary<string, string> propertiesTable,
             string[] undefineProperties,

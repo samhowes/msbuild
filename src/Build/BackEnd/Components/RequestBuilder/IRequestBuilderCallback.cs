@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Execution;
@@ -10,7 +10,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// This interface is passed to objects which might need to call back into the request builder, such as the Target and Task builders
     /// </summary>
-    internal interface IRequestBuilderCallback
+    public interface IRequestBuilderCallback
     {
         /// <summary>
         /// This method instructs the request builder to build the specified projects using the specified parameters.  This is

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Diagnostics.CodeAnalysis;
@@ -18,7 +18,7 @@ namespace Microsoft.Build.Shared
     /// <typeparam name="TKey">Key</typeparam>
     /// <typeparam name="TValue">Value</typeparam>
     [SuppressMessage("Microsoft.Performance", "CA1815:OverrideEqualsAndOperatorEqualsOnValueTypes", Justification = "Not possible as Equals cannot be implemented on the struct members")]
-    internal struct Pair<TKey, TValue>
+    public struct Pair<TKey, TValue>
     {
         /// <summary>
         /// Key
@@ -42,7 +42,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Key
         /// </summary>
-        internal TKey Key
+        public TKey Key
         {
             get { return _key; }
         }
@@ -50,7 +50,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Value
         /// </summary>
-        internal TValue Value
+        public TValue Value
         {
             get { return _value; }
         }

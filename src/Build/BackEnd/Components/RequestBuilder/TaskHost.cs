@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -29,7 +29,7 @@ namespace Microsoft.Build.BackEnd
     /// The task host object which allows tasks to interface with the rest of the build system.
     /// Implementation of IBuildEngineX is thread-safe, so, for example, tasks can log concurrently on multiple threads.
     /// </summary>
-    internal class TaskHost :
+    public class TaskHost :
 #if FEATURE_APPDOMAIN
         MarshalByRefObject,
 #endif
@@ -152,7 +152,7 @@ namespace Microsoft.Build.BackEnd
                 return _continueOnError;
             }
 
-            internal set
+            set
             {
                 _continueOnError = value;
             }
@@ -196,7 +196,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Indicates whether or not errors should be converted to warnings.
         /// </summary>
-        internal bool ConvertErrorsToWarnings
+        public bool ConvertErrorsToWarnings
         {
             get { return _convertErrorsToWarnings; }
             set { _convertErrorsToWarnings = value; }
@@ -205,7 +205,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Sets or retrieves the logging context
         /// </summary>
-        internal TaskLoggingContext LoggingContext
+        public TaskLoggingContext LoggingContext
         {
             [DebuggerStepThrough]
             get
@@ -220,7 +220,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// For configuring child AppDomains.
         /// </summary>
-        internal AppDomainSetup AppDomainSetup
+        public AppDomainSetup AppDomainSetup
         {
             get
             {
@@ -232,7 +232,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Whether or not this is out of proc.
         /// </summary>
-        internal bool IsOutOfProc
+        public bool IsOutOfProc
         {
             get
             {
@@ -788,7 +788,7 @@ namespace Microsoft.Build.BackEnd
         /// Indicates to the TaskHost that it is no longer needed.
         /// Called by TaskBuilder when the task using the EngineProxy is done.
         /// </summary>
-        internal void MarkAsInactive()
+        public void MarkAsInactive()
         {
             lock (_callbackMonitor)
             {
@@ -823,7 +823,7 @@ namespace Microsoft.Build.BackEnd
         /// Determine if the event is serializable. If we are running with multiple nodes we need to make sure the logging events are serializable. If not
         /// we need to log a warning.
         /// </summary>
-        internal bool IsEventSerializable(BuildEventArgs e)
+        public bool IsEventSerializable(BuildEventArgs e)
         {
             if (!e.GetType().GetTypeInfo().IsSerializable)
             {

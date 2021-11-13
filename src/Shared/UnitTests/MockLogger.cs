@@ -24,7 +24,7 @@ namespace Microsoft.Build.UnitTests
      * up a raw string (fullLog) that contains all messages, warnings, errors.
      * Thread-safe.
      */
-    internal sealed class MockLogger : ILogger
+    public sealed class MockLogger : ILogger
     {
         #region Properties
 
@@ -38,7 +38,7 @@ namespace Microsoft.Build.UnitTests
         /// Should the build finished event be logged in the log file. This is to work around the fact we have different
         /// localized strings between env and xmake for the build finished event.
         /// </summary>
-        internal bool LogBuildFinished { get; set; } = true;
+        public bool LogBuildFinished { get; set; } = true;
 
         /*
          * Method:  ErrorCount
@@ -46,7 +46,7 @@ namespace Microsoft.Build.UnitTests
          * The count of all errors seen so far.
          *
          */
-        internal int ErrorCount { get; private set; }
+        public int ErrorCount { get; private set; }
 
         /*
          * Method:  WarningCount
@@ -54,79 +54,79 @@ namespace Microsoft.Build.UnitTests
          * The count of all warnings seen so far.
          *
          */
-        internal int WarningCount { get; private set; }
+        public int WarningCount { get; private set; }
 
         /// <summary>
         /// Return the list of logged errors
         /// </summary>
-        internal List<BuildErrorEventArgs> Errors { get; } = new List<BuildErrorEventArgs>();
+        public List<BuildErrorEventArgs> Errors { get; } = new List<BuildErrorEventArgs>();
 
         /// <summary>
         /// Returns the list of logged warnings
         /// </summary>
-        internal List<BuildWarningEventArgs> Warnings { get; } = new List<BuildWarningEventArgs>();
+        public List<BuildWarningEventArgs> Warnings { get; } = new List<BuildWarningEventArgs>();
 
         /// <summary>
         /// When set to true, allows task crashes to be logged without causing an assert.
         /// </summary>
-        internal bool AllowTaskCrashes { get; set; }
+        public bool AllowTaskCrashes { get; set; }
 
         /// <summary>
         /// List of ExternalProjectStarted events
         /// </summary>
-        internal List<ExternalProjectStartedEventArgs> ExternalProjectStartedEvents { get; } = new List<ExternalProjectStartedEventArgs>();
+        public List<ExternalProjectStartedEventArgs> ExternalProjectStartedEvents { get; } = new List<ExternalProjectStartedEventArgs>();
 
         /// <summary>
         /// List of ExternalProjectFinished events
         /// </summary>
-        internal List<ExternalProjectFinishedEventArgs> ExternalProjectFinishedEvents { get; } = new List<ExternalProjectFinishedEventArgs>();
+        public List<ExternalProjectFinishedEventArgs> ExternalProjectFinishedEvents { get; } = new List<ExternalProjectFinishedEventArgs>();
 
         /// <summary>
         /// List of ProjectStarted events
         /// </summary>
-        internal List<ProjectStartedEventArgs> ProjectStartedEvents { get; } = new List<ProjectStartedEventArgs>();
+        public List<ProjectStartedEventArgs> ProjectStartedEvents { get; } = new List<ProjectStartedEventArgs>();
 
         /// <summary>
         /// List of ProjectFinished events
         /// </summary>
-        internal List<ProjectFinishedEventArgs> ProjectFinishedEvents { get; } = new List<ProjectFinishedEventArgs>();
+        public List<ProjectFinishedEventArgs> ProjectFinishedEvents { get; } = new List<ProjectFinishedEventArgs>();
 
         /// <summary>
         /// List of TargetStarted events
         /// </summary>
-        internal List<TargetStartedEventArgs> TargetStartedEvents { get; } = new List<TargetStartedEventArgs>();
+        public List<TargetStartedEventArgs> TargetStartedEvents { get; } = new List<TargetStartedEventArgs>();
 
         /// <summary>
         /// List of TargetFinished events
         /// </summary>
-        internal List<TargetFinishedEventArgs> TargetFinishedEvents { get; } = new List<TargetFinishedEventArgs>();
+        public List<TargetFinishedEventArgs> TargetFinishedEvents { get; } = new List<TargetFinishedEventArgs>();
 
         /// <summary>
         /// List of TaskStarted events
         /// </summary>
-        internal List<TaskStartedEventArgs> TaskStartedEvents { get; } = new List<TaskStartedEventArgs>();
+        public List<TaskStartedEventArgs> TaskStartedEvents { get; } = new List<TaskStartedEventArgs>();
 
         /// <summary>
         /// List of TaskFinished events
         /// </summary>
-        internal List<TaskFinishedEventArgs> TaskFinishedEvents { get; } = new List<TaskFinishedEventArgs>();
+        public List<TaskFinishedEventArgs> TaskFinishedEvents { get; } = new List<TaskFinishedEventArgs>();
 
         /// <summary>
         /// List of BuildMessage events
         /// </summary>
-        internal List<BuildMessageEventArgs> BuildMessageEvents { get; } = new List<BuildMessageEventArgs>();
+        public List<BuildMessageEventArgs> BuildMessageEvents { get; } = new List<BuildMessageEventArgs>();
 
         /// <summary>
         /// List of BuildStarted events, thought we expect there to only be one, a valid check is to make sure this list is length 1
         /// </summary>
-        internal List<BuildStartedEventArgs> BuildStartedEvents { get; } = new List<BuildStartedEventArgs>();
+        public List<BuildStartedEventArgs> BuildStartedEvents { get; } = new List<BuildStartedEventArgs>();
 
         /// <summary>
         /// List of BuildFinished events, thought we expect there to only be one, a valid check is to make sure this list is length 1
         /// </summary>
-        internal List<BuildFinishedEventArgs> BuildFinishedEvents { get; } = new List<BuildFinishedEventArgs>();
+        public List<BuildFinishedEventArgs> BuildFinishedEvents { get; } = new List<BuildFinishedEventArgs>();
 
-        internal List<BuildEventArgs> AllBuildEvents { get; } = new List<BuildEventArgs>();
+        public List<BuildEventArgs> AllBuildEvents { get; } = new List<BuildEventArgs>();
 
         /*
          * Method:  FullLog
@@ -134,7 +134,7 @@ namespace Microsoft.Build.UnitTests
          * The raw concatenation of all messages, errors and warnings seen so far.
          *
          */
-        internal string FullLog
+        public string FullLog
         {
             get
             {
@@ -229,7 +229,7 @@ namespace Microsoft.Build.UnitTests
          * Receives build events and logs them the way we like.
          *
          */
-        internal void LoggerEventHandler(object sender, BuildEventArgs eventArgs)
+        public void LoggerEventHandler(object sender, BuildEventArgs eventArgs)
         {
             lock (_lockObj)
             {
@@ -381,14 +381,14 @@ namespace Microsoft.Build.UnitTests
         /// Assert that the log file contains the given strings, in order.
         /// </summary>
         /// <param name="contains"></param>
-        internal void AssertLogContains(params string[] contains) => AssertLogContains(true, contains);
+        public void AssertLogContains(params string[] contains) => AssertLogContains(true, contains);
 
         /// <summary>
         /// Assert that the log file contains the given string, in order. Includes the option of case invariance
         /// </summary>
         /// <param name="isCaseSensitive">False if we do not care about case sensitivity</param>
         /// <param name="contains"></param>
-        internal void AssertLogContains(bool isCaseSensitive, params string[] contains)
+        public void AssertLogContains(bool isCaseSensitive, params string[] contains)
         {
             lock (_lockObj)
             {
@@ -444,7 +444,7 @@ namespace Microsoft.Build.UnitTests
         /// Assert that the log file does not contain the given string.
         /// </summary>
         /// <param name="contains"></param>
-        internal void AssertLogDoesntContain(string contains)
+        public void AssertLogDoesntContain(string contains)
         {
             lock (_lockObj)
             {
@@ -467,14 +467,14 @@ namespace Microsoft.Build.UnitTests
         /// <summary>
         /// Assert that no errors were logged
         /// </summary>
-        internal void AssertNoErrors() => Assert.Equal(0, ErrorCount);
+        public void AssertNoErrors() => Assert.Equal(0, ErrorCount);
 
         /// <summary>
         /// Assert that no warnings were logged
         /// </summary>
-        internal void AssertNoWarnings() => Assert.Equal(0, WarningCount);
+        public void AssertNoWarnings() => Assert.Equal(0, WarningCount);
 
-        internal void AssertMessageCount(string message, int expectedCount)
+        public void AssertMessageCount(string message, int expectedCount)
         {
             var matches = Regex.Matches(FullLog, message);
             matches.Count.ShouldBe(expectedCount);

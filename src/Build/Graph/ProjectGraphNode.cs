@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -20,7 +20,7 @@ namespace Microsoft.Build.Graph
         private readonly HashSet<ProjectGraphNode> _referencingProjects = new HashSet<ProjectGraphNode>();
 
         // No public creation.
-        internal ProjectGraphNode(ProjectInstance projectInstance)
+        public ProjectGraphNode(ProjectInstance projectInstance)
         {
             ErrorUtilities.VerifyThrowInternalNull(projectInstance, nameof(projectInstance));
             ProjectInstance = projectInstance;
@@ -49,7 +49,7 @@ namespace Microsoft.Build.Graph
                 $"{truncatedProjectFile}, #GlobalProps={ProjectInstance.GlobalProperties.Count}, #Props={ProjectInstance.Properties.Count}, #Items={ProjectInstance.Items.Count}, #in={ReferencingProjects.Count}, #out={ProjectReferences.Count}";
         }
 
-        internal void AddProjectReference(ProjectGraphNode reference, ProjectItemInstance projectReferenceItem, GraphBuilder.GraphEdges edges)
+        public void AddProjectReference(ProjectGraphNode reference, ProjectItemInstance projectReferenceItem, GraphBuilder.GraphEdges edges)
         {
             _projectReferences.Add(reference);
             reference._referencingProjects.Add(this);
@@ -58,7 +58,7 @@ namespace Microsoft.Build.Graph
             edges[(this, reference)] = projectReferenceItem;
         }
 
-        internal void RemoveReference(ProjectGraphNode reference, GraphBuilder.GraphEdges edges)
+        public void RemoveReference(ProjectGraphNode reference, GraphBuilder.GraphEdges edges)
         {
             _projectReferences.Remove(reference);
             reference._referencingProjects.Remove(reference);
@@ -66,7 +66,7 @@ namespace Microsoft.Build.Graph
             edges.RemoveEdge((this, reference));
         }
 
-        internal void RemoveReferences(GraphBuilder.GraphEdges edges)
+        public void RemoveReferences(GraphBuilder.GraphEdges edges)
         {
             foreach (var reference in _projectReferences)
             {
@@ -79,7 +79,7 @@ namespace Microsoft.Build.Graph
             _projectReferences.Clear();
         }
 
-        internal ConfigurationMetadata ToConfigurationMetadata()
+        public ConfigurationMetadata ToConfigurationMetadata()
         {
             return new ConfigurationMetadata(ProjectInstance.FullPath, ProjectInstance.GlobalPropertiesDictionary);
         }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -14,25 +14,25 @@ namespace Microsoft.Build.BackEnd
     /// another method.  When invoked, this delegate should return a new object which has been translated appropriately.
     /// </summary>
     /// <typeparam name="T">The type to be translated.</typeparam>
-    internal delegate T NodePacketValueFactory<T>(ITranslator translator);
+    public delegate T NodePacketValueFactory<T>(ITranslator translator);
 
     /// <summary>
     /// Delegate for users that want to translate an arbitrary structure that doesn't implement <see cref="ITranslatable"/> (e.g. translating a complex collection)
     /// </summary>
     /// <param name="translator">the translator</param>
     /// <param name="objectToTranslate">the object to translate</param>
-    internal delegate void ObjectTranslator<T>(ITranslator translator, ref T objectToTranslate);
+    public delegate void ObjectTranslator<T>(ITranslator translator, ref T objectToTranslate);
 
     /// <summary>
     /// This delegate is used to create arbitrary collection types for serialization.
     /// </summary>
     /// <typeparam name="T">The type of dictionary to be created.</typeparam>
-    internal delegate T NodePacketCollectionCreator<T>(int capacity);
+    public delegate T NodePacketCollectionCreator<T>(int capacity);
 
     /// <summary>
     /// The serialization mode.
     /// </summary>
-    internal enum TranslationDirection
+    public enum TranslationDirection
     {
         /// <summary>
         /// Indicates the serializer is operating in write mode.
@@ -62,7 +62,7 @@ namespace Microsoft.Build.BackEnd
     ///    that by ensuring a single Translate method on a given object can handle both reads and
     ///    writes without referencing any field more than once.
     /// </remarks>
-    internal interface ITranslator
+    public interface ITranslator
     {
         /// <summary>
         /// Returns the current serialization mode.

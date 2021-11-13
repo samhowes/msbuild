@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -32,7 +32,7 @@ namespace Microsoft.Build.BackEnd
     /// reflection, and executing the task in the appropriate context.The TaskExecutionHost does not deal with any part of the task declaration or
     /// XML.
     /// </summary>
-    internal class TaskExecutionHost : ITaskExecutionHost, IDisposable
+    public class TaskExecutionHost : ITaskExecutionHost, IDisposable
     {
         /// <summary>
         /// Time interval in miliseconds to wait between receiving a cancelation signal and emitting the first warning that a non-cancelable task has not finished
@@ -135,7 +135,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Constructor
         /// </summary>
-        internal TaskExecutionHost(IBuildComponentHost host)
+        public TaskExecutionHost(IBuildComponentHost host)
         {
             _buildComponentHost = host;
             if (host?.BuildParameters != null)
@@ -153,7 +153,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Constructor, for unit testing only.  
         /// </summary>
-        internal TaskExecutionHost()
+        public TaskExecutionHost()
         {
             // do nothing
         }
@@ -180,12 +180,12 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Gets the task instance
         /// </summary>
-        internal ITask TaskInstance { get; private set; }
+        public ITask TaskInstance { get; private set; }
 
         /// <summary>
         /// FOR UNIT TESTING ONLY
         /// </summary>
-        internal TaskFactoryWrapper _UNITTESTONLY_TaskFactoryWrapper
+        public TaskFactoryWrapper _UNITTESTONLY_TaskFactoryWrapper
         {
             get => _taskFactoryWrapper;
             set => _taskFactoryWrapper = value;
@@ -195,13 +195,13 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// App domain configuration.
         /// </summary>
-        internal AppDomainSetup AppDomainSetup { get; set; }
+        public AppDomainSetup AppDomainSetup { get; set; }
 #endif
 
         /// <summary>
         /// Whether or not this is out-of-proc.
         /// </summary>
-        internal bool IsOutOfProc { get; set; }
+        public bool IsOutOfProc { get; set; }
 
         /// <summary>
         /// Implementation of IDisposable

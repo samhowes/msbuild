@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace Microsoft.Build.Evaluation
     /// for the majority of code that doesn't call these methods.
     /// </summary>
     /// <typeparam name="M">Type of metadata object.</typeparam>
-    internal interface IItem<M> : IItem
+    public interface IItem<M> : IItem
         where M : class, IMetadatum
     {
         /// <summary>

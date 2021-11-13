@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Framework;
@@ -10,7 +10,7 @@ namespace Microsoft.Build.BackEnd.Logging
     /// <summary>
     /// The logging context for an entire node.
     /// </summary>
-    internal class NodeLoggingContext : BuildLoggingContext
+    public class NodeLoggingContext : BuildLoggingContext
     {
         /// <summary>
         /// Used to create the initial, base logging context for the node.
@@ -18,7 +18,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <param name="loggingService">The logging service to use.</param>
         /// <param name="nodeId">The </param>
         /// <param name="inProcNode"><code>true</code> if this is an in-process node, otherwise <code>false</code>.</param>
-        internal NodeLoggingContext(ILoggingService loggingService, int nodeId, bool inProcNode)
+        public NodeLoggingContext(ILoggingService loggingService, int nodeId, bool inProcNode)
             : base(loggingService, new BuildEventContext(nodeId, BuildEventContext.InvalidTargetId, BuildEventContext.InvalidProjectContextId, BuildEventContext.InvalidTaskId), inProcNode)
         {
             ErrorUtilities.VerifyThrow(nodeId != BuildEventContext.InvalidNodeId, "Should not ever be given an invalid NodeId");
@@ -36,7 +36,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// Log the completion of a build
         /// </summary>
         /// <param name="success">Did the build succeed or not</param>
-        internal void LogBuildFinished(bool success)
+        public void LogBuildFinished(bool success)
         {
             ErrorUtilities.VerifyThrow(this.IsValid, "Build not started.");
 
@@ -54,7 +54,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// </summary>
         /// <param name="requestEntry">The build request entry for this project.</param>
         /// <returns>The BuildEventContext to use for this project.</returns>
-        internal ProjectLoggingContext LogProjectStarted(BuildRequestEntry requestEntry)
+        public ProjectLoggingContext LogProjectStarted(BuildRequestEntry requestEntry)
         {
             ErrorUtilities.VerifyThrow(this.IsValid, "Build not started.");
             return new ProjectLoggingContext(this, requestEntry, requestEntry.Request.ParentBuildEventContext);
@@ -66,7 +66,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <param name="request">The build request.</param>
         /// <param name="configuration">The configuration used to build the request.</param>
         /// <returns>The BuildEventContext to use for this project.</returns>
-        internal ProjectLoggingContext LogProjectStarted(BuildRequest request, BuildRequestConfiguration configuration)
+        public ProjectLoggingContext LogProjectStarted(BuildRequest request, BuildRequestConfiguration configuration)
         {
             ErrorUtilities.VerifyThrow(this.IsValid, "Build not started.");
 
@@ -82,7 +82,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// Logs the project started/finished pair for projects which are skipped entirely because all
         /// of their results are available in the cache.
         /// </summary>
-        internal void LogRequestHandledFromCache(BuildRequest request, BuildRequestConfiguration configuration, BuildResult result)
+        public void LogRequestHandledFromCache(BuildRequest request, BuildRequestConfiguration configuration, BuildResult result)
         {
             ProjectLoggingContext projectLoggingContext = LogProjectStarted(request, configuration);
 

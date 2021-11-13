@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Globalization;
@@ -22,12 +22,12 @@ namespace Microsoft.Build.Evaluation
     ///  After Advance() is called, you can get the current token (s.CurrentToken),
     ///  check it's type (s.IsNext()), get the string for it (s.NextString()).
     /// </summary>
-    internal sealed class Scanner
+    public sealed class Scanner
     {
         private string _expression;
         private int _parsePoint;
         private Token _lookahead;
-        internal bool _errorState;
+        public bool _errorState;
         private int _errorPosition;
         // What we found instead of what we were looking for
         private string _unexpectedlyFound = null;
@@ -55,7 +55,7 @@ namespace Microsoft.Build.Evaluation
         //
         // Constructor takes the string to parse and the culture.
         //
-        internal Scanner(string expressionToParse, ParserOptions options)
+        public Scanner(string expressionToParse, ParserOptions options)
         {
             // We currently have no support (and no scenarios) for disallowing property references
             // in Conditions.
@@ -76,7 +76,7 @@ namespace Microsoft.Build.Evaluation
         /// </summary>
         /// <remarks>Intentionally not a property getter to avoid the debugger triggering the Assert dialog</remarks>
         /// <returns></returns>
-        internal string GetErrorResource()
+        public string GetErrorResource()
         {
             if (_errorResource == null)
             {
@@ -91,22 +91,22 @@ namespace Microsoft.Build.Evaluation
             }
         }
 
-        internal bool IsNext(Token.TokenType type)
+        public bool IsNext(Token.TokenType type)
         {
             return _lookahead.IsToken(type);
         }
 
-        internal string IsNextString()
+        public string IsNextString()
         {
             return _lookahead.String;
         }
 
-        internal Token CurrentToken
+        public Token CurrentToken
         {
             get { return _lookahead; }
         }
 
-        internal int GetErrorPosition()
+        public int GetErrorPosition()
         {
             Debug.Assert(-1 != _errorPosition); // We should have set it
             return _errorPosition;
@@ -114,7 +114,7 @@ namespace Microsoft.Build.Evaluation
 
         // The string (usually a single character) we found unexpectedly. 
         // We might want to show it in the error message, to help the user spot the error.
-        internal string UnexpectedlyFound
+        public string UnexpectedlyFound
         {
             get
             {
@@ -130,7 +130,7 @@ namespace Microsoft.Build.Evaluation
         /// Doesn't return error until the bogus input is encountered.
         /// Advance() returns true even after EndOfInput is encountered.
         /// </summary>
-        internal bool Advance()
+        public bool Advance()
         {
             if (_errorState)
                 return false;

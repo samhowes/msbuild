@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -54,19 +54,19 @@ namespace Microsoft.Build.Construction
         SharedProject
     }
 
-    internal struct AspNetCompilerParameters
+    public struct AspNetCompilerParameters
     {
-        internal string aspNetVirtualPath;      // For Venus projects only, Virtual path for web
-        internal string aspNetPhysicalPath;     // For Venus projects only, Physical path for web
-        internal string aspNetTargetPath;       // For Venus projects only, Target for output files
-        internal string aspNetForce;            // For Venus projects only, Force overwrite of target
-        internal string aspNetUpdateable;       // For Venus projects only, compiled web application is updateable
-        internal string aspNetDebug;            // For Venus projects only, generate symbols, etc.
-        internal string aspNetKeyFile;          // For Venus projects only, strong name key file.
-        internal string aspNetKeyContainer;     // For Venus projects only, strong name key container.
-        internal string aspNetDelaySign;        // For Venus projects only, delay sign strong name.
-        internal string aspNetAPTCA;            // For Venus projects only, AllowPartiallyTrustedCallers.
-        internal string aspNetFixedNames;       // For Venus projects only, generate fixed assembly names.
+        public string aspNetVirtualPath;      // For Venus projects only, Virtual path for web
+        public string aspNetPhysicalPath;     // For Venus projects only, Physical path for web
+        public string aspNetTargetPath;       // For Venus projects only, Target for output files
+        public string aspNetForce;            // For Venus projects only, Force overwrite of target
+        public string aspNetUpdateable;       // For Venus projects only, compiled web application is updateable
+        public string aspNetDebug;            // For Venus projects only, generate symbols, etc.
+        public string aspNetKeyFile;          // For Venus projects only, strong name key file.
+        public string aspNetKeyContainer;     // For Venus projects only, strong name key container.
+        public string aspNetDelaySign;        // For Venus projects only, delay sign strong name.
+        public string aspNetAPTCA;            // For Venus projects only, AllowPartiallyTrustedCallers.
+        public string aspNetFixedNames;       // For Venus projects only, generate fixed assembly names.
     }
 
     /// <remarks>
@@ -84,7 +84,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Project names that need to be disambiguated when forming a target name
         /// </summary>
-        internal static readonly string[] projectNamesToDisambiguate = { "Build", "Rebuild", "Clean", "Publish" };
+        public static readonly string[] projectNamesToDisambiguate = { "Build", "Rebuild", "Clean", "Publish" };
 
         /// <summary>
         /// Character that will be used to replace 'unclean' ones.
@@ -112,7 +112,7 @@ namespace Microsoft.Build.Construction
 
         #region Constructors
 
-        internal ProjectInSolution(SolutionFile solution)
+        public ProjectInSolution(SolutionFile solution)
         {
             ProjectType = SolutionProjectType.Unknown;
             ProjectName = null;
@@ -147,7 +147,7 @@ namespace Microsoft.Build.Construction
         public string RelativePath
         {
             get { return _relativePath; }
-            internal set
+            set
             {
 #if NETFRAMEWORK && !MONO
                 // Avoid loading System.Runtime.InteropServices.RuntimeInformation in full-framework
@@ -223,7 +223,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Extension of the project file, if any
         /// </summary>
-        internal string Extension => Path.GetExtension(_relativePath);
+        public string Extension => Path.GetExtension(_relativePath);
 
         /// <summary>
         /// This project's type.
@@ -235,14 +235,14 @@ namespace Microsoft.Build.Construction
         /// either specified as Dependencies above, or as ProjectReferences in the
         /// project file, which the solution doesn't have insight into. 
         /// </summary>
-        internal List<string> ProjectReferences { get; } = new List<string>();
+        public List<string> ProjectReferences { get; } = new List<string>();
 
-        internal SolutionFile ParentSolution { get; set; }
+        public SolutionFile ParentSolution { get; set; }
 
         // Key is configuration name, value is [struct] AspNetCompilerParameters
-        internal Hashtable AspNetConfigurations { get; set; }
+        public Hashtable AspNetConfigurations { get; set; }
 
-        internal string TargetFrameworkMoniker { get; set; }
+        public string TargetFrameworkMoniker { get; set; }
 
         #endregion
 
@@ -255,7 +255,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Add the guid of a referenced project to our dependencies list.
         /// </summary>
-        internal void AddDependency(string referencedProjectGuid)
+        public void AddDependency(string referencedProjectGuid)
         {
             _dependencies.Add(referencedProjectGuid);
             _dependenciesAsReadonly = null;
@@ -264,7 +264,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Set the requested project configuration. 
         /// </summary>
-        internal void SetProjectConfiguration(string configurationName, ProjectConfigurationInSolution configuration)
+        public void SetProjectConfiguration(string configurationName, ProjectConfigurationInSolution configuration)
         {
             _projectConfigurations[configurationName] = configuration;
             _projectConfigurationsReadOnly = null;
@@ -276,7 +276,7 @@ namespace Microsoft.Build.Construction
         /// </summary>
         /// <param name="errorMessage">Detailed error message in case we encounter critical problems reading the file</param>
         /// <returns></returns>
-        internal bool CanBeMSBuildProjectFile(out string errorMessage)
+        public bool CanBeMSBuildProjectFile(out string errorMessage)
         {
             if (_checkedIfCanBeMSBuildProjectFile)
             {
@@ -378,7 +378,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Find the unique name for this project, e.g. SolutionFolder\SubSolutionFolder\Project_Name
         /// </summary>
-        internal string GetUniqueProjectName()
+        public string GetUniqueProjectName()
         {
             if (_uniqueProjectName == null)
             {
@@ -417,7 +417,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Gets the original project name with the parent project as it is declared in the solution file, e.g. SolutionFolder\SubSolutionFolder\Project.Name
         /// </summary>
-        internal string GetOriginalProjectName()
+        public string GetOriginalProjectName()
         {
             if (_originalProjectName == null)
             {
@@ -453,7 +453,7 @@ namespace Microsoft.Build.Construction
             return _originalProjectName;
         }
 
-        internal string GetProjectGuidWithoutCurlyBrackets()
+        public string GetProjectGuidWithoutCurlyBrackets()
         {
             if (string.IsNullOrEmpty(ProjectGuid))
             {
@@ -466,7 +466,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Changes the unique name of the project.
         /// </summary>
-        internal void UpdateUniqueProjectName(string newUniqueName)
+        public void UpdateUniqueProjectName(string newUniqueName)
         {
             ErrorUtilities.VerifyThrowArgumentLength(newUniqueName, nameof(newUniqueName));
 
@@ -508,7 +508,7 @@ namespace Microsoft.Build.Construction
         /// </summary>
         /// <param name="uniqueProjectName">The unique name for the project</param>
         /// <returns>string</returns>
-        internal static string DisambiguateProjectTargetName(string uniqueProjectName)
+        public static string DisambiguateProjectTargetName(string uniqueProjectName)
         {
             // Test our unique project name against those names that collide with Solution
             // entry point targets
@@ -548,8 +548,8 @@ namespace Microsoft.Build.Construction
 
         #region Constants
 
-        internal const int DependencyLevelUnknown = -1;
-        internal const int DependencyLevelBeingDetermined = -2;
+        public const int DependencyLevelUnknown = -1;
+        public const int DependencyLevelBeingDetermined = -2;
 
         #endregion
     }

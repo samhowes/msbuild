@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// This class represents a PropertyGroup intrinsic task.
     /// </summary>
-    internal class PropertyGroupIntrinsicTask : IntrinsicTask
+    public class PropertyGroupIntrinsicTask : IntrinsicTask
     {
         /// <summary>
         /// The original task instance data.
@@ -39,7 +39,7 @@ namespace Microsoft.Build.BackEnd
         /// Execute a PropertyGroup element, including each child property
         /// </summary>
         /// <param name="lookup">The lookup use for evaluation and as a destination for these properties.</param>
-        internal override void ExecuteTask(Lookup lookup)
+        public override void ExecuteTask(Lookup lookup)
         {
             foreach (ProjectPropertyGroupTaskPropertyInstance property in _taskInstance.Properties)
             {

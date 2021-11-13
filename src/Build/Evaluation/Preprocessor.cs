@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -22,7 +22,7 @@ namespace Microsoft.Build.Evaluation
     /// -- same for AssemblyFile on UsingTask
     /// Paths in item includes are relative to the importing project, though.
     /// </remarks>
-    internal class Preprocessor
+    public class Preprocessor
     {
         /// <summary>
         /// Project to preprocess
@@ -71,7 +71,7 @@ namespace Microsoft.Build.Evaluation
         /// Returns an XmlDocument representing the evaluated project's XML as if it all had
         /// been loaded from a single file, instead of being assembled by pulling in imported files.
         /// </summary>
-        internal static XmlDocument GetPreprocessedDocument(Project project)
+        public static XmlDocument GetPreprocessedDocument(Project project)
         {
             Preprocessor preprocessor = new Preprocessor(project);
 

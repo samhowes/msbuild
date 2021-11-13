@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -21,12 +21,12 @@ namespace Microsoft.Build.BackEnd.Logging
     /// to the console (stdout).
     /// </summary>
     /// <remarks>This class is not thread safe.</remarks>
-    internal class ParallelConsoleLogger : BaseConsoleLogger
+    public class ParallelConsoleLogger : BaseConsoleLogger
     {
         /// <summary>
         /// Associate a (nodeID and project_context_id) to a target framework.
         /// </summary>
-        internal Dictionary<(int nodeId, int contextId), string> propertyOutputMap = new Dictionary<(int nodeId, int contextId), string>();
+        public Dictionary<(int nodeId, int contextId), string> propertyOutputMap = new Dictionary<(int nodeId, int contextId), string>();
 
         #region Constructors
         /// <summary>
@@ -113,7 +113,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Allows the logger to take action based on a parameter passed on when initializing the logger
         /// </summary>
-        internal override bool ApplyParameter(string parameterName, string parameterValue)
+        public override bool ApplyParameter(string parameterName, string parameterValue)
         {
             if (base.ApplyParameter(parameterName, parameterValue))
             {
@@ -185,7 +185,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// Reset the states of per-build member variables
         /// VSW#516376 
         /// </summary>
-        internal override void ResetConsoleLoggerState()
+        public override void ResetConsoleLoggerState()
         {
             if (ShowSummary == true)
             {
@@ -650,7 +650,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// </summary>
         /// <param name="e">A <see cref="BuildEventArgs"/> object containing information about the build event.</param>
         /// <param name="properties">List of properties</param>
-        internal void WriteProperties(BuildEventArgs e, IEnumerable properties)
+        public void WriteProperties(BuildEventArgs e, IEnumerable properties)
         {
             if (showOnlyErrors || showOnlyWarnings) return;
             var propertyList = ExtractPropertyList(properties);
@@ -667,7 +667,7 @@ namespace Microsoft.Build.BackEnd.Logging
             ShownBuildEventContext(e.BuildEventContext);
         }
 
-        internal override void OutputProperties(List<DictionaryEntry> list)
+        public override void OutputProperties(List<DictionaryEntry> list)
         {
             // Write the banner
             setColor(ConsoleColor.Green);
@@ -685,7 +685,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         ///  Write the environment strings to the console.
         /// </summary>
-        internal override void OutputEnvironment(IDictionary<string, string> environment)
+        public override void OutputEnvironment(IDictionary<string, string> environment)
         {
             // Write the banner
             setColor(ConsoleColor.Green);
@@ -713,7 +713,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// </summary>
         /// <param name="e">A <see cref="BuildEventArgs"/> object containing information about the build event.</param>
         /// <param name="items">List of items</param>
-        internal void WriteItems(BuildEventArgs e, IEnumerable items)
+        public void WriteItems(BuildEventArgs e, IEnumerable items)
         {
             if (showOnlyErrors || showOnlyWarnings) return;
             SortedList itemList = ExtractItemList(items);
@@ -729,7 +729,7 @@ namespace Microsoft.Build.BackEnd.Logging
             ShownBuildEventContext(e.BuildEventContext);
         }
 
-        internal override void OutputItems(string itemType, ArrayList itemTypeList)
+        public override void OutputItems(string itemType, ArrayList itemTypeList)
         {
             // Write each item, one per line
             bool haveWrittenItemType = false;
@@ -941,7 +941,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// Finds the LogOutProperty string to be printed in messages.
         /// </summary>
         /// <param name="e"> Build event to extract context information from.</param>
-        internal string FindLogOutputProperties(BuildEventArgs e)
+        public string FindLogOutputProperties(BuildEventArgs e)
         {
             string projectConfigurationDescription = String.Empty;
             if (e.BuildEventContext != null)
@@ -1604,7 +1604,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// </summary>
         /// <param name="scopeName">Task name or target name.</param>
         /// <param name="table">Table that has tasks or targets.</param>
-        internal new static MPPerformanceCounter GetPerformanceCounter(string scopeName, ref Dictionary<string, PerformanceCounter> table)
+        public new static MPPerformanceCounter GetPerformanceCounter(string scopeName, ref Dictionary<string, PerformanceCounter> table)
         {
             // Lazily construct the performance counter table.
             if (table == null)
@@ -1628,7 +1628,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Stores and calculates the performance numbers for the different events
         /// </summary>
-        internal class MPPerformanceCounter : PerformanceCounter
+        public class MPPerformanceCounter : PerformanceCounter
         {
             // Set of performance counters for a project
             private Dictionary<string, PerformanceCounter> _internalPerformanceCounters;
@@ -1638,9 +1638,9 @@ namespace Microsoft.Build.BackEnd.Logging
             // An object is being used to box the start time long value to prevent jitting when this code path is executed.
             private Dictionary<BuildEventContext, object> _startedEvent;
 
-            internal int MessageIndentLevel { get; set; } = 2;
+            public int MessageIndentLevel { get; set; } = 2;
 
-            internal MPPerformanceCounter(string scopeName)
+            public MPPerformanceCounter(string scopeName)
                 : base(scopeName)
             {
                 // Do Nothing
@@ -1649,7 +1649,7 @@ namespace Microsoft.Build.BackEnd.Logging
             /// <summary>
             /// Add a started event to the performance counter, by adding the event this sets the start time of the performance counter
             /// </summary>
-            internal void AddEventStarted(string projectTargetNames, BuildEventContext buildEventContext, DateTime eventTimeStamp, IEqualityComparer<BuildEventContext> comparer)
+            public void AddEventStarted(string projectTargetNames, BuildEventContext buildEventContext, DateTime eventTimeStamp, IEqualityComparer<BuildEventContext> comparer)
             {
                 //If the projectTargetNames are set then we should be a project started event
                 if (!string.IsNullOrEmpty(projectTargetNames))
@@ -1679,7 +1679,7 @@ namespace Microsoft.Build.BackEnd.Logging
             /// <summary>
             ///  Add a finished event to the performance counter, so perf numbers can be calculated
             /// </summary>
-            internal void AddEventFinished(string projectTargetNames, BuildEventContext buildEventContext, DateTime eventTimeStamp)
+            public void AddEventFinished(string projectTargetNames, BuildEventContext buildEventContext, DateTime eventTimeStamp)
             {
                 if (!string.IsNullOrEmpty(projectTargetNames))
                 {
@@ -1701,7 +1701,7 @@ namespace Microsoft.Build.BackEnd.Logging
             /// <summary>
             /// Print out the performance counter message
             /// </summary>
-            internal override void PrintCounterMessage(WriteLinePrettyFromResourceDelegate WriteLinePrettyFromResource, ColorSetter setColor, ColorResetter resetColor)
+            public override void PrintCounterMessage(WriteLinePrettyFromResourceDelegate WriteLinePrettyFromResource, ColorSetter setColor, ColorResetter resetColor)
             {
                 // round: sub-millisecond values are not meaningful
                 string time = String.Format(CultureInfo.CurrentCulture,

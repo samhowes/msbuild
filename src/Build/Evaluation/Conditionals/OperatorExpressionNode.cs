@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -9,12 +9,12 @@ namespace Microsoft.Build.Evaluation
     /// <summary>
     /// Base class for nodes that are operators (have children in the parse tree)
     /// </summary>
-    internal abstract class OperatorExpressionNode : GenericExpressionNode
+    public abstract class OperatorExpressionNode : GenericExpressionNode
     {
         /// <summary>
         /// Numeric evaluation is never allowed for operators
         /// </summary>
-        internal override double NumericEvaluate(ConditionEvaluator.IConditionEvaluationState state)
+        public override double NumericEvaluate(ConditionEvaluator.IConditionEvaluationState state)
         {
             // Should be unreachable: all calls check CanNumericEvaluate() first
             ErrorUtilities.VerifyThrow(false, "Cannot numeric evaluate an operator");
@@ -24,7 +24,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Version evaluation is never allowed for operators
         /// </summary>
-        internal override Version VersionEvaluate(ConditionEvaluator.IConditionEvaluationState state)
+        public override Version VersionEvaluate(ConditionEvaluator.IConditionEvaluationState state)
         {
             ErrorUtilities.VerifyThrow(false, "Cannot version evaluate an operator");
             return null;
@@ -33,7 +33,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Whether boolean evaluation is allowed: always allowed for operators
         /// </summary>
-        internal override bool CanBoolEvaluate(ConditionEvaluator.IConditionEvaluationState state)
+        public override bool CanBoolEvaluate(ConditionEvaluator.IConditionEvaluationState state)
         {
             return true;
         }
@@ -42,7 +42,7 @@ namespace Microsoft.Build.Evaluation
         /// Whether the node can be evaluated as a numeric: by default,
         /// this is not allowed
         /// </summary>
-        internal override bool CanNumericEvaluate(ConditionEvaluator.IConditionEvaluationState state)
+        public override bool CanNumericEvaluate(ConditionEvaluator.IConditionEvaluationState state)
         {
             return false;
         }
@@ -51,7 +51,7 @@ namespace Microsoft.Build.Evaluation
         /// Whether the node can be evaluated as a version: by default,
         /// this is not allowed
         /// </summary>
-        internal override bool CanVersionEvaluate(ConditionEvaluator.IConditionEvaluationState state)
+        public override bool CanVersionEvaluate(ConditionEvaluator.IConditionEvaluationState state)
         {
             return false;
         }
@@ -60,7 +60,7 @@ namespace Microsoft.Build.Evaluation
         /// Value after any item and property expressions are expanded
         /// </summary>
         /// <returns></returns>
-        internal override string GetExpandedValue(ConditionEvaluator.IConditionEvaluationState state)
+        public override string GetExpandedValue(ConditionEvaluator.IConditionEvaluationState state)
         {
             return null;
         }
@@ -69,7 +69,7 @@ namespace Microsoft.Build.Evaluation
         /// Value before any item and property expressions are expanded
         /// </summary>
         /// <returns></returns>
-        internal override string GetUnexpandedValue(ConditionEvaluator.IConditionEvaluationState state)
+        public override string GetUnexpandedValue(ConditionEvaluator.IConditionEvaluationState state)
         {
             return null;
         }
@@ -78,7 +78,7 @@ namespace Microsoft.Build.Evaluation
         /// If any expression nodes cache any state for the duration of evaluation, 
         /// now's the time to clean it up
         /// </summary>
-        internal override void ResetState()
+        public override void ResetState()
         {
             LeftChild?.ResetState();
 
@@ -88,15 +88,15 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Storage for the left child
         /// </summary>
-        internal GenericExpressionNode LeftChild { set; get; }
+        public GenericExpressionNode LeftChild { set; get; }
 
         /// <summary>
         /// Storage for the right child
         /// </summary>
-        internal GenericExpressionNode RightChild { set; get; }
+        public GenericExpressionNode RightChild { set; get; }
 
         #region REMOVE_COMPAT_WARNING
-        internal override bool DetectAnd()
+        public override bool DetectAnd()
         {
             // Read the state of the current node
             bool detectedAnd = this.PossibleAndCollision;
@@ -116,7 +116,7 @@ namespace Microsoft.Build.Evaluation
             return detectedAnd || detectAndRChild || detectAndLChild;
         }
 
-        internal override bool DetectOr()
+        public override bool DetectOr()
         {
             // Read the state of the current node
             bool detectedOr = this.PossibleOrCollision;

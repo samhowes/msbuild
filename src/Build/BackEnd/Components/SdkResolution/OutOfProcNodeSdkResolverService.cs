@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.BackEnd.Logging;
@@ -21,7 +21,7 @@ namespace Microsoft.Build.BackEnd.SdkResolution
     /// Since this object is a registered <see cref="IBuildComponent"/>, it is a singleton for the main process.  To get an instance of it, you
     /// must have access to an <see cref="IBuildComponentHost"/> and call <see cref="IBuildComponentHost.GetComponent"/> and pass <see cref="BuildComponentType.SdkResolverService"/>.
     /// </summary>
-    internal sealed class OutOfProcNodeSdkResolverService : HostedSdkResolverServiceBase
+    public sealed class OutOfProcNodeSdkResolverService : HostedSdkResolverServiceBase
     {
         /// <summary>
         /// The cache of responses which is cleared between builds.

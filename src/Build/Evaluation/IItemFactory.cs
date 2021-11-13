@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace Microsoft.Build.Evaluation
     /// </summary>
     /// <typeparam name="S">The type of items this factory can clone from.</typeparam>
     /// <typeparam name="T">The type of items this factory will create.</typeparam>
-    internal interface IItemFactory<S, T>
+    public interface IItemFactory<S, T>
         where S : class, IItem
         where T : class, IItem
     {

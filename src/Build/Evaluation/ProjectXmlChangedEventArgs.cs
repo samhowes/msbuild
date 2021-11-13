@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -30,7 +30,7 @@ namespace Microsoft.Build.Evaluation
         /// <param name="projectXml">The ProjectRootElement whose content was actually changed.</param>
         /// <param name="unformattedReason">The unformatted (may contain {0}) reason for the dirty event.</param>
         /// <param name="formattingParameter">The formatting parameter to use with <paramref name="unformattedReason"/>.</param>
-        internal ProjectXmlChangedEventArgs(ProjectRootElement projectXml, string unformattedReason, string formattingParameter)
+        public ProjectXmlChangedEventArgs(ProjectRootElement projectXml, string unformattedReason, string formattingParameter)
         {
             ErrorUtilities.VerifyThrowArgumentNull(projectXml, nameof(projectXml));
 

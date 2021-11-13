@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -13,7 +13,7 @@ namespace Microsoft.Build.Evaluation
     /// <summary>
     /// Class which provides access to toolsets.
     /// </summary>
-    internal class ToolsetProvider : IToolsetProvider, ITranslatable
+    public class ToolsetProvider : IToolsetProvider, ITranslatable
     {
         /// <summary>
         /// A mapping of tools versions to Toolsets, which contain the public Toolsets.
@@ -85,7 +85,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Factory for deserialization.
         /// </summary>
-        internal static ToolsetProvider FactoryForDeserialization(ITranslator translator)
+        public static ToolsetProvider FactoryForDeserialization(ITranslator translator)
         {
             ToolsetProvider provider = new ToolsetProvider(translator);
             return provider;

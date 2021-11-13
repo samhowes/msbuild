@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -19,14 +19,14 @@ namespace Microsoft.Build.Shared
     ///     
     /// </summary>
     [Serializable]
-    internal sealed class InternalErrorException : Exception
+    public sealed class InternalErrorException : Exception
     {
         /// <summary>
         /// Default constructor.
         /// SHOULD ONLY BE CALLED BY DESERIALIZER. 
         /// SUPPLY A MESSAGE INSTEAD.
         /// </summary>
-        internal InternalErrorException() : base()
+        public InternalErrorException() : base()
         {
             // do nothing
         }
@@ -34,7 +34,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Creates an instance of this exception using the given message.
         /// </summary>
-        internal InternalErrorException
+        public InternalErrorException
         (
             String message
         ) :
@@ -48,7 +48,7 @@ namespace Microsoft.Build.Shared
         /// Adds the inner exception's details to the exception message because most bug reporters don't bother
         /// to provide the inner exception details which is typically what we care about.
         /// </summary>
-        internal InternalErrorException
+        public InternalErrorException
         (
             String message,
             Exception innerException

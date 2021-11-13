@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 
@@ -15,11 +15,11 @@ namespace Microsoft.Build.Shared
     /// This class is used to isolate the types used by an MSBuild plugin
     /// (SDK resolver, logger, or task).
     /// </summary>
-    internal class MSBuildLoadContext : AssemblyLoadContext
+    public class MSBuildLoadContext : AssemblyLoadContext
     {
         private readonly string _directory;
 
-        internal static readonly ImmutableHashSet<string> WellKnownAssemblyNames =
+        public static readonly ImmutableHashSet<string> WellKnownAssemblyNames =
             new[]
             {
                 "MSBuild",
@@ -29,7 +29,7 @@ namespace Microsoft.Build.Shared
                 "Microsoft.Build.Utilities.Core",
             }.ToImmutableHashSet();
 
-        internal static readonly string[] Extensions = new[] { "ni.dll", "ni.exe", "dll", "exe" };
+        public static readonly string[] Extensions = new[] { "ni.dll", "ni.exe", "dll", "exe" };
 
 
         public MSBuildLoadContext(string assemblyPath)

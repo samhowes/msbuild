@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -19,7 +19,7 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// Functions for matching file names with patterns. 
     /// </summary>
-    internal class FileMatcher
+    public class FileMatcher
     {
         private readonly IFileSystem _fileSystem;
         private const string recursiveDirectoryMatch = "**";
@@ -32,8 +32,8 @@ namespace Microsoft.Build.Shared
         private static readonly char[] s_wildcardAndSemicolonCharacters = { '*', '?', ';' };
 
         // on OSX both System.IO.Path separators are '/', so we have to use the literals
-        internal static readonly char[] directorySeparatorCharacters = { '/', '\\' };
-        internal static readonly string[] directorySeparatorStrings = directorySeparatorCharacters.Select(c => c.ToString()).ToArray();
+        public static readonly char[] directorySeparatorCharacters = { '/', '\\' };
+        public static readonly string[] directorySeparatorStrings = directorySeparatorCharacters.Select(c => c.ToString()).ToArray();
 
         // until Cloudbuild switches to EvaluationContext, we need to keep their dependence on global glob caching via an environment variable
         private static readonly Lazy<ConcurrentDictionary<string, ImmutableArray<string>>> s_cachedGlobExpansions = new Lazy<ConcurrentDictionary<string, ImmutableArray<string>>>(() => new ConcurrentDictionary<string, ImmutableArray<string>>(StringComparer.OrdinalIgnoreCase));
@@ -54,20 +54,20 @@ namespace Microsoft.Build.Shared
 
         private static class FileSpecRegexParts
         {
-            internal const string FixedDirGroupStart = "^(?<FIXEDDIR>";
-            internal const string WildcardGroupStart = "(?<WILDCARDDIR>";
-            internal const string FilenameGroupStart = "(?<FILENAME>";
-            internal const string GroupEnd = ")";
-            internal const string EndOfLine = "$";
+            public const string FixedDirGroupStart = "^(?<FIXEDDIR>";
+            public const string WildcardGroupStart = "(?<WILDCARDDIR>";
+            public const string FilenameGroupStart = "(?<FILENAME>";
+            public const string GroupEnd = ")";
+            public const string EndOfLine = "$";
 
-            internal const string AnyNonSeparator = @"[^/\\]*";
-            internal const string AnySingleCharacterButDot = @"[^\.].";
-            internal const string AnythingButDot = @"[^\.]*";
-            internal const string DirSeparator = @"[/\\]+";
-            internal const string LeftDirs = @"((.*/)|(.*\\)|())";
-            internal const string MiddleDirs = @"((/)|(\\)|(/.*/)|(/.*\\)|(\\.*\\)|(\\.*/))";
-            internal const string SingleCharacter = ".";
-            internal const string UncSlashSlash = @"\\\\";
+            public const string AnyNonSeparator = @"[^/\\]*";
+            public const string AnySingleCharacterButDot = @"[^\.].";
+            public const string AnythingButDot = @"[^\.]*";
+            public const string DirSeparator = @"[/\\]+";
+            public const string LeftDirs = @"((.*/)|(.*\\)|())";
+            public const string MiddleDirs = @"((/)|(\\)|(/.*/)|(/.*\\)|(\\.*\\)|(\\.*/))";
+            public const string SingleCharacter = ".";
+            public const string UncSlashSlash = @"\\\\";
         }
 
         /*
@@ -131,7 +131,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// The type of entity that GetFileSystemEntries should return.
         /// </summary>
-        internal enum FileSystemEntity
+        public enum FileSystemEntity
         {
             Files,
             Directories,
@@ -148,9 +148,9 @@ namespace Microsoft.Build.Shared
         /// <param name="projectDirectory"></param>
         /// <param name="stripProjectDirectory"></param>
         /// <returns>An immutable array of filesystem entries.</returns>
-        internal delegate ImmutableArray<string> GetFileSystemEntries(FileSystemEntity entityType, string path, string pattern, string projectDirectory, bool stripProjectDirectory);
+        public delegate ImmutableArray<string> GetFileSystemEntries(FileSystemEntity entityType, string path, string pattern, string projectDirectory, bool stripProjectDirectory);
 
-        internal static void ClearFileEnumerationsCache()
+        public static void ClearFileEnumerationsCache()
         {
             if (s_cachedGlobExpansions.IsValueCreated)
             {
@@ -168,7 +168,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="filespec"></param>
         /// <returns></returns>
-        internal static bool HasWildcards(string filespec)
+        public static bool HasWildcards(string filespec)
         {
             // Perf Note: Doing a [Last]IndexOfAny(...) is much faster than compiling a
             // regular expression that does the same thing, regardless of whether
@@ -182,7 +182,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Determines whether the given path has any wild card characters or any semicolons.
         /// </summary>
-        internal static bool HasWildcardsSemicolonItemOrPropertyReferences(string filespec)
+        public static bool HasWildcardsSemicolonItemOrPropertyReferences(string filespec)
         {
             return
 
@@ -412,7 +412,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="path">The short path.</param>
         /// <returns>The long path.</returns>
-        internal string GetLongPathName
+        public string GetLongPathName
         (
             string path
         )
@@ -426,7 +426,7 @@ namespace Microsoft.Build.Shared
         /// <param name="path">The short path.</param>
         /// <param name="getFileSystemEntries">Delegate.</param>
         /// <returns>The long path.</returns>
-        internal static string GetLongPathName
+        public static string GetLongPathName
         (
             string path,
             GetFileSystemEntries getFileSystemEntries
@@ -532,7 +532,7 @@ namespace Microsoft.Build.Shared
         /// <param name="fixedDirectoryPart">Receives the fixed directory part.</param>
         /// <param name="wildcardDirectoryPart">The wildcard directory part.</param>
         /// <param name="filenamePart">The filename part.</param>
-        internal void SplitFileSpec(
+        public void SplitFileSpec(
             string filespec,
             out string fixedDirectoryPart,
             out string wildcardDirectoryPart,
@@ -688,7 +688,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="c"></param>
         /// <returns></returns>
-        internal static bool IsDirectorySeparator(char c)
+        public static bool IsDirectorySeparator(char c)
         {
             return c == Path.DirectorySeparatorChar || c == Path.AltDirectorySeparatorChar;
         }
@@ -697,7 +697,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="paths">Paths to remove current directory from.</param>
         /// <param name="projectDirectory"></param>
-        internal static IEnumerable<string> RemoveProjectDirectory
+        public static IEnumerable<string> RemoveProjectDirectory
         (
             IEnumerable<string> paths,
             string projectDirectory
@@ -1439,7 +1439,7 @@ namespace Microsoft.Build.Shared
         /// <param name="regexFileMatch">Receives the regular expression.</param>
         /// <param name="needsRecursion">Receives the flag that is true if recursion is required.</param>
         /// <param name="isLegalFileSpec">Receives the flag that is true if the filespec is legal.</param>
-        internal void GetFileSpecInfoWithRegexObject(
+        public void GetFileSpecInfoWithRegexObject(
             string filespec,
             out Regex regexFileMatch,
             out bool needsRecursion,
@@ -1460,7 +1460,7 @@ namespace Microsoft.Build.Shared
                 : null;
         }
 
-        internal delegate (string fixedDirectoryPart, string recursiveDirectoryPart, string fileNamePart) FixupParts(
+        public delegate (string fixedDirectoryPart, string recursiveDirectoryPart, string fileNamePart) FixupParts(
             string fixedDirectoryPart,
             string recursiveDirectoryPart,
             string filenamePart);
@@ -1476,7 +1476,7 @@ namespace Microsoft.Build.Shared
         /// <param name="needsRecursion">Receives the flag that is true if recursion is required.</param>
         /// <param name="isLegalFileSpec">Receives the flag that is true if the filespec is legal.</param>
         /// <param name="fixupParts">hook method to further change the parts</param>
-        internal void GetFileSpecInfo(
+        public void GetFileSpecInfo(
             string filespec,
             out string fixedDirectoryPart,
             out string wildcardDirectoryPart,
@@ -1531,7 +1531,7 @@ namespace Microsoft.Build.Shared
             needsRecursion = (wildcardDirectoryPart.Length != 0);
         }
 
-        internal static bool RawFileSpecIsValid(string filespec)
+        public static bool RawFileSpecIsValid(string filespec)
         {
             // filespec cannot contain illegal characters
             if (-1 != filespec.IndexOfAny(s_invalidPathChars))
@@ -1573,22 +1573,22 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// The results of a match between a filespec and a file name.
         /// </summary>
-        internal sealed class Result
+        public sealed class Result
         {
             /// <summary>
             /// Default constructor.
             /// </summary>
-            internal Result()
+            public Result()
             {
                 // do nothing
             }
 
-            internal bool isLegalFileSpec; // initially false
-            internal bool isMatch; // initially false
-            internal bool isFileSpecRecursive; // initially false
-            internal string fixedDirectoryPart = String.Empty;
-            internal string wildcardDirectoryPart = String.Empty;
-            internal string filenamePart = String.Empty;
+            public bool isLegalFileSpec; // initially false
+            public bool isMatch; // initially false
+            public bool isFileSpecRecursive; // initially false
+            public string fixedDirectoryPart = String.Empty;
+            public string wildcardDirectoryPart = String.Empty;
+            public string filenamePart = String.Empty;
         }
 
         /// <summary>
@@ -1597,7 +1597,7 @@ namespace Microsoft.Build.Shared
         /// <param name="input">String which is matched against the pattern.</param>
         /// <param name="pattern">Pattern against which string is matched.</param>
         /// <param name="ignoreCase">Determines whether ignoring case when comparing two characters</param>
-        internal static bool IsMatch(string input, string pattern, bool ignoreCase)
+        public static bool IsMatch(string input, string pattern, bool ignoreCase)
         {
             if (input == null)
             {
@@ -1769,7 +1769,7 @@ namespace Microsoft.Build.Shared
         /// <param name="filespec">The filespec.</param>
         /// <param name="fileToMatch">The candidate to match against.</param>
         /// <returns>The result class.</returns>
-        internal Result FileMatch
+        public Result FileMatch
         (
             string filespec,
             string fileToMatch
@@ -1802,7 +1802,7 @@ namespace Microsoft.Build.Shared
             return matchResult;
         }
 
-        internal static void GetRegexMatchInfo(
+        public static void GetRegexMatchInfo(
             string fileToMatch,
             Regex fileSpecRegex,
             out bool isMatch,
@@ -1855,7 +1855,7 @@ namespace Microsoft.Build.Shared
         /// <param name="filespecUnescaped">Get files that match the given file spec.</param>
         /// <param name="excludeSpecsUnescaped">Exclude files that match this file spec.</param>
         /// <returns>The array of files.</returns>
-        internal string[] GetFiles
+        public string[] GetFiles
             (
             string projectDirectoryUnescaped,
             string filespecUnescaped,
@@ -2084,7 +2084,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="aString">A string</param>
         /// <returns>The normalized string</returns>
-        internal static string Normalize(string aString)
+        public static string Normalize(string aString)
         {
             if (string.IsNullOrEmpty(aString))
             {
@@ -2172,7 +2172,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Returns true if the given character is a valid drive letter
         /// </summary>
-        internal static bool IsValidDriveChar(char value)
+        public static bool IsValidDriveChar(char value)
         {
             return (value >= 'A' && value <= 'Z') || (value >= 'a' && value <= 'z');
         }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -15,12 +15,12 @@ namespace Microsoft.Build.BackEnd
     /// Build Event Type
     /// Build Event Args
     /// </summary>
-    internal class LogMessagePacket : LogMessagePacketBase
+    public class LogMessagePacket : LogMessagePacketBase
     {
         /// <summary>
         /// Encapsulates the buildEventArg in this packet.
         /// </summary>
-        internal LogMessagePacket(KeyValuePair<int, BuildEventArgs>? nodeBuildEvent)
+        public LogMessagePacket(KeyValuePair<int, BuildEventArgs>? nodeBuildEvent)
             : base(nodeBuildEvent, new TargetFinishedTranslator(TranslateTargetFinishedEvent))
         {
         }
@@ -36,7 +36,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Factory for serialization
         /// </summary>
-        static internal INodePacket FactoryForDeserialization(ITranslator translator)
+        static public INodePacket FactoryForDeserialization(ITranslator translator)
         {
             return new LogMessagePacket(translator);
         }

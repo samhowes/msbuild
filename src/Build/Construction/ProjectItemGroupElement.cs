@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -20,7 +20,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// External projects support
         /// </summary>
-        internal ProjectItemGroupElement(ProjectItemGroupElementLink link)
+        public ProjectItemGroupElement(ProjectItemGroupElementLink link)
             : base(link)
         {
         }
@@ -35,7 +35,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Initialize a parented ProjectItemGroupElement
         /// </summary>
-        internal ProjectItemGroupElement(XmlElementWithLocation xmlElement, ProjectElementContainer parent, ProjectRootElement containingProject)
+        public ProjectItemGroupElement(XmlElementWithLocation xmlElement, ProjectElementContainer parent, ProjectRootElement containingProject)
             : base(xmlElement, parent, containingProject)
         {
             ErrorUtilities.VerifyThrowArgumentNull(parent, nameof(parent));
@@ -62,7 +62,7 @@ namespace Microsoft.Build.Construction
         /// ONLY TO BE CALLED by ProjectItemElement.
         /// Should be protected+internal.
         /// </summary>
-        internal bool DefinitelyAreNoChildrenWithWildcards
+        public bool DefinitelyAreNoChildrenWithWildcards
         {
             get
             {
@@ -160,7 +160,7 @@ namespace Microsoft.Build.Construction
         /// Creates an unparented ProjectItemGroupElement, wrapping an unparented XmlElement.
         /// Caller should then ensure the element is added to the XmlDocument in the appropriate location.
         /// </summary>
-        internal static ProjectItemGroupElement CreateDisconnected(ProjectRootElement containingProject)
+        public static ProjectItemGroupElement CreateDisconnected(ProjectRootElement containingProject)
         {
             XmlElementWithLocation element = containingProject.CreateElement(XMakeElements.itemGroup);
 
@@ -171,7 +171,7 @@ namespace Microsoft.Build.Construction
         /// Overridden to verify that the potential parent and siblings
         /// are acceptable. Throws InvalidOperationException if they are not.
         /// </summary>
-        internal override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
+        public override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
         {
             ErrorUtilities.VerifyThrowInvalidOperation(parent is ProjectRootElement || parent is ProjectTargetElement || parent is ProjectWhenElement || parent is ProjectOtherwiseElement, "OM_CannotAcceptParent");
         }

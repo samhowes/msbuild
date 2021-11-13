@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,7 +10,7 @@ namespace Microsoft.Build.Construction
     /// <summary>
     /// Derivation of XmlAttribute to implement IXmlLineInfo
     /// </summary>
-    internal class XmlAttributeWithLocation : XmlAttribute, IXmlLineInfo
+    public class XmlAttributeWithLocation : XmlAttribute, IXmlLineInfo
     {
         /// <summary>
         /// Line, column, file information
@@ -66,7 +66,7 @@ namespace Microsoft.Build.Construction
         /// even if it wasn't loaded from disk, or has been edited since. That's because we set that
         /// path on our XmlDocumentWithLocation wrapper class.
         /// </remarks>
-        internal ElementLocation Location
+        public ElementLocation Location
         {
             get
             {

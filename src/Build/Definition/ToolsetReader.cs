@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -21,7 +21,7 @@ namespace Microsoft.Build.Evaluation
     /// <summary>
     /// The abstract base class for all Toolset readers.
     /// </summary>
-    internal abstract class ToolsetReader
+    public abstract class ToolsetReader
     {
         /// <summary>
         /// The global properties used to read the toolset.
@@ -82,7 +82,7 @@ namespace Microsoft.Build.Evaluation
         /// allows you to specify which of the registry and configuration file to
         /// read from by providing ToolsetInitialization
         /// </summary>
-        internal static string ReadAllToolsets(Dictionary<string, Toolset> toolsets, PropertyDictionary<ProjectPropertyInstance> environmentProperties, PropertyDictionary<ProjectPropertyInstance> globalProperties, ToolsetDefinitionLocations locations)
+        public static string ReadAllToolsets(Dictionary<string, Toolset> toolsets, PropertyDictionary<ProjectPropertyInstance> environmentProperties, PropertyDictionary<ProjectPropertyInstance> globalProperties, ToolsetDefinitionLocations locations)
         {
             return ReadAllToolsets(toolsets,
 #if FEATURE_WIN32_REGISTRY
@@ -99,7 +99,7 @@ namespace Microsoft.Build.Evaluation
         /// Gathers toolset data from the registry and configuration file, if any.
         /// NOTE:  this method is internal for unit testing purposes only.
         /// </summary>
-        internal static string ReadAllToolsets
+        public static string ReadAllToolsets
             (
             Dictionary<string, Toolset> toolsets,
 #if FEATURE_WIN32_REGISTRY
@@ -348,7 +348,7 @@ namespace Microsoft.Build.Evaluation
         /// </summary>
         /// <remarks>Internal for unit testing only</remarks>
         /// <returns>the default tools version if available, or null otherwise</returns>
-        internal string ReadToolsets
+        public string ReadToolsets
             (
             Dictionary<string, Toolset> toolsets,
             PropertyDictionary<ProjectPropertyInstance> globalProperties,
@@ -753,7 +753,7 @@ namespace Microsoft.Build.Evaluation
     /// <summary>
     /// struct representing a reference to MSBuildExtensionsPath* property
     /// </summary>
-    internal struct MSBuildExtensionsPathReferenceKind
+    public struct MSBuildExtensionsPathReferenceKind
     {
         /// <summary>
         /// MSBuildExtensionsPathReferenceKind instance for property named "MSBuildExtensionsPath"

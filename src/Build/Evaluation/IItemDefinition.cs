@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Construction;
@@ -9,7 +9,7 @@ namespace Microsoft.Build.Evaluation
     /// Interface representing item definition objects for use by the Evaulator.
     /// </summary>
     /// <typeparam name="M">Type of metadata objects.</typeparam>
-    internal interface IItemDefinition<M> : IMetadataTable
+    public interface IItemDefinition<M> : IMetadataTable
         where M : class, IMetadatum
     {
         /// <summary>

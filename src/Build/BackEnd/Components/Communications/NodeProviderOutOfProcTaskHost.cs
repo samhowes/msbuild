@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -16,7 +16,7 @@ namespace Microsoft.Build.BackEnd
     /// The provider for out-of-proc nodes.  This manages the lifetime of external MSBuild.exe processes
     /// which act as child nodes for the build system.
     /// </summary>
-    internal class NodeProviderOutOfProcTaskHost : NodeProviderOutOfProcBase, INodeProvider, INodePacketFactory, INodePacketHandler
+    public class NodeProviderOutOfProcTaskHost : NodeProviderOutOfProcBase, INodeProvider, INodePacketFactory, INodePacketHandler
     {
         /// <summary>
         /// The maximum number of nodes that this provider supports. Should
@@ -128,7 +128,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Returns the name of the CLR2 Task Host executable
         /// </summary>
-        internal static string TaskHostNameForClr2TaskHost
+        public static string TaskHostNameForClr2TaskHost
         {
             get
             {
@@ -333,7 +333,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Static factory for component creation.
         /// </summary>
-        static internal IBuildComponent CreateComponent(BuildComponentType componentType)
+        static public IBuildComponent CreateComponent(BuildComponentType componentType)
         {
             ErrorUtilities.VerifyThrow(componentType == BuildComponentType.OutOfProcTaskHostNodeProvider, "Factory cannot create components of type {0}", componentType);
             return new NodeProviderOutOfProcTaskHost();
@@ -343,7 +343,7 @@ namespace Microsoft.Build.BackEnd
         /// Clears out our cached values for the various task host names and paths.
         /// FOR UNIT TESTING ONLY
         /// </summary>
-        internal static void ClearCachedTaskHostPaths()
+        public static void ClearCachedTaskHostPaths()
         {
             s_msbuildName = null;
             s_msbuildTaskHostName = null;
@@ -358,7 +358,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Given a TaskHostContext, returns the name of the executable we should be searching for.
         /// </summary>
-        internal static string GetTaskHostNameFromHostContext(HandshakeOptions hostContext)
+        public static string GetTaskHostNameFromHostContext(HandshakeOptions hostContext)
         {
             ErrorUtilities.VerifyThrowInternalErrorUnreachable((hostContext & HandshakeOptions.TaskHost) == HandshakeOptions.TaskHost);
             if ((hostContext & HandshakeOptions.CLR2) == HandshakeOptions.CLR2) {
@@ -385,7 +385,7 @@ namespace Microsoft.Build.BackEnd
         /// executable (MSBuild or MSBuildTaskHost) that we wish to use, or null
         /// if that location cannot be resolved.
         /// </summary>
-        internal static string GetMSBuildLocationFromHostContext(HandshakeOptions hostContext)
+        public static string GetMSBuildLocationFromHostContext(HandshakeOptions hostContext)
         {
             string toolName = GetTaskHostNameFromHostContext(hostContext);
             string toolPath;
@@ -451,7 +451,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Make sure a node in the requested context exists.
         /// </summary>
-        internal bool AcquireAndSetUpHost(HandshakeOptions hostContext, INodePacketFactory factory, INodePacketHandler handler, TaskHostConfiguration configuration)
+        public bool AcquireAndSetUpHost(HandshakeOptions hostContext, INodePacketFactory factory, INodePacketHandler handler, TaskHostConfiguration configuration)
         {
             NodeContext context;
             bool nodeCreationSucceeded;
@@ -482,7 +482,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Expected to be called when TaskHostTask is done with host of the given context.
         /// </summary>
-        internal void DisconnectFromHost(HandshakeOptions hostContext)
+        public void DisconnectFromHost(HandshakeOptions hostContext)
         {
             ErrorUtilities.VerifyThrow(_nodeIdToPacketFactory.ContainsKey((int)hostContext) && _nodeIdToPacketHandler.ContainsKey((int)hostContext), "Why are we trying to disconnect from a context that we already disconnected from?  Did we call DisconnectFromHost twice?");
 
@@ -493,7 +493,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Instantiates a new MSBuild or MSBuildTaskHost process acting as a child node.
         /// </summary>
-        internal bool CreateNode(HandshakeOptions hostContext, INodePacketFactory factory, INodePacketHandler handler, TaskHostConfiguration configuration)
+        public bool CreateNode(HandshakeOptions hostContext, INodePacketFactory factory, INodePacketHandler handler, TaskHostConfiguration configuration)
         {
             ErrorUtilities.VerifyThrowArgumentNull(factory, nameof(factory));
             ErrorUtilities.VerifyThrow(!_nodeIdToPacketFactory.ContainsKey((int)hostContext), "We should not already have a factory for this context!  Did we forget to call DisconnectFromHost somewhere?");

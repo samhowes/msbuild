@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,7 +10,7 @@ namespace Microsoft.Build.Shared.LanguageParser
     /// <summary>
     /// A class with string-like semantics mapped over a Stream.
     /// </summary>
-    sealed internal class StreamMappedString
+    sealed public class StreamMappedString
     {
         /// <summary>
         /// The raw binary stream that's being read.
@@ -79,7 +79,7 @@ namespace Microsoft.Build.Shared.LanguageParser
         /// <param name="binaryStream">The raw binary stream that's being read.</param>
         /// <param name="forceANSI">When false, try to guess the encoding of binaryStream. When true, force the encoding to ANSI.</param>
         /// <param name="pageSize">Size of pages to use for reading from source file.</param>
-        internal StreamMappedString(Stream binaryStream, bool forceANSI, int pageSize)
+        public StreamMappedString(Stream binaryStream, bool forceANSI, int pageSize)
         {
             _binaryStream = binaryStream;
             _forceANSI = forceANSI;

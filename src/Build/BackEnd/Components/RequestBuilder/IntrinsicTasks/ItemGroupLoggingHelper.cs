@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -14,27 +14,27 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// Helper class to convert ItemGroup parameters to a string value for logging.
     /// </summary>
-    internal static class ItemGroupLoggingHelper
+    public static class ItemGroupLoggingHelper
     {
         /// <summary>
         /// The default character limit for logging parameters. 10k is somewhat arbitrary, see https://github.com/microsoft/msbuild/issues/4907.
         /// </summary>
-        internal static int parameterCharacterLimit = 40_000;
+        public static int parameterCharacterLimit = 40_000;
 
         /// <summary>
         /// The default parameter limit for logging. 200 is somewhat arbitrary, see https://github.com/microsoft/msbuild/pull/5210.
         /// </summary>
-        internal static int parameterLimit = 200;
+        public static int parameterLimit = 200;
 
-        internal static string ItemGroupIncludeLogMessagePrefix = ResourceUtilities.GetResourceString("ItemGroupIncludeLogMessagePrefix");
-        internal static string ItemGroupRemoveLogMessage = ResourceUtilities.GetResourceString("ItemGroupRemoveLogMessage");
-        internal static string OutputItemParameterMessagePrefix = ResourceUtilities.GetResourceString("OutputItemParameterMessagePrefix");
-        internal static string TaskParameterPrefix = ResourceUtilities.GetResourceString("TaskParameterPrefix");
+        public static string ItemGroupIncludeLogMessagePrefix = ResourceUtilities.GetResourceString("ItemGroupIncludeLogMessagePrefix");
+        public static string ItemGroupRemoveLogMessage = ResourceUtilities.GetResourceString("ItemGroupRemoveLogMessage");
+        public static string OutputItemParameterMessagePrefix = ResourceUtilities.GetResourceString("OutputItemParameterMessagePrefix");
+        public static string TaskParameterPrefix = ResourceUtilities.GetResourceString("TaskParameterPrefix");
 
         /// <summary>
         /// Gets a text serialized value of a parameter for logging.
         /// </summary>
-        internal static string GetParameterText(string prefix, string parameterName, IList parameterValue, bool logItemMetadata = true)
+        public static string GetParameterText(string prefix, string parameterName, IList parameterValue, bool logItemMetadata = true)
         {
             if (parameterValue == null || parameterValue.Count == 0)
             {
@@ -109,7 +109,7 @@ namespace Microsoft.Build.BackEnd
         /// First line is already indented.
         /// Indent of any subsequent line should be 12 spaces.
         /// </summary>
-        internal static string GetStringFromParameterValue(object parameterValue, bool logItemMetadata = true)
+        public static string GetStringFromParameterValue(object parameterValue, bool logItemMetadata = true)
         {
             // fast path for the common case
             if (parameterValue is string valueText)

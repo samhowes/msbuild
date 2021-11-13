@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -11,7 +11,7 @@ namespace Microsoft.Build
     /// <summary>
     /// Define the methods needed to intern something.
     /// </summary>
-    internal interface IInternable
+    public interface IInternable
     {
         /// <summary>
         /// The length of the target.
@@ -45,7 +45,7 @@ namespace Microsoft.Build
     /// <summary>
     /// A wrapper over StringBuilder.
     /// </summary>
-    internal readonly struct StringBuilderInternTarget : IInternable
+    public readonly struct StringBuilderInternTarget : IInternable
     {
         /// <summary>
         /// The held StringBuilder
@@ -55,7 +55,7 @@ namespace Microsoft.Build
         /// <summary>
         /// Pointless comment about constructor.
         /// </summary>
-        internal StringBuilderInternTarget(StringBuilder target)
+        public StringBuilderInternTarget(StringBuilder target)
         {
             _target = target;
         }
@@ -118,7 +118,7 @@ namespace Microsoft.Build
     /// <summary>
     /// A wrapper over char[].
     /// </summary>
-    internal readonly struct CharArrayInternTarget : IInternable
+    public readonly struct CharArrayInternTarget : IInternable
     {
         /// <summary>
         /// Start index for the string
@@ -133,7 +133,7 @@ namespace Microsoft.Build
         /// <summary>
         /// Pointless comment about constructor.
         /// </summary>
-        internal CharArrayInternTarget(char[] target, int count)
+        public CharArrayInternTarget(char[] target, int count)
             : this(target, 0, count)
         {
         }
@@ -141,7 +141,7 @@ namespace Microsoft.Build
         /// <summary>
         /// Pointless comment about constructor.
         /// </summary>
-        internal CharArrayInternTarget(char[] target, int startIndex, int count)
+        public CharArrayInternTarget(char[] target, int startIndex, int count)
         {
 #if DEBUG
             if (startIndex + count > target.Length)
@@ -222,7 +222,7 @@ namespace Microsoft.Build
     /// <summary>
     /// Wrapper over a string.
     /// </summary>
-    internal readonly struct StringInternTarget : IInternable
+    public readonly struct StringInternTarget : IInternable
     {
         /// <summary>
         /// Stores the wrapped string.
@@ -233,7 +233,7 @@ namespace Microsoft.Build
         /// Constructor of the class
         /// </summary>
         /// <param name="target">The string to wrap</param>
-        internal StringInternTarget(string target)
+        public StringInternTarget(string target)
         {
             ErrorUtilities.VerifyThrowArgumentLength(target, nameof(target));
             _target = target;
@@ -275,7 +275,7 @@ namespace Microsoft.Build
     /// <summary>
     /// Wrapper over a substring of a string.
     /// </summary>
-    internal readonly struct SubstringInternTarget : IInternable
+    public readonly struct SubstringInternTarget : IInternable
     {
         /// <summary>
         /// Stores the wrapped string.
@@ -293,7 +293,7 @@ namespace Microsoft.Build
         /// <param name="target">The string to wrap.</param>
         /// <param name="startIndex">Start index of the substring within <paramref name="target"/>.</param>
         /// <param name="length">Length of the substring.</param>
-        internal SubstringInternTarget(string target, int startIndex, int length)
+        public SubstringInternTarget(string target, int startIndex, int length)
         {
 #if DEBUG
             if (startIndex + length > target.Length)

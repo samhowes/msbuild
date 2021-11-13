@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -14,7 +14,7 @@ namespace Microsoft.Build.BackEnd.Logging
     /// <summary>
     /// A logging context for building a specific target within a project.
     /// </summary>
-    internal class TargetLoggingContext : BuildLoggingContext
+    public class TargetLoggingContext : BuildLoggingContext
     {
         /// <summary>
         /// Should target outputs be logged also.
@@ -34,7 +34,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Creates a new target logging context from an existing project context and target.
         /// </summary>
-        internal TargetLoggingContext(ProjectLoggingContext projectLoggingContext, string projectFullPath, ProjectTargetInstance target, string parentTargetName, TargetBuiltReason buildReason)
+        public TargetLoggingContext(ProjectLoggingContext projectLoggingContext, string projectFullPath, ProjectTargetInstance target, string parentTargetName, TargetBuiltReason buildReason)
             : base(projectLoggingContext)
         {
             _projectLoggingContext = projectLoggingContext;
@@ -47,7 +47,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Constructor used to support out-of-proc task host (proxy for in-proc logging service.)
         /// </summary>
-        internal TargetLoggingContext(ILoggingService loggingService, BuildEventContext outOfProcContext)
+        public TargetLoggingContext(ILoggingService loggingService, BuildEventContext outOfProcContext)
             : base(loggingService, outOfProcContext, true)
         {
             this.IsValid = true;
@@ -56,7 +56,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Should target outputs be logged also.
         /// </summary>
-        internal static bool EnableTargetOutputLogging
+        public static bool EnableTargetOutputLogging
         {
             get { return s_enableTargetOutputLogging; }
             set { s_enableTargetOutputLogging = value; }
@@ -65,7 +65,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Retrieves the project logging context.
         /// </summary>
-        internal ProjectLoggingContext ProjectLoggingContext
+        public ProjectLoggingContext ProjectLoggingContext
         {
             get
             {
@@ -76,7 +76,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Retrieves the target.
         /// </summary>
-        internal ProjectTargetInstance Target
+        public ProjectTargetInstance Target
         {
             get
             {
@@ -87,7 +87,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Log that a target has finished
         /// </summary>
-        internal void LogTargetBatchFinished(string projectFullPath, bool success, IEnumerable<TaskItem> targetOutputs)
+        public void LogTargetBatchFinished(string projectFullPath, bool success, IEnumerable<TaskItem> targetOutputs)
         {
             ErrorUtilities.VerifyThrow(IsValid, "Should be valid");
 
@@ -106,7 +106,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Log that a task is about to start
         /// </summary>
-        internal TaskLoggingContext LogTaskBatchStarted(string projectFullPath, ProjectTargetInstanceChild task)
+        public TaskLoggingContext LogTaskBatchStarted(string projectFullPath, ProjectTargetInstanceChild task)
         {
             ErrorUtilities.VerifyThrow(IsValid, "Should be valid");
 
@@ -122,7 +122,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// The expense of copying items is only incurred if and when 
         /// a logger chooses to enumerate over it.
         /// </remarks>
-        internal class TargetOutputItemsInstanceEnumeratorProxy : IEnumerable<TaskItem>
+        public class TargetOutputItemsInstanceEnumeratorProxy : IEnumerable<TaskItem>
         {
             /// <summary>
             /// Enumerable that this proxies
@@ -133,7 +133,7 @@ namespace Microsoft.Build.BackEnd.Logging
             /// Constructor
             /// </summary>
             /// <param name="backingItems">Enumerator this class should proxy</param>
-            internal TargetOutputItemsInstanceEnumeratorProxy(IEnumerable<TaskItem> backingItems)
+            public TargetOutputItemsInstanceEnumeratorProxy(IEnumerable<TaskItem> backingItems)
             {
                 _backingItems = backingItems;
             }

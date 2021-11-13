@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -18,7 +18,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// The host allows task factories access to method to allow them to log message during the construction of the task factories.
     /// </summary>
-    internal class TaskFactoryLoggingHost :
+    public class TaskFactoryLoggingHost :
 #if FEATURE_APPDOMAIN
         MarshalByRefObject,
 #endif
@@ -137,7 +137,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Sets or retrieves the logging context
         /// </summary>
-        internal BuildLoggingContext LoggingContext
+        public BuildLoggingContext LoggingContext
         {
             [DebuggerStepThrough]
             get
@@ -307,7 +307,7 @@ namespace Microsoft.Build.BackEnd
         /// Indicates to the TaskHost that it is no longer needed.
         /// Called by TaskBuilder when the task using the EngineProxy is done.
         /// </summary>
-        internal void MarkAsInactive()
+        public void MarkAsInactive()
         {
             VerifyActiveProxy();
             _activeProxy = false;
@@ -333,7 +333,7 @@ namespace Microsoft.Build.BackEnd
         /// Determine if the event is serializable. If we are running with multiple nodes we need to make sure the logging events are serializable. If not
         /// we need to log a warning.
         /// </summary>
-        internal bool IsEventSerializable(BuildEventArgs e)
+        public bool IsEventSerializable(BuildEventArgs e)
         {
             if (!e.GetType().GetTypeInfo().IsSerializable)
             {

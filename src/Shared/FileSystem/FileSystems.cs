@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace Microsoft.Build.Shared.FileSystem
@@ -6,7 +6,7 @@ namespace Microsoft.Build.Shared.FileSystem
     /// <summary>
     /// Factory for <see cref="IFileSystem"/>
     /// </summary>
-    internal static class FileSystems
+    public static class FileSystems
     {
         public static IFileSystem Default = GetFileSystem();
 

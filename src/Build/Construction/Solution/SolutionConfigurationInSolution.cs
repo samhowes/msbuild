@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace Microsoft.Build.Construction
@@ -12,14 +12,14 @@ namespace Microsoft.Build.Construction
         /// Default separator between configuration and platform in configuration
         /// full names
         /// </summary>
-        internal const char ConfigurationPlatformSeparator = '|';
+        public const char ConfigurationPlatformSeparator = '|';
 
-        internal static readonly char[] ConfigurationPlatformSeparatorArray = new char[] { '|' };
+        public static readonly char[] ConfigurationPlatformSeparatorArray = new char[] { '|' };
 
         /// <summary>
         /// Constructor
         /// </summary>
-        internal SolutionConfigurationInSolution(string configurationName, string platformName)
+        public SolutionConfigurationInSolution(string configurationName, string platformName)
         {
             ConfigurationName = configurationName;
             PlatformName = platformName;
@@ -45,7 +45,7 @@ namespace Microsoft.Build.Construction
         /// Given a configuration name and a platform name, compute the full name 
         /// of this configuration
         /// </summary>
-        internal static string ComputeFullName(string configurationName, string platformName)
+        public static string ComputeFullName(string configurationName, string platformName)
         {
             // Some configurations don't have the platform part
             if (!string.IsNullOrEmpty(platformName))

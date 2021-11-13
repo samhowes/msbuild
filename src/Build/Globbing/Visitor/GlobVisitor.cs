@@ -1,9 +1,9 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace Microsoft.Build.Globbing.Visitor
 {
-    internal abstract class GlobVisitor
+    public abstract class GlobVisitor
     {
         public void Visit(IMSBuildGlob glob)
         {

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -11,27 +11,27 @@ namespace Microsoft.Build.Shared
     /// IKeyComparer implementation that compares AssemblyNames for using in Hashtables.
     /// </summary>
     [Serializable]
-    internal sealed class AssemblyNameComparer : IComparer, IEqualityComparer, IEqualityComparer<AssemblyNameExtension>
+    public sealed class AssemblyNameComparer : IComparer, IEqualityComparer, IEqualityComparer<AssemblyNameExtension>
     {
         /// <summary>
         /// Comparer for two assembly name extensions
         /// </summary>
-        internal static readonly IComparer Comparer = new AssemblyNameComparer(false);
+        public static readonly IComparer Comparer = new AssemblyNameComparer(false);
 
         /// <summary>
         /// Comparer for two assembly name extensions
         /// </summary>
-        internal static readonly IComparer ComparerConsiderRetargetable = new AssemblyNameComparer(true);
+        public static readonly IComparer ComparerConsiderRetargetable = new AssemblyNameComparer(true);
 
         /// <summary>
         /// Comparer for two assembly name extensions
         /// </summary>
-        internal static readonly IEqualityComparer<AssemblyNameExtension> GenericComparer = Comparer as IEqualityComparer<AssemblyNameExtension>;
+        public static readonly IEqualityComparer<AssemblyNameExtension> GenericComparer = Comparer as IEqualityComparer<AssemblyNameExtension>;
 
         /// <summary>
         /// Comparer for two assembly name extensions
         /// </summary>
-        internal static readonly IEqualityComparer<AssemblyNameExtension> GenericComparerConsiderRetargetable = ComparerConsiderRetargetable as IEqualityComparer<AssemblyNameExtension>;
+        public static readonly IEqualityComparer<AssemblyNameExtension> GenericComparerConsiderRetargetable = ComparerConsiderRetargetable as IEqualityComparer<AssemblyNameExtension>;
 
         /// <summary>
         /// Should the comparer consider the retargetable flag when doing comparisons

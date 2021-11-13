@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Text;
 
@@ -65,7 +65,7 @@ namespace System.Collections.Generic {
         /// <param name="bitArray">int array to hold bits</param>
         /// <param name="length">length of int array</param>
         [System.Security.SecurityCritical]
-        internal BitHelper(int* bitArrayPtr, int length) {
+        public BitHelper(int* bitArrayPtr, int length) {
             this.m_arrayPtr = bitArrayPtr;
             this.m_length = length;
             useStackAlloc = true;
@@ -76,7 +76,7 @@ namespace System.Collections.Generic {
         /// </summary>
         /// <param name="bitArray">int array to hold bits</param>
         /// <param name="length">length of int array</param>
-        internal BitHelper(int[] bitArray, int length) {
+        public BitHelper(int[] bitArray, int length) {
             this.m_array = bitArray;
             this.m_length = length;
         }
@@ -86,7 +86,7 @@ namespace System.Collections.Generic {
         /// </summary>
         /// <param name="bitPosition"></param>
         [System.Security.SecuritySafeCritical]
-        internal unsafe void MarkBit(int bitPosition) {
+        public unsafe void MarkBit(int bitPosition) {
             if (useStackAlloc) {
                 int bitArrayIndex = bitPosition / IntSize;
                 if (bitArrayIndex < m_length && bitArrayIndex >= 0) {
@@ -107,7 +107,7 @@ namespace System.Collections.Generic {
         /// <param name="bitPosition"></param>
         /// <returns></returns>
         [System.Security.SecuritySafeCritical]
-        internal unsafe bool IsMarked(int bitPosition) {
+        public unsafe bool IsMarked(int bitPosition) {
             if (useStackAlloc) {
                 int bitArrayIndex = bitPosition / IntSize;
                 if (bitArrayIndex < m_length && bitArrayIndex >= 0) {
@@ -130,7 +130,7 @@ namespace System.Collections.Generic {
         /// </summary>
         /// <param name="n"></param>
         /// <returns></returns>
-        internal static int ToIntArrayLength(int n) {
+        public static int ToIntArrayLength(int n) {
             return n > 0 ? ((n - 1) / IntSize + 1) : 0;
         }
 

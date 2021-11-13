@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace Microsoft.Build.BackEnd
@@ -9,7 +9,7 @@ namespace Microsoft.Build.BackEnd
     /// 
     /// REFACTOR: Maybe these could all implement IDisposable.
     /// </summary>
-    internal interface IBuildComponent
+    public interface IBuildComponent
     {
         /// <summary>
         /// Called by the build component host when a component is first initialized

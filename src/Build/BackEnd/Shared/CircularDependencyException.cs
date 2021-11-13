@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -19,11 +19,11 @@ namespace Microsoft.Build.Exceptions
         /// <summary>
         /// Constructs a standard BuildAbortedException.
         /// </summary>
-        internal CircularDependencyException()
+        public CircularDependencyException()
         {
         }
 
-        internal CircularDependencyException(string message)
+        public CircularDependencyException(string message)
             : base(message)
         {
         }

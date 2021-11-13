@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,7 +10,7 @@ namespace Microsoft.Build.Evaluation
     /// Wraps a table of metadata values in which keys
     /// may be qualified ("itemtype.name") or unqualified ("name").
     /// </summary>
-    internal class StringMetadataTable : IMetadataTable
+    public class StringMetadataTable : IMetadataTable
     {
         /// <summary>
         /// Table of metadata values. 
@@ -26,7 +26,7 @@ namespace Microsoft.Build.Evaluation
         /// Unqualified keys are considered to apply to all item types.
         /// Metadata may be null, indicating it is empty.
         /// </summary>
-        internal StringMetadataTable(Dictionary<string, string> metadata)
+        public StringMetadataTable(Dictionary<string, string> metadata)
         {
             _metadata = metadata;
         }

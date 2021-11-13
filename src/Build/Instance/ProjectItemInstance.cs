@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -55,7 +55,7 @@ namespace Microsoft.Build.Execution
         /// and during the build when tasks emit items.
         /// Mutability follows the project.
         /// </summary>
-        internal ProjectItemInstance(ProjectInstance project, string itemType, string includeEscaped, string definingFileEscaped)
+        public ProjectItemInstance(ProjectInstance project, string itemType, string includeEscaped, string definingFileEscaped)
             : this(project, itemType, includeEscaped, includeEscaped, definingFileEscaped)
         {
         }
@@ -67,7 +67,7 @@ namespace Microsoft.Build.Execution
         /// and during the build when tasks emit items.
         /// Mutability follows the project.
         /// </summary>
-        internal ProjectItemInstance(ProjectInstance project, string itemType, string includeEscaped, string includeBeforeWildcardExpansionEscaped, string definingFileEscaped)
+        public ProjectItemInstance(ProjectInstance project, string itemType, string includeEscaped, string includeBeforeWildcardExpansionEscaped, string definingFileEscaped)
             : this(project, itemType, includeEscaped, includeBeforeWildcardExpansionEscaped, null /* no direct metadata */, null /* need to add item definition metadata */, definingFileEscaped)
         {
         }
@@ -85,7 +85,7 @@ namespace Microsoft.Build.Execution
         /// <remarks>
         /// Not public since the only creation scenario is setting on a project.
         /// </remarks>
-        internal ProjectItemInstance(ProjectInstance project, string itemType, string includeEscaped, string includeBeforeWildcardExpansionEscaped, CopyOnWritePropertyDictionary<ProjectMetadataInstance> directMetadata, List<ProjectItemDefinitionInstance> itemDefinitions, string definingFileEscaped)
+        public ProjectItemInstance(ProjectInstance project, string itemType, string includeEscaped, string includeBeforeWildcardExpansionEscaped, CopyOnWritePropertyDictionary<ProjectMetadataInstance> directMetadata, List<ProjectItemDefinitionInstance> itemDefinitions, string definingFileEscaped)
         {
             CommonConstructor(project, itemType, includeEscaped, includeBeforeWildcardExpansionEscaped, directMetadata, itemDefinitions, definingFileEscaped);
         }
@@ -101,7 +101,7 @@ namespace Microsoft.Build.Execution
         /// <remarks>
         /// Not public since the only creation scenario is setting on a project.
         /// </remarks>
-        internal ProjectItemInstance(ProjectInstance project, string itemType, string includeEscaped, IEnumerable<KeyValuePair<string, string>> directMetadata, string definingFileEscaped)
+        public ProjectItemInstance(ProjectInstance project, string itemType, string includeEscaped, IEnumerable<KeyValuePair<string, string>> directMetadata, string definingFileEscaped)
         {
             CopyOnWritePropertyDictionary<ProjectMetadataInstance> metadata = null;
 
@@ -322,7 +322,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Retrieves the comparer used for determining equality between ProjectItemInstances.
         /// </summary>
-        internal static IEqualityComparer<ProjectItemInstance> EqualityComparer
+        public static IEqualityComparer<ProjectItemInstance> EqualityComparer
         {
             get { return ProjectItemInstanceEqualityComparer.Default; }
         }
@@ -331,7 +331,7 @@ namespace Microsoft.Build.Execution
         /// The full path to the project file being built
         /// Can be null: if the project hasn't been saved yet it will be null
         /// </summary>
-        internal string ProjectFullPath
+        public string ProjectFullPath
         {
             get { return _project.FullPath; }
         }
@@ -589,7 +589,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Set all the supplied metadata on all the supplied items.
         /// </summary>
-        internal static void SetMetadata(IEnumerable<KeyValuePair<string, string>> metadataList, IEnumerable<ProjectItemInstance> items)
+        public static void SetMetadata(IEnumerable<KeyValuePair<string, string>> metadataList, IEnumerable<ProjectItemInstance> items)
         {
             // Set up a single dictionary that can be applied to all the items
             CopyOnWritePropertyDictionary<ProjectMetadataInstance> metadata = new CopyOnWritePropertyDictionary<ProjectMetadataInstance>(metadataList.FastCountOrZero());
@@ -607,7 +607,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Factory for deserialization.
         /// </summary>
-        static internal ProjectItemInstance FactoryForDeserialization(ITranslator translator, ProjectInstance projectInstance)
+        static public ProjectItemInstance FactoryForDeserialization(ITranslator translator, ProjectInstance projectInstance)
         {
             ProjectItemInstance newItem = new ProjectItemInstance(projectInstance);
             ((ITranslatable)newItem).Translate(translator);
@@ -618,7 +618,7 @@ namespace Microsoft.Build.Execution
         /// Add a metadata with the specified names and values.
         /// Overwrites any metadata with the same name already in the collection.
         /// </summary>
-        internal void SetMetadata(CopyOnWritePropertyDictionary<ProjectMetadataInstance> metadataDictionary)
+        public void SetMetadata(CopyOnWritePropertyDictionary<ProjectMetadataInstance> metadataDictionary)
         {
             _project.VerifyThrowNotImmutable();
 
@@ -634,7 +634,7 @@ namespace Microsoft.Build.Execution
         /// which legally have built-in metadata. If necessary we can calculate it on the new items we're making if requested.
         /// We don't copy them too because tasks shouldn't set them (they might become inconsistent)
         /// </summary>
-        internal void SetMetadataOnTaskOutput(string name, string evaluatedValueEscaped)
+        public void SetMetadataOnTaskOutput(string name, string evaluatedValueEscaped)
         {
             _project.VerifyThrowNotImmutable();
 
@@ -645,7 +645,7 @@ namespace Microsoft.Build.Execution
         /// Deep clone the item.
         /// Any metadata inherited from item definitions are also copied.
         /// </summary>
-        internal ProjectItemInstance DeepClone()
+        public ProjectItemInstance DeepClone()
         {
             return new ProjectItemInstance(this);
         }
@@ -654,7 +654,7 @@ namespace Microsoft.Build.Execution
         /// Deep clone the item.
         /// Any metadata inherited from item definitions are also copied.
         /// </summary>
-        internal ProjectItemInstance DeepClone(ProjectInstance newProject)
+        public ProjectItemInstance DeepClone(ProjectInstance newProject)
         {
             return new ProjectItemInstance(this, newProject);
         }
@@ -664,7 +664,7 @@ namespace Microsoft.Build.Execution
         /// </summary>
         /// <param name="parent">The root element to which the element will belong.</param>
         /// <returns>The new element.</returns>
-        internal ProjectItemElement ToProjectItemElement(ProjectElementContainer parent)
+        public ProjectItemElement ToProjectItemElement(ProjectElementContainer parent)
         {
             ProjectItemElement item = parent.ContainingProject.CreateItemElement(ItemType);
             item.Include = EvaluatedInclude;
@@ -719,7 +719,7 @@ namespace Microsoft.Build.Execution
         /// An item without an item type. Cast to an ITaskItem, this is
         /// what is given to tasks. It is also used for target outputs.
         /// </summary>
-        internal sealed class TaskItem :
+        public sealed class TaskItem :
 #if FEATURE_APPDOMAIN
             MarshalByRefObject,
 #endif
@@ -782,7 +782,7 @@ namespace Microsoft.Build.Execution
             /// <summary>
             /// Creates an instance of this class given the item-spec.
             /// </summary>
-            internal TaskItem(string includeEscaped, string definingFileEscaped)
+            public TaskItem(string includeEscaped, string definingFileEscaped)
                 : this(includeEscaped, includeEscaped, null, null, null, /* mutable */ false, definingFileEscaped)
             {
             }
@@ -791,7 +791,7 @@ namespace Microsoft.Build.Execution
             /// Creates an instance of this class given the item-spec and a built-in metadata collection.
             /// Parameters are assumed to be ALREADY CLONED.
             /// </summary>
-            internal TaskItem(
+            public TaskItem(
                               string includeEscaped,
                               string includeBeforeWildcardExpansionEscaped,
                               CopyOnWritePropertyDictionary<ProjectMetadataInstance> directMetadata,
@@ -817,7 +817,7 @@ namespace Microsoft.Build.Execution
             /// Creates a task item by copying the information from a <see cref="ProjectItemInstance"/>.
             /// Parameters are cloned.
             /// </summary>
-            internal TaskItem(ProjectItemInstance item)
+            public TaskItem(ProjectItemInstance item)
                 : this(item._taskItem, false /* no original itemspec */)
             {
             }
@@ -1011,7 +1011,7 @@ namespace Microsoft.Build.Execution
             /// <summary>
             /// The escaped include for this item
             /// </summary>
-            internal string IncludeEscaped
+            public string IncludeEscaped
             {
                 get
                 {
@@ -1032,7 +1032,7 @@ namespace Microsoft.Build.Execution
             /// The value of the include after evaluation but before wildcard expansion.
             /// Used to determine %(RecursiveDir)
             /// </summary>
-            internal string IncludeBeforeWildcardExpansionEscaped
+            public string IncludeBeforeWildcardExpansionEscaped
             {
                 get { return _includeBeforeWildcardExpansionEscaped; }
             }
@@ -1040,7 +1040,7 @@ namespace Microsoft.Build.Execution
             /// <summary>
             /// Number of pieces of metadata directly on this item
             /// </summary>
-            internal int DirectMetadataCount
+            public int DirectMetadataCount
             {
                 get { return (_directMetadata == null) ? 0 : _directMetadata.Count; }
             }
@@ -1053,7 +1053,7 @@ namespace Microsoft.Build.Execution
             /// This is a read-only collection. To modify the metadata, use <see cref="SetMetadata(string, string)"/>.
             /// Computed, not necessarily fast.
             /// </summary>
-            internal CopyOnWritePropertyDictionary<ProjectMetadataInstance> MetadataCollection
+            public CopyOnWritePropertyDictionary<ProjectMetadataInstance> MetadataCollection
             {
                 get
                 {
@@ -1580,7 +1580,7 @@ namespace Microsoft.Build.Execution
             /// <summary>
             /// Factory for serialization.
             /// </summary>
-            internal static TaskItem FactoryForDeserialization(ITranslator translator)
+            public static TaskItem FactoryForDeserialization(ITranslator translator)
             {
                 return new TaskItem(translator);
             }
@@ -1588,7 +1588,7 @@ namespace Microsoft.Build.Execution
             /// <summary>
             /// Factory for serialization.
             /// </summary>
-            internal static TaskItem FactoryForDeserialization(ITranslator translator, LookasideStringInterner interner)
+            public static TaskItem FactoryForDeserialization(ITranslator translator, LookasideStringInterner interner)
             {
                 return new TaskItem(translator, interner);
             }
@@ -1608,7 +1608,7 @@ namespace Microsoft.Build.Execution
             /// <summary>
             /// Reads or writes the task item to the translator using an interner for metadata.
             /// </summary>
-            internal void TranslateWithInterning(ITranslator translator, LookasideStringInterner interner)
+            public void TranslateWithInterning(ITranslator translator, LookasideStringInterner interner)
             {
                 translator.Translate(ref _itemDefinitions, ProjectItemDefinitionInstance.FactoryForDeserialization);
                 translator.Translate(ref _isImmutable);
@@ -1657,7 +1657,7 @@ namespace Microsoft.Build.Execution
             /// Gets any metadata with the specified name.
             /// Does not include built-in metadata.
             /// </summary>
-            internal ProjectMetadataInstance GetMetadataObject(string name)
+            public ProjectMetadataInstance GetMetadataObject(string name)
             {
                 ProjectMetadataInstance value = null;
 
@@ -1678,7 +1678,7 @@ namespace Microsoft.Build.Execution
             /// Add a metadata with the specified name and value.
             /// Overwrites any metadata with the same name already in the collection.
             /// </summary>
-            internal void SetMetadata(CopyOnWritePropertyDictionary<ProjectMetadataInstance> metadata)
+            public void SetMetadata(CopyOnWritePropertyDictionary<ProjectMetadataInstance> metadata)
             {
                 ProjectInstance.VerifyThrowNotImmutable(_isImmutable);
 
@@ -1702,7 +1702,7 @@ namespace Microsoft.Build.Execution
             /// Overwrites any metadata with the same name already in the collection.
             /// Does not allow built-in metadata unless allowItemSpecModifiers is set.
             /// </summary>
-            internal ProjectMetadataInstance SetMetadataObject(string name, string metadataValueEscaped, bool allowItemSpecModifiers)
+            public ProjectMetadataInstance SetMetadataObject(string name, string metadataValueEscaped, bool allowItemSpecModifiers)
             {
                 ProjectInstance.VerifyThrowNotImmutable(_isImmutable);
 
@@ -1722,7 +1722,7 @@ namespace Microsoft.Build.Execution
             /// which legally have built-in metadata. If necessary we can calculate it on the new items we're making if requested.
             /// We don't copy them too because tasks shouldn't set them (they might become inconsistent)
             /// </summary>
-            internal void SetMetadataOnTaskOutput(string name, string evaluatedValueEscaped)
+            public void SetMetadataOnTaskOutput(string name, string evaluatedValueEscaped)
             {
                 ProjectInstance.VerifyThrowNotImmutable(_isImmutable);
 
@@ -1737,7 +1737,7 @@ namespace Microsoft.Build.Execution
             /// <summary>
             /// Deep clone this into another TaskItem
             /// </summary>
-            internal TaskItem DeepClone()
+            public TaskItem DeepClone()
             {
                 // When making a deep clone we do not want to add the OriginalItemSpec because it is the same as ItemSpec
                 return new TaskItem(this, false);
@@ -1746,7 +1746,7 @@ namespace Microsoft.Build.Execution
             /// <summary>
             /// Deep clone this into another TaskItem
             /// </summary>
-            internal TaskItem DeepClone(bool isImmutable)
+            public TaskItem DeepClone(bool isImmutable)
             {
                 // When making a deep clone we do not want to add the OriginalItemSpec because it is the same as ItemSpec
                 var clone = new TaskItem(this, false);
@@ -1800,7 +1800,7 @@ namespace Microsoft.Build.Execution
             /// <summary>
             /// A class factory for instance model items.
             /// </summary>
-            internal class ProjectItemInstanceFactory : IItemFactory<ProjectItemInstance, ProjectItemInstance>
+            public class ProjectItemInstanceFactory : IItemFactory<ProjectItemInstance, ProjectItemInstance>
             {
                 /// <summary>
                 /// The project to which item instances created by this factory will belong.
@@ -1812,7 +1812,7 @@ namespace Microsoft.Build.Execution
                 /// This indicates that the user of this factory should set the item type
                 /// on it before using it to create items.
                 /// </summary>
-                internal ProjectItemInstanceFactory(ProjectInstance project)
+                public ProjectItemInstanceFactory(ProjectInstance project)
                 {
                     _project = project;
                 }
@@ -1820,7 +1820,7 @@ namespace Microsoft.Build.Execution
                 /// <summary>
                 /// Constructor taking the itemtype for the generated items.
                 /// </summary>
-                internal ProjectItemInstanceFactory(ProjectInstance project, string itemType)
+                public ProjectItemInstanceFactory(ProjectInstance project, string itemType)
                     : this(project)
                 {
                     ErrorUtilities.VerifyThrowInternalLength(itemType, nameof(itemType));
@@ -1947,7 +1947,7 @@ namespace Microsoft.Build.Execution
             /// <summary>
             /// A class factory for task items.
             /// </summary>
-            internal class TaskItemFactory : IItemFactory<ProjectItem, TaskItem>, IItemFactory<ProjectItemInstance, TaskItem>
+            public class TaskItemFactory : IItemFactory<ProjectItem, TaskItem>, IItemFactory<ProjectItemInstance, TaskItem>
             {
                 /// <summary>
                 /// The singleton instance.
@@ -1982,7 +1982,7 @@ namespace Microsoft.Build.Execution
                 /// <summary>
                 /// The singleton instance. Can be cast to the interface required.
                 /// </summary>
-                internal static TaskItemFactory Instance
+                public static TaskItemFactory Instance
                 {
                     get { return s_instance; }
                 }
@@ -2089,7 +2089,7 @@ namespace Microsoft.Build.Execution
                 /// <summary>
                 /// Constructor.
                 /// </summary>
-                internal BuiltInMetadataTable(string itemType, TaskItem item)
+                public BuiltInMetadataTable(string itemType, TaskItem item)
                 {
                     _itemType = itemType;
                     _item = item;
@@ -2138,7 +2138,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Implementation of a comparer that determines equality between ProjectItemInstances
         /// </summary>
-        internal class ProjectItemInstanceEqualityComparer : IEqualityComparer<ProjectItemInstance>
+        public class ProjectItemInstanceEqualityComparer : IEqualityComparer<ProjectItemInstance>
         {
             /// <summary>
             /// The singleton comparer.

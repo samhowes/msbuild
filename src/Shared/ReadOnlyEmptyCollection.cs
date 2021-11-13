@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -15,7 +15,7 @@ namespace Microsoft.Build.Collections
     /// Thus this is an omission from the BCL.
     /// </remarks>
     /// <typeparam name="T">Type of element in the collection</typeparam>
-    internal class ReadOnlyEmptyCollection<T> : ICollection<T>, ICollection
+    public class ReadOnlyEmptyCollection<T> : ICollection<T>, ICollection
     {
         /// <summary>
         /// Backing live collection

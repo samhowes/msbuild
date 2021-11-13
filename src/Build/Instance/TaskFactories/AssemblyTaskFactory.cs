@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -19,7 +19,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// The assembly task factory is used to wrap and construct tasks which are from .net assemblies.
     /// </summary>
-    internal class AssemblyTaskFactory : ITaskFactory2
+    public class AssemblyTaskFactory : ITaskFactory2
     {
         #region Data
 
@@ -69,7 +69,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyTaskFactory"/> class.
         /// </summary>
-        internal AssemblyTaskFactory()
+        public AssemblyTaskFactory()
         {
         }
 
@@ -248,7 +248,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Initialize the factory from the task registry
         /// </summary>
-        internal LoadedType InitializeFactory
+        public LoadedType InitializeFactory
             (
                 AssemblyLoadInfo loadInfo,
                 string taskName,
@@ -318,7 +318,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Create an instance of the wrapped ITask for a batch run of the task.
         /// </summary>
-        internal ITask CreateTaskInstance(ElementLocation taskLocation, TaskLoggingContext taskLoggingContext, IBuildComponentHost buildComponentHost, IDictionary<string, string> taskIdentityParameters,
+        public ITask CreateTaskInstance(ElementLocation taskLocation, TaskLoggingContext taskLoggingContext, IBuildComponentHost buildComponentHost, IDictionary<string, string> taskIdentityParameters,
 #if FEATURE_APPDOMAIN
             AppDomainSetup appDomainSetup,
 #endif
@@ -406,7 +406,7 @@ namespace Microsoft.Build.BackEnd
         /// Is the given task name able to be created by the task factory. In the case of an assembly task factory 
         /// this question is answered by checking the assembly wrapped by the task factory to see if it exists. 
         /// </summary>
-        internal bool TaskNameCreatableByFactory(string taskName, IDictionary<string, string> taskIdentityParameters, string taskProjectFile, TargetLoggingContext targetLoggingContext, ElementLocation elementLocation)
+        public bool TaskNameCreatableByFactory(string taskName, IDictionary<string, string> taskIdentityParameters, string taskProjectFile, TargetLoggingContext targetLoggingContext, ElementLocation elementLocation)
         {
             if (!TaskIdentityParametersMatchFactory(_factoryIdentityParameters, taskIdentityParameters))
             {

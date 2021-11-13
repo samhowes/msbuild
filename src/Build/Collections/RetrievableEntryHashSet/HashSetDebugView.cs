@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,7 +10,7 @@ namespace Microsoft.Build.Collections
     /// Debug view for HashSet
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    internal class HashSetDebugView<T> where T : class, IKeyed
+    public class HashSetDebugView<T> where T : class, IKeyed
     {
         private readonly RetrievableEntryHashSet<T> _set;
 

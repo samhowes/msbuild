@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Diagnostics.CodeAnalysis;
@@ -19,7 +19,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Initializes a new instance of the <see cref="ResolvedImport"/> struct.
         /// </summary>
-        internal ResolvedImport(ProjectImportElement importingElement, ProjectRootElement importedProject, int versionEvaluated, SdkResult sdkResult, bool isImported)
+        public ResolvedImport(ProjectImportElement importingElement, ProjectRootElement importedProject, int versionEvaluated, SdkResult sdkResult, bool isImported)
         {
             ErrorUtilities.VerifyThrowInternalNull(importedProject, "child");
 
@@ -33,7 +33,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Initializes a new instance of the <see cref="ResolvedImport"/> struct.
         /// </summary>
-        internal ResolvedImport(Project project, ProjectImportElement importingElement, ProjectRootElement importedProject, int versionEvaluated, SdkResult sdkResult)
+        public ResolvedImport(Project project, ProjectImportElement importingElement, ProjectRootElement importedProject, int versionEvaluated, SdkResult sdkResult)
         {
             ErrorUtilities.VerifyThrowInternalNull(importedProject, "child");
 
@@ -60,7 +60,7 @@ namespace Microsoft.Build.Evaluation
         /// </summary>
         public SdkResult SdkResult { get; }
 
-        internal int VersionEvaluated { get; }
+        public int VersionEvaluated { get; }
 
         /// <summary>
         /// Whether the importing element is itself imported.

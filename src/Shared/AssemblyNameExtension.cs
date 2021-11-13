@@ -20,7 +20,7 @@ namespace Microsoft.Build.Shared
     /// Specifies the parts of the assembly name to partially match
     /// </summary>
     [FlagsAttribute]
-    internal enum PartialComparisonFlags : int
+    public enum PartialComparisonFlags : int
     {
         /// <summary>
         /// Compare SimpleName  A.PartialCompare(B,SimpleName)  match the simple name on A and B if the simple name on A is not null.
@@ -54,7 +54,7 @@ namespace Microsoft.Build.Shared
     /// between the two is done lazily on demand.
     /// </summary>
     [Serializable]
-    internal sealed class AssemblyNameExtension : ISerializable, IEquatable<AssemblyNameExtension>
+    public sealed class AssemblyNameExtension : ISerializable, IEquatable<AssemblyNameExtension>
     {
         private AssemblyName asAssemblyName = null;
         private string asString = null;
@@ -81,7 +81,7 @@ namespace Microsoft.Build.Shared
         /// Construct with AssemblyName.
         /// </summary>
         /// <param name="assemblyName"></param>
-        internal AssemblyNameExtension(AssemblyName assemblyName) : this()
+        public AssemblyNameExtension(AssemblyName assemblyName) : this()
         {
             asAssemblyName = assemblyName;
         }
@@ -90,7 +90,7 @@ namespace Microsoft.Build.Shared
         /// Construct with string.
         /// </summary>
         /// <param name="assemblyName"></param>
-        internal AssemblyNameExtension(string assemblyName) : this()
+        public AssemblyNameExtension(string assemblyName) : this()
         {
             asString = assemblyName;
         }
@@ -107,7 +107,7 @@ namespace Microsoft.Build.Shared
         /// Used when the assembly name comes from a user-controlled source like a project file or config file.
         /// Does extra checking on the assembly name and will throw exceptions if something is invalid.
         /// </param>
-        internal AssemblyNameExtension(string assemblyName, bool validate) : this()
+        public AssemblyNameExtension(string assemblyName, bool validate) : this()
         {
             asString = assemblyName;
 
@@ -178,7 +178,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        internal static AssemblyNameExtension GetAssemblyNameEx(string path)
+        public static AssemblyNameExtension GetAssemblyNameEx(string path)
         {
             AssemblyName assemblyName = null;
 #if !FEATURE_ASSEMBLYLOADCONTEXT
@@ -287,7 +287,7 @@ namespace Microsoft.Build.Shared
         /// The base name of the assembly.
         /// </summary>
         /// <value></value>
-        internal string Name
+        public string Name
         {
             get
             {
@@ -300,14 +300,14 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Gets the backing AssemblyName, this can be None.
         /// </summary>
-        internal ProcessorArchitecture ProcessorArchitecture =>
+        public ProcessorArchitecture ProcessorArchitecture =>
             asAssemblyName?.ProcessorArchitecture ?? ProcessorArchitecture.None;
 
         /// <summary>
         /// The assembly's version number.
         /// </summary>
         /// <value></value>
-        internal Version Version
+        public Version Version
         {
             get
             {
@@ -321,7 +321,7 @@ namespace Microsoft.Build.Shared
         /// Is the assembly a complex name or a simple name. A simple name is where only the name is set
         /// a complex name is where the version, culture or publickeytoken is also set
         /// </summary>
-        internal bool IsSimpleName
+        public bool IsSimpleName
         {
             get
             {
@@ -333,7 +333,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Does the fullName have the processor architecture defined
         /// </summary>
-        internal bool HasProcessorArchitectureInFusionName
+        public bool HasProcessorArchitectureInFusionName
         {
             get
             {
@@ -346,7 +346,7 @@ namespace Microsoft.Build.Shared
         /// Replace the current version with a new version.
         /// </summary>
         /// <param name="version"></param>
-        internal void ReplaceVersion(Version version)
+        public void ReplaceVersion(Version version)
         {
             ErrorUtilities.VerifyThrow(!immutable, "Object is immutable cannot replace the version");
             CreateAssemblyName();
@@ -363,7 +363,7 @@ namespace Microsoft.Build.Shared
         /// The assembly's Culture
         /// </summary>
         /// <value></value>
-        internal CultureInfo CultureInfo
+        public CultureInfo CultureInfo
         {
             get
             {
@@ -377,7 +377,7 @@ namespace Microsoft.Build.Shared
         /// The assembly's retargetable bit
         /// </summary>
         /// <value></value>
-        internal bool Retargetable
+        public bool Retargetable
         {
             get
             {
@@ -391,7 +391,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// The full name of the original extension we were before being remapped.
         /// </summary>
-        internal IEnumerable<AssemblyNameExtension> RemappedFromEnumerator
+        public IEnumerable<AssemblyNameExtension> RemappedFromEnumerator
         {
             get
             {
@@ -403,7 +403,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Add an assemblyNameExtension which represents an assembly name which was mapped to THIS assemblyName.
         /// </summary>
-        internal void AddRemappedAssemblyName(AssemblyNameExtension extensionToAdd)
+        public void AddRemappedAssemblyName(AssemblyNameExtension extensionToAdd)
         {
             ErrorUtilities.VerifyThrow(extensionToAdd.Immutable, "ExtensionToAdd is not immutable");
             InitializeRemappedFrom();
@@ -414,7 +414,7 @@ namespace Microsoft.Build.Shared
         /// As an AssemblyName
         /// </summary>
         /// <value></value>
-        internal AssemblyName AssemblyName
+        public AssemblyName AssemblyName
         {
             get
             {
@@ -428,7 +428,7 @@ namespace Microsoft.Build.Shared
         /// The assembly's full name.
         /// </summary>
         /// <value></value>
-        internal string FullName
+        public string FullName
         {
             get
             {
@@ -442,7 +442,7 @@ namespace Microsoft.Build.Shared
         /// Get the assembly's public key token.
         /// </summary>
         /// <returns></returns>
-        internal byte[] GetPublicKeyToken()
+        public byte[] GetPublicKeyToken()
         {
             // Is there a string?
             CreateAssemblyName();
@@ -454,14 +454,14 @@ namespace Microsoft.Build.Shared
         /// A special "unnamed" instance of AssemblyNameExtension.
         /// </summary>
         /// <value></value>
-        internal static AssemblyNameExtension UnnamedAssembly => s_unnamedAssembly;
+        public static AssemblyNameExtension UnnamedAssembly => s_unnamedAssembly;
 
         /// <summary>
         /// Compare one assembly name to another.
         /// </summary>
         /// <param name="that"></param>
         /// <returns></returns>
-        internal int CompareTo(AssemblyNameExtension that)
+        public int CompareTo(AssemblyNameExtension that)
         {
             return CompareTo(that, false);
         }
@@ -469,7 +469,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Compare one assembly name to another.
         /// </summary>
-        internal int CompareTo(AssemblyNameExtension that, bool considerRetargetableFlag)
+        public int CompareTo(AssemblyNameExtension that, bool considerRetargetableFlag)
         {
             // Are they identical?
             if (this.Equals(that, considerRetargetableFlag))
@@ -505,7 +505,7 @@ namespace Microsoft.Build.Shared
         /// Get a hash code for this assembly name.
         /// </summary>
         /// <returns></returns>
-        internal new int GetHashCode()
+        public new int GetHashCode()
         {
             // Ok, so this isn't a great hashing algorithm. However, basenames with different 
             // versions or PKTs are relatively uncommon and so collisions should be low.
@@ -519,7 +519,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="that"></param>
         /// <returns></returns>
-        internal int CompareBaseNameTo(AssemblyNameExtension that)
+        public int CompareBaseNameTo(AssemblyNameExtension that)
         {
             int result = CompareBaseNameToImpl(that);
 #if DEBUG
@@ -616,7 +616,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Clone this assemblyNameExtension
         /// </summary>
-        internal AssemblyNameExtension Clone()
+        public AssemblyNameExtension Clone()
         {
             AssemblyNameExtension newExtension = new AssemblyNameExtension();
 
@@ -640,7 +640,7 @@ namespace Microsoft.Build.Shared
         /// Clone the object but mark and mark the cloned object as immutable
         /// </summary>
         /// <returns></returns>
-        internal AssemblyNameExtension CloneImmutable()
+        public AssemblyNameExtension CloneImmutable()
         {
             AssemblyNameExtension clonedExtension = Clone();
             clonedExtension.MarkImmutable();
@@ -655,7 +655,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Mark this object as immutable
         /// </summary>
-        internal void MarkImmutable()
+        public void MarkImmutable()
         {
             immutable = true;
         }
@@ -665,7 +665,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="that"></param>
         /// <returns></returns>
-        internal bool Equals(AssemblyNameExtension that)
+        public bool Equals(AssemblyNameExtension that)
         {
             return EqualsImpl(that, false, false);
         }
@@ -685,7 +685,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="that"></param>
         /// <returns></returns>
-        internal bool EqualsIgnoreVersion(AssemblyNameExtension that)
+        public bool EqualsIgnoreVersion(AssemblyNameExtension that)
         {
             return EqualsImpl(that, true, false);
         }
@@ -693,7 +693,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Compare two assembly names and consider the retargetable flag during the comparison
         /// </summary>
-        internal bool Equals(AssemblyNameExtension that, bool considerRetargetableFlag)
+        public bool Equals(AssemblyNameExtension that, bool considerRetargetableFlag)
         {
             return EqualsImpl(that, false, considerRetargetableFlag);
         }
@@ -769,7 +769,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Allows the comparison of the culture.
         /// </summary>
-        internal static bool CompareCultures(AssemblyName a, AssemblyName b)
+        public static bool CompareCultures(AssemblyName a, AssemblyName b)
         {
             // Do the Cultures match?
             CultureInfo aCulture = a.CultureInfo;
@@ -789,7 +789,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         ///  Allows the comparison of just the PublicKeyToken
         /// </summary>
-        internal bool ComparePublicKeyToken(AssemblyNameExtension that)
+        public bool ComparePublicKeyToken(AssemblyNameExtension that)
         {
             // Do the PKTs match?
             byte[] aPKT = GetPublicKeyToken();
@@ -800,7 +800,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Compare two public key tokens.
         /// </summary>
-        internal static bool ComparePublicKeyTokens(byte[] aPKT, byte[] bPKT)
+        public static bool ComparePublicKeyTokens(byte[] aPKT, byte[] bPKT)
         {
             // Some assemblies (real case was interop assembly) may have null PKTs.
             if (aPKT == null)
@@ -830,7 +830,7 @@ namespace Microsoft.Build.Shared
         /// Only the unnamed assembly has both null assemblyname and null string.
         /// </summary>
         /// <returns></returns>
-        internal bool IsUnnamedAssembly => asAssemblyName == null && asString == null;
+        public bool IsUnnamedAssembly => asAssemblyName == null && asString == null;
 
         /// <summary>
         /// Given a display name, construct an assembly name.
@@ -853,7 +853,7 @@ namespace Microsoft.Build.Shared
         /// </remarks>
         /// <param name="displayName"></param>
         /// <returns></returns>
-        internal static string EscapeDisplayNameCharacters(string displayName)
+        public static string EscapeDisplayNameCharacters(string displayName)
         {
             StringBuilder sb = new StringBuilder(displayName);
             sb = sb.Replace("\\", "\\\\");
@@ -877,7 +877,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Compare the fields of this with that if they are not null.
         /// </summary>
-        internal bool PartialNameCompare(AssemblyNameExtension that)
+        public bool PartialNameCompare(AssemblyNameExtension that)
         {
             return PartialNameCompare(that, PartialComparisonFlags.Default, false /* do not consider retargetable flag*/);
         }
@@ -885,7 +885,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Compare the fields of this with that if they are not null.
         /// </summary>
-        internal bool PartialNameCompare(AssemblyNameExtension that, bool considerRetargetableFlag)
+        public bool PartialNameCompare(AssemblyNameExtension that, bool considerRetargetableFlag)
         {
             return PartialNameCompare(that, PartialComparisonFlags.Default, considerRetargetableFlag);
         }
@@ -898,7 +898,7 @@ namespace Microsoft.Build.Shared
         ///
         /// If A.Field is null then we will not compare A.Field and B.Field even when the comparison flag is set for that field unless skipNullFields is false.
         /// </summary>
-        internal bool PartialNameCompare(AssemblyNameExtension that, PartialComparisonFlags comparisonFlags)
+        public bool PartialNameCompare(AssemblyNameExtension that, PartialComparisonFlags comparisonFlags)
         {
             return PartialNameCompare(that, comparisonFlags, false /* do not consider retargetable flag*/);
         }
@@ -911,7 +911,7 @@ namespace Microsoft.Build.Shared
         ///
         /// If A.Field is null then we will not compare A.Field and B.Field even when the comparison flag is set for that field unless skipNullFields is false.
         /// </summary>
-        internal bool PartialNameCompare(AssemblyNameExtension that, PartialComparisonFlags comparisonFlags, bool considerRetargetableFlag)
+        public bool PartialNameCompare(AssemblyNameExtension that, PartialComparisonFlags comparisonFlags, bool considerRetargetableFlag)
         {
             // Pointer compare.
             if (object.ReferenceEquals(this, that))

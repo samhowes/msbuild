@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -15,14 +15,14 @@ using Microsoft.Build.Utilities;
 namespace Microsoft.Build.Tasks
 #endif
 {
-    internal static class PropertyParser
+    public static class PropertyParser
     {
         /// <summary>
         /// Given a string of semi-colon delimited name=value pairs, this method parses it and creates 
         /// a hash table containing the property names as keys and the property values as values.  
         /// </summary>
         /// <returns>true on success, false on failure.</returns>
-        internal static bool GetTable(TaskLoggingHelper log, string parameterName, string[] propertyList, out Dictionary<string, string> propertiesTable)
+        public static bool GetTable(TaskLoggingHelper log, string parameterName, string[] propertyList, out Dictionary<string, string> propertiesTable)
         {
             propertiesTable = null;
 
@@ -78,7 +78,7 @@ namespace Microsoft.Build.Tasks
         /// already.
         /// </summary>
         /// <returns>true on success, false on failure.</returns>
-        internal static bool GetTableWithEscaping(TaskLoggingHelper log, string parameterName, string syntaxName, string[] propertyNameValueStrings, out Dictionary<string, string> finalPropertiesTable)
+        public static bool GetTableWithEscaping(TaskLoggingHelper log, string parameterName, string syntaxName, string[] propertyNameValueStrings, out Dictionary<string, string> finalPropertiesTable)
         {
             finalPropertiesTable = null;
 
@@ -184,14 +184,14 @@ namespace Microsoft.Build.Tasks
             /// <summary>
             /// Property name
             /// </summary>
-            internal string Name { get; }
+            public string Name { get; }
 
             /// <summary>
             /// Property value
             /// </summary>
-            internal StringBuilder Value { get; }
+            public StringBuilder Value { get; }
 
-            internal PropertyNameValuePair(string propertyName, string propertyValue)
+            public PropertyNameValuePair(string propertyName, string propertyValue)
             {
                 Name = propertyName;
                 Value = new StringBuilder(propertyValue);

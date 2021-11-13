@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Diagnostics;
@@ -44,7 +44,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Constructor called by the Evaluator.
         /// </summary>
-        internal ProjectItemGroupTaskMetadataInstance(string name, string value, string condition, ElementLocation location, ElementLocation conditionLocation)
+        public ProjectItemGroupTaskMetadataInstance(string name, string value, string condition, ElementLocation location, ElementLocation conditionLocation)
         {
             ErrorUtilities.VerifyThrowInternalNull(name, nameof(name));
             ErrorUtilities.VerifyThrowInternalNull(value, nameof(value));
@@ -126,7 +126,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Deep clone
         /// </summary>
-        internal ProjectItemGroupTaskMetadataInstance DeepClone()
+        public ProjectItemGroupTaskMetadataInstance DeepClone()
         {
             return new ProjectItemGroupTaskMetadataInstance(this);
         }
@@ -140,7 +140,7 @@ namespace Microsoft.Build.Execution
             translator.Translate(ref _conditionLocation, ElementLocation.FactoryForDeserialization);
         }
 
-        internal static ProjectItemGroupTaskMetadataInstance FactoryForDeserialization(ITranslator translator)
+        public static ProjectItemGroupTaskMetadataInstance FactoryForDeserialization(ITranslator translator)
         {
             var instance = new ProjectItemGroupTaskMetadataInstance();
             ((ITranslatable) instance).Translate(translator);

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -11,7 +11,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// NodeConfiguration contains all of the information necessary for a node to configure itself for building.
     /// </summary>
-    internal class NodeConfiguration : INodePacket
+    public class NodeConfiguration : INodePacket
     {
         /// <summary>
         /// The node id
@@ -184,7 +184,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Factory for deserialization.
         /// </summary>
-        internal static INodePacket FactoryForDeserialization(ITranslator translator)
+        public static INodePacket FactoryForDeserialization(ITranslator translator)
         {
             NodeConfiguration configuration = new NodeConfiguration();
             configuration.Translate(translator);
@@ -195,7 +195,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// We need to clone this object since it gets modified for each node which is launched.
         /// </summary>
-        internal NodeConfiguration Clone()
+        public NodeConfiguration Clone()
         {
             return new NodeConfiguration(_nodeId, _buildParameters, _forwardingLoggers
 #if FEATURE_APPDOMAIN

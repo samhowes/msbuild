@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// Contains information about the state of a node.
     /// </summary>
-    internal class NodeInfo
+    public class NodeInfo
     {
         /// <summary>
         /// The node ID
@@ -82,7 +82,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Returns true if this node can service requests with the specified affinity.
         /// </summary>
-        internal bool CanServiceRequestWithAffinity(NodeAffinity nodeAffinity)
+        public bool CanServiceRequestWithAffinity(NodeAffinity nodeAffinity)
         {
             return nodeAffinity switch
             {

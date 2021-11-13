@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -15,7 +15,7 @@ using Microsoft.Build.Shared;
 
 namespace Microsoft.Build.Graph
 {
-    internal sealed class ProjectInterpretation
+    public sealed class ProjectInterpretation
     {
         private const string FullPathMetadataName = "FullPath";
         private const string ToolsVersionMetadataName = "ToolsVersion";
@@ -25,8 +25,8 @@ namespace Microsoft.Build.Graph
         private const string GlobalPropertiesToRemoveMetadataName = "GlobalPropertiesToRemove";
         private const string ProjectReferenceTargetIsOuterBuildMetadataName = "OuterBuild";
         private const string InnerBuildReferenceItemName = "_ProjectSelfReference";
-        internal static string TransitiveReferenceItemName = "_TransitiveProjectReference";
-        internal const string AddTransitiveProjectReferencesInStaticGraphPropertyName = "AddTransitiveProjectReferencesInStaticGraph";
+        public static string TransitiveReferenceItemName = "_TransitiveProjectReference";
+        public const string AddTransitiveProjectReferencesInStaticGraphPropertyName = "AddTransitiveProjectReferencesInStaticGraph";
 
         private static readonly char[] PropertySeparator = MSBuildConstants.SemicolonChar;
 
@@ -38,12 +38,12 @@ namespace Microsoft.Build.Graph
 
         private static readonly ImmutableList<GlobalPropertiesModifier> ModifierForNonMultitargetingNodes = new[] {(GlobalPropertiesModifier) ProjectReferenceGlobalPropertiesModifier}.ToImmutableList();
 
-        internal enum ProjectType
+        public enum ProjectType
         {
             OuterBuild, InnerBuild, NonMultitargeting
         }
 
-        internal readonly struct ReferenceInfo
+        public readonly struct ReferenceInfo
         {
             public ConfigurationMetadata ReferenceConfiguration { get; }
             public ProjectItemInstance ProjectReferenceItem { get; }
@@ -115,7 +115,7 @@ namespace Microsoft.Build.Graph
             return project.GetPropertyValue(project.GetPropertyValue(PropertyNames.InnerBuildPropertyValues));
         }
 
-        internal static ProjectType GetProjectType(ProjectInstance project)
+        public static ProjectType GetProjectType(ProjectInstance project)
         {
             var isOuterBuild = String.IsNullOrWhiteSpace(GetInnerBuildPropertyValue(project)) && !String.IsNullOrWhiteSpace(GetInnerBuildPropertyValues(project));
             var isInnerBuild = !String.IsNullOrWhiteSpace(GetInnerBuildPropertyValue(project));

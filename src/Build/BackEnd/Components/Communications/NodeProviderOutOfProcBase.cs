@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -33,7 +33,7 @@ namespace Microsoft.Build.BackEnd
     /// Contains the shared pieces of code from NodeProviderOutOfProc
     /// and NodeProviderOutOfProcTaskHost.
     /// </summary>
-    internal abstract class NodeProviderOutOfProcBase
+    public abstract class NodeProviderOutOfProcBase
     {
         /// <summary>
         /// The maximum number of bytes to write
@@ -64,7 +64,7 @@ namespace Microsoft.Build.BackEnd
         /// Delegate used to tell the node provider that a context has terminated.
         /// </summary>
         /// <param name="nodeId">The id of the node which terminated.</param>
-        internal delegate void NodeContextTerminateDelegate(int nodeId);
+        public delegate void NodeContextTerminateDelegate(int nodeId);
 
         /// <summary>
         /// The build component host.
@@ -581,7 +581,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Class which wraps up the communications infrastructure for a given node.
         /// </summary>
-        internal class NodeContext
+        public class NodeContext
         {
             // The pipe(s) used to communicate with the node.
             private Stream _clientToServerStream;

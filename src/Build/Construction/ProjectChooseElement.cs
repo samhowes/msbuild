@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -21,7 +21,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// External projects support
         /// </summary>
-        internal ProjectChooseElement(ProjectChooseElementLink link)
+        public ProjectChooseElement(ProjectChooseElementLink link)
             : base(link)
         {
         }
@@ -29,7 +29,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Initialize a parented ProjectChooseElement
         /// </summary>
-        internal ProjectChooseElement(XmlElement xmlElement, ProjectElementContainer parent, ProjectRootElement containingProject)
+        public ProjectChooseElement(XmlElement xmlElement, ProjectElementContainer parent, ProjectRootElement containingProject)
             : base(xmlElement, parent, containingProject)
         {
             ErrorUtilities.VerifyThrowArgumentNull(parent, nameof(parent));
@@ -90,7 +90,7 @@ namespace Microsoft.Build.Construction
         /// Creates an unparented ProjectChooseElement, wrapping an unparented XmlElement.
         /// Caller should then ensure the element is added to a parent
         /// </summary>
-        internal static ProjectChooseElement CreateDisconnected(ProjectRootElement containingProject)
+        public static ProjectChooseElement CreateDisconnected(ProjectRootElement containingProject)
         {
             ErrorUtilities.VerifyThrow(containingProject.Link == null, "External project");
 
@@ -102,7 +102,7 @@ namespace Microsoft.Build.Construction
         /// Sets the parent of this element if it is a valid parent,
         /// otherwise throws.
         /// </summary>
-        internal override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
+        public override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
         {
             ErrorUtilities.VerifyThrowInvalidOperation(parent is ProjectRootElement || parent is ProjectWhenElement || parent is ProjectOtherwiseElement, "OM_CannotAcceptParent");
 

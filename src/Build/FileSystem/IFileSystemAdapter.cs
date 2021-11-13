@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -8,7 +8,7 @@ using Microsoft.Build.Shared.FileSystem;
 
 namespace Microsoft.Build.FileSystem
 {
-    internal class IFileSystemAdapter : MSBuildFileSystemBase
+    public class IFileSystemAdapter : MSBuildFileSystemBase
     {
         private readonly IFileSystem _wrappedFileSystem;
 

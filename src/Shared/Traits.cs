@@ -9,7 +9,7 @@ namespace Microsoft.Build.Utilities
     /// <summary>
     ///     Represents toggleable features of the MSBuild engine
     /// </summary>
-    internal class Traits
+    public class Traits
     {
         private static readonly Traits _instance = new Traits();
         public static Traits Instance
@@ -31,7 +31,7 @@ namespace Microsoft.Build.Utilities
 
         public EscapeHatches EscapeHatches { get; }
 
-        internal readonly string MSBuildDisableFeaturesFromVersion = Environment.GetEnvironmentVariable("MSBUILDDISABLEFEATURESFROMVERSION"); 
+        public readonly string MSBuildDisableFeaturesFromVersion = Environment.GetEnvironmentVariable("MSBUILDDISABLEFEATURESFROMVERSION"); 
 
         /// <summary>
         /// Do not expand wildcards that match a certain pattern
@@ -104,7 +104,7 @@ namespace Microsoft.Build.Utilities
         }
     }
 
-    internal class EscapeHatches
+    public class EscapeHatches
     {
         /// <summary>
         /// Do not log command line information to build loggers. Useful to unbreak people who parse the msbuild log and who are unwilling to change their code.

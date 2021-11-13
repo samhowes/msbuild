@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -12,7 +12,7 @@ namespace Microsoft.Build.Evaluation
     /// Node representing a string
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    internal sealed class StringExpressionNode : OperandExpressionNode
+    public sealed class StringExpressionNode : OperandExpressionNode
     {
         private string _value;
         private string _cachedExpandedValue;
@@ -23,7 +23,7 @@ namespace Microsoft.Build.Evaluation
         /// </summary>
         private bool _expandable;
 
-        internal StringExpressionNode(string value, bool expandable)
+        public StringExpressionNode(string value, bool expandable)
         {
             _value = value;
             _expandable = expandable;
@@ -32,7 +32,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Evaluate as boolean
         /// </summary>
-        internal override bool BoolEvaluate(ConditionEvaluator.IConditionEvaluationState state)
+        public override bool BoolEvaluate(ConditionEvaluator.IConditionEvaluationState state)
         {
             return ConversionUtilities.ConvertStringToBool(GetExpandedValue(state));
         }
@@ -40,7 +40,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Evaluate as numeric
         /// </summary>
-        internal override double NumericEvaluate(ConditionEvaluator.IConditionEvaluationState state)
+        public override double NumericEvaluate(ConditionEvaluator.IConditionEvaluationState state)
         {
             if (ShouldBeTreatedAsVisualStudioVersion(state))
             {
@@ -50,7 +50,7 @@ namespace Microsoft.Build.Evaluation
             return ConversionUtilities.ConvertDecimalOrHexToDouble(GetExpandedValue(state));
         }
 
-        internal override Version VersionEvaluate(ConditionEvaluator.IConditionEvaluationState state)
+        public override Version VersionEvaluate(ConditionEvaluator.IConditionEvaluationState state)
         {
             if (ShouldBeTreatedAsVisualStudioVersion(state))
             {
@@ -60,12 +60,12 @@ namespace Microsoft.Build.Evaluation
             return Version.Parse(GetExpandedValue(state));
         }
 
-        internal override bool CanBoolEvaluate(ConditionEvaluator.IConditionEvaluationState state)
+        public override bool CanBoolEvaluate(ConditionEvaluator.IConditionEvaluationState state)
         {
             return ConversionUtilities.CanConvertStringToBool(GetExpandedValue(state));
         }
 
-        internal override bool CanNumericEvaluate(ConditionEvaluator.IConditionEvaluationState state)
+        public override bool CanNumericEvaluate(ConditionEvaluator.IConditionEvaluationState state)
         {
             if (ShouldBeTreatedAsVisualStudioVersion(state))
             {
@@ -75,7 +75,7 @@ namespace Microsoft.Build.Evaluation
             return ConversionUtilities.ValidDecimalOrHexNumber(GetExpandedValue(state));
         }
 
-        internal override bool CanVersionEvaluate(ConditionEvaluator.IConditionEvaluationState state)
+        public override bool CanVersionEvaluate(ConditionEvaluator.IConditionEvaluationState state)
         {
             if (ShouldBeTreatedAsVisualStudioVersion(state))
             {
@@ -92,7 +92,7 @@ namespace Microsoft.Build.Evaluation
         /// to empty than to fully evaluate it.
         /// Implementations should cache the result so that calls after the first are free.
         /// </summary>
-        internal override bool EvaluatesToEmpty(ConditionEvaluator.IConditionEvaluationState state)
+        public override bool EvaluatesToEmpty(ConditionEvaluator.IConditionEvaluationState state)
         {
             if (_cachedExpandedValue == null)
             {
@@ -125,7 +125,7 @@ namespace Microsoft.Build.Evaluation
         /// Value before any item and property expressions are expanded
         /// </summary>
         /// <returns></returns>
-        internal override string GetUnexpandedValue(ConditionEvaluator.IConditionEvaluationState state)
+        public override string GetUnexpandedValue(ConditionEvaluator.IConditionEvaluationState state)
         {
             return _value;
         }
@@ -134,7 +134,7 @@ namespace Microsoft.Build.Evaluation
         /// Value after any item and property expressions are expanded
         /// </summary>
         /// <returns></returns>
-        internal override string GetExpandedValue(ConditionEvaluator.IConditionEvaluationState state)
+        public override string GetExpandedValue(ConditionEvaluator.IConditionEvaluationState state)
         {
             if (_cachedExpandedValue == null)
             {
@@ -155,7 +155,7 @@ namespace Microsoft.Build.Evaluation
         /// If any expression nodes cache any state for the duration of evaluation, 
         /// now's the time to clean it up
         /// </summary>
-        internal override void ResetState()
+        public override void ResetState()
         {
             _cachedExpandedValue = null;
             _shouldBeTreatedAsVisualStudioVersion = null;
@@ -195,6 +195,6 @@ namespace Microsoft.Build.Evaluation
             return _shouldBeTreatedAsVisualStudioVersion.Value;
         }
 
-        internal override string DebuggerDisplay => $"\"{_value}\"";
+        public override string DebuggerDisplay => $"\"{_value}\"";
     }
 }

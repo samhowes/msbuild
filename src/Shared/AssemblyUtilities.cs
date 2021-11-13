@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -11,7 +11,7 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// This class contains common reflection tasks
     /// </summary>
-    internal static class AssemblyUtilities
+    public static class AssemblyUtilities
     {
 #if !FEATURE_CULTUREINFO_GETCULTURES
         // True when the cached method info objects have been set.

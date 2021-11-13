@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.BackEnd.Components.Logging;
@@ -24,7 +24,7 @@ namespace Microsoft.Build.BackEnd.SdkResolution
     /// Since this object is a registered <see cref="IBuildComponent"/>, it is a singleton for the main process.  To get an instance of it, you
     /// must have access to an <see cref="IBuildComponentHost"/> and call <see cref="IBuildComponentHost.GetComponent"/> and pass <see cref="BuildComponentType.SdkResolverService"/>.
     /// </summary>
-    internal sealed class MainNodeSdkResolverService : HostedSdkResolverServiceBase
+    public sealed class MainNodeSdkResolverService : HostedSdkResolverServiceBase
     {
         /// <summary>
         /// An object used for locking in this class instance.
@@ -57,7 +57,7 @@ namespace Microsoft.Build.BackEnd.SdkResolution
         }
 
         //  Test hook
-        internal void InitializeForTests(SdkResolverLoader resolverLoader = null, IList<SdkResolver> resolvers = null)
+        public void InitializeForTests(SdkResolverLoader resolverLoader = null, IList<SdkResolver> resolvers = null)
         {
             ((CachingSdkResolverService)_cachedSdkResolver).InitializeForTests(resolverLoader, resolvers);
         }

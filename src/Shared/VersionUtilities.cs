@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,14 +10,14 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// Set of methods to deal with versions in the tasks
     /// </summary>
-    internal static class VersionUtilities
+    public static class VersionUtilities
     {
         /// <summary>
         /// Convert a version number like 0.0.0.0 to a Version instance.
         /// The method will return null if the string is not a valid value
         /// </summary>
         /// <param name="version">Version string to convert to a version object</param>
-        internal static Version ConvertToVersion(string version)
+        public static Version ConvertToVersion(string version)
         {
             return ConvertToVersion(version, false);
         }
@@ -26,7 +26,7 @@ namespace Microsoft.Build.Shared
         /// Go though an enumeration and create a sorted list of strings which can be parsed as versions. Keep around the original 
         /// string because it may contain a v and this would be required to create the correct path on disk if the string was part of a path.
         /// </summary>
-        internal static SortedDictionary<Version, List<string>> GatherVersionStrings(Version targetPlatformVersion, IEnumerable versions)
+        public static SortedDictionary<Version, List<string>> GatherVersionStrings(Version targetPlatformVersion, IEnumerable versions)
         {
             SortedDictionary<Version, List<string>> versionValues = new SortedDictionary<Version, List<string>>(ReverseVersionGenericComparer.Comparer);
 
@@ -63,7 +63,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="version"></param>
         /// <param name="throwException">Should we use Parse to TryParse (parse means we throw an exception, tryparse means we will not).</param>
-        internal static Version ConvertToVersion(string version, bool throwException)
+        public static Version ConvertToVersion(string version, bool throwException)
         {
             if (version.Length > 0 && (version[0] == 'v' || version[0] == 'V'))
             {
@@ -95,12 +95,12 @@ namespace Microsoft.Build.Shared
         }
     }
 
-    sealed internal class ReverseStringGenericComparer : IComparer<string>
+    sealed public class ReverseStringGenericComparer : IComparer<string>
     {
         /// <summary>
         /// Static accessor for a ReverseVersionGenericComparer
         /// </summary>
-        internal static readonly ReverseStringGenericComparer Comparer = new ReverseStringGenericComparer();
+        public static readonly ReverseStringGenericComparer Comparer = new ReverseStringGenericComparer();
 
         /// <summary>
         /// The Compare implements a reverse comparison
@@ -112,12 +112,12 @@ namespace Microsoft.Build.Shared
         }
     }
 
-    sealed internal class ReverseVersionGenericComparer : IComparer<Version>
+    sealed public class ReverseVersionGenericComparer : IComparer<Version>
     {
         /// <summary>
         /// Static accessor for a ReverseVersionGenericComparer
         /// </summary>
-        internal static readonly ReverseVersionGenericComparer Comparer = new ReverseVersionGenericComparer();
+        public static readonly ReverseVersionGenericComparer Comparer = new ReverseVersionGenericComparer();
 
         /// <summary>
         /// The Compare implements a reverse comparison

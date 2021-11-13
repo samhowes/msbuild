@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -22,7 +22,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// External projects support
         /// </summary>
-        internal UsingTaskParameterGroupElement(UsingTaskParameterGroupElementLink link)
+        public UsingTaskParameterGroupElement(UsingTaskParameterGroupElementLink link)
             : base(link)
         {
         }
@@ -30,7 +30,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Initialize a parented UsingTaskParameterGroupElement
         /// </summary>
-        internal UsingTaskParameterGroupElement(XmlElementWithLocation xmlElement, ProjectElementContainer parent, ProjectRootElement containingProject)
+        public UsingTaskParameterGroupElement(XmlElementWithLocation xmlElement, ProjectElementContainer parent, ProjectRootElement containingProject)
             : base(xmlElement, parent, containingProject)
         {
             ErrorUtilities.VerifyThrowArgumentNull(parent, nameof(parent));
@@ -99,7 +99,7 @@ namespace Microsoft.Build.Construction
         /// Creates an unparented UsingTaskParameterGroupElement, wrapping an unparented XmlElement.
         /// Caller should then ensure the element is added to a parent
         /// </summary>
-        internal static UsingTaskParameterGroupElement CreateDisconnected(ProjectRootElement containingProject)
+        public static UsingTaskParameterGroupElement CreateDisconnected(ProjectRootElement containingProject)
         {
             XmlElementWithLocation element = containingProject.CreateElement(XMakeElements.usingTaskParameterGroup);
 
@@ -110,7 +110,7 @@ namespace Microsoft.Build.Construction
         /// Overridden to verify that the potential parent and siblings
         /// are acceptable. Throws InvalidOperationException if they are not.
         /// </summary>
-        internal override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
+        public override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
         {
             VerifyCorrectParent(parent);
         }

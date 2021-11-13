@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace Microsoft.Build.BackEnd
@@ -9,7 +9,7 @@ namespace Microsoft.Build.BackEnd
     /// for the "resolved" configuration id, which is global to all nodes in the system.  This packet maps the unresolved to the resolved
     /// configuration id.  Once this packet is received, the node engine can then continue processing requests associated with the configuration.
     /// </summary>
-    internal class BuildRequestConfigurationResponse : INodePacket
+    public class BuildRequestConfigurationResponse : INodePacket
     {
         /// <summary>
         /// The configuration ID assigned by the node
@@ -82,7 +82,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Factory for serialization.
         /// </summary>
-        internal static INodePacket FactoryForDeserialization(ITranslator translator)
+        public static INodePacket FactoryForDeserialization(ITranslator translator)
         {
             return new BuildRequestConfigurationResponse(translator);
         }

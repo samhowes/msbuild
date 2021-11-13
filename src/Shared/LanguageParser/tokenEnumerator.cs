@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections;
@@ -12,16 +12,16 @@ namespace Microsoft.Build.Shared.LanguageParser
      * Derived class is responsible for actual tokenization.
      *
      */
-    internal abstract class TokenEnumerator : IEnumerator
+    public abstract class TokenEnumerator : IEnumerator
     {
         // The current token that was found.
         protected Token current = null;
 
         // Return the token char reader.
-        abstract internal TokenCharReader Reader { get; }
+        abstract public TokenCharReader Reader { get; }
 
         // Implemented by derived class to find the next token.
-        abstract internal bool FindNextToken();
+        abstract public bool FindNextToken();
 
         /*
         * Method:  MoveNext

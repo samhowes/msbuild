@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,7 +10,7 @@ namespace System.Collections.Generic {
     /// Debug view for HashSet
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    internal class HashSetDebugView<T> {
+    public class HashSetDebugView<T> {
         private HashSet<T> set;
 
         public HashSetDebugView(HashSet<T> set) {

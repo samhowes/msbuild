@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -17,24 +17,24 @@ namespace Microsoft.Build.BackEnd
     /// If you add fields to this class, add a custom serialization constructor and override GetObjectData().
     /// </remarks>
     [Serializable]
-    internal class NodeFailedToLaunchException : Exception
+    public class NodeFailedToLaunchException : Exception
     {
         /// <summary>
         /// Constructs a standard NodeFailedToLaunchException.
         /// </summary>
-        internal NodeFailedToLaunchException()
+        public NodeFailedToLaunchException()
             : base()
         {
         }
 
-        internal NodeFailedToLaunchException(Exception innerException)
+        public NodeFailedToLaunchException(Exception innerException)
             : base(innerException.Message, innerException)
         { }
 
         /// <summary>
         /// Constructs a standard NodeFailedToLaunchException.
         /// </summary>
-        internal NodeFailedToLaunchException(string errorCode, string message)
+        public NodeFailedToLaunchException(string errorCode, string message)
             : base(message)
         {
             ErrorCode = errorCode;

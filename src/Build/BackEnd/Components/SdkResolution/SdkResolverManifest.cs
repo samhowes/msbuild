@@ -1,4 +1,4 @@
-﻿using Microsoft.Build.Shared;
+using Microsoft.Build.Shared;
 using System.IO;
 using System.Xml;
 
@@ -7,16 +7,16 @@ namespace Microsoft.Build.BackEnd.SdkResolution
     /// <summary>
     /// Serialization contract for an SDK Resolver manifest
     /// </summary>
-    internal class SdkResolverManifest
+    public class SdkResolverManifest
     {
-        internal string Path { get; set; }
+        public string Path { get; set; }
 
         /// <summary>
         /// Deserialize the file into an SdkResolverManifest.
         /// </summary>
         /// <param name="filePath">Path to the manifest xml file.</param>
         /// <returns>New deserialized collection instance.</returns>
-        internal static SdkResolverManifest Load(string filePath)
+        public static SdkResolverManifest Load(string filePath)
         {
             XmlReaderSettings readerSettings = new XmlReaderSettings()
             {

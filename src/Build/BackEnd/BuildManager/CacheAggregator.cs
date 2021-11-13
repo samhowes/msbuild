@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,7 +10,7 @@ using Microsoft.Build.Shared;
 
 namespace Microsoft.Build.Execution
 {
-    internal class CacheAggregator
+    public class CacheAggregator
     {
         private readonly Func<int> _nextConfigurationId;
         private readonly List<(IConfigCache ConfigCache, IResultsCache ResultsCache)> _inputCaches = new List<(IConfigCache ConfigCache, IResultsCache ResultsCache)>();
@@ -98,7 +98,7 @@ namespace Microsoft.Build.Execution
         }
     }
 
-    internal class CacheAggregation
+    public class CacheAggregation
     {
         public CacheAggregation(IConfigCache configCache, IResultsCache resultsCache, int lastConfigurationId)
         {
