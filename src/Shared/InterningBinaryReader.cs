@@ -52,7 +52,7 @@ namespace Microsoft.Build
         /// The decoder used to translate from UTF8 (or whatever).
         /// </summary>
         private Decoder _decoder;
-
+        public static ICustomInterner Strings { get; set; }
         /// <summary>
         /// Comment about constructing.
         /// </summary>
@@ -208,7 +208,7 @@ namespace Microsoft.Build
             return new Buffer();
         }
 
-#region IDisposable pattern
+        #region IDisposable pattern
 
         /// <summary>
         /// Returns our buffer to the pool if we were not passed one by the caller.
@@ -224,13 +224,13 @@ namespace Microsoft.Build
             base.Dispose(disposing);
         }
 
-#endregion
+        #endregion
 
         /// <summary>
         /// Create a BinaryReader. It will either be an interning reader or standard binary reader
         /// depending on whether the interning reader is possible given the buffer and stream.
         /// </summary>
-        public static BinaryReader Create(Stream stream, SharedReadBuffer sharedBuffer)
+        public static InterningBinaryReader Create(Stream stream, SharedReadBuffer sharedBuffer)
         {
             Buffer buffer = (Buffer)sharedBuffer;
             if (buffer != null)
@@ -243,7 +243,7 @@ namespace Microsoft.Build
         /// <summary>
         /// Holds thepreallocated buffer. 
         /// </summary>
-        private class Buffer : SharedReadBuffer
+        public class Buffer : SharedReadBuffer
         {
             private char[] _charBuffer;
             private byte[] _byteBuffer;
@@ -280,7 +280,11 @@ namespace Microsoft.Build
             }
         }
     }
-
+    public interface ICustomInterner
+    {
+        string WeakIntern(string str);
+        string WeakIntern(ReadOnlySpan<char> str);
+    }
     /// <summary>
     /// Opaque holder of shared buffer.
     /// </summary>
