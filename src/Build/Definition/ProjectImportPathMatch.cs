@@ -10,14 +10,14 @@ namespace Microsoft.Build.Evaluation
     /// <summary>
     /// Class representing a reference to a project import path with property fall-back
     /// </summary>
-    internal class ProjectImportPathMatch : ITranslatable
+    public class ProjectImportPathMatch : ITranslatable
     {
         /// <summary>
         /// ProjectImportPathMatch instance representing no fall-back
         /// </summary>
         public static readonly ProjectImportPathMatch None = new ProjectImportPathMatch(string.Empty, new List<string>());
 
-        internal ProjectImportPathMatch(string propertyName, List<string> searchPaths)
+        public ProjectImportPathMatch(string propertyName, List<string> searchPaths)
         {
             ErrorUtilities.VerifyThrowArgumentNull(propertyName, nameof(propertyName));
             ErrorUtilities.VerifyThrowArgumentNull(searchPaths, nameof(searchPaths));
@@ -57,7 +57,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Factory for serialization.
         /// </summary>
-        internal static ProjectImportPathMatch FactoryForDeserialization(ITranslator translator)
+        public static ProjectImportPathMatch FactoryForDeserialization(ITranslator translator)
         {
             return new ProjectImportPathMatch(translator);
         }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,7 +10,7 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// This class contains utility methods for XML manipulation.
     /// </summary>
-    static internal class XmlUtilities
+    static public class XmlUtilities
     {
         /// <summary>
         /// This method renames an XML element.  Well, actually you can't directly
@@ -23,7 +23,7 @@ namespace Microsoft.Build.Shared
         /// <param name="newElementName"></param>
         /// <param name="xmlNamespace">Can be null if global namespace.</param>
         /// <returns>new/renamed element</returns>
-        internal static XmlElementWithLocation RenameXmlElement(XmlElementWithLocation oldElement, string newElementName, string xmlNamespace)
+        public static XmlElementWithLocation RenameXmlElement(XmlElementWithLocation oldElement, string newElementName, string xmlNamespace)
         {
             if (String.Equals(oldElement.Name, newElementName, StringComparison.Ordinal) && String.Equals(oldElement.NamespaceURI, xmlNamespace, StringComparison.Ordinal))
             {
@@ -66,7 +66,7 @@ namespace Microsoft.Build.Shared
         /// </remarks>
         /// <throws>ArgumentException</throws>
         /// <param name="name">name to validate</param>
-        internal static void VerifyThrowArgumentValidElementName(string name)
+        public static void VerifyThrowArgumentValidElementName(string name)
         {
             ErrorUtilities.VerifyThrowArgumentLength(name, nameof(name));
 
@@ -85,7 +85,7 @@ namespace Microsoft.Build.Shared
         /// <remarks>
         /// Note that our restrictions are more stringent than the XML Standard's restrictions.
         /// </remarks>
-        internal static void VerifyThrowProjectValidElementName(string name, IElementLocation location)
+        public static void VerifyThrowProjectValidElementName(string name, IElementLocation location)
         {
             ErrorUtilities.VerifyThrowArgumentLength(name, nameof(name));
             int firstInvalidCharLocation = LocateFirstInvalidElementNameCharacter(name);
@@ -103,7 +103,7 @@ namespace Microsoft.Build.Shared
         /// <remarks>
         /// Note that our restrictions are more stringent than the XML Standard's restrictions.
         /// </remarks>
-        internal static void VerifyThrowProjectValidElementName(XmlElementWithLocation element)
+        public static void VerifyThrowProjectValidElementName(XmlElementWithLocation element)
         {
             string name = element.Name;
             int firstInvalidCharLocation = LocateFirstInvalidElementNameCharacter(name);
@@ -122,7 +122,7 @@ namespace Microsoft.Build.Shared
         /// </remarks>
         /// <param name="name"></param>
         /// <returns>true, if name is valid</returns>
-        internal static bool IsValidElementName(string name)
+        public static bool IsValidElementName(string name)
         {
             return LocateFirstInvalidElementNameCharacter(name) == -1;
         }
@@ -140,7 +140,7 @@ namespace Microsoft.Build.Shared
         /// PERF: This method has to be as fast as possible, as it's called when any item, property, or piece
         /// of metadata is constructed.
         /// </remarks>
-        internal static int LocateFirstInvalidElementNameCharacter(string name)
+        public static int LocateFirstInvalidElementNameCharacter(string name)
         {
             // Check the first character.
             // Try capital letters first.
@@ -165,14 +165,14 @@ namespace Microsoft.Build.Shared
             return -1;
         }
 
-        internal static bool IsValidInitialElementNameCharacter(char c)
+        public static bool IsValidInitialElementNameCharacter(char c)
         {
             return (c >= 'A' && c <= 'Z') ||
                    (c >= 'a' && c <= 'z') ||
                    (c == '_');
         }
 
-        internal static bool IsValidSubsequentElementNameCharacter(char c)
+        public static bool IsValidSubsequentElementNameCharacter(char c)
         {
             return (c >= 'A' && c <= 'Z') ||
                    (c >= 'a' && c <= 'z') ||

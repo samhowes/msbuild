@@ -21,17 +21,17 @@ namespace Microsoft.Build.Evaluation
     /// ProjectRootElementCache, and further investigation is required to determine the best way to hide these behind
     /// an abstraction. As such, any method unused by evaluation will throw NotImplementedException.
     /// </summary>
-    internal class SimpleProjectRootElementCache : ProjectRootElementCacheBase
+    public class SimpleProjectRootElementCache : ProjectRootElementCacheBase
     {
         private readonly ConcurrentDictionary<string, ProjectRootElement> _cache;
 
-        internal SimpleProjectRootElementCache()
+        public SimpleProjectRootElementCache()
         {
             _cache = new ConcurrentDictionary<string, ProjectRootElement>(StringComparer.OrdinalIgnoreCase);
             LoadProjectsReadOnly = true;
         }
 
-        internal override ProjectRootElement Get(
+        public override ProjectRootElement Get(
             string projectFile,
             OpenProjectRootElement openProjectRootElement,
             bool isExplicitlyLoaded,
@@ -73,7 +73,7 @@ namespace Microsoft.Build.Evaluation
             });
         }
 
-        internal override void AddEntry(ProjectRootElement projectRootElement)
+        public override void AddEntry(ProjectRootElement projectRootElement)
         {
             if (_cache.TryAdd(projectRootElement.FullPath, projectRootElement))
             {
@@ -81,17 +81,17 @@ namespace Microsoft.Build.Evaluation
             }
         }
 
-        internal override void RenameEntry(string oldFullPath, ProjectRootElement projectRootElement)
+        public override void RenameEntry(string oldFullPath, ProjectRootElement projectRootElement)
         {
             throw new NotImplementedException();
         }
 
-        internal override ProjectRootElement TryGet(string projectFile)
+        public override ProjectRootElement TryGet(string projectFile)
         {
             return TryGet(projectFile, null);
         }
 
-        internal override ProjectRootElement TryGet(string projectFile, bool? preserveFormatting)
+        public override ProjectRootElement TryGet(string projectFile, bool? preserveFormatting)
         {
             return Get(
                 projectFile,
@@ -100,21 +100,21 @@ namespace Microsoft.Build.Evaluation
                 preserveFormatting);
         }
 
-        internal override void DiscardStrongReferences()
+        public override void DiscardStrongReferences()
         {
         }
 
-        internal override void Clear()
+        public override void Clear()
         {
             _cache.Clear();
         }
 
-        internal override void DiscardImplicitReferences()
+        public override void DiscardImplicitReferences()
         {
             throw new NotImplementedException();
         }
 
-        internal override void DiscardAnyWeakReference(ProjectRootElement projectRootElement)
+        public override void DiscardAnyWeakReference(ProjectRootElement projectRootElement)
         {
             ErrorUtilities.VerifyThrowArgumentNull(projectRootElement, nameof(projectRootElement));
 
@@ -125,12 +125,12 @@ namespace Microsoft.Build.Evaluation
             }
         }
 
-        internal override void OnProjectRootElementDirtied(ProjectRootElement sender, ProjectXmlChangedEventArgs e)
+        public override void OnProjectRootElementDirtied(ProjectRootElement sender, ProjectXmlChangedEventArgs e)
         {
             throw new NotImplementedException();
         }
 
-        internal override void OnProjectDirtied(Project sender, ProjectChangedEventArgs e)
+        public override void OnProjectDirtied(Project sender, ProjectChangedEventArgs e)
         {
             throw new NotImplementedException();
         }

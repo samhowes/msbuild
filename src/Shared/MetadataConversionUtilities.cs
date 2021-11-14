@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,7 +10,7 @@ namespace Microsoft.Build.Shared
     /// This class contains only static methods, which are useful throughout many
     /// of the XMake classes and don't really belong in any specific class.   
     /// </summary>
-    internal static class MetadataConversionUtilities
+    public static class MetadataConversionUtilities
     {
         /// <summary>
         /// Convert a task item metadata to bool. Throw an exception if the string is badly formed and can't
@@ -22,7 +22,7 @@ namespace Microsoft.Build.Shared
         /// <param name="itemMetadataName">The name of the metadata.</param>
         /// <param name="metadataFound">Receives true if the metadata was found, false otherwise.</param>
         /// <returns>The resulting boolean value.</returns>
-        internal static bool TryConvertItemMetadataToBool
+        public static bool TryConvertItemMetadataToBool
             (
                 ITaskItem item,
                 string itemMetadataName,
@@ -56,7 +56,7 @@ namespace Microsoft.Build.Shared
         /// <param name="item">The item that contains the metadata.</param>
         /// <param name="itemMetadataName">The name of the metadata.</param>
         /// <returns>The resulting boolean value.</returns>
-        internal static bool TryConvertItemMetadataToBool
+        public static bool TryConvertItemMetadataToBool
             (
                 ITaskItem item,
                 string itemMetadataName

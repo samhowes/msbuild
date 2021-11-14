@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -28,7 +28,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// The possible values for a task's ContinueOnError attribute.
     /// </summary>
-    internal enum ContinueOnError
+    public enum ContinueOnError
     {
         /// <summary>
         /// If the task fails, error and stop.
@@ -53,7 +53,7 @@ namespace Microsoft.Build.BackEnd
     /// when task execution has been completed.  It is not responsible for reflection over the task instance or anything which
     /// requires dealing with the task instance directly - those actions are handled by the TaskExecutionHost.
     /// </summary>
-    internal class TaskBuilder : ITaskBuilder, IBuildComponent
+    public class TaskBuilder : ITaskBuilder, IBuildComponent
     {
         /// <summary>
         /// The Build Request Entry for which this task is executing.
@@ -118,7 +118,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Constructor
         /// </summary>
-        internal TaskBuilder()
+        public TaskBuilder()
         {
         }
 
@@ -216,7 +216,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Class factory for component creation.
         /// </summary>
-        internal static IBuildComponent CreateComponent(BuildComponentType type)
+        public static IBuildComponent CreateComponent(BuildComponentType type)
         {
             ErrorUtilities.VerifyThrow(type == BuildComponentType.TaskBuilder, "Cannot create components of type {0}", type);
             return new TaskBuilder();

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Shared;
@@ -11,12 +11,12 @@ namespace Microsoft.Build.Evaluation
     /// Does not update conditioned properties table
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    internal sealed class AndExpressionNode : OperatorExpressionNode
+    public sealed class AndExpressionNode : OperatorExpressionNode
     {
         /// <summary>
         /// Evaluate as boolean
         /// </summary>
-        internal override bool BoolEvaluate(ConditionEvaluator.IConditionEvaluationState state)
+        public override bool BoolEvaluate(ConditionEvaluator.IConditionEvaluationState state)
         {
             ProjectErrorUtilities.VerifyThrowInvalidProject
                     (LeftChild.CanBoolEvaluate(state),
@@ -45,11 +45,11 @@ namespace Microsoft.Build.Evaluation
             }
         }
 
-        internal override string DebuggerDisplay => $"(and {LeftChild.DebuggerDisplay} {RightChild.DebuggerDisplay})";
+        public override string DebuggerDisplay => $"(and {LeftChild.DebuggerDisplay} {RightChild.DebuggerDisplay})";
 
         #region REMOVE_COMPAT_WARNING
         private bool _possibleAndCollision = true;
-        internal override bool PossibleAndCollision
+        public override bool PossibleAndCollision
         {
             set { _possibleAndCollision = value; }
             get { return _possibleAndCollision; }

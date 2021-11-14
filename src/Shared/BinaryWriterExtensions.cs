@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -8,7 +8,7 @@ using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Shared
 {
-    internal static class BinaryWriterExtensions
+    public static class BinaryWriterExtensions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void WriteOptionalString(this BinaryWriter writer, string value)

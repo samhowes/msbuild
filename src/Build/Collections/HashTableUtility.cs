@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -9,7 +9,7 @@ namespace Microsoft.Build.Collections
     /// <summary>
     /// Tools for working with Hashtables.
     /// </summary>
-    internal static class HashTableUtility
+    public static class HashTableUtility
     {
         /// <summary>
         /// Compares the given hashtables.
@@ -21,7 +21,7 @@ namespace Microsoft.Build.Collections
         ///  0, if hashtables have identical keys and equivalent (case-insensitive) values
         /// +1, if first hashtable is "greater than" the second one
         /// </returns>
-        internal static int Compare(Dictionary<string, string> h1, Dictionary<string, string> h2)
+        public static int Compare(Dictionary<string, string> h1, Dictionary<string, string> h2)
         {
             // NOTE: These are deliberately typed as Dictionary<TKey, TValue> and not
             // IDictionary<TKey, TValue> to avoid boxing the enumerator

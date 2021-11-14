@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -14,7 +14,7 @@ namespace Microsoft.Build.BackEnd
     /// TaskHostConfiguration contains information needed for the task host to 
     /// configure itself for to execute a particular task.
     /// </summary>
-    internal class TaskHostConfiguration : INodePacket
+    public class TaskHostConfiguration : INodePacket
     {
         /// <summary>
         /// The node id (of the parent node, to make the logging work out)
@@ -433,7 +433,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Factory for deserialization.
         /// </summary>
-        internal static INodePacket FactoryForDeserialization(ITranslator translator)
+        public static INodePacket FactoryForDeserialization(ITranslator translator)
         {
             TaskHostConfiguration configuration = new TaskHostConfiguration();
             configuration.Translate(translator);

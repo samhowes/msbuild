@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -23,12 +23,12 @@ namespace Microsoft.Build.Construction
         private ProjectElement _firstChild;
         private ProjectElement _lastChild;
 
-        internal ProjectElementContainerLink ContainerLink => (ProjectElementContainerLink)Link;
+        public ProjectElementContainerLink ContainerLink => (ProjectElementContainerLink)Link;
 
         /// <summary>
         /// External projects support
         /// </summary>
-        internal ProjectElementContainer(ProjectElementContainerLink link)
+        public ProjectElementContainer(ProjectElementContainerLink link)
             :base(link)
         {
         }
@@ -40,7 +40,7 @@ namespace Microsoft.Build.Construction
         /// <comment>
         /// Should ideally be protected+internal.
         /// </comment> 
-        internal ProjectElementContainer()
+        public ProjectElementContainer()
         {
         }
 
@@ -51,7 +51,7 @@ namespace Microsoft.Build.Construction
         /// <comment>
         /// Should ideally be protected+internal.
         /// </comment>
-        internal ProjectElementContainer(XmlElement xmlElement, ProjectElementContainer parent, ProjectRootElement containingProject)
+        public ProjectElementContainer(XmlElement xmlElement, ProjectElementContainer parent, ProjectRootElement containingProject)
             : base(xmlElement, parent, containingProject)
         {
         }
@@ -365,7 +365,7 @@ namespace Microsoft.Build.Construction
         /// parent's element.
         /// All that remains is to set FirstChild/LastChild and fix up the linked list.
         /// </summary>
-        internal void AppendParentedChildNoChecks(ProjectElement child)
+        public void AppendParentedChildNoChecks(ProjectElement child)
         {
             ErrorUtilities.VerifyThrow(child.Parent == this, "Expected parent already set");
             ErrorUtilities.VerifyThrow(child.PreviousSibling == null && child.NextSibling == null, "Invalid structure");
@@ -392,7 +392,7 @@ namespace Microsoft.Build.Construction
         /// <param name="factory">The factory to use for creating the new instance.</param>
         /// <param name="parent">The parent to append the cloned element to as a child.</param>
         /// <returns>The cloned element.</returns>
-        protected internal virtual ProjectElementContainer DeepClone(ProjectRootElement factory, ProjectElementContainer parent)
+        public virtual ProjectElementContainer DeepClone(ProjectRootElement factory, ProjectElementContainer parent)
         {
             var clone = (ProjectElementContainer)Clone(factory);
             parent?.AppendChild(clone);
@@ -412,7 +412,7 @@ namespace Microsoft.Build.Construction
             return clone;
         }
 
-        internal static ProjectElementContainer DeepClone(ProjectElementContainer xml, ProjectRootElement factory, ProjectElementContainer parent)
+        public static ProjectElementContainer DeepClone(ProjectElementContainer xml, ProjectRootElement factory, ProjectElementContainer parent)
         {
             return xml.DeepClone(factory, parent);
         }
@@ -433,7 +433,7 @@ namespace Microsoft.Build.Construction
         /// If child "element" is actually represented as an attribute, update the value in the corresponding Xml attribute
         /// </summary>
         /// <param name="child">A child element which might be represented as an attribute</param>
-        internal void UpdateElementValue(ProjectElement child)
+        public void UpdateElementValue(ProjectElement child)
         {
             ErrorUtilities.VerifyThrow(Link == null, "External project");
 
@@ -453,7 +453,7 @@ namespace Microsoft.Build.Construction
         /// tree after the corresponding ProjectElement has been added to the construction API tree, and fixes up
         /// whitespace as necessary.
         /// </remarks>
-        internal void AddToXml(ProjectElement child)
+        public void AddToXml(ProjectElement child)
         {
             ErrorUtilities.VerifyThrow(Link == null, "External project");
 
@@ -559,7 +559,7 @@ namespace Microsoft.Build.Construction
             return leadingWhiteSpace.Substring(lastIndexOfNewLine + 1);
         }
 
-        internal void RemoveFromXml(ProjectElement child)
+        public void RemoveFromXml(ProjectElement child)
         {
             ErrorUtilities.VerifyThrow(Link == null, "External project");
 
@@ -601,7 +601,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Sets the first child in this container
         /// </summary>
-        internal void AddInitialChild(ProjectElement child)
+        public void AddInitialChild(ProjectElement child)
         {
             ErrorUtilities.VerifyThrow(FirstChild == null && LastChild == null, "Expecting no children");
 
@@ -736,7 +736,7 @@ namespace Microsoft.Build.Construction
             /// <summary>
             /// Constructor allowing reverse enumeration
             /// </summary>
-            internal ProjectElementSiblingEnumerable(ProjectElement initial, bool forwards = true)
+            public ProjectElementSiblingEnumerable(ProjectElement initial, bool forwards = true)
             {
                 _enumerator = new ProjectElementSiblingEnumerator(initial, forwards);
             }
@@ -777,7 +777,7 @@ namespace Microsoft.Build.Construction
                 /// <summary>
                 /// Constructor taking the first element
                 /// </summary>
-                internal ProjectElementSiblingEnumerator(ProjectElement initial, bool forwards)
+                public ProjectElementSiblingEnumerator(ProjectElement initial, bool forwards)
                 {
                     _initial = initial;
                     Current = null;

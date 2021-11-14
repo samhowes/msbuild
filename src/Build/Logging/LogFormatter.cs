@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,12 +10,12 @@ namespace Microsoft.Build.BackEnd.Logging
     /// <summary>
     /// Utility helper functions for formatting logger output.
     /// </summary>
-    static internal class LogFormatter
+    static public class LogFormatter
     {
         /// <summary>
         /// Formats the timestamp in the log as  Hours:Minutes:Seconds.Milliseconds
         /// </summary>
-        internal static string FormatLogTimeStamp(DateTime timeStamp)
+        public static string FormatLogTimeStamp(DateTime timeStamp)
         {
             // From http://msdn2.microsoft.com/en-us/library/8kb3ddd4.aspx
             // Custom DateTime Format Strings  
@@ -44,7 +44,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// </summary>
         /// <param name="t"></param>
         /// <returns>String representation of time-span.</returns>
-        internal static string FormatTimeSpan(TimeSpan t)
+        public static string FormatTimeSpan(TimeSpan t)
         {
             string rawTime = t.ToString(); // Timespan is a value type and can't be null.
             int rawTimeLength = rawTime.Length;

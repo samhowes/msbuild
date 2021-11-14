@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -13,7 +13,7 @@ namespace Microsoft.Build.Shared.LanguageParser
     * Given C# sources, enumerate over all tokens.
     *
     */
-    sealed internal class CSharpTokenEnumerator : TokenEnumerator
+    sealed public class CSharpTokenEnumerator : TokenEnumerator
     {
         // Reader over the sources.
         private CSharpTokenCharReader _reader = null;
@@ -23,7 +23,7 @@ namespace Microsoft.Build.Shared.LanguageParser
         * 
         * Construct
         */
-        internal CSharpTokenEnumerator(Stream binaryStream, bool forceANSI)
+        public CSharpTokenEnumerator(Stream binaryStream, bool forceANSI)
         {
             _reader = new CSharpTokenCharReader(binaryStream, forceANSI);
         }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections;
@@ -8,7 +8,7 @@ using Microsoft.Build.Shared;
 
 namespace Microsoft.Build.Execution
 {
-    internal class ResultsCacheWithOverride : IResultsCache
+    public class ResultsCacheWithOverride : IResultsCache
     {
         private readonly IResultsCache _override;
         public ResultsCache CurrentCache { get; }

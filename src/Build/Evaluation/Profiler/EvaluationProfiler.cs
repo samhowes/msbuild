@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -14,7 +14,7 @@ namespace Microsoft.Build.Evaluation
     /// <summary>
     /// Tracks an assortment of evaluation elements in a stack-like fashion, keeping inclusive and exclusive times for each of them.
     /// </summary>
-    internal sealed class EvaluationProfiler
+    public sealed class EvaluationProfiler
     {
         private readonly bool _shouldTrackElements;
         private readonly Stack<EvaluationFrame> _evaluationStack = new Stack<EvaluationFrame>();
@@ -25,7 +25,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// If <param name="shouldTrackElements"/> is false, then requesting to track a given element has no effect and a null <see cref="IDisposable"/> is returned.
         /// </summary>
-        internal EvaluationProfiler(bool shouldTrackElements)
+        public EvaluationProfiler(bool shouldTrackElements)
         {
             _shouldTrackElements = shouldTrackElements;
         }
@@ -81,7 +81,7 @@ namespace Microsoft.Build.Evaluation
         /// Returns true when the evaluation stack is empty.
         /// </summary>
         /// <returns></returns>
-        internal bool IsEmpty()
+        public bool IsEmpty()
         {
             return _evaluationStack.Count == 0;
         }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -35,15 +35,15 @@ namespace Microsoft.Build.Evaluation.Context
             Isolated
         }
 
-        internal static Action<EvaluationContext> TestOnlyHookOnCreate { get; set; }
+        public static Action<EvaluationContext> TestOnlyHookOnCreate { get; set; }
 
         private int _used;
 
-        internal SharingPolicy Policy { get; }
+        public SharingPolicy Policy { get; }
 
-        internal ISdkResolverService SdkResolverService { get; }
-        internal IFileSystem FileSystem { get; }
-        internal EngineFileUtilities EngineFileUtilities { get; }
+        public ISdkResolverService SdkResolverService { get; }
+        public IFileSystem FileSystem { get; }
+        public EngineFileUtilities EngineFileUtilities { get; }
 
         /// <summary>
         /// Key to file entry list. Example usages: cache glob expansion and intermediary directory expansions during glob expansion.
@@ -106,7 +106,7 @@ namespace Microsoft.Build.Evaluation.Context
             return context;
         }
 
-        internal EvaluationContext ContextForNewProject()
+        public EvaluationContext ContextForNewProject()
         {
             // Projects using isolated contexts need to get a new context instance 
             switch (Policy)

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -45,7 +45,7 @@ namespace Microsoft.Build.Logging
         /// <summary>
         /// Creates a logger for testing purposes that gathers profiling information but doesn't save a file to disk with the report
         /// </summary>
-        internal static ProfilerLogger CreateForTesting()
+        public static ProfilerLogger CreateForTesting()
         {
             return new ProfilerLogger(fileToLog: null);
         }
@@ -111,7 +111,7 @@ namespace Microsoft.Build.Logging
         /// In the regular code path, this method is called only once per build. But some test cases may call it multiple times to validate 
         /// the aggregated data
         /// </remarks>
-        internal ProfilerResult GetAggregatedResult(bool pruneSmallItems = true)
+        public ProfilerResult GetAggregatedResult(bool pruneSmallItems = true)
         {
             if (_aggregatedLocations != null)
             {

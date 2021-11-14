@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -11,7 +11,7 @@ namespace Microsoft.Build.Evaluation
     /// Evaluates a numeric comparison, such as less-than, or greater-or-equal-than
     /// Does not update conditioned properties table.
     /// </summary>
-    internal abstract class NumericComparisonExpressionNode : OperatorExpressionNode
+    public abstract class NumericComparisonExpressionNode : OperatorExpressionNode
     {
         /// <summary>
         /// Compare numbers
@@ -36,7 +36,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Evaluate as boolean
         /// </summary>
-        internal override bool BoolEvaluate(ConditionEvaluator.IConditionEvaluationState state)
+        public override bool BoolEvaluate(ConditionEvaluator.IConditionEvaluationState state)
         {
             bool isLeftNum = LeftChild.CanNumericEvaluate(state);
             bool isLeftVersion = LeftChild.CanVersionEvaluate(state);

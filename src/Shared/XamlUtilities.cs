@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Xml;
 using System.Text.RegularExpressions;
 using Microsoft.Build.Construction;
@@ -9,7 +9,7 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// This class contains utility methods for Xaml types.
     /// </summary>
-    static internal class XamlUtilities
+    static public class XamlUtilities
     {
         /// <summary>
         /// Gets an identifier for a property based on its name, its containing object's name and/or type. This is intended to
@@ -20,7 +20,7 @@ namespace Microsoft.Build.Shared
         /// <param name="containingObjectName"> The name of the containing object. </param>
         /// <param name="containingObject"> The object which contains this property. </param>
         /// <returns> Returns "(containingObject's type name)containingObjectName.PropertyName". </returns>
-        internal static string GetPropertyId(string propertyName, string containingObjectName, object containingObject)
+        public static string GetPropertyId(string propertyName, string containingObjectName, object containingObject)
         {
             ErrorUtilities.VerifyThrowArgumentLength(propertyName, "propertyName");
             ErrorUtilities.VerifyThrowArgumentLength(containingObjectName, "containingObjectName");
@@ -52,7 +52,7 @@ namespace Microsoft.Build.Shared
         /// <param name="propertyName"> The name of the property. </param>
         /// <param name="containingObject"> The object which contains this property. </param>
         /// <returns> Returns "(containingObject's type name)unknown.PropertyName". </returns>
-        internal static string GetPropertyId(string propertyName, object containingObject)
+        public static string GetPropertyId(string propertyName, object containingObject)
         {
             string propertyId = GetPropertyId(propertyName, "unknown", containingObject);
             return propertyId;
@@ -63,7 +63,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="property">The property to test.</param>
         /// <param name="propertyId">An identifier of the property to check.</param>
-        internal static void VerifyThrowPropertyNotSet(object property, string propertyId)
+        public static void VerifyThrowPropertyNotSet(object property, string propertyId)
         {
             ErrorUtilities.VerifyThrowArgumentLength(propertyId, "propertyId");
 
@@ -79,7 +79,7 @@ namespace Microsoft.Build.Shared
         /// <param name="property">The property to test.</param>
         /// <param name="propertyId">An identifier of the property to check.</param>
         /// <param name="unformattedMessage"> The text message to display. </param>
-        internal static void VerifyThrowPropertyNotSet(object property, string propertyId, string unformattedMessage)
+        public static void VerifyThrowPropertyNotSet(object property, string propertyId, string unformattedMessage)
         {
             ErrorUtilities.VerifyThrowArgumentLength(propertyId, "propertyId");
 
@@ -94,7 +94,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="property">The parameter to test.</param>
         /// <param name="propertyId">An identifier of the property to check.</param>
-        internal static void VerifyThrowPropertyEmptyString(string property, string propertyId)
+        public static void VerifyThrowPropertyEmptyString(string property, string propertyId)
         {
             ErrorUtilities.VerifyThrowArgumentNull(property, "property");
             ErrorUtilities.VerifyThrowArgumentLength(propertyId, "propertyId");
@@ -111,7 +111,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="property">The parameter to test.</param>
         /// <param name="propertyId">An identifier of the property to check.</param>
-        internal static void VerifyThrowPropertyNotSetOrEmptyString(string property, string propertyId)
+        public static void VerifyThrowPropertyNotSetOrEmptyString(string property, string propertyId)
         {
             VerifyThrowPropertyNotSet(property, propertyId);
             VerifyThrowPropertyEmptyString(property, propertyId);
@@ -122,7 +122,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="listProperty"> The list parameter to test. </param>
         /// <param name="propertyId"> An identifier of the property to check. </param>
-        internal static void VerifyThrowListPropertyEmpty(IList listProperty, string propertyId)
+        public static void VerifyThrowListPropertyEmpty(IList listProperty, string propertyId)
         {
             ErrorUtilities.VerifyThrowArgumentNull(listProperty, "listProperty");
             ErrorUtilities.VerifyThrowArgumentLength(propertyId, "propertyId");
@@ -139,7 +139,7 @@ namespace Microsoft.Build.Shared
         /// Validates the properties of this object. This method should be called
         /// after initialization is complete.
         /// </summary>
-        internal void Validate(this Argument type)
+        public void Validate(this Argument type)
         {
             string propertyId = GetPropertyId("Property", type);
             VerifyThrowPropertyNotSetOrEmptyString(type.Property, propertyId);
@@ -149,7 +149,7 @@ namespace Microsoft.Build.Shared
         /// Validates the properties of this object. This method should be called
         /// after initialization is complete.
         /// </summary>
-        internal void Validate(this BaseProperty type)
+        public void Validate(this BaseProperty type)
         {
             string namePropertyId = GetPropertyId("Name", type);
             VerifyThrowPropertyNotSetOrEmptyString(type.Name, namePropertyId);
@@ -221,7 +221,7 @@ namespace Microsoft.Build.Shared
         /// Validates the properties of this object. This method should be called
         /// after initialization is complete.
         /// </summary>
-        internal void Validate(this Category type)
+        public void Validate(this Category type)
         {
             string namePropertyId = GetPropertyId("Name", type);
             VerifyThrowPropertyNotSetOrEmptyString(type.Name, namePropertyId);
@@ -232,7 +232,7 @@ namespace Microsoft.Build.Shared
         /// Validates the properties of this object. This method should be called
         /// after initialization is complete.
         /// </summary>
-        internal void Validate(this DataSource type)
+        public void Validate(this DataSource type)
         {
             string persistencePropertyId = GetPropertyId("Persistence", type);
             VerifyThrowPropertyNotSetOrEmptyString(type.Persistence, persistencePropertyId);
@@ -241,7 +241,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Validate the content type data integrity afte deserializing from XAML file
         /// </summary>
-        internal void Validate(this ContentType type)
+        public void Validate(this ContentType type)
         {
             // content type must at least declare name, and msbuild ItemType to be workable at minimum level
             string namePropertyId = GetPropertyId("Name", type);
@@ -255,7 +255,7 @@ namespace Microsoft.Build.Shared
         /// Validates the properties of this object. This method should be called
         /// after initialization is complete.
         /// </summary>
-        internal void Validate(this DynamicEnumProperty type)
+        public void Validate(this DynamicEnumProperty type)
         {
             (type as BaseProperty).Validate();
             ErrorUtilities.VerifyThrowArgumentLength(type.EnumProvider, "EnumProvider");
@@ -306,7 +306,7 @@ namespace Microsoft.Build.Shared
         /// Validates the properties of this object. This method should be called
         /// after initialization is complete.
         /// </summary>
-        internal void Validate(this IntProperty type)
+        public void Validate(this IntProperty type)
         {
             (type as BaseProperty).Validate();
 
@@ -323,7 +323,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Validate the content type data integrity afte deserializing from XAML file
         /// </summary>
-        internal void Validate(this ItemType type)
+        public void Validate(this ItemType type)
         {
             // content type must at least declare name, and msbuild ItemType to be workable at minimum level
             string namePropertyId = GetPropertyId("Name", type);
@@ -339,7 +339,7 @@ namespace Microsoft.Build.Shared
         /// Validates the properties of this object. This method should be called
         /// after initialization is complete.
         /// </summary>
-        internal void Validate(this Rule type)
+        public void Validate(this Rule type)
         {
             // Validate "Name" property.
             string namePropertyId = GetPropertyId("Name", type);
@@ -407,7 +407,7 @@ namespace Microsoft.Build.Shared
         /// Validates the properties of this object. This method should be called
         /// after initialization is complete.
         /// </summary>
-        internal void Validate(this RuleBag type)
+        public void Validate(this RuleBag type)
         {
             // Make sure that at least one Rule was defined in this RuleBag.
             string rulesId = GetPropertyId("Rules", type);
@@ -423,7 +423,7 @@ namespace Microsoft.Build.Shared
         /// Validates the properties of this object. This method should be called
         /// after initialization is complete.
         /// </summary>
-        internal void Validate(this ValueEditor type)
+        public void Validate(this ValueEditor type)
         {
             string propertyId = GetPropertyId("EditorType", type);
             VerifyThrowPropertyNotSetOrEmptyString(type.EditorType, propertyId);

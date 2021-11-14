@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -14,7 +14,7 @@ namespace Microsoft.Build.Collections
     /// </summary>
     /// <typeparam name="K">Key</typeparam>
     /// <typeparam name="V">Value</typeparam>
-    internal class ReadOnlyEmptyDictionary<K, V> : IDictionary<K, V>, IDictionary
+    public class ReadOnlyEmptyDictionary<K, V> : IDictionary<K, V>, IDictionary
     {
         /// <summary>
         /// The single instance

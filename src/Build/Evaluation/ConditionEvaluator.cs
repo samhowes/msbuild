@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -16,7 +16,7 @@ namespace Microsoft.Build.Evaluation
     using Microsoft.Build.Shared;
     using Microsoft.Build.Shared.FileSystem;
 
-    internal static class ConditionEvaluator
+    public static class ConditionEvaluator
     {
         private static readonly Lazy<Regex> s_singlePropertyRegex = new Lazy<Regex>(
             () => new Regex(@"^\$\(([^\$\(\)]*)\)$", RegexOptions.Compiled));
@@ -36,7 +36,7 @@ namespace Microsoft.Build.Evaluation
         /// <param name="conditionedPropertiesTable"></param>
         /// <param name="leftValue"></param>
         /// <param name="rightValueExpanded"></param>
-        internal static void UpdateConditionedPropertiesTable
+        public static void UpdateConditionedPropertiesTable
         (
             Dictionary<string, List<string>> conditionedPropertiesTable,   // List of possible values, keyed by property name
 
@@ -168,7 +168,7 @@ namespace Microsoft.Build.Evaluation
         /// This method uses cached expression trees to avoid generating them from scratch every time it's called.
         /// This method is thread safe and is called from engine and task execution module threads
         /// </summary>
-        internal static bool EvaluateCondition<P, I>
+        public static bool EvaluateCondition<P, I>
             (
             string condition,
             ParserOptions options,
@@ -204,7 +204,7 @@ namespace Microsoft.Build.Evaluation
         /// This method is thread safe and is called from engine and task execution module threads
         /// Logging service may be null.
         /// </summary>
-        internal static bool EvaluateConditionCollectingConditionedProperties<P, I>
+        public static bool EvaluateConditionCollectingConditionedProperties<P, I>
         (
             string condition,
             ParserOptions options,
@@ -331,7 +331,7 @@ namespace Microsoft.Build.Evaluation
             return cachedExpressionTreesForCurrentOptions;
         }
 
-        internal interface IConditionEvaluationState
+        public interface IConditionEvaluationState
         {
             string Condition { get; }
 
@@ -375,7 +375,7 @@ namespace Microsoft.Build.Evaluation
         /// All the state necessary for the evaluation of conditionals so that the expression tree 
         /// is stateless and reusable
         /// </summary>
-        internal class ConditionEvaluationState<P, I> : IConditionEvaluationState
+        public class ConditionEvaluationState<P, I> : IConditionEvaluationState
             where P : class, IProperty
             where I : class, IItem
         {
@@ -407,7 +407,7 @@ namespace Microsoft.Build.Evaluation
             /// </summary>
             public ProjectRootElementCacheBase LoadedProjectsCache { get; }
 
-            internal ConditionEvaluationState
+            public ConditionEvaluationState
                 (
                 string condition,
                 Expander<P, I> expander,

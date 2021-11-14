@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -18,7 +18,7 @@ namespace Microsoft.Build.BackEnd
     /// A SchedulingPlan contains timing and relationship information for a build which has already occurred.  This data can then be
     /// used by subsequent builds to determine how best to distribute work among several nodes.
     /// </summary>
-    internal class SchedulingPlan
+    public class SchedulingPlan
     {
         /// <summary>
         /// The configuration cache.

@@ -1,13 +1,13 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Immutable;
 
 namespace Microsoft.Build.Evaluation
 {
-    internal partial class LazyItemEvaluator<P, I, M, D>
+    public partial class LazyItemEvaluator<P, I, M, D>
     {
-        internal interface IItemOperation
+        public interface IItemOperation
         {
             void Apply(OrderedItemDataCollection.Builder listBuilder, ImmutableHashSet<string> globsToIgnore);
         }

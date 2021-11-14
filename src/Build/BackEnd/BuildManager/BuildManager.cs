@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -47,7 +47,7 @@ namespace Microsoft.Build.Execution
     public class BuildManager : INodePacketHandler, IBuildComponentHost, IDisposable
     {
         // TODO: Remove this when VS gets updated to setup project cache plugins.
-        internal static ConcurrentDictionary<string, ProjectCacheItem> ProjectCacheItems { get; } = new ConcurrentDictionary<string, ProjectCacheItem>();
+        public static ConcurrentDictionary<string, ProjectCacheItem> ProjectCacheItems { get; } = new ConcurrentDictionary<string, ProjectCacheItem>();
 
         /// <summary>
         /// The object used for thread-safe synchronization of static members.
@@ -1069,7 +1069,7 @@ namespace Microsoft.Build.Execution
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Standard ExpectedException pattern used")]
         [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "Complex class might need refactoring to separate scheduling elements from submission elements.")]
-        internal void ExecuteSubmission(BuildSubmission submission, bool allowMainThreadBuild)
+        public void ExecuteSubmission(BuildSubmission submission, bool allowMainThreadBuild)
         {
             ErrorUtilities.VerifyThrowArgumentNull(submission, nameof(submission));
             ErrorUtilities.VerifyThrow(!submission.IsCompleted, "Submission already complete.");
@@ -1286,7 +1286,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// This method adds the graph build request in the specified submission to the set of requests being handled by the scheduler.
         /// </summary>
-        internal void ExecuteSubmission(GraphBuildSubmission submission)
+        public void ExecuteSubmission(GraphBuildSubmission submission)
         {
             lock (_syncLock)
             {
@@ -2284,7 +2284,7 @@ namespace Microsoft.Build.Execution
             return newConfiguration;
         }
 
-        internal void PostCacheResult(CacheRequest cacheRequest, CacheResult cacheResult)
+        public void PostCacheResult(CacheRequest cacheRequest, CacheResult cacheResult)
         {
             _workQueue.Post(() =>
             {
@@ -3203,7 +3203,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// The logger registered to the logging service when no other one is.
         /// </summary>
-        internal class NullLogger : ILogger
+        public class NullLogger : ILogger
         {
             #region ILogger Members
 

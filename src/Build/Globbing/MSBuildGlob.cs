@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 
@@ -50,10 +50,10 @@ namespace Microsoft.Build.Globbing
 
         private readonly Lazy<GlobState> _state;
 
-        internal string TestOnlyGlobRoot => _state.Value.GlobRoot;
-        internal string TestOnlyFileSpec => _state.Value.FileSpec;
-        internal bool TestOnlyNeedsRecursion => _state.Value.NeedsRecursion;
-        internal Regex TestOnlyRegex => _state.Value.Regex;
+        public string TestOnlyGlobRoot => _state.Value.GlobRoot;
+        public string TestOnlyFileSpec => _state.Value.FileSpec;
+        public bool TestOnlyNeedsRecursion => _state.Value.NeedsRecursion;
+        public Regex TestOnlyRegex => _state.Value.Regex;
 
         /// <summary>
         ///     The fixed directory part.
@@ -282,10 +282,10 @@ namespace Microsoft.Build.Globbing
             /// </summary>
             public string FilenamePartMatchGroup { get; }
 
-            internal static MatchInfoResult Empty
+            public static MatchInfoResult Empty
                 => new MatchInfoResult(false, string.Empty, string.Empty, string.Empty);
 
-            internal MatchInfoResult(
+            public MatchInfoResult(
                 bool isMatch,
                 string fixedDirectoryPartMatchGroup,
                 string wildcardDirectoryPartMatchGroup,

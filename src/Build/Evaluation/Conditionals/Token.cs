@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using ErrorUtilities = Microsoft.Build.Shared.ErrorUtilities;
@@ -11,26 +11,26 @@ namespace Microsoft.Build.Evaluation
     /// was parsed into the token.  This isn't very useful for operators, but
     /// is useful for strings and such.
     /// </summary>
-    internal sealed class Token
+    public sealed class Token
     {
-        internal readonly static Token Comma = new Token(TokenType.Comma);
-        internal readonly static Token LeftParenthesis = new Token(TokenType.LeftParenthesis);
-        internal readonly static Token RightParenthesis = new Token(TokenType.RightParenthesis);
-        internal readonly static Token LessThan = new Token(TokenType.LessThan);
-        internal readonly static Token GreaterThan = new Token(TokenType.GreaterThan);
-        internal readonly static Token LessThanOrEqualTo = new Token(TokenType.LessThanOrEqualTo);
-        internal readonly static Token GreaterThanOrEqualTo = new Token(TokenType.GreaterThanOrEqualTo);
-        internal readonly static Token And = new Token(TokenType.And);
-        internal readonly static Token Or = new Token(TokenType.Or);
-        internal readonly static Token EqualTo = new Token(TokenType.EqualTo);
-        internal readonly static Token NotEqualTo = new Token(TokenType.NotEqualTo);
-        internal readonly static Token Not = new Token(TokenType.Not);
-        internal readonly static Token EndOfInput = new Token(TokenType.EndOfInput);
+        public readonly static Token Comma = new Token(TokenType.Comma);
+        public readonly static Token LeftParenthesis = new Token(TokenType.LeftParenthesis);
+        public readonly static Token RightParenthesis = new Token(TokenType.RightParenthesis);
+        public readonly static Token LessThan = new Token(TokenType.LessThan);
+        public readonly static Token GreaterThan = new Token(TokenType.GreaterThan);
+        public readonly static Token LessThanOrEqualTo = new Token(TokenType.LessThanOrEqualTo);
+        public readonly static Token GreaterThanOrEqualTo = new Token(TokenType.GreaterThanOrEqualTo);
+        public readonly static Token And = new Token(TokenType.And);
+        public readonly static Token Or = new Token(TokenType.Or);
+        public readonly static Token EqualTo = new Token(TokenType.EqualTo);
+        public readonly static Token NotEqualTo = new Token(TokenType.NotEqualTo);
+        public readonly static Token Not = new Token(TokenType.Not);
+        public readonly static Token EndOfInput = new Token(TokenType.EndOfInput);
 
         /// <summary>
         /// Valid tokens
         /// </summary>
-        internal enum TokenType
+        public enum TokenType
         {
             Comma, LeftParenthesis, RightParenthesis,
             LessThan, GreaterThan, LessThanOrEqualTo, GreaterThanOrEqualTo,
@@ -59,7 +59,7 @@ namespace Microsoft.Build.Evaluation
         /// </summary>
         /// <param name="type"></param>
         /// <param name="tokenString"></param>
-        internal Token(TokenType type, string tokenString)
+        public Token(TokenType type, string tokenString)
             : this(type, tokenString, false /* not expandable */)
         { }
 
@@ -68,7 +68,7 @@ namespace Microsoft.Build.Evaluation
         /// represents the token.
         /// If the string may contain content that needs expansion, expandable is set.
         /// </summary>
-        internal Token(TokenType type, string tokenString, bool expandable)
+        public Token(TokenType type, string tokenString, bool expandable)
         {
             ErrorUtilities.VerifyThrow
                 (
@@ -92,7 +92,7 @@ namespace Microsoft.Build.Evaluation
         /// Whether the content potentially has expandable content,
         /// such as a property expression or escaped character.
         /// </summary>
-        internal bool Expandable
+        public bool Expandable
         {
             get;
             set;
@@ -103,12 +103,12 @@ namespace Microsoft.Build.Evaluation
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        internal bool IsToken(TokenType type)
+        public bool IsToken(TokenType type)
         {
             return _tokenType == type;
         }
 
-        internal string String
+        public string String
         {
             get
             {

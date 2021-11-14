@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.BackEnd.Logging;
@@ -26,7 +26,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// Implementation of IRequestBuilder
     /// </summary>
-    internal class RequestBuilder : IRequestBuilder, IRequestBuilderCallback, IBuildComponent
+    public class RequestBuilder : IRequestBuilder, IRequestBuilderCallback, IBuildComponent
     {
         /// <summary>
         /// The dedicated scheduler object.
@@ -106,7 +106,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Creates a new request builder.
         /// </summary>
-        internal RequestBuilder()
+        public RequestBuilder()
         {
             _terminateEvent = new ManualResetEvent(false);
             _continueEvent = new AutoResetEvent(false);
@@ -162,7 +162,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Retrieves the request entry associated with this RequestBuilder.
         /// </summary>
-        internal BuildRequestEntry RequestEntry
+        public BuildRequestEntry RequestEntry
         {
             get
             {
@@ -174,7 +174,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Returns true if this RequestBuilder has an active build request
         /// </summary>
-        internal bool HasActiveBuildRequest
+        public bool HasActiveBuildRequest
         {
             get
             {
@@ -565,7 +565,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Returns true if this builder is using legacy threading semantics.
         /// </summary>
-        internal static bool IsBuilderUsingLegacyThreadingSemantics(IBuildComponentHost host, BuildRequestEntry entry)
+        public static bool IsBuilderUsingLegacyThreadingSemantics(IBuildComponentHost host, BuildRequestEntry entry)
         {
             return host.BuildParameters.LegacyThreadingSemantics && (host.LegacyThreadingData.MainThreadSubmissionId == entry.Request.SubmissionId);
         }
@@ -575,7 +575,7 @@ namespace Microsoft.Build.BackEnd
         /// This mechanism is used to implement running RequestBuilder threads on the main UI thread in VS.
         /// </summary>
         /// <returns>The index of the handle which was signaled.</returns>
-        internal static int WaitWithBuilderThreadStart(WaitHandle[] handles, bool recursive, LegacyThreadingData threadingData, int submissionId)
+        public static int WaitWithBuilderThreadStart(WaitHandle[] handles, bool recursive, LegacyThreadingData threadingData, int submissionId)
         {
             WaitHandle[] allHandles = new WaitHandle[handles.Length + 1];
             allHandles[0] = threadingData.GetStartRequestBuilderMainThreadEventForSubmission(submissionId);
@@ -622,7 +622,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Class factory for component creation.
         /// </summary>
-        internal static IBuildComponent CreateComponent(BuildComponentType type)
+        public static IBuildComponent CreateComponent(BuildComponentType type)
         {
             ErrorUtilities.VerifyThrow(type == BuildComponentType.RequestBuilder, "Cannot create components of type {0}", type);
             return new RequestBuilder();

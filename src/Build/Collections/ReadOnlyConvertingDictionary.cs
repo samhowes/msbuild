@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -15,7 +15,7 @@ namespace Microsoft.Build.Collections
     /// <typeparam name="K">The backing dictionary's key type.</typeparam>
     /// <typeparam name="V">The backing dictionary's value type.</typeparam>
     /// <typeparam name="N">The desired value type.</typeparam>
-    internal class ReadOnlyConvertingDictionary<K, V, N> : IDictionary<K, N>
+    public class ReadOnlyConvertingDictionary<K, V, N> : IDictionary<K, N>
     {
         /// <summary>
         /// The backing dictionary.
@@ -30,7 +30,7 @@ namespace Microsoft.Build.Collections
         /// <summary>
         /// Constructor.
         /// </summary>
-        internal ReadOnlyConvertingDictionary(IDictionary<K, V> backing, Func<V, N> converter)
+        public ReadOnlyConvertingDictionary(IDictionary<K, V> backing, Func<V, N> converter)
         {
             ErrorUtilities.VerifyThrowArgumentNull(backing, nameof(backing));
             ErrorUtilities.VerifyThrowArgumentNull(converter, nameof(converter));

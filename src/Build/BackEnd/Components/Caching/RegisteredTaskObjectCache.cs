@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,7 +10,7 @@ namespace Microsoft.Build.BackEnd.Components.Caching
     /// <summary>
     /// This is a cache of objects which are registered to be disposed of at a specified time.
     /// </summary>
-    internal class RegisteredTaskObjectCache : RegisteredTaskObjectCacheBase, IBuildComponent, IRegisteredTaskObjectCache, IDisposable
+    public class RegisteredTaskObjectCache : RegisteredTaskObjectCacheBase, IBuildComponent, IRegisteredTaskObjectCache, IDisposable
     {
         /// <summary>
         /// Finalizer
@@ -55,7 +55,7 @@ namespace Microsoft.Build.BackEnd.Components.Caching
         /// <summary>
         /// Component factory.
         /// </summary>
-        internal static IBuildComponent CreateComponent(BuildComponentType type)
+        public static IBuildComponent CreateComponent(BuildComponentType type)
         {
             ErrorUtilities.VerifyThrow(type == BuildComponentType.RegisteredTaskObjectCache, "Cannot create components of type {0}", type);
             return new RegisteredTaskObjectCache();

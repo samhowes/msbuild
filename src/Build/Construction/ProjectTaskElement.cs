@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -19,12 +19,12 @@ namespace Microsoft.Build.Construction
     [DebuggerDisplay("{Name} Condition={Condition} ContinueOnError={ContinueOnError} MSBuildRuntime={MSBuildRuntime} MSBuildArchitecture={MSBuildArchitecture} #Outputs={Count}")]
     public class ProjectTaskElement : ProjectElementContainer
     {
-        internal ProjectTaskElementLink TaskLink => (ProjectTaskElementLink)Link;
+        public ProjectTaskElementLink TaskLink => (ProjectTaskElementLink)Link;
 
         /// <summary>
         /// External projects support
         /// </summary>
-        internal ProjectTaskElement(ProjectTaskElementLink link)
+        public ProjectTaskElement(ProjectTaskElementLink link)
             : base(link)
         {
         }
@@ -42,7 +42,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Initialize a parented ProjectTaskElement
         /// </summary>
-        internal ProjectTaskElement(XmlElementWithLocation xmlElement, ProjectTargetElement parent, ProjectRootElement containingProject)
+        public ProjectTaskElement(XmlElementWithLocation xmlElement, ProjectTargetElement parent, ProjectRootElement containingProject)
             : base(xmlElement, parent, containingProject)
         {
             ErrorUtilities.VerifyThrowArgumentNull(parent, nameof(parent));
@@ -207,7 +207,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Retrieves a copy of the parameters as used during evaluation.
         /// </summary>
-        internal CopyOnWriteDictionary<(string, ElementLocation)> ParametersForEvaluation
+        public CopyOnWriteDictionary<(string, ElementLocation)> ParametersForEvaluation
         {
             get
             {
@@ -408,7 +408,7 @@ namespace Microsoft.Build.Construction
         /// Any legal XML element name is allowed. We can't easily verify if the name is a legal XML element name,
         /// so this will specifically throw XmlException if it isn't.
         /// </remarks>
-        internal static ProjectTaskElement CreateDisconnected(string name, ProjectRootElement containingProject)
+        public static ProjectTaskElement CreateDisconnected(string name, ProjectRootElement containingProject)
         {
             ErrorUtilities.VerifyThrowArgumentLength(name, nameof(name));
 
@@ -421,7 +421,7 @@ namespace Microsoft.Build.Construction
         /// Overridden to verify that the potential parent and siblings
         /// are acceptable. Throws InvalidOperationException if they are not.
         /// </summary>
-        internal override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
+        public override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
         {
             ErrorUtilities.VerifyThrowInvalidOperation(parent is ProjectTargetElement, "OM_CannotAcceptParent");
         }

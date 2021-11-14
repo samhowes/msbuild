@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -265,7 +265,7 @@ namespace Microsoft.Build.Logging
         /// The minimum message importance corresponding to this logger's verbosity or (MessageImportance.High - 1)
         /// if this logger does not log messages of any importance.
         /// </returns>
-        internal MessageImportance GetMinimumMessageImportance()
+        public MessageImportance GetMinimumMessageImportance()
         {
             if (_forwardingTable[LowMessageEventDescription] == 1)
             {

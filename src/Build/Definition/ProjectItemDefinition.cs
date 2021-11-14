@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Diagnostics;
@@ -51,7 +51,7 @@ namespace Microsoft.Build.Evaluation
         /// Assumes that the itemType string originated in a ProjectItemDefinitionElement and therefore
         /// was already validated.
         /// </remarks>
-        internal ProjectItemDefinition(Project project, string itemType)
+        public ProjectItemDefinition(Project project, string itemType)
         {
             ErrorUtilities.VerifyThrowInternalNull(project, nameof(project));
             ErrorUtilities.VerifyThrowArgumentLength(itemType, nameof(itemType));
@@ -61,7 +61,7 @@ namespace Microsoft.Build.Evaluation
             _metadata = null;
         }
 
-        internal virtual ProjectItemDefinitionLink Link => null;
+        public virtual ProjectItemDefinitionLink Link => null;
 
         /// <summary>
         /// Project that this item lives in.

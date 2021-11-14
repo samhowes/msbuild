@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,7 +10,7 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// This class contains methods that are useful for error checking and validation of project files.
     /// </summary>
-    static internal class ProjectFileErrorUtilities
+    static public class ProjectFileErrorUtilities
     {
         /// <summary>
         /// This method is used to flag errors in the project file being processed. Do NOT use this method in place of
@@ -22,7 +22,7 @@ namespace Microsoft.Build.Shared
         /// <param name="projectFile">The invalid project file.</param>
         /// <param name="resourceName">The resource string for the error message.</param>
         /// <param name="args">Extra arguments for formatting the error message.</param>
-        internal static void ThrowInvalidProjectFile
+        public static void ThrowInvalidProjectFile
         (
             BuildEventFileInfo projectFile,
             string resourceName,
@@ -43,7 +43,7 @@ namespace Microsoft.Build.Shared
         /// <param name="innerException">Any inner exception. May be null.</param>
         /// <param name="resourceName">The resource string for the error message.</param>
         /// <param name="args">Extra arguments for formatting the error message.</param>
-        internal static void ThrowInvalidProjectFile
+        public static void ThrowInvalidProjectFile
         (
             BuildEventFileInfo projectFile,
             Exception innerException,
@@ -65,7 +65,7 @@ namespace Microsoft.Build.Shared
         /// <param name="projectFile">The invalid project file.</param>
         /// <param name="resourceName">The resource string for the error message.</param>
         /// <param name="args">Extra arguments for formatting the error message.</param>
-        internal static void VerifyThrowInvalidProjectFile
+        public static void VerifyThrowInvalidProjectFile
         (
             bool condition,
             BuildEventFileInfo projectFile,
@@ -87,7 +87,7 @@ namespace Microsoft.Build.Shared
         /// <param name="projectFile">The invalid project file.</param>
         /// <param name="resourceName">The resource string for the error message.</param>
         /// <param name="args">Extra arguments for formatting the error message.</param>
-        internal static void ThrowInvalidProjectFile
+        public static void ThrowInvalidProjectFile
         (
             string errorSubCategoryResourceName,
             BuildEventFileInfo projectFile,
@@ -110,7 +110,7 @@ namespace Microsoft.Build.Shared
         /// <param name="projectFile">The invalid project file.</param>
         /// <param name="resourceName">The resource string for the error message.</param>
         /// <param name="args">Extra arguments for formatting the error message.</param>
-        internal static void VerifyThrowInvalidProjectFile
+        public static void VerifyThrowInvalidProjectFile
         (
             bool condition,
             string errorSubCategoryResourceName,
@@ -135,7 +135,7 @@ namespace Microsoft.Build.Shared
         /// <param name="innerException">The inner <see cref="Exception"/>.</param>
         /// <param name="resourceName">The resource string for the error message.</param>
         /// <param name="args">Extra arguments for formatting the error message.</param>
-        internal static void VerifyThrowInvalidProjectFile
+        public static void VerifyThrowInvalidProjectFile
         (
             bool condition,
             string errorSubCategoryResourceName,

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.BackEnd;
@@ -53,7 +53,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Constructor called by Evaluator
         /// </summary>
-        internal ProjectTaskOutputPropertyInstance(string propertyName, string taskParameter, string condition, ElementLocation location, ElementLocation propertyNameLocation, ElementLocation taskParameterLocation, ElementLocation conditionLocation)
+        public ProjectTaskOutputPropertyInstance(string propertyName, string taskParameter, string condition, ElementLocation location, ElementLocation propertyNameLocation, ElementLocation taskParameterLocation, ElementLocation conditionLocation)
         {
             ErrorUtilities.VerifyThrowInternalLength(propertyName, nameof(propertyName));
             ErrorUtilities.VerifyThrowInternalLength(taskParameter, nameof(taskParameter));

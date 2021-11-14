@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.IO;
@@ -12,21 +12,21 @@ namespace Microsoft.Build.Shared.LanguageParser
      * Given vb sources, return an enumerator that will provide tokens one at a time.
      *
      */
-    sealed internal class VisualBasicTokenizer : IEnumerable
+    sealed public class VisualBasicTokenizer : IEnumerable
     {
         /*
             These are the tokens that are specific to the VB tokenizer.
             Tokens that should be shared with other tokenizers should go
             into Token.cs.
         */
-        internal class LineTerminatorToken : Token { }
-        internal class SeparatorToken : Token { }
+        public class LineTerminatorToken : Token { }
+        public class SeparatorToken : Token { }
 
-        internal class LineContinuationToken : WhitespaceToken { }
+        public class LineContinuationToken : WhitespaceToken { }
 
-        internal class OctalIntegerLiteralToken : IntegerLiteralToken { }
+        public class OctalIntegerLiteralToken : IntegerLiteralToken { }
 
-        internal class ExpectedValidOctalDigitToken : SyntaxErrorToken { }
+        public class ExpectedValidOctalDigitToken : SyntaxErrorToken { }
 
         // The source lines
         private Stream _binaryStream = null;
@@ -39,7 +39,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Construct
          */
-        internal VisualBasicTokenizer(Stream binaryStream, bool forceANSI)
+        public VisualBasicTokenizer(Stream binaryStream, bool forceANSI)
         {
             _binaryStream = binaryStream;
             _forceANSI = forceANSI;

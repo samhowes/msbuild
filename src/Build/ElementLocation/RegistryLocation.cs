@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Shared;
@@ -16,7 +16,7 @@ namespace Microsoft.Build.Construction
     /// DO NOT make it public without considering a solution to this problem.
     /// </remarks>
     [Serializable]
-    internal class RegistryLocation : IElementLocation, ITranslatable
+    public class RegistryLocation : IElementLocation, ITranslatable
     {
         /// <summary>
         /// The location.
@@ -26,7 +26,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Constructor taking the registry location.
         /// </summary>
-        internal RegistryLocation(string registryPath)
+        public RegistryLocation(string registryPath)
         {
             ErrorUtilities.VerifyThrowInternalLength(registryPath, nameof(registryPath));
 
@@ -87,7 +87,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Factory for serialization.
         /// </summary>
-        static internal RegistryLocation FactoryForDeserialization(ITranslator translator)
+        static public RegistryLocation FactoryForDeserialization(ITranslator translator)
         {
             return new RegistryLocation(translator);
         }

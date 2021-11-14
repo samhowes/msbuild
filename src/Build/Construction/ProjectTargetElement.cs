@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -20,12 +20,12 @@ namespace Microsoft.Build.Construction
     [DebuggerDisplay("Name={Name} #Children={Count} Condition={Condition}")]
     public class ProjectTargetElement : ProjectElementContainer
     {
-        internal ProjectTargetElementLink TargetLink => (ProjectTargetElementLink)Link;
+        public ProjectTargetElementLink TargetLink => (ProjectTargetElementLink)Link;
 
         /// <summary>
         /// External projects support
         /// </summary>
-        internal ProjectTargetElement(ProjectTargetElementLink link)
+        public ProjectTargetElement(ProjectTargetElementLink link)
             : base(link)
         {
         }
@@ -38,7 +38,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Initialize a parented ProjectTargetElement
         /// </summary>
-        internal ProjectTargetElement(XmlElementWithLocation xmlElement, ProjectRootElement parent, ProjectRootElement containingProject)
+        public ProjectTargetElement(XmlElementWithLocation xmlElement, ProjectRootElement parent, ProjectRootElement containingProject)
             : base(xmlElement, parent, containingProject)
         {
             ErrorUtilities.VerifyThrowArgumentNull(parent, nameof(parent));
@@ -342,7 +342,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// A cache of the last instance which was created from this target.
         /// </summary>
-        internal ProjectTargetInstance TargetInstance { get; set; }
+        public ProjectTargetInstance TargetInstance { get; set; }
 
         /// <summary>
         /// Convenience method that picks a location based on a heuristic:
@@ -399,7 +399,7 @@ namespace Microsoft.Build.Construction
         /// Validates the name.
         /// Caller should then ensure the element is added to a parent.
         /// </summary>
-        internal static ProjectTargetElement CreateDisconnected(string name, ProjectRootElement containingProject)
+        public static ProjectTargetElement CreateDisconnected(string name, ProjectRootElement containingProject)
         {
             XmlElementWithLocation element = containingProject.CreateElement(XMakeElements.target);
 
@@ -410,7 +410,7 @@ namespace Microsoft.Build.Construction
         /// Overridden to verify that the potential parent and siblings
         /// are acceptable. Throws InvalidOperationException if they are not.
         /// </summary>
-        internal override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
+        public override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
         {
             ErrorUtilities.VerifyThrowInvalidOperation(parent is ProjectRootElement, "OM_CannotAcceptParent");
         }
@@ -418,7 +418,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Marks this element as dirty.
         /// </summary>
-        internal override void MarkDirty(string reason, string param)
+        public override void MarkDirty(string reason, string param)
         {
             base.MarkDirty(reason, param);
             TargetInstance = null;

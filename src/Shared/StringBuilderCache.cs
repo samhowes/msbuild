@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 /*============================================================
@@ -36,7 +36,7 @@ using System.Text;
 
 namespace Microsoft.Build.Shared
 {
-    internal static class StringBuilderCache
+    public static class StringBuilderCache
     {
         // The value 360 was chosen in discussion with performance experts as a compromise between using
         // as little memory (per thread) as possible and still covering a large part of short-lived

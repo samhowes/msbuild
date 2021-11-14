@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace Microsoft.Build.BackEnd
@@ -9,14 +9,14 @@ namespace Microsoft.Build.BackEnd
     /// </summary>
     /// <param name="endpoint">The endpoint invoking the delegate.</param>
     /// <param name="status">The current status of the link.</param>
-    internal delegate void LinkStatusChangedDelegate(INodeEndpoint endpoint, LinkStatus status);
+    public delegate void LinkStatusChangedDelegate(INodeEndpoint endpoint, LinkStatus status);
 
     /// <summary>
     /// Used to receive data from a node 
     /// </summary>
     /// <param name="endpoint">The endpoint invoking the delegate.</param>
     /// <param name="packet">The packet received.</param>
-    internal delegate void DataReceivedDelegate(INodeEndpoint endpoint, INodePacket packet);
+    public delegate void DataReceivedDelegate(INodeEndpoint endpoint, INodePacket packet);
     #endregion
 
     #region Enums
@@ -24,7 +24,7 @@ namespace Microsoft.Build.BackEnd
     /// The connection status of a link between the NodeEndpoint on the host and the NodeEndpoint
     /// on the peer.
     /// </summary>
-    internal enum LinkStatus
+    public enum LinkStatus
     {
         /// <summary>
         /// The connection has never been started.
@@ -54,7 +54,7 @@ namespace Microsoft.Build.BackEnd
     /// This interface represents one end of a connection between the INodeProvider and a Node.
     /// Implementations of this interface define the actual mechanism by which data is communicated.
     /// </summary>
-    internal interface INodeEndpoint
+    public interface INodeEndpoint
     {
         #region Events
 

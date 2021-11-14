@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -64,14 +64,14 @@ namespace Microsoft.Build.Evaluation
         private ProjectLink implementation;
         private IProjectLinkInternal implementationInternal;
 
-        internal bool IsLinked => implementationInternal.IsLinked;
-        internal ProjectLink Link => implementation;
+        public bool IsLinked => implementationInternal.IsLinked;
+        public ProjectLink Link => implementation;
         object ILinkableObject.Link => IsLinked ? Link : null;
 
         /// <summary>
         /// Default project template options (include all features).
         /// </summary>
-        internal const NewProjectFileOptions DefaultNewProjectTemplateOptions = NewProjectFileOptions.IncludeAllOptions;
+        public const NewProjectFileOptions DefaultNewProjectTemplateOptions = NewProjectFileOptions.IncludeAllOptions;
 
         /// <summary>
         /// Certain item operations split the item element in multiple elements if the include
@@ -99,7 +99,7 @@ namespace Microsoft.Build.Evaluation
             set => implementation.ThrowInsteadOfSplittingItemElement = value;
         }
 
-        internal Project(ProjectCollection projectCollection, ProjectLink link)
+        public Project(ProjectCollection projectCollection, ProjectLink link)
         {
             ErrorUtilities.VerifyThrowArgumentNull(projectCollection, nameof(projectCollection));
             ErrorUtilities.VerifyThrowArgumentNull(link, nameof(link));
@@ -548,7 +548,7 @@ namespace Microsoft.Build.Evaluation
             UseProjectCollectionSetting
         }
 
-        internal Data TestOnlyGetPrivateData => (Data)implementationInternal.TestOnlyGetPrivateData;
+        public Data TestOnlyGetPrivateData => (Data)implementationInternal.TestOnlyGetPrivateData;
 
         /// <summary>
         /// Gets or sets the project collection which contains this project.
@@ -805,12 +805,12 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// List of names of the properties that, while global, are still treated as overridable.
         /// </summary>
-        internal ISet<string> GlobalPropertiesToTreatAsLocal => implementationInternal.GlobalPropertiesToTreatAsLocal;
+        public ISet<string> GlobalPropertiesToTreatAsLocal => implementationInternal.GlobalPropertiesToTreatAsLocal;
 
         /// <summary>
         /// The logging service used for evaluation errors.
         /// </summary>
-        internal ILoggingService LoggingService => ProjectCollection.LoggingService;
+        public ILoggingService LoggingService => ProjectCollection.LoggingService;
 
         /// <summary>
         /// Returns the evaluated, escaped value of the provided item's include.
@@ -1602,7 +1602,7 @@ namespace Microsoft.Build.Evaluation
         /// </summary>
         /// <param name="xmlRootElement">The project xml root element in question.</param>
         /// <returns>True if this project is or imports the xml file; false otherwise.</returns>
-        internal bool UsesProjectRootElement(ProjectRootElement xmlRootElement)
+        public bool UsesProjectRootElement(ProjectRootElement xmlRootElement)
         {
             return implementationInternal.UsesProjectRootElement(xmlRootElement);
         }
@@ -1625,7 +1625,7 @@ namespace Microsoft.Build.Evaluation
         /// Or, perhaps the user would rather the property in "$(p)\a;$(p)\b" not be expanded when "$(p)\b" is removed.
         /// If that's important, the host can manipulate the ProjectItemElement's directly, instead, and it can be as fastidious as it wishes.
         /// </remarks>
-        internal bool SplitItemElementIfNecessary(ProjectItemElement itemElement)
+        public bool SplitItemElementIfNecessary(ProjectItemElement itemElement)
         {
             if (!ItemElementRequiresSplitting(itemElement))
             {
@@ -1654,7 +1654,7 @@ namespace Microsoft.Build.Evaluation
             return true;
         }
 
-        internal bool ItemElementRequiresSplitting(ProjectItemElement itemElement)
+        public bool ItemElementRequiresSplitting(ProjectItemElement itemElement)
         {
             var hasCharactersThatRequireSplitting = FileMatcher.HasWildcardsSemicolonItemOrPropertyReferences(itemElement.Include);
 
@@ -1670,7 +1670,7 @@ namespace Microsoft.Build.Evaluation
         /// <remarks>
         /// Outside this class called ONLY from <see cref="ProjectItem.Rename(string)"/>ProjectItem.Rename(string name).
         /// </remarks>
-        internal bool IsSuitableExistingItemXml(ProjectItemElement candidateExistingItemXml, string unevaluatedInclude, IEnumerable<KeyValuePair<string, string>> metadata)
+        public bool IsSuitableExistingItemXml(ProjectItemElement candidateExistingItemXml, string unevaluatedInclude, IEnumerable<KeyValuePair<string, string>> metadata)
         {
             return implementationInternal.IsSuitableExistingItemXml(candidateExistingItemXml, unevaluatedInclude, metadata);
         }
@@ -1680,7 +1680,7 @@ namespace Microsoft.Build.Evaluation
         /// our datastructures, which key off item type.
         /// This should be called ONLY by ProjectItems, in this situation.
         /// </summary>
-        internal void RemoveItemBeforeItemTypeChange(ProjectItem item)
+        public void RemoveItemBeforeItemTypeChange(ProjectItem item)
         {
             implementationInternal.RemoveItemBeforeItemTypeChange(item);
         }
@@ -1690,7 +1690,7 @@ namespace Microsoft.Build.Evaluation
         /// since our data structures key off the item type.
         /// This should be called ONLY by ProjectItems, in this situation.
         /// </summary>
-        internal void ReAddExistingItemAfterItemTypeChange(ProjectItem item)
+        public void ReAddExistingItemAfterItemTypeChange(ProjectItem item)
         {
             implementationInternal.ReAddExistingItemAfterItemTypeChange(item);
         }
@@ -1702,7 +1702,7 @@ namespace Microsoft.Build.Evaluation
         /// <remarks>
         /// On project in order to keep Project's expander hidden.
         /// </remarks>
-        internal string ExpandPropertyValueBestEffortLeaveEscaped(string unevaluatedValue, ElementLocation propertyLocation)
+        public string ExpandPropertyValueBestEffortLeaveEscaped(string unevaluatedValue, ElementLocation propertyLocation)
         {
             return implementationInternal.ExpandPropertyValueBestEffortLeaveEscaped(unevaluatedValue, propertyLocation);
         }
@@ -1718,7 +1718,7 @@ namespace Microsoft.Build.Evaluation
         /// <remarks>
         /// On project in order to keep Project's expander hidden.
         /// </remarks>
-        internal string ExpandItemIncludeBestEffortLeaveEscaped(ProjectItemElement renamedItemElement)
+        public string ExpandItemIncludeBestEffortLeaveEscaped(ProjectItemElement renamedItemElement)
         {
             return implementationInternal.ExpandItemIncludeBestEffortLeaveEscaped(renamedItemElement);
         }
@@ -1732,7 +1732,7 @@ namespace Microsoft.Build.Evaluation
         /// <remarks>
         /// On project in order to keep Project's expander hidden.
         /// </remarks>
-        internal string ExpandMetadataValueBestEffortLeaveEscaped(IMetadataTable metadataTable, string unevaluatedValue, ElementLocation metadataLocation)
+        public string ExpandMetadataValueBestEffortLeaveEscaped(IMetadataTable metadataTable, string unevaluatedValue, ElementLocation metadataLocation)
         {
             return implementationInternal.ExpandMetadataValueBestEffortLeaveEscaped(metadataTable, unevaluatedValue, metadataLocation);
         }
@@ -1740,7 +1740,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Called by the project collection to indicate to this project that it is no longer loaded.
         /// </summary>
-        internal void Zombify()
+        public void Zombify()
         {
             implementation.Unload();
             implementationInternal.IsZombified = true;
@@ -1750,7 +1750,7 @@ namespace Microsoft.Build.Evaluation
         /// Verify that the project has not been unloaded from its collection.
         /// Once it's been unloaded, it cannot be used.
         /// </summary>
-        internal void VerifyThrowInvalidOperationNotZombie()
+        public void VerifyThrowInvalidOperationNotZombie()
         {
             ErrorUtilities.VerifyThrow(!implementationInternal.IsZombified, "OM_ProjectIsNoLongerActive");
         }
@@ -1761,7 +1761,7 @@ namespace Microsoft.Build.Evaluation
         /// This prevents, for example, accidentally updating something like the OutputPath property, that you want be in the
         /// main project, but for some reason was actually read in from an imported targets file.
         /// </summary>
-        internal void VerifyThrowInvalidOperationNotImported(ProjectRootElement otherXml)
+        public void VerifyThrowInvalidOperationNotImported(ProjectRootElement otherXml)
         {
             ErrorUtilities.VerifyThrowInternalNull(otherXml, nameof(otherXml));
             ErrorUtilities.VerifyThrowInvalidOperation(ReferenceEquals(Xml, otherXml), "OM_CannotModifyEvaluatedObjectInImportedFile", otherXml.Location.File);
@@ -2419,7 +2419,7 @@ namespace Microsoft.Build.Evaluation
             /// <summary>
             /// The logging service used for evaluation errors.
             /// </summary>
-            internal ILoggingService LoggingService => ProjectCollection.LoggingService;
+            public ILoggingService LoggingService => ProjectCollection.LoggingService;
 
             /// <summary>
             /// See <see cref="ProjectLink.GetAllGlobs(EvaluationContext)"/>.
@@ -3310,7 +3310,7 @@ namespace Microsoft.Build.Evaluation
             /// Or, perhaps the user would rather the property in "$(p)\a;$(p)\b" not be expanded when "$(p)\b" is removed.
             /// If that's important, the host can manipulate the ProjectItemElement's directly, instead, and it can be as fastidious as it wishes.
             /// </remarks>
-            internal bool SplitItemElementIfNecessary(ProjectItemElement itemElement)
+            public bool SplitItemElementIfNecessary(ProjectItemElement itemElement)
             {
                 if (!ItemElementRequiresSplitting(itemElement))
                 {
@@ -3339,7 +3339,7 @@ namespace Microsoft.Build.Evaluation
                 return true;
             }
 
-            internal bool ItemElementRequiresSplitting(ProjectItemElement itemElement)
+            public bool ItemElementRequiresSplitting(ProjectItemElement itemElement)
             {
                 var hasCharactersThatRequireSplitting = FileMatcher.HasWildcardsSemicolonItemOrPropertyReferences(itemElement.Include);
 
@@ -3494,7 +3494,7 @@ namespace Microsoft.Build.Evaluation
             /// This prevents, for example, accidentally updating something like the OutputPath property, that you want be in the
             /// main project, but for some reason was actually read in from an imported targets file.
             /// </summary>
-            internal void VerifyThrowInvalidOperationNotImported(ProjectRootElement otherXml)
+            public void VerifyThrowInvalidOperationNotImported(ProjectRootElement otherXml)
             {
                 ErrorUtilities.VerifyThrowInternalNull(otherXml, nameof(otherXml));
                 ErrorUtilities.VerifyThrowInvalidOperation(ReferenceEquals(Xml, otherXml), "OM_CannotModifyEvaluatedObjectInImportedFile", otherXml.Location.File);
@@ -3667,7 +3667,7 @@ namespace Microsoft.Build.Evaluation
             /// Global properties may be null.
             /// Tools version may be null.
             /// </summary>
-            internal void Initialize(IDictionary<string, string> globalProperties, string toolsVersion, string subToolsetVersion, ProjectLoadSettings loadSettings, EvaluationContext evaluationContext)
+            public void Initialize(IDictionary<string, string> globalProperties, string toolsVersion, string subToolsetVersion, ProjectLoadSettings loadSettings, EvaluationContext evaluationContext)
             {
                 Xml.MarkAsExplicitlyLoaded();
 
@@ -3909,7 +3909,7 @@ namespace Microsoft.Build.Evaluation
         /// <remarks>
         /// This object is only passed to the Evaluator.
         /// </remarks>
-        internal class Data : IItemProvider<ProjectItem>, IPropertyProvider<ProjectProperty>, IEvaluatorData<ProjectProperty, ProjectItem, ProjectMetadata, ProjectItemDefinition>
+        public class Data : IItemProvider<ProjectItem>, IPropertyProvider<ProjectProperty>, IEvaluatorData<ProjectProperty, ProjectItem, ProjectMetadata, ProjectItemDefinition>
         {
             /// <summary>
             /// Almost always, projects have the same set of targets because they all import the same ones.
@@ -3926,7 +3926,7 @@ namespace Microsoft.Build.Evaluation
             /// Constructor taking the immutable global properties and tools version.
             /// Tools version may be null.
             /// </summary>
-            internal Data(Project project, PropertyDictionary<ProjectPropertyInstance> globalProperties, string explicitToolsVersion, string explicitSubToolsetVersion, bool CanEvaluateElementsWithFalseConditions)
+            public Data(Project project, PropertyDictionary<ProjectPropertyInstance> globalProperties, string explicitToolsVersion, string explicitSubToolsetVersion, bool CanEvaluateElementsWithFalseConditions)
             {
                 Project = project;
                 GlobalPropertiesDictionary = globalProperties;
@@ -4087,7 +4087,7 @@ namespace Microsoft.Build.Evaluation
             /// properties whose conditions did not evaluate to true.
             /// It does not include any properties added since the last evaluation.
             /// </summary>
-            internal IList<ProjectProperty> AllEvaluatedProperties { get; private set; }
+            public IList<ProjectProperty> AllEvaluatedProperties { get; private set; }
 
             /// <summary>
             /// Item definition metadata encountered during evaluation. These are read during the second evaluation pass.
@@ -4096,7 +4096,7 @@ namespace Microsoft.Build.Evaluation
             /// elements whose conditions did not evaluate to true.
             /// It does not include any item definition metadata added since the last evaluation.
             /// </summary>
-            internal IList<ProjectMetadata> AllEvaluatedItemDefinitionMetadata { get; private set; }
+            public IList<ProjectMetadata> AllEvaluatedItemDefinitionMetadata { get; private set; }
 
             /// <summary>
             /// Items encountered during evaluation. These are read during the third evaluation pass.
@@ -4104,62 +4104,62 @@ namespace Microsoft.Build.Evaluation
             /// It does not include any elements whose conditions did not evaluate to true.
             /// It does not include any items added since the last evaluation.
             /// </summary>
-            internal IList<ProjectItem> AllEvaluatedItems { get; private set; }
+            public IList<ProjectItem> AllEvaluatedItems { get; private set; }
 
             /// <summary>
             /// Expander to use to expand any expressions encountered after the project has been fully evaluated.
             /// For example, to expand the values of any properties added at design time.
             /// It's convenient to store it here.
             /// </summary>
-            internal Expander<ProjectProperty, ProjectItem> Expander { get; private set; }
+            public Expander<ProjectProperty, ProjectItem> Expander { get; private set; }
 
             /// <summary>
             /// Whether something in this data has been modified since evaluation.
             /// For example, a global property has been set.
             /// </summary>
-            internal bool HasUnsavedChanges { get; set; }
+            public bool HasUnsavedChanges { get; set; }
 
             /// <summary>
             /// Collection of all evaluated item definitions, one per item-type.
             /// </summary>
-            internal RetrievableEntryHashSet<ProjectItemDefinition> ItemDefinitions { get; private set; }
+            public RetrievableEntryHashSet<ProjectItemDefinition> ItemDefinitions { get; private set; }
 
             /// <summary>
             /// Project that owns this data.
             /// </summary>
-            internal Project Project { get; }
+            public Project Project { get; }
 
             /// <summary>
             /// Targets in the project, used to build.
             /// </summary>
-            internal RetrievableEntryHashSet<ProjectTargetInstance> Targets { get; set; }
+            public RetrievableEntryHashSet<ProjectTargetInstance> Targets { get; set; }
 
             /// <summary>
             /// Complete list of all imports pulled in during evaluation.
             /// This includes the outer project itself.
             /// </summary>
-            internal List<ResolvedImport> ImportClosure { get; private set; }
+            public List<ResolvedImport> ImportClosure { get; private set; }
 
             /// <summary>
             /// Complete list of all imports pulled in during evaluation including duplicate imports.
             /// This includes the outer project itself.
             /// </summary>
-            internal List<ResolvedImport> ImportClosureWithDuplicates { get; private set; }
+            public List<ResolvedImport> ImportClosureWithDuplicates { get; private set; }
 
             /// <summary>
             /// The toolsversion that was originally specified on the project's root element.
             /// </summary>
-            internal string OriginalProjectToolsVersion { get; private set; }
+            public string OriginalProjectToolsVersion { get; private set; }
 
             /// <summary>
             /// Whether when we read a ToolsVersion other than the current one in the Project tag, we treat it as the current one.
             /// </summary>
-            internal bool UsingDifferentToolsVersionFromProjectFile { get; private set; }
+            public bool UsingDifferentToolsVersionFromProjectFile { get; private set; }
 
             /// <summary>
             /// expose mutable precalculated cache to outside so that other can take advantage of the cache as well.
             /// </summary>
-            internal MultiDictionary<string, ProjectItem> ItemsByEvaluatedIncludeCache { get; private set; }
+            public MultiDictionary<string, ProjectItem> ItemsByEvaluatedIncludeCache { get; private set; }
 
             /// <summary>
             /// Prepares the data object for evaluation.
@@ -4483,7 +4483,7 @@ namespace Microsoft.Build.Evaluation
             /// Removes an item.
             /// Returns true if it was previously present, otherwise false.
             /// </summary>
-            internal bool RemoveItem(ProjectItem item)
+            public bool RemoveItem(ProjectItem item)
             {
                 bool result = Items.Remove(item);
 
@@ -4507,7 +4507,7 @@ namespace Microsoft.Build.Evaluation
             /// <remarks>
             /// Assumes that the evaluated include value is unescaped.
             /// </remarks>
-            internal ICollection<ProjectItem> GetItemsByEvaluatedInclude(string evaluatedInclude)
+            public ICollection<ProjectItem> GetItemsByEvaluatedInclude(string evaluatedInclude)
             {
                 // Even if there are no items in itemsByEvaluatedInclude[], it will return an IEnumerable, which is non-null
                 ICollection<ProjectItem> items = new ReadOnlyCollection<ProjectItem>(ItemsByEvaluatedIncludeCache[evaluatedInclude]);
@@ -4526,7 +4526,7 @@ namespace Microsoft.Build.Evaluation
             /// That makes it easier to use. To find out if a property is set at
             /// all in the project, use GetProperty(name).
             /// </remarks>
-            internal string GetPropertyValue(string name)
+            public string GetPropertyValue(string name)
             {
                 ErrorUtilities.VerifyThrowArgumentLength(name, nameof(name));
 

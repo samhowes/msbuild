@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Resources;
@@ -10,7 +10,7 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// This class provides access to the assembly's resources.
     /// </summary>
-    internal static class AssemblyResources
+    public static class AssemblyResources
     {
         /// <summary>
         /// A slot for msbuild.exe to add a resource manager over its own resources, that can also be consulted.
@@ -25,7 +25,7 @@ namespace Microsoft.Build.Shared
         /// We can't change the resource ID's this late in the cycle and we sometimes want to load the MSBuild.exe ones,
         /// because they're a little different. So for that purpose we call GetStringLookingInMSBuildExeResourcesFirst() )
         /// </summary>
-        internal static void RegisterMSBuildExeResources(ResourceManager manager)
+        public static void RegisterMSBuildExeResources(ResourceManager manager)
         {
             ErrorUtilities.VerifyThrow(s_msbuildExeResourceManager == null, "Only one extra resource manager");
 
@@ -38,7 +38,7 @@ namespace Microsoft.Build.Shared
         /// <remarks>This method is thread-safe.</remarks>
         /// <param name="name"></param>
         /// <returns>The resource string, or null if not found.</returns>
-        internal static string GetString(string name)
+        public static string GetString(string name)
         {
             // NOTE: the ResourceManager.GetString() method is thread-safe
             string resource = GetStringFromEngineResources(name);
@@ -55,7 +55,7 @@ namespace Microsoft.Build.Shared
         /// Loads the specified resource string.
         /// </summary>
         /// <returns>The resource string, or null if not found.</returns>
-        internal static string GetStringLookingInMSBuildExeResourcesFirst(string name)
+        public static string GetStringLookingInMSBuildExeResourcesFirst(string name)
         {
             string resource = GetStringFromMSBuildExeResources(name);
 
@@ -102,12 +102,12 @@ namespace Microsoft.Build.Shared
             return resource;
         }
 
-        internal static ResourceManager PrimaryResources
+        public static ResourceManager PrimaryResources
         {
             get { return s_resources; }
         }
 
-        internal static ResourceManager SharedResources
+        public static ResourceManager SharedResources
         {
             get { return s_sharedResources; }
         }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -253,7 +253,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Copy constructor
         /// </summary>
-        internal BuildParameters(BuildParameters other, bool resetEnvironment = false)
+        public BuildParameters(BuildParameters other, bool resetEnvironment = false)
         {
             ErrorUtilities.VerifyThrowInternalNull(other, nameof(other));
 
@@ -592,54 +592,54 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Gets the internal msbuild thread stack size.
         /// </summary>
-        internal static int ThreadStackSize => CommunicationsUtilities.GetIntegerVariableOrDefault(
+        public static int ThreadStackSize => CommunicationsUtilities.GetIntegerVariableOrDefault(
             "MSBUILDTHREADSTACKSIZE", DefaultThreadStackSize);
 
         /// <summary>
         /// Gets the endpoint shutdown timeout.
         /// </summary>
-        internal static int EndpointShutdownTimeout => CommunicationsUtilities.GetIntegerVariableOrDefault(
+        public static int EndpointShutdownTimeout => CommunicationsUtilities.GetIntegerVariableOrDefault(
             "MSBUILDENDPOINTSHUTDOWNTIMEOUT", DefaultEndpointShutdownTimeout);
 
         /// <summary>
         /// Gets or sets the engine shutdown timeout.
         /// </summary>
-        internal static int EngineShutdownTimeout => CommunicationsUtilities.GetIntegerVariableOrDefault(
+        public static int EngineShutdownTimeout => CommunicationsUtilities.GetIntegerVariableOrDefault(
             "MSBUILDENGINESHUTDOWNTIMEOUT", DefaultEngineShutdownTimeout);
 
         /// <summary>
         /// Gets the maximum number of idle request builders to retain.
         /// </summary>
-        internal static int IdleRequestBuilderLimit => GetStaticIntVariableOrDefault("MSBUILDIDLEREQUESTBUILDERLIMIT",
+        public static int IdleRequestBuilderLimit => GetStaticIntVariableOrDefault("MSBUILDIDLEREQUESTBUILDERLIMIT",
             ref s_idleRequestBuilderLimit, DefaultIdleRequestBuilderLimit);
 
         /// <summary>
         /// Gets the logging thread shutdown timeout.
         /// </summary>
-        internal static int LoggingThreadShutdownTimeout => CommunicationsUtilities.GetIntegerVariableOrDefault(
+        public static int LoggingThreadShutdownTimeout => CommunicationsUtilities.GetIntegerVariableOrDefault(
             "MSBUILDLOGGINGTHREADSHUTDOWNTIMEOUT", DefaultLoggingThreadShutdownTimeout);
 
         /// <summary>
         /// Gets the request builder shutdown timeout.
         /// </summary>
-        internal static int RequestBuilderShutdownTimeout => CommunicationsUtilities.GetIntegerVariableOrDefault(
+        public static int RequestBuilderShutdownTimeout => CommunicationsUtilities.GetIntegerVariableOrDefault(
             "MSBUILDREQUESTBUILDERSHUTDOWNTIMEOUT", DefaultRequestBuilderShutdownTimeout);
 
         /// <summary>
         /// Gets the startup directory.
         /// </summary>
-        internal static string StartupDirectory => s_startupDirectory;
+        public static string StartupDirectory => s_startupDirectory;
 
         /// <summary>
         /// Indicates whether the build plan is enabled or not.
         /// </summary>
-        internal static bool EnableBuildPlan => GetStaticBoolVariableOrDefault("MSBUILDENABLEBUILDPLAN",
+        public static bool EnableBuildPlan => GetStaticBoolVariableOrDefault("MSBUILDENABLEBUILDPLAN",
             ref s_enableBuildPlan, false);
 
         /// <summary>
         /// Indicates whether we should warn when a property is uninitialized when it is used.
         /// </summary>
-        internal static bool WarnOnUninitializedProperty
+        public static bool WarnOnUninitializedProperty
         {
             get => GetStaticBoolVariableOrDefault("MSBUILDWARNONUNINITIALIZEDPROPERTY",
                 ref s_warnOnUninitializedProperty, false);
@@ -650,25 +650,25 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Indicates whether we should dump string interning stats
         /// </summary>
-        internal static bool DumpOpportunisticInternStats => GetStaticBoolVariableOrDefault(
+        public static bool DumpOpportunisticInternStats => GetStaticBoolVariableOrDefault(
             "MSBUILDDUMPOPPORTUNISTICINTERNSTATS", ref s_dumpStringInterningStats, false);
 
         /// <summary>
         /// Indicates whether we should dump debugging information about the expander
         /// </summary>
-        internal static bool DebugExpansion => GetStaticBoolVariableOrDefault("MSBUILDDEBUGEXPANSION",
+        public static bool DebugExpansion => GetStaticBoolVariableOrDefault("MSBUILDDEBUGEXPANSION",
             ref s_debugExpansion, false);
 
         /// <summary>
         /// Indicates whether we should keep duplicate target outputs
         /// </summary>
-        internal static bool KeepDuplicateOutputs => GetStaticBoolVariableOrDefault("MSBUILDKEEPDUPLICATEOUTPUTS",
+        public static bool KeepDuplicateOutputs => GetStaticBoolVariableOrDefault("MSBUILDKEEPDUPLICATEOUTPUTS",
             ref s_keepDuplicateOutputs, false);
 
         /// <summary>
         /// Gets or sets the build id.
         /// </summary>
-        internal int BuildId
+        public int BuildId
         {
             get => _buildId;
             set => _buildId = value;
@@ -682,7 +682,7 @@ namespace Microsoft.Build.Execution
         /// are used during evaluation of a project, and exclude those properties which would not be valid MSBuild properties
         /// because they contain invalid characters (such as 'Program Files (x86)').
         /// </remarks>
-        internal PropertyDictionary<ProjectPropertyInstance> EnvironmentPropertiesInternal
+        public PropertyDictionary<ProjectPropertyInstance> EnvironmentPropertiesInternal
         {
             get => _environmentProperties;
 
@@ -696,17 +696,17 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Gets the global properties.
         /// </summary>
-        internal PropertyDictionary<ProjectPropertyInstance> GlobalPropertiesInternal => _globalProperties;
+        public PropertyDictionary<ProjectPropertyInstance> GlobalPropertiesInternal => _globalProperties;
 
         /// <summary>
         /// Gets or sets the node id.
         /// </summary>
-        internal int NodeId { get; set; }
+        public int NodeId { get; set; }
 
         /// <summary>
         /// Gets the toolset provider.
         /// </summary>
-        internal IToolsetProvider ToolsetProvider
+        public IToolsetProvider ToolsetProvider
         {
             get
             {
@@ -718,19 +718,19 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// The one and only project root element cache to be used for the build.
         /// </summary>
-        internal ProjectRootElementCacheBase ProjectRootElementCache { get; set; }
+        public ProjectRootElementCacheBase ProjectRootElementCache { get; set; }
 
 #if FEATURE_APPDOMAIN
         /// <summary>
         /// Information for configuring child AppDomains.
         /// </summary>
-        internal AppDomainSetup AppDomainSetup { get; set; }
+        public AppDomainSetup AppDomainSetup { get; set; }
 #endif
 
         /// <summary>
         ///  (for diagnostic use) Whether or not this is out of proc
         /// </summary>
-        internal bool IsOutOfProc { get; set; }
+        public bool IsOutOfProc { get; set; }
 
         /// <nodoc/>
         public ProjectLoadSettings ProjectLoadSettings
@@ -813,13 +813,13 @@ namespace Microsoft.Build.Execution
             return new BuildParameters(this);
         }
 
-        internal bool UsesCachedResults() => UsesInputCaches() || UsesOutputCache();
+        public bool UsesCachedResults() => UsesInputCaches() || UsesOutputCache();
 
-        internal bool UsesOutputCache() => OutputResultsCacheFile != null;
+        public bool UsesOutputCache() => OutputResultsCacheFile != null;
 
-        internal bool UsesInputCaches() => InputResultsCacheFiles != null;
+        public bool UsesInputCaches() => InputResultsCacheFiles != null;
 
-        internal bool SkippedResultsDoNotCauseCacheMiss() => IsolateProjects;
+        public bool SkippedResultsDoNotCauseCacheMiss() => IsolateProjects;
 
         /// <summary>
         /// Implementation of the serialization mechanism.
@@ -867,7 +867,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// The class factory for deserialization.
         /// </summary>
-        internal static BuildParameters FactoryForDeserialization(ITranslator translator)
+        public static BuildParameters FactoryForDeserialization(ITranslator translator)
         {
             return new BuildParameters(translator);
         }

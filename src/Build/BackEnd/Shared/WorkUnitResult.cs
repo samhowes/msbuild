@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -8,7 +8,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// The result of executing the task or target.
     /// </summary>
-    internal enum WorkUnitResultCode
+    public enum WorkUnitResultCode
     {
         /// <summary>
         /// The work unit was skipped.
@@ -34,7 +34,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// Indicates whether further work should be done.
     /// </summary>
-    internal enum WorkUnitActionCode
+    public enum WorkUnitActionCode
     {
         /// <summary>
         /// Work should proceed with the next work unit.
@@ -50,7 +50,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// A result of executing a target or task.
     /// </summary>
-    internal class WorkUnitResult : ITranslatable
+    public class WorkUnitResult : ITranslatable
     {
         /// <summary>
         /// The result.
@@ -70,7 +70,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Creates a new work result ready for aggregation during batches.
         /// </summary>
-        internal WorkUnitResult()
+        public WorkUnitResult()
         {
             _resultCode = WorkUnitResultCode.Skipped;
             _actionCode = WorkUnitActionCode.Continue;
@@ -80,7 +80,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Creates a work result with the specified result codes.
         /// </summary>
-        internal WorkUnitResult(WorkUnitResultCode resultCode, WorkUnitActionCode actionCode, Exception e)
+        public WorkUnitResult(WorkUnitResultCode resultCode, WorkUnitActionCode actionCode, Exception e)
         {
             _resultCode = resultCode;
             _actionCode = actionCode;
@@ -98,12 +98,12 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Get the result code.
         /// </summary>
-        internal WorkUnitResultCode ResultCode => _resultCode;
+        public WorkUnitResultCode ResultCode => _resultCode;
 
         /// <summary>
         /// Get the action code.
         /// </summary>
-        internal WorkUnitActionCode ActionCode
+        public WorkUnitActionCode ActionCode
         {
             get => _actionCode;
             set => _actionCode = value;
@@ -112,7 +112,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Get the exception
         /// </summary>
-        internal Exception Exception => _exception;
+        public Exception Exception => _exception;
 
         #region INodePacketTranslatable Members
 
@@ -131,7 +131,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Factory for serialization.
         /// </summary>
-        internal static WorkUnitResult FactoryForDeserialization(ITranslator translator)
+        public static WorkUnitResult FactoryForDeserialization(ITranslator translator)
         {
             return new WorkUnitResult(translator);
         }
@@ -146,7 +146,7 @@ namespace Microsoft.Build.BackEnd
         /// 3. Stop takes precedence over continue.
         /// 4. The first exception in the result wins.
         /// </remarks>
-        internal WorkUnitResult AggregateResult(WorkUnitResult result)
+        public WorkUnitResult AggregateResult(WorkUnitResult result)
         {
             WorkUnitResultCode aggregateResult = _resultCode;
             WorkUnitActionCode aggregateAction = _actionCode;

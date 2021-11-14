@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -25,29 +25,29 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// The MSBuild Scheduler
     /// </summary>
-    internal class Scheduler : IScheduler
+    public class Scheduler : IScheduler
     {
         /// <summary>
         /// The invalid node id
         /// </summary>
-        internal const int InvalidNodeId = -1;
+        public const int InvalidNodeId = -1;
 
         /// <summary>
         /// ID used to indicate that the results for a particular configuration may at one point
         /// have resided on this node, but currently do not and will need to be transferred back
         /// in order to be used.
         /// </summary>
-        internal const int ResultsTransferredId = -2;
+        public const int ResultsTransferredId = -2;
 
         /// <summary>
         /// The in-proc node id
         /// </summary>
-        internal const int InProcNodeId = 1;
+        public const int InProcNodeId = 1;
 
         /// <summary>
         /// The virtual node, used when a request is initially given to the scheduler.
         /// </summary>
-        internal const int VirtualNode = 0;
+        public const int VirtualNode = 0;
 
         /// <summary>
         /// If MSBUILDCUSTOMSCHEDULER = CustomSchedulerForSQL, the default multiplier for the amount by which
@@ -142,7 +142,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Flag used for debugging by forcing all scheduling to go out-of-proc.
         /// </summary>
-        internal bool ForceAffinityOutOfProc { get; private set; }
+        public bool ForceAffinityOutOfProc { get; private set; }
 
         /// <summary>
         /// The path into which debug files will be written.
@@ -236,7 +236,7 @@ namespace Microsoft.Build.BackEnd
         /// In the circumstance where we want to specify the scheduling algorithm via the secret environment variable
         /// MSBUILDCUSTOMSCHEDULING, the scheduling algorithm used will be assigned to a delegate of this type.
         /// </summary>
-        internal delegate void AssignUnscheduledRequestsDelegate(List<ScheduleResponse> responses, HashSet<int> idleNodes);
+        public delegate void AssignUnscheduledRequestsDelegate(List<ScheduleResponse> responses, HashSet<int> idleNodes);
 
         #endregion
 
@@ -638,7 +638,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Factory for component construction.
         /// </summary>
-        static internal IBuildComponent CreateComponent(BuildComponentType componentType)
+        static public IBuildComponent CreateComponent(BuildComponentType componentType)
         {
             ErrorUtilities.VerifyThrow(componentType == BuildComponentType.Scheduler, "Cannot create components of type {0}", componentType);
             return new Scheduler();

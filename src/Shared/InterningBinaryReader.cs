@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -20,7 +20,7 @@ namespace Microsoft.Build
     /// <summary>
     /// Replacement for BinaryReader which attempts to intern the strings read by ReadString.
     /// </summary>
-    internal class InterningBinaryReader : BinaryReader
+    public class InterningBinaryReader : BinaryReader
     {
         /// <summary>
         /// The maximum size, in bytes, to read at once.
@@ -189,7 +189,7 @@ namespace Microsoft.Build
         /// <remarks>
         /// The caller is responsible for managing the lifetime of the returned buffer and for passing it to <see cref="Create"/>.
         /// </remarks>
-        internal static SharedReadBuffer CreateSharedBuffer()
+        public static SharedReadBuffer CreateSharedBuffer()
         {
             return new Buffer();
         }
@@ -230,7 +230,7 @@ namespace Microsoft.Build
         /// Create a BinaryReader. It will either be an interning reader or standard binary reader
         /// depending on whether the interning reader is possible given the buffer and stream.
         /// </summary>
-        internal static BinaryReader Create(Stream stream, SharedReadBuffer sharedBuffer)
+        public static BinaryReader Create(Stream stream, SharedReadBuffer sharedBuffer)
         {
             Buffer buffer = (Buffer)sharedBuffer;
             if (buffer != null)
@@ -251,14 +251,14 @@ namespace Microsoft.Build
             /// <summary>
             /// Yes, we are constructing.
             /// </summary>
-            internal Buffer()
+            public Buffer()
             {
             }
 
             /// <summary>
             /// The char buffer.
             /// </summary>
-            internal char[] CharBuffer
+            public char[] CharBuffer
             {
                 get
                 {
@@ -270,7 +270,7 @@ namespace Microsoft.Build
             /// <summary>
             /// The byte buffer.
             /// </summary>
-            internal byte[] ByteBuffer
+            public byte[] ByteBuffer
             {
                 get
                 {
@@ -284,7 +284,7 @@ namespace Microsoft.Build
     /// <summary>
     /// Opaque holder of shared buffer.
     /// </summary>
-    abstract internal class SharedReadBuffer
+    abstract public class SharedReadBuffer
     {
     }
 }

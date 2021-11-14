@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -43,7 +43,7 @@ namespace Microsoft.Build.Graph
         /// </summary>
         public IDictionary<string, string> GlobalProperties { get; }
 
-        internal static IEnumerable<ProjectGraphEntryPoint> CreateEnumerable(IEnumerable<string> entryProjectFiles)
+        public static IEnumerable<ProjectGraphEntryPoint> CreateEnumerable(IEnumerable<string> entryProjectFiles)
         {
             foreach (string entryProjectFile in entryProjectFiles)
             {
@@ -51,7 +51,7 @@ namespace Microsoft.Build.Graph
             }
         }
 
-        internal static IEnumerable<ProjectGraphEntryPoint> CreateEnumerable(IEnumerable<string> entryProjectFiles, IDictionary<string, string> globalProperties)
+        public static IEnumerable<ProjectGraphEntryPoint> CreateEnumerable(IEnumerable<string> entryProjectFiles, IDictionary<string, string> globalProperties)
         {
             foreach (string entryProjectFile in entryProjectFiles)
             {
@@ -59,7 +59,7 @@ namespace Microsoft.Build.Graph
             }
         }
 
-        internal IEnumerable<ProjectGraphEntryPoint> AsEnumerable()
+        public IEnumerable<ProjectGraphEntryPoint> AsEnumerable()
         {
             yield return this;
         }

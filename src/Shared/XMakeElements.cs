@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -8,35 +8,35 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// Contains the names of the known elements in the XML project file.
     /// </summary>
-    internal static class XMakeElements
+    public static class XMakeElements
     {
-        internal const string project = "Project";
-        internal const string visualStudioProject = "VisualStudioProject";
-        internal const string target = "Target";
-        internal const string propertyGroup = "PropertyGroup";
-        internal const string output = "Output";
-        internal const string itemGroup = "ItemGroup";
-        internal const string itemDefinitionGroup = "ItemDefinitionGroup";
-        internal const string usingTask = "UsingTask";
-        internal const string projectExtensions = "ProjectExtensions";
-        internal const string onError = "OnError";
-        internal const string error = "Error";
-        internal const string warning = "Warning";
-        internal const string message = "Message";
-        internal const string import = "Import";
-        internal const string importGroup = "ImportGroup";
-        internal const string choose = "Choose";
-        internal const string when = "When";
-        internal const string otherwise = "Otherwise";
-        internal const string usingTaskParameterGroup = "ParameterGroup";
-        internal const string usingTaskParameter = "Parameter";
-        internal const string usingTaskBody = "Task";
-        internal const string sdk = "Sdk";
+        public const string project = "Project";
+        public const string visualStudioProject = "VisualStudioProject";
+        public const string target = "Target";
+        public const string propertyGroup = "PropertyGroup";
+        public const string output = "Output";
+        public const string itemGroup = "ItemGroup";
+        public const string itemDefinitionGroup = "ItemDefinitionGroup";
+        public const string usingTask = "UsingTask";
+        public const string projectExtensions = "ProjectExtensions";
+        public const string onError = "OnError";
+        public const string error = "Error";
+        public const string warning = "Warning";
+        public const string message = "Message";
+        public const string import = "Import";
+        public const string importGroup = "ImportGroup";
+        public const string choose = "Choose";
+        public const string when = "When";
+        public const string otherwise = "Otherwise";
+        public const string usingTaskParameterGroup = "ParameterGroup";
+        public const string usingTaskParameter = "Parameter";
+        public const string usingTaskBody = "Task";
+        public const string sdk = "Sdk";
 
-        internal static readonly char[] InvalidTargetNameCharacters = { '$', '@', '(', ')', '%', '*', '?', '.' };
+        public static readonly char[] InvalidTargetNameCharacters = { '$', '@', '(', ')', '%', '*', '?', '.' };
 
         // Names that cannot be used as property or item names because they are reserved
-        internal static readonly HashSet<string> ReservedItemNames = new HashSet<string>
+        public static readonly HashSet<string> ReservedItemNames = new HashSet<string>
         {
             // XMakeElements.project, "Project" is not reserved, because unfortunately ProjectReference items already use it as metadata name.
             XMakeElements.visualStudioProject,

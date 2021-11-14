@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -15,7 +15,7 @@ namespace Microsoft.Runtime.Hosting
     /// The methods here are designed to aid in transition from the v2 StrongName APIs on mscoree.dll to the
     /// v4 metahost APIs (which are in-proc SxS aware).
     /// </summary>
-    internal static class StrongNameHelpers
+    public static class StrongNameHelpers
     {
         [ThreadStatic]
         private static int t_ts_LastStrongNameHR;
@@ -306,7 +306,7 @@ namespace Microsoft.Runtime.Hosting
     /// </summary>
     [System.Security.SecurityCritical]
     [ComImport, ComConversionLoss, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("9FD93CCF-3280-4391-B3A9-96E1CDE77C8D")]
-    internal interface IClrStrongNameUsingIntPtr
+    public interface IClrStrongNameUsingIntPtr
     {
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         [PreserveSig]
@@ -524,7 +524,7 @@ namespace Microsoft.Runtime.Hosting
     /// </summary> 
     [System.Security.SecurityCritical]
     [ComImport, ComConversionLoss, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("9FD93CCF-3280-4391-B3A9-96E1CDE77C8D")]
-    internal interface IClrStrongName
+    public interface IClrStrongName
     {
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         [PreserveSig]

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -11,14 +11,14 @@ namespace Microsoft.Build.Shared
     /// This class packages information about a type loaded from an assembly: for example,
     /// the GenerateResource task class type or the ConsoleLogger logger class type.
     /// </summary>
-    internal sealed class LoadedType
+    public sealed class LoadedType
     {
         #region Constructors
 
         /// <summary>
         /// Creates an instance of this class for the given type.
         /// </summary>
-        internal LoadedType(Type type, AssemblyLoadInfo assemblyLoadInfo)
+        public LoadedType(Type type, AssemblyLoadInfo assemblyLoadInfo)
             : this(type, assemblyLoadInfo, null)
         {
         }
@@ -29,7 +29,7 @@ namespace Microsoft.Build.Shared
         /// <param name="type">The Type to be loaded</param>
         /// <param name="assemblyLoadInfo">Information used to load the assembly</param>
         /// <param name="loadedAssembly">The assembly which has been loaded, if any</param>
-        internal LoadedType(Type type, AssemblyLoadInfo assemblyLoadInfo, Assembly loadedAssembly)
+        public LoadedType(Type type, AssemblyLoadInfo assemblyLoadInfo, Assembly loadedAssembly)
         {
             ErrorUtilities.VerifyThrow(type != null, "We must have the type.");
             ErrorUtilities.VerifyThrow(assemblyLoadInfo != null, "We must have the assembly the type was loaded from.");
@@ -106,7 +106,7 @@ namespace Microsoft.Build.Shared
         /// Gets the type that was loaded from an assembly.
         /// </summary>
         /// <value>The loaded type.</value>
-        internal Type Type
+        public Type Type
         {
             get
             {
@@ -118,7 +118,7 @@ namespace Microsoft.Build.Shared
         /// If we loaded an assembly for this type.
         /// We use this information to help created AppDomains to resolve types that it could not load successfully
         /// </summary>
-        internal Assembly LoadedAssembly
+        public Assembly LoadedAssembly
         {
             get
             {
@@ -130,7 +130,7 @@ namespace Microsoft.Build.Shared
         /// Gets the assembly the type was loaded from.
         /// </summary>
         /// <value>The assembly info for the loaded type.</value>
-        internal AssemblyLoadInfo Assembly
+        public AssemblyLoadInfo Assembly
         {
             get
             {

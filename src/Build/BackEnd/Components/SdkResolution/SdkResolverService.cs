@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.BackEnd.Logging;
@@ -18,7 +18,7 @@ namespace Microsoft.Build.BackEnd.SdkResolution
     /// The main implementation of <see cref="ISdkResolverService"/> which resolves SDKs.  This class is the central location for all SDK resolution and is used
     /// directly by the main node and non-build evaluations and is used indirectly by the out-of-proc node when it sends requests to the main node.
     /// </summary>
-    internal class SdkResolverService : ISdkResolverService
+    public class SdkResolverService : ISdkResolverService
     {
         /// <summary>
         /// Stores the singleton instance for a particular process.
@@ -179,7 +179,7 @@ namespace Microsoft.Build.BackEnd.SdkResolution
         /// </summary>
         /// <param name="resolverLoader">An <see cref="SdkResolverLoader"/> to use for loading SDK resolvers.</param>
         /// <param name="resolvers">Explicit set of SdkResolvers to use for all SDK resolution.</param>
-        internal void InitializeForTests(SdkResolverLoader resolverLoader = null, IList<SdkResolver> resolvers = null)
+        public void InitializeForTests(SdkResolverLoader resolverLoader = null, IList<SdkResolver> resolvers = null)
         {
             if (resolverLoader != null)
             {

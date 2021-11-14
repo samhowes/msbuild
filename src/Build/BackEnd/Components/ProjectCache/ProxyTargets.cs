@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 #nullable enable
@@ -44,7 +44,7 @@ namespace Microsoft.Build.Experimental.ProjectCache
             translator.TranslateDictionary(ref _proxyTargetToRealTargetMap, StringComparer.OrdinalIgnoreCase);
         }
 
-        internal static ProxyTargets FactoryForDeserialization(ITranslator translator)
+        public static ProxyTargets FactoryForDeserialization(ITranslator translator)
         {
             var instance = new ProxyTargets();
             ((ITranslatable) instance).Translate(translator);

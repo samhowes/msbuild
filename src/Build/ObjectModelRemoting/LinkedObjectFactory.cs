@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Construction;
@@ -11,7 +11,7 @@ namespace Microsoft.Build.ObjectModelRemoting
     /// <summary>
     /// implemented by MSBuild objects that support remote linking;
     /// </summary>
-    internal interface ILinkableObject
+    public interface ILinkableObject
     {
         /// <summary>
         /// Gets the current link, if any. For local objects returns null;
@@ -236,44 +236,44 @@ namespace Microsoft.Build.ObjectModelRemoting
 
         private class LinkedProjectItem : ProjectItem, ILinkableObject
         {
-            internal LinkedProjectItem(ProjectItemElement xml, Project project, ProjectItemLink link)
+            public LinkedProjectItem(ProjectItemElement xml, Project project, ProjectItemLink link)
                 : base(xml, project)
             {
                 this.Link = link;
             }
 
-            internal override ProjectItemLink Link { get; }
+            public override ProjectItemLink Link { get; }
 
             object ILinkableObject.Link => Link;
         }
 
         private class LinkedProjectItemDefinition : ProjectItemDefinition, ILinkableObject
         {
-            internal LinkedProjectItemDefinition(ProjectItemDefinitionLink link, Project project, string itemType)
+            public LinkedProjectItemDefinition(ProjectItemDefinitionLink link, Project project, string itemType)
                 : base(project, itemType)
             {
                 Link = link;
             }
 
-            internal override ProjectItemDefinitionLink Link { get; }
+            public override ProjectItemDefinitionLink Link { get; }
             object ILinkableObject.Link => Link;
         }
 
         private class LinkedProjectMetadata : ProjectMetadata, ILinkableObject
         {
-            internal LinkedProjectMetadata(object parent, ProjectMetadataLink link)
+            public LinkedProjectMetadata(object parent, ProjectMetadataLink link)
                 : base(parent, link.Xml)
             {
                 Link = link;
             }
 
-            internal override ProjectMetadataLink Link { get; }
+            public override ProjectMetadataLink Link { get; }
             object ILinkableObject.Link => Link;
         }
 
         private class LinkedProjectProperty : ProjectProperty, ILinkableObject
         {
-            internal ProjectPropertyLink Link { get; }
+            public ProjectPropertyLink Link { get; }
             object ILinkableObject.Link => Link;
 
             /// <summary>
@@ -282,7 +282,7 @@ namespace Microsoft.Build.ObjectModelRemoting
             /// Property MAY NOT have reserved name and MAY NOT overwrite a global property.
             /// Predecessor is any immediately previous property that was overridden by this one during evaluation and may be null.
             /// </summary>
-            internal LinkedProjectProperty(Project project, ProjectPropertyLink link)
+            public LinkedProjectProperty(Project project, ProjectPropertyLink link)
                 : base(project)
             {
                 Link = link;
@@ -308,7 +308,7 @@ namespace Microsoft.Build.ObjectModelRemoting
 
             public override bool IsImported => Link.IsImported;
 
-            internal override string EvaluatedValueEscapedInternal => Link.EvaluatedIncludeEscaped;
+            public override string EvaluatedValueEscapedInternal => Link.EvaluatedIncludeEscaped;
         }
         #endregion
     }

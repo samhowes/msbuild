@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections;
@@ -12,7 +12,7 @@ namespace Microsoft.Build.Shared
     /// This class implements some static methods to assist with command-line parsing of 
     /// parameters that could be quoted, and thus could contain nested escaped quotes.
     /// </summary>
-    internal static class QuotingUtilities
+    public static class QuotingUtilities
     {
         /*
          * Quoting Rules:
@@ -59,7 +59,7 @@ namespace Microsoft.Build.Shared
         /// <param name="emptySplits">[out] a count of all pieces that were empty, and thus discarded, per remark (1) above</param>
         /// <param name="separator"></param>
         /// <returns>ArrayList of all the pieces the string was split into.</returns>
-        internal static List<string> SplitUnquoted
+        public static List<string> SplitUnquoted
         (
             string input,
             int maxSplits,
@@ -164,7 +164,7 @@ namespace Microsoft.Build.Shared
         /// <param name="input"></param>
         /// <param name="separator"></param>
         /// <returns>ArrayList of all the pieces the string was split into.</returns>
-        internal static List<string> SplitUnquoted(string input, params char[] separator)
+        public static List<string> SplitUnquoted(string input, params char[] separator)
         {
             int emptySplits;
             return SplitUnquoted(input, int.MaxValue, false /* discard empty splits */, false /* don't unquote the split pieces */, out emptySplits, separator);
@@ -176,7 +176,7 @@ namespace Microsoft.Build.Shared
         /// <param name="input"></param>
         /// <param name="doubleQuotesRemoved">[out] the number of double-quotes removed from the string</param>
         /// <returns>The given string in unquoted form.</returns>
-        internal static string Unquote(string input, out int doubleQuotesRemoved)
+        public static string Unquote(string input, out int doubleQuotesRemoved)
         {
             StringBuilder unquotedString = new StringBuilder();
             unquotedString.EnsureCapacity(input.Length);
@@ -230,7 +230,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="input"></param>
         /// <returns>The given string in unquoted form.</returns>
-        internal static string Unquote(string input)
+        public static string Unquote(string input)
         {
             int doubleQuotesRemoved;
             return Unquote(input, out doubleQuotesRemoved);

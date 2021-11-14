@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace Microsoft.Build.Evaluation
@@ -9,24 +9,24 @@ namespace Microsoft.Build.Evaluation
     /// "EmbeddedResource" is the item name, and "Culture" is the metadata name.
     /// The item name is optional.
     /// </summary>
-    internal struct MetadataReference
+    public struct MetadataReference
     {
         /// <summary>
         /// The item name
         /// </summary>
-        internal string ItemName;       // Could be null if the %(...) is not qualified with an item name.
+        public string ItemName;       // Could be null if the %(...) is not qualified with an item name.
 
         /// <summary>
         /// The metadata name
         /// </summary>
-        internal string MetadataName;
+        public string MetadataName;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="itemName">Name of the item</param>
         /// <param name="metadataName">Name of the metadata</param>
-        internal MetadataReference
+        public MetadataReference
         (
             string itemName,
             string metadataName

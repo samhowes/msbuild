@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -35,12 +35,12 @@ namespace Microsoft.Build.Construction
     /// <summary>
     /// This class is used to generate an MSBuild wrapper project for a solution file.
     /// </summary>
-    internal class SolutionProjectGenerator
+    public class SolutionProjectGenerator
     {
         /// <summary>
         /// Name of the property used to store the path to the solution being built.
         /// </summary>
-        internal const string SolutionPathPropertyName = "SolutionPath";
+        public const string SolutionPathPropertyName = "SolutionPath";
 
 #if FEATURE_ASPNET_COMPILER
         /// <summary>
@@ -52,7 +52,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Property set by VS when building projects. It's an XML containing the project configurations for ALL projects in the solution for the currently selected solution configuration.
         /// </summary>
-        internal const string CurrentSolutionConfigurationContents = nameof(CurrentSolutionConfigurationContents);
+        public const string CurrentSolutionConfigurationContents = nameof(CurrentSolutionConfigurationContents);
 
         /// <summary>
         /// The set of properties all projects in the solution should be built with
@@ -67,7 +67,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// A known list of target names to create.  This is for backwards compatibility.
         /// </summary>
-        internal static readonly ImmutableHashSet<string> _defaultTargetNames = ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase,
+        public static readonly ImmutableHashSet<string> _defaultTargetNames = ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase,
             "Build",
             "Clean",
             "Rebuild",
@@ -191,7 +191,7 @@ namespace Microsoft.Build.Construction
         /// <param name="sdkResolverService">An <see cref="ISdkResolverService"/> to use.</param>
         /// <param name="submissionId">The current build submission ID.</param>
         /// <returns>An array of ProjectInstances.  The first instance is the traversal project, the remaining are the metaprojects for each project referenced in the solution.</returns>
-        internal static ProjectInstance[] Generate
+        public static ProjectInstance[] Generate
             (
             SolutionFile solution,
             IDictionary<string, string> globalProperties,
@@ -221,7 +221,7 @@ namespace Microsoft.Build.Construction
         /// Adds a new property group with contents of the given solution configuration to the project
         /// Internal for unit-testing.
         /// </summary>
-        internal static void AddPropertyGroupForSolutionConfiguration(ProjectRootElement msbuildProject, SolutionFile solutionFile, SolutionConfigurationInSolution solutionConfiguration)
+        public static void AddPropertyGroupForSolutionConfiguration(ProjectRootElement msbuildProject, SolutionFile solutionFile, SolutionConfigurationInSolution solutionConfiguration)
         {
             ProjectPropertyGroupElement solutionConfigurationProperties = msbuildProject.CreatePropertyGroupElement();
             msbuildProject.AppendChild(solutionConfigurationProperties);
@@ -298,7 +298,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Add a new error/warning/message tag into the given target
         /// </summary>
-        internal static ProjectTaskElement AddErrorWarningMessageElement
+        public static ProjectTaskElement AddErrorWarningMessageElement
             (
             ProjectTargetElement target,
             string elementType,
@@ -336,7 +336,7 @@ namespace Microsoft.Build.Construction
         /// for the right project configuration/platform. It's unlikely that references would be conditional,
         /// but still possible and we want to get that case right.
         /// </summary>
-        internal static string PredictActiveSolutionConfigurationName(SolutionFile solutionFile, IDictionary<string, string> globalProperties)
+        public static string PredictActiveSolutionConfigurationName(SolutionFile solutionFile, IDictionary<string, string> globalProperties)
         {
             string candidateFullSolutionConfigurationName = DetermineLikelyActiveSolutionConfiguration(solutionFile, globalProperties);
 

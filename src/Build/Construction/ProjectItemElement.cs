@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -18,12 +18,12 @@ namespace Microsoft.Build.Construction
     [DebuggerDisplay("{ItemType} Include={Include} Exclude={Exclude} #Metadata={Count} Condition={Condition}")]
     public class ProjectItemElement : ProjectElementContainer
     {
-        internal ProjectItemElementLink ItemLink => (ProjectItemElementLink)Link;
+        public ProjectItemElementLink ItemLink => (ProjectItemElementLink)Link;
 
         /// <summary>
         /// External projects support
         /// </summary>
-        internal ProjectItemElement(ProjectItemElementLink link)
+        public ProjectItemElement(ProjectItemElementLink link)
             : base(link)
         {
         }
@@ -62,7 +62,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Initialize a parented ProjectItemElement instance
         /// </summary>
-        internal ProjectItemElement(XmlElementWithLocation xmlElement, ProjectItemGroupElement parent, ProjectRootElement containingProject)
+        public ProjectItemElement(XmlElementWithLocation xmlElement, ProjectItemGroupElement parent, ProjectRootElement containingProject)
             : base(xmlElement, parent, containingProject)
         {
             ErrorUtilities.VerifyThrowArgumentNull(parent, nameof(parent));
@@ -334,7 +334,7 @@ namespace Microsoft.Build.Construction
         /// Whether the include value has wildcards, 
         /// cached for performance.
         /// </summary>
-        internal bool IncludeHasWildcards
+        public bool IncludeHasWildcards
         {
             get
             {
@@ -352,7 +352,7 @@ namespace Microsoft.Build.Construction
         /// Internal helper to get the next ProjectItemElement sibling.
         /// If there is none, returns null.
         /// </summary>
-        internal ProjectItemElement NextItem
+        public ProjectItemElement NextItem
         {
             get
             {
@@ -419,7 +419,7 @@ namespace Microsoft.Build.Construction
         /// Creates an unparented ProjectItemElement, wrapping an unparented XmlElement.
         /// Caller should then ensure the element is added to a parent.
         /// </summary>
-        internal static ProjectItemElement CreateDisconnected(string itemType, ProjectRootElement containingProject)
+        public static ProjectItemElement CreateDisconnected(string itemType, ProjectRootElement containingProject)
         {
             XmlUtilities.VerifyThrowArgumentValidElementName(itemType);
             ErrorUtilities.VerifyThrowArgument(!XMakeElements.ReservedItemNames.Contains(itemType), "CannotModifyReservedItem", itemType);
@@ -437,7 +437,7 @@ namespace Microsoft.Build.Construction
         /// <remarks>
         /// The implementation has to actually replace the element to do this.
         /// </remarks>
-        internal void ChangeItemType(string newItemType)
+        public void ChangeItemType(string newItemType)
         {
             ErrorUtilities.VerifyThrowArgumentLength(newItemType, nameof(newItemType));
             XmlUtilities.VerifyThrowArgumentValidElementName(newItemType);
@@ -455,7 +455,7 @@ namespace Microsoft.Build.Construction
             ReplaceElement(newElement);
         }
 
-        internal override void ClearAttributeCache()
+        public override void ClearAttributeCache()
         {
             base.ClearAttributeCache();
             _include = null;
@@ -470,7 +470,7 @@ namespace Microsoft.Build.Construction
         /// Overridden to verify that the potential parent and siblings
         /// are acceptable. Throws InvalidOperationException if they are not.
         /// </summary>
-        internal override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
+        public override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
         {
             ErrorUtilities.VerifyThrowInvalidOperation(parent.Parent is ProjectTargetElement || (Include.Length > 0 || Update.Length > 0 || Remove.Length > 0), "OM_ItemsOutsideTargetMustHaveIncludeOrUpdateOrRemove");
             ErrorUtilities.VerifyThrowInvalidOperation(parent.Parent is ProjectRootElement || parent.Parent is ProjectTargetElement || parent.Parent is ProjectWhenElement || parent.Parent is ProjectOtherwiseElement, "OM_CannotAcceptParent");
@@ -479,7 +479,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Overridden to update the parent's children-have-no-wildcards flag.
         /// </summary>
-        internal override void OnAfterParentChanged(ProjectElementContainer parent)
+        public override void OnAfterParentChanged(ProjectElementContainer parent)
         {
             base.OnAfterParentChanged(parent);
 
@@ -505,6 +505,6 @@ namespace Microsoft.Build.Construction
         /// </summary>
         protected override bool ShouldCloneXmlAttribute(XmlAttribute attribute) => !ProjectMetadataElement.AttributeNameIsValidMetadataName(attribute.LocalName);
 
-        internal override bool ShouldCloneXmlAttribute(XmlAttributeLink attributeLink) => !ProjectMetadataElement.AttributeNameIsValidMetadataName(attributeLink.LocalName);
+        public override bool ShouldCloneXmlAttribute(XmlAttributeLink attributeLink) => !ProjectMetadataElement.AttributeNameIsValidMetadataName(attributeLink.LocalName);
     }
 }

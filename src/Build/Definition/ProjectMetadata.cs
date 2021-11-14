@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -53,7 +53,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// External projects support
         /// </summary>
-        internal ProjectMetadata(object parent, ProjectMetadataElement xml)
+        public ProjectMetadata(object parent, ProjectMetadataElement xml)
         {
             ErrorUtilities.VerifyThrowArgumentNull(parent, nameof(parent));
             ErrorUtilities.VerifyThrowArgumentNull(xml, nameof(xml));
@@ -66,7 +66,7 @@ namespace Microsoft.Build.Evaluation
         /// Creates a metadata backed by XML. 
         /// Constructed during evaluation of a project.
         /// </summary>
-        internal ProjectMetadata(IProjectMetadataParent parent, ProjectMetadataElement xml, string evaluatedValueEscaped, ProjectMetadata predecessor)
+        public ProjectMetadata(IProjectMetadataParent parent, ProjectMetadataElement xml, string evaluatedValueEscaped, ProjectMetadata predecessor)
         {
             ErrorUtilities.VerifyThrowArgumentNull(parent, nameof(parent));
             ErrorUtilities.VerifyThrowArgumentNull(xml, nameof(xml));
@@ -78,7 +78,7 @@ namespace Microsoft.Build.Evaluation
             _predecessor = predecessor;
         }
 
-        internal virtual ProjectMetadataLink Link => null;
+        public virtual ProjectMetadataLink Link => null;
 
         /// <summary>
         /// Name of the metadata
@@ -152,7 +152,7 @@ namespace Microsoft.Build.Evaluation
             }
         }
 
-        internal IProjectMetadataParent Parent => _parent;
+        public IProjectMetadataParent Parent => _parent;
 
         /// <summary>
         /// Backing XML metadata.
@@ -260,7 +260,7 @@ namespace Microsoft.Build.Evaluation
         /// Is never null.
         /// </summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        internal string EvaluatedValueEscaped
+        public string EvaluatedValueEscaped
         {
             [DebuggerStepThrough]
             get => Link != null ? Link.EvaluatedValueEscaped : _evaluatedValueEscaped;
@@ -294,7 +294,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Deep clone a metadatum, retaining the same parent.
         /// </summary>
-        internal ProjectMetadata DeepClone()
+        public ProjectMetadata DeepClone()
         {
             // The new metadatum's predecessor is the same as its original's predecessor, just as the XML is the same
             // as its original's XML. Predecessors map to XML elements.

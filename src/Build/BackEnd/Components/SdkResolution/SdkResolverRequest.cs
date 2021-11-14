@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Construction;
@@ -10,7 +10,7 @@ namespace Microsoft.Build.BackEnd.SdkResolution
     /// Represents an SDK resolver request which is serialized and sent between nodes.  This is mostly a wrapper around <see cref="SdkReference"/>
     /// with an additional <see cref="INodePacket"/> implementation.
     /// </summary>
-    internal sealed class SdkResolverRequest : INodePacket
+    public sealed class SdkResolverRequest : INodePacket
     {
         private BuildEventContext _buildEventContext;
         private ElementLocation _elementLocation;

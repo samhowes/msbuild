@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -8,12 +8,12 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// Contains information about entries in the AssemblyFoldersEx registry keys.
     /// </summary>
-    internal class ExtensionFoldersRegistryKey
+    public class ExtensionFoldersRegistryKey
     {
         /// <summary>
         /// Constructor
         /// </summary>
-        internal ExtensionFoldersRegistryKey(string registryKey, Version targetFrameworkVersion)
+        public ExtensionFoldersRegistryKey(string registryKey, Version targetFrameworkVersion)
         {
             ErrorUtilities.VerifyThrowArgumentNull(registryKey, nameof(registryKey));
             ErrorUtilities.VerifyThrowArgumentNull(targetFrameworkVersion, nameof(targetFrameworkVersion));
@@ -25,11 +25,11 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// The registry key to the component
         /// </summary>
-        internal string RegistryKey { get; }
+        public string RegistryKey { get; }
 
         /// <summary>
         /// Target framework version for the registry key
         /// </summary>
-        internal Version TargetFrameworkVersion { get; }
+        public Version TargetFrameworkVersion { get; }
     }
 }

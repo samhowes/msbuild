@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -16,7 +16,7 @@ namespace Microsoft.Build.BackEnd
     /// This class represents a collection of items that are homogeneous w.r.t.
     /// a certain set of metadata.
     /// </summary>
-    internal sealed class ItemBucket : IComparable
+    public sealed class ItemBucket : IComparable
     {
         #region Member data
 
@@ -69,7 +69,7 @@ namespace Microsoft.Build.BackEnd
         /// <param name="metadata">Hashtable of item metadata values: null indicates no batching is occurring</param>
         /// <param name="lookup">The <see cref="Lookup"/> to use for the items in the bucket.</param>
         /// <param name="bucketSequenceNumber">A sequence number indication what order the buckets were created in.</param>
-        internal ItemBucket
+        public ItemBucket
         (
             ICollection<string> itemNames,
             Dictionary<string, string> metadata,
@@ -130,7 +130,7 @@ namespace Microsoft.Build.BackEnd
         /// allocates a minimum of memory compared to a real bucket.
         /// </remarks>
         /// <returns>An item bucket that is invalid for everything except comparisons.</returns>
-        internal static ItemBucket GetDummyBucketForComparisons(Dictionary<string, string> metadata)
+        public static ItemBucket GetDummyBucketForComparisons(Dictionary<string, string> metadata)
         {
             ItemBucket bucket = new ItemBucket();
             bucket._metadata = metadata;
@@ -144,7 +144,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Returns the object that knows how to handle all kinds of expansion for this bucket.
         /// </summary>
-        internal Expander<ProjectPropertyInstance, ProjectItemInstance> Expander
+        public Expander<ProjectPropertyInstance, ProjectItemInstance> Expander
         {
             get
             {
@@ -160,7 +160,7 @@ namespace Microsoft.Build.BackEnd
         /// bucket created gets bucketSequenceNumber=0, the second bucket created gets 
         /// bucketSequenceNumber=1, etc.
         /// </summary>
-        internal int BucketSequenceNumber
+        public int BucketSequenceNumber
         {
             get
             {
@@ -171,7 +171,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// The items for this bucket.
         /// </summary>
-        internal Lookup Lookup
+        public Lookup Lookup
         {
             get
             {
@@ -186,7 +186,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Adds a new item to this bucket.
         /// </summary>
-        internal void AddItem(ProjectItemInstance item)
+        public void AddItem(ProjectItemInstance item)
         {
             _lookup.PopulateWithItem(item);
         }
@@ -194,7 +194,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Leaves the lookup scope created for this bucket.
         /// </summary>
-        internal void LeaveScope()
+        public void LeaveScope()
         {
             _lookupEntry.LeaveScope();
         }

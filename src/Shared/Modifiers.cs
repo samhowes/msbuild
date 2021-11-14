@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -15,12 +15,12 @@ namespace Microsoft.Build.Shared
     /// <comment>
     /// Partial class in order to reduce the amount of sharing into different assemblies
     /// </comment>
-    static internal partial class FileUtilities
+    static public partial class FileUtilities
     {
         /// <summary>
         /// Encapsulates the definitions of the item-spec modifiers a.k.a. reserved item metadata.
         /// </summary>
-        static internal class ItemSpecModifiers
+        static public class ItemSpecModifiers
         {
 #if DEBUG
             /// <summary>
@@ -31,24 +31,24 @@ namespace Microsoft.Build.Shared
 
             // NOTE: If you add an item here that starts with a new letter, you need to update the case 
             // statements in IsItemSpecModifier and IsDerivableItemSpecModifier.
-            internal const string FullPath = "FullPath";
-            internal const string RootDir = "RootDir";
-            internal const string Filename = "Filename";
-            internal const string Extension = "Extension";
-            internal const string RelativeDir = "RelativeDir";
-            internal const string Directory = "Directory";
-            internal const string RecursiveDir = "RecursiveDir";
-            internal const string Identity = "Identity";
-            internal const string ModifiedTime = "ModifiedTime";
-            internal const string CreatedTime = "CreatedTime";
-            internal const string AccessedTime = "AccessedTime";
-            internal const string DefiningProjectFullPath = "DefiningProjectFullPath";
-            internal const string DefiningProjectDirectory = "DefiningProjectDirectory";
-            internal const string DefiningProjectName = "DefiningProjectName";
-            internal const string DefiningProjectExtension = "DefiningProjectExtension";
+            public const string FullPath = "FullPath";
+            public const string RootDir = "RootDir";
+            public const string Filename = "Filename";
+            public const string Extension = "Extension";
+            public const string RelativeDir = "RelativeDir";
+            public const string Directory = "Directory";
+            public const string RecursiveDir = "RecursiveDir";
+            public const string Identity = "Identity";
+            public const string ModifiedTime = "ModifiedTime";
+            public const string CreatedTime = "CreatedTime";
+            public const string AccessedTime = "AccessedTime";
+            public const string DefiningProjectFullPath = "DefiningProjectFullPath";
+            public const string DefiningProjectDirectory = "DefiningProjectDirectory";
+            public const string DefiningProjectName = "DefiningProjectName";
+            public const string DefiningProjectExtension = "DefiningProjectExtension";
 
             // These are all the well-known attributes.
-            internal static readonly string[] All =
+            public static readonly string[] All =
                 {
                     FullPath,
                     RootDir,
@@ -73,7 +73,7 @@ namespace Microsoft.Build.Shared
             /// Indicates if the given name is reserved for an item-spec modifier.
             /// </summary>
             [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Performance")]
-            internal static bool IsItemSpecModifier(string name)
+            public static bool IsItemSpecModifier(string name)
             {
                 if (name == null)
                 {
@@ -246,7 +246,7 @@ namespace Microsoft.Build.Shared
             /// Indicates if the given name is reserved for one of the specific subset of itemspec 
             /// modifiers to do with the defining project of the item. 
             /// </summary>
-            internal static bool IsDefiningProjectModifier(string name)
+            public static bool IsDefiningProjectModifier(string name)
             {
                 switch (name.Length)
                 {
@@ -309,7 +309,7 @@ namespace Microsoft.Build.Shared
             /// </summary>
             /// <param name="name">Name to check.</param>
             /// <returns>true, if name of a derivable modifier</returns>
-            internal static bool IsDerivableItemSpecModifier(string name)
+            public static bool IsDerivableItemSpecModifier(string name)
             {
                 bool isItemSpecModifier = IsItemSpecModifier(name);
 
@@ -332,7 +332,7 @@ namespace Microsoft.Build.Shared
             /// Performs path manipulations on the given item-spec as directed.
             /// Does not cache the result.
             /// </summary>
-            internal static string GetItemSpecModifier(string currentDirectory, string itemSpec, string definingProjectEscaped, string modifier)
+            public static string GetItemSpecModifier(string currentDirectory, string itemSpec, string definingProjectEscaped, string modifier)
             {
                 string dummy = null;
                 return GetItemSpecModifier(currentDirectory, itemSpec, definingProjectEscaped, modifier, ref dummy);
@@ -378,7 +378,7 @@ namespace Microsoft.Build.Shared
             /// <returns>The modified item-spec (can be empty string, but will never be null).</returns>
             /// <exception cref="InvalidOperationException">Thrown when the item-spec is not a path.</exception>
             [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Pre-existing")]
-            internal static string GetItemSpecModifier(string currentDirectory, string itemSpec, string definingProjectEscaped, string modifier, ref string fullPath)
+            public static string GetItemSpecModifier(string currentDirectory, string itemSpec, string definingProjectEscaped, string modifier, ref string fullPath)
             {
                 ErrorUtilities.VerifyThrow(itemSpec != null, "Need item-spec to modify.");
                 ErrorUtilities.VerifyThrow(modifier != null, "Need modifier to apply to item-spec.");

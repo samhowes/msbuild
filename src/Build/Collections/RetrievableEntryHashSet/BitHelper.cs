@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Security;
@@ -42,7 +42,7 @@ namespace Microsoft.Build.Collections
     /// on a bit array and then need to loop over it. In particular, if it avoided visiting 
     /// every bit, it would allow good perf improvements when the bit array is sparse.
     /// </summary>
-    internal unsafe class BitHelper
+    public unsafe class BitHelper
     {   // should not be serialized
         private const byte MarkedBitFlag = 1;
         private const byte IntSize = 32;
@@ -66,7 +66,7 @@ namespace Microsoft.Build.Collections
         /// <param name="bitArrayPtr">int array to hold bits</param>
         /// <param name="length">length of int array</param>
         [SecurityCritical]
-        internal BitHelper(int* bitArrayPtr, int length)
+        public BitHelper(int* bitArrayPtr, int length)
         {
             _arrayPtr = bitArrayPtr;
             _length = length;
@@ -79,7 +79,7 @@ namespace Microsoft.Build.Collections
         /// <param name="bitArray">int array to hold bits</param>
         /// <param name="length">length of int array</param>
         [SecurityCritical]
-        internal BitHelper(int[] bitArray, int length)
+        public BitHelper(int[] bitArray, int length)
         {
             _array = bitArray;
             _length = length;
@@ -88,7 +88,7 @@ namespace Microsoft.Build.Collections
         /// <summary>
         /// Mark bit at specified position
         /// </summary>
-        internal void MarkBit(int bitPosition)
+        public void MarkBit(int bitPosition)
         {
             if (_useStackAlloc)
             {
@@ -111,7 +111,7 @@ namespace Microsoft.Build.Collections
         /// <summary>
         /// Is bit at specified position marked?
         /// </summary>
-        internal bool IsMarked(int bitPosition)
+        public bool IsMarked(int bitPosition)
         {
             if (_useStackAlloc)
             {
@@ -139,7 +139,7 @@ namespace Microsoft.Build.Collections
         /// </summary>
         /// <param name="n"></param>
         /// <returns></returns>
-        internal static int ToIntArrayLength(int n)
+        public static int ToIntArrayLength(int n)
         {
             return n > 0 ? (((n - 1) / IntSize) + 1) : 0;
         }

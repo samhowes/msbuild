@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -13,12 +13,12 @@ namespace Microsoft.Build.Evaluation
     /// are inferred from the content of the include and sometimes the context of the project or
     /// current directory.
     /// </summary>
-    internal static class BuiltInMetadata
+    public static class BuiltInMetadata
     {
         /// <summary>
         /// Retrieves the count of built-in metadata.
         /// </summary>
-        static internal int MetadataCount
+        static public int MetadataCount
         {
             [DebuggerStepThrough]
             get
@@ -28,7 +28,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Retrieves the list of metadata names.
         /// </summary>
-        static internal ICollection<string> MetadataNames
+        static public ICollection<string> MetadataNames
         {
             [DebuggerStepThrough]
             get
@@ -49,7 +49,7 @@ namespace Microsoft.Build.Evaluation
         /// <param name="name">The name of the metadata.</param>
         /// <param name="fullPath">The generated full path, for caching</param>
         /// <returns>The unescaped metadata value.</returns>
-        internal static string GetMetadataValue(string currentDirectory, string evaluatedIncludeBeforeWildcardExpansionEscaped, string evaluatedIncludeEscaped, string definingProjectEscaped, string name, ref string fullPath)
+        public static string GetMetadataValue(string currentDirectory, string evaluatedIncludeBeforeWildcardExpansionEscaped, string evaluatedIncludeEscaped, string definingProjectEscaped, string name, ref string fullPath)
         {
             return EscapingUtilities.UnescapeAll(GetMetadataValueEscaped(currentDirectory, evaluatedIncludeBeforeWildcardExpansionEscaped, evaluatedIncludeEscaped, definingProjectEscaped, name, ref fullPath));
         }
@@ -68,7 +68,7 @@ namespace Microsoft.Build.Evaluation
         /// <param name="name">The name of the metadata.</param>
         /// <param name="fullPath">The generated full path, for caching</param>
         /// <returns>The escaped as necessary metadata value.</returns>
-        internal static string GetMetadataValueEscaped(string currentDirectory, string evaluatedIncludeBeforeWildcardExpansionEscaped, string evaluatedIncludeEscaped, string definingProjectEscaped, string name, ref string fullPath)
+        public static string GetMetadataValueEscaped(string currentDirectory, string evaluatedIncludeBeforeWildcardExpansionEscaped, string evaluatedIncludeEscaped, string definingProjectEscaped, string name, ref string fullPath)
         {
             // This is an assert, not a VerifyThrow, because the caller should already have done this check, and it's slow/hot.
             Debug.Assert(FileUtilities.ItemSpecModifiers.IsItemSpecModifier(name));

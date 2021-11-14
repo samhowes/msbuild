@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -12,7 +12,7 @@ namespace Microsoft.Build.Shared.FileSystem
     /// <summary>
     /// The type of file artifact to search for
     /// </summary>
-    internal enum FileArtifactType : byte
+    public enum FileArtifactType : byte
     {
         /// <nodoc/>
         File,
@@ -26,7 +26,7 @@ namespace Microsoft.Build.Shared.FileSystem
     /// Windows-specific implementation of file system operations using Windows native invocations.
     /// TODO For potential extra perf gains, provide native implementations for all IFileSystem methods and stop inheriting from ManagedFileSystem
     /// </summary>
-    internal class WindowsFileSystem : ManagedFileSystem
+    public class WindowsFileSystem : ManagedFileSystem
     {
         private static readonly WindowsFileSystem Instance = new WindowsFileSystem();
 

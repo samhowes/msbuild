@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -9,7 +9,7 @@ using System.Reflection;
 // Declare this to get init properties. See https://github.com/dotnet/roslyn/issues/45510#issuecomment-694977239
 namespace System.Runtime.CompilerServices
 {
-    internal static class IsExternalInit { }
+    public static class IsExternalInit { }
 }
 
 namespace Microsoft.Build.Shared
@@ -17,7 +17,7 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// This class contains common reflection tasks
     /// </summary>
-    internal static class AssemblyUtilities
+    public static class AssemblyUtilities
     {
 #if !FEATURE_CULTUREINFO_GETCULTURES
         // True when the cached method info objects have been set.

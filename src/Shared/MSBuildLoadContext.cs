@@ -15,11 +15,11 @@ namespace Microsoft.Build.Shared
     /// This class is used to isolate the types used by an MSBuild plugin
     /// (SDK resolver, logger, or task).
     /// </summary>
-    internal class MSBuildLoadContext : AssemblyLoadContext
+    public class MSBuildLoadContext : AssemblyLoadContext
     {
         private readonly string _directory;
 
-        internal static readonly ImmutableHashSet<string> WellKnownAssemblyNames =
+        public static readonly ImmutableHashSet<string> WellKnownAssemblyNames =
             new[]
             {
                 "MSBuild",

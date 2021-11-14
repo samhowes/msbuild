@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -11,14 +11,14 @@ namespace Microsoft.Build.BackEnd.Logging
     /// Delegate to a method which will transport the packet accross the wire.
     /// </summary>
     /// <param name="packetToSend">A node packet to send accross the wire</param>
-    internal delegate void SendDataDelegate(INodePacket packetToSend);
+    public delegate void SendDataDelegate(INodePacket packetToSend);
 
     /// <summary>
     /// This class will consume the BuildEventArgs forwarded by the EventRedirectorToSink class.
     /// The sink will then create a packet and then pass this along to the transport layer to be
     /// sent back to the build manager.
     /// </summary>
-    internal class BuildEventArgTransportSink : IBuildEventSink
+    public class BuildEventArgTransportSink : IBuildEventSink
     {
         #region Data
         /// <summary>
@@ -35,7 +35,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// </summary>
         /// <param name="sendData">A delegate which takes an INodePacket and sends the packet to where it needs to go</param>
         /// <exception cref="InternalErrorException">Send data delegate is null</exception>
-        internal BuildEventArgTransportSink(SendDataDelegate sendData)
+        public BuildEventArgTransportSink(SendDataDelegate sendData)
         {
             ErrorUtilities.VerifyThrow(sendData != null, "sendData delegate is null");
             _sendDataDelegate = sendData;

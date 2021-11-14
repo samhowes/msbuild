@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -11,7 +11,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// The state enumeration for SchedulableRequests.
     /// </summary>
-    internal enum SchedulableRequestState
+    public enum SchedulableRequestState
     {
         /// <summary>
         /// This request has been submitted but has never been scheduled so it has executed no tasks and does not currently have an
@@ -56,7 +56,7 @@ namespace Microsoft.Build.BackEnd
     /// methods.  These methods, along with Complete, cause state changes which the SchedulingData object will record.  That data can be
     /// queried to determine the state of any request or node in the system.
     /// </summary>
-    internal class SchedulableRequest
+    public class SchedulableRequest
     {
         /// <summary>
         /// The request collection to which this belongs.
@@ -634,7 +634,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Removes the association between this request and the one we are blocked by.
         /// </summary>
-        internal void DisconnectRequestWeAreBlockedBy(BlockingRequestKey blockingRequestKey)
+        public void DisconnectRequestWeAreBlockedBy(BlockingRequestKey blockingRequestKey)
         {
             ErrorUtilities.VerifyThrow(_requestsWeAreBlockedBy.TryGetValue(blockingRequestKey, out SchedulableRequest unblockingRequest), "We are not blocked by the specified request.");
             ErrorUtilities.VerifyThrow(unblockingRequest._requestsWeAreBlocking.Contains(this), "The request unblocking us doesn't think it is blocking us.");
@@ -658,7 +658,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// A key for blocking requests combining the global request and node request ids.
         /// </summary>
-        internal class BlockingRequestKey
+        public class BlockingRequestKey
         {
             /// <summary>
             /// The global request id.

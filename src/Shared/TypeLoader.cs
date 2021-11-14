@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -15,7 +15,7 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// This class is used to load types from their assemblies.
     /// </summary>
-    internal class TypeLoader
+    public class TypeLoader
     {
 #if FEATURE_ASSEMBLYLOADCONTEXT
         /// <summary>
@@ -49,7 +49,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Constructor.
         /// </summary>
-        internal TypeLoader(Func<Type, object, bool> isDesiredType)
+        public TypeLoader(Func<Type, object, bool> isDesiredType)
         {
             ErrorUtilities.VerifyThrow(isDesiredType != null, "need a type filter");
 
@@ -77,7 +77,7 @@ namespace Microsoft.Build.Shared
         /// "MyTasks.ATask\\\.Csc" and "Csc"                                ==> no match
         /// </example>
         /// <returns>true, if the type names match exactly or partially; false, if there is no match at all</returns>
-        internal static bool IsPartialTypeNameMatch(string typeName1, string typeName2)
+        public static bool IsPartialTypeNameMatch(string typeName1, string typeName2)
         {
             bool isPartialMatch = false;
 
@@ -183,7 +183,7 @@ namespace Microsoft.Build.Shared
         /// any) is unambiguous; otherwise, if there are multiple types with the same name in different namespaces, the first type
         /// found will be returned.
         /// </summary>
-        internal LoadedType Load
+        public LoadedType Load
         (
             string typeName,
             AssemblyLoadInfo assembly
@@ -198,7 +198,7 @@ namespace Microsoft.Build.Shared
         /// found will be returned.
         /// </summary>
         /// <returns>The loaded type, or null if the type was not found.</returns>
-        internal LoadedType ReflectionOnlyLoad
+        public LoadedType ReflectionOnlyLoad
         (
             string typeName,
             AssemblyLoadInfo assembly
@@ -276,7 +276,7 @@ namespace Microsoft.Build.Shared
             /// <summary>
             /// Given a type filter, and an assembly to load the type information from determine if a given type name is in the assembly or not.
             /// </summary>
-            internal AssemblyInfoToLoadedTypes(Func<Type, object, bool> typeFilter, AssemblyLoadInfo loadInfo)
+            public AssemblyInfoToLoadedTypes(Func<Type, object, bool> typeFilter, AssemblyLoadInfo loadInfo)
             {
                 ErrorUtilities.VerifyThrowArgumentNull(typeFilter, "typefilter");
                 ErrorUtilities.VerifyThrowArgumentNull(loadInfo, nameof(loadInfo));
@@ -290,7 +290,7 @@ namespace Microsoft.Build.Shared
             /// <summary>
             /// Determine if a given type name is in the assembly or not. Return null if the type is not in the assembly
             /// </summary>
-            internal LoadedType GetLoadedTypeByTypeName(string typeName)
+            public LoadedType GetLoadedTypeByTypeName(string typeName)
             {
                 ErrorUtilities.VerifyThrowArgumentNull(typeName, nameof(typeName));
 

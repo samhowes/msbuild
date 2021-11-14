@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -11,7 +11,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// How the task completed -- successful, failed, or crashed
     /// </summary>
-    internal enum TaskCompleteType
+    public enum TaskCompleteType
     {
         /// <summary>
         /// Task execution succeeded
@@ -45,7 +45,7 @@ namespace Microsoft.Build.BackEnd
     /// TaskHostTaskComplete contains all the information the parent node 
     /// needs from the task host on completion of task execution.
     /// </summary>
-    internal class TaskHostTaskComplete : INodePacket
+    public class TaskHostTaskComplete : INodePacket
     {
         /// <summary>
         /// Result of the task's execution. 
@@ -216,7 +216,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Factory for deserialization.
         /// </summary>
-        internal static INodePacket FactoryForDeserialization(ITranslator translator)
+        public static INodePacket FactoryForDeserialization(ITranslator translator)
         {
             TaskHostTaskComplete taskComplete = new TaskHostTaskComplete();
             taskComplete.Translate(translator);

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -13,7 +13,7 @@ namespace Microsoft.Build.Execution
     /// <summary>
     /// This class represents the data which is used for legacy threading semantics for the build
     /// </summary>
-    internal class LegacyThreadingData
+    public class LegacyThreadingData
     {
         #region Fields
         /// <summary>
@@ -46,7 +46,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// The instance to be used when the new request builder is started on the main thread.
         /// </summary>
-        internal RequestBuilder InstanceForMainThread
+        public RequestBuilder InstanceForMainThread
         {
             get => _instanceForMainThread;
 
@@ -60,7 +60,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// The current submission id building on the main thread, if any.
         /// </summary>
-        internal int MainThreadSubmissionId
+        public int MainThreadSubmissionId
         {
             get => _mainThreadSubmissionId;
 
@@ -80,7 +80,7 @@ namespace Microsoft.Build.Execution
         /// Given a submission ID, assign it "start" and "finish" events to track its use of 
         /// the legacy thread.
         /// </summary>
-        internal void RegisterSubmissionForLegacyThread(int submissionId)
+        public void RegisterSubmissionForLegacyThread(int submissionId)
         {
             lock (_legacyThreadingEventsLock)
             {
@@ -98,7 +98,7 @@ namespace Microsoft.Build.Execution
         /// This submission is completely done with the legacy thread, so unregister it 
         /// from the dictionary so that we don't leave random events lying around. 
         /// </summary>
-        internal void UnregisterSubmissionForLegacyThread(int submissionId)
+        public void UnregisterSubmissionForLegacyThread(int submissionId)
         {
             lock (_legacyThreadingEventsLock)
             {
@@ -112,7 +112,7 @@ namespace Microsoft.Build.Execution
         /// Given a submission ID, return the event being used to track when that submission is ready 
         /// to be executed on the legacy thread. 
         /// </summary>
-        internal WaitHandle GetStartRequestBuilderMainThreadEventForSubmission(int submissionId)
+        public WaitHandle GetStartRequestBuilderMainThreadEventForSubmission(int submissionId)
         {
             Tuple<AutoResetEvent, ManualResetEvent> legacyThreadingEvents;
 
@@ -130,7 +130,7 @@ namespace Microsoft.Build.Execution
         /// Given a submission ID, return the event being used to track when that submission is ready 
         /// to be executed on the legacy thread. 
         /// </summary>
-        internal Task GetLegacyThreadInactiveTask(int submissionId)
+        public Task GetLegacyThreadInactiveTask(int submissionId)
         {
             Tuple<AutoResetEvent, ManualResetEvent> legacyThreadingEvents;
 
@@ -147,7 +147,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Signal that the legacy thread is starting work.
         /// </summary>
-        internal void SignalLegacyThreadStart(RequestBuilder instance)
+        public void SignalLegacyThreadStart(RequestBuilder instance)
         {
             ErrorUtilities.VerifyThrow
                 (
@@ -176,7 +176,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Signal that the legacy thread has finished its work.
         /// </summary>
-        internal void SignalLegacyThreadEnd(int submissionId)
+        public void SignalLegacyThreadEnd(int submissionId)
         {
             MainThreadSubmissionId = -1;
 

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace Microsoft.Build.BackEnd
@@ -7,7 +7,7 @@ namespace Microsoft.Build.BackEnd
     /// TaskHostTaskCancelled informs the task host that the task it is 
     /// currently executing has been canceled.
     /// </summary>
-    internal class TaskHostTaskCancelled : INodePacket
+    public class TaskHostTaskCancelled : INodePacket
     {
         /// <summary>
         /// Constructor
@@ -36,7 +36,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Factory for deserialization.
         /// </summary>
-        internal static INodePacket FactoryForDeserialization(ITranslator translator)
+        public static INodePacket FactoryForDeserialization(ITranslator translator)
         {
             TaskHostTaskCancelled taskCancelled = new TaskHostTaskCancelled();
             taskCancelled.Translate(translator);

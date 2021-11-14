@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -13,7 +13,7 @@ namespace Microsoft.Build.BackEnd
     /// This class manages the set of schedulable requests.  In concert with SchedulableRequest, it tracks all relationships
     /// between requests in the system, verifies state change validity and provides efficient methods for querying request relationships.
     /// </summary>
-    internal class SchedulingData
+    public class SchedulingData
     {
         #region Requests By State
 
@@ -689,7 +689,7 @@ namespace Microsoft.Build.BackEnd
         /// <remarks>
         /// The operation is only valid when there are no scheduled requests for this configuration.
         /// </remarks>
-        internal void UnassignNodeForRequestConfiguration(int configurationId)
+        public void UnassignNodeForRequestConfiguration(int configurationId)
         {
             ErrorUtilities.VerifyThrow(
                 GetRequestsAssignedToConfigurationCount(configurationId) == 0,
@@ -747,7 +747,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// A scheduling event.
         /// </summary>
-        internal class SchedulingEvent
+        public class SchedulingEvent
         {
             /// <summary>
             /// The time the event took place.

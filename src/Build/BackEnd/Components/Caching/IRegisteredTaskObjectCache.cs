@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Framework;
@@ -12,7 +12,7 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// Defines a cache for registered task objects.
     /// </summary>
-    internal interface IRegisteredTaskObjectCache
+    public interface IRegisteredTaskObjectCache
     {
         /// <summary>
         /// Disposes of all of the objects with the specified lifetime.

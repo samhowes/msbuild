@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -28,7 +28,7 @@ namespace Microsoft.Build.Shared
     /// An enumeration of all the types of BuildEventArgs that can be
     /// packaged by this logMessagePacket
     /// </summary>
-    internal enum LoggingEventType : int
+    public enum LoggingEventType : int
     {
         /// <summary>
         /// An invalid eventId, used during initialization of a LoggingEventType
@@ -138,7 +138,7 @@ namespace Microsoft.Build.Shared
     /// Build Event Type
     /// Build Event Args
     /// </summary>
-    internal abstract class LogMessagePacketBase : INodePacket
+    public abstract class LogMessagePacketBase : INodePacket
     {
 #if FEATURE_DOTNETVERSION
         /// <summary>
@@ -213,7 +213,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Encapsulates the buildEventArg in this packet.
         /// </summary>
-        internal LogMessagePacketBase(KeyValuePair<int, BuildEventArgs>? nodeBuildEvent, TargetFinishedTranslator targetFinishedTranslator)
+        public LogMessagePacketBase(KeyValuePair<int, BuildEventArgs>? nodeBuildEvent, TargetFinishedTranslator targetFinishedTranslator)
         {
             ErrorUtilities.VerifyThrow(nodeBuildEvent != null, "nodeBuildEvent was null");
             _buildEvent = nodeBuildEvent.Value.Value;
@@ -237,7 +237,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Delegate for translating TargetFinishedEventArgs
         /// </summary>
-        internal delegate void TargetFinishedTranslator(ITranslator translator, TargetFinishedEventArgs finishedEvent);
+        public delegate void TargetFinishedTranslator(ITranslator translator, TargetFinishedEventArgs finishedEvent);
 
         /// <summary>
         /// Delegate representing a method on the BuildEventArgs classes used to write to a stream.
@@ -264,7 +264,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// The buildEventArg wrapped by this packet
         /// </summary>
-        internal KeyValuePair<int, BuildEventArgs>? NodeBuildEvent
+        public KeyValuePair<int, BuildEventArgs>? NodeBuildEvent
         {
             get
             {
@@ -276,7 +276,7 @@ namespace Microsoft.Build.Shared
         /// The event type of the wrapped buildEventArg 
         /// based on the LoggingEventType enumeration 
         /// </summary>
-        internal LoggingEventType EventType
+        public LoggingEventType EventType
         {
             get
             {
@@ -309,7 +309,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Writes the logging packet to the translator.
         /// </summary>
-        internal void WriteToStream(ITranslator translator)
+        public void WriteToStream(ITranslator translator)
         {
             if (_eventType != LoggingEventType.CustomEvent)
             {
@@ -319,7 +319,7 @@ namespace Microsoft.Build.Shared
                     if (!s_writeMethodCache.TryGetValue(_eventType, out methodInfo))
                     {
                         Type eventDerivedType = _buildEvent.GetType();
-                        methodInfo = eventDerivedType.GetMethod("WriteToStream", BindingFlags.NonPublic | BindingFlags.Instance);
+                        methodInfo = eventDerivedType.GetMethod("WriteToStream", BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
                         s_writeMethodCache.Add(_eventType, methodInfo);
                     }
                 }
@@ -375,7 +375,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Reads the logging packet from the translator.
         /// </summary>
-        internal void ReadFromStream(ITranslator translator)
+        public void ReadFromStream(ITranslator translator)
         {
             if (LoggingEventType.CustomEvent != _eventType)
             {
@@ -397,7 +397,7 @@ namespace Microsoft.Build.Shared
                         if (!s_readMethodCache.TryGetValue(_eventType, out methodInfo))
                         {
                             Type eventDerivedType = _buildEvent.GetType();
-                            methodInfo = eventDerivedType.GetMethod("CreateFromStream", BindingFlags.NonPublic | BindingFlags.Instance);
+                            methodInfo = eventDerivedType.GetMethod("CreateFromStream", BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
                             s_readMethodCache.Add(_eventType, methodInfo);
                         }
                     }

@@ -28,7 +28,7 @@ namespace Microsoft.Build.Collections
     /// be run in a separate appdomain.
     /// </comment>
     [Serializable]
-    internal class CopyOnWriteDictionary<V> : IDictionary<string, V>, IDictionary, ISerializable
+    public class CopyOnWriteDictionary<V> : IDictionary<string, V>, IDictionary, ISerializable
     {
 #if !NET35 // MSBuildNameIgnoreCaseComparer not compiled into MSBuildTaskHost but also allocations not interesting there.
         /// <summary>
@@ -56,7 +56,7 @@ namespace Microsoft.Build.Collections
         /// <summary>
         /// Constructor. Consider supplying a comparer instead.
         /// </summary>
-        internal CopyOnWriteDictionary()
+        public CopyOnWriteDictionary()
         {
             _backing = ImmutableDictionary<string, V>.Empty;
         }
@@ -64,7 +64,7 @@ namespace Microsoft.Build.Collections
         /// <summary>
         /// Constructor taking an initial capacity
         /// </summary>
-        internal CopyOnWriteDictionary(int capacity)
+        public CopyOnWriteDictionary(int capacity)
             : this(capacity, null)
         {
         }
@@ -72,7 +72,7 @@ namespace Microsoft.Build.Collections
         /// <summary>
         /// Constructor taking a specified comparer for the keys
         /// </summary>
-        internal CopyOnWriteDictionary(IEqualityComparer<string> keyComparer)
+        public CopyOnWriteDictionary(IEqualityComparer<string> keyComparer)
             : this(0, keyComparer)
         {
         }
@@ -80,7 +80,7 @@ namespace Microsoft.Build.Collections
         /// <summary>
         /// Constructor taking a specified comparer for the keys and an initial capacity
         /// </summary>
-        internal CopyOnWriteDictionary(int capacity, IEqualityComparer<string>? keyComparer)
+        public CopyOnWriteDictionary(int capacity, IEqualityComparer<string>? keyComparer)
         {
             _backing = GetInitialDictionary(keyComparer);
         }
@@ -184,7 +184,7 @@ namespace Microsoft.Build.Collections
         /// <summary>
         /// Comparer used for keys
         /// </summary>
-        internal IEqualityComparer<string> Comparer
+        public IEqualityComparer<string> Comparer
         {
             get => _backing.KeyComparer;
             private set => _backing = _backing.WithComparers(keyComparer: value);
@@ -383,7 +383,7 @@ namespace Microsoft.Build.Collections
         /// <summary>
         /// Clone, with the actual clone deferred
         /// </summary>
-        internal CopyOnWriteDictionary<V> Clone()
+        public CopyOnWriteDictionary<V> Clone()
         {
             return new CopyOnWriteDictionary<V>(this);
         }
@@ -391,7 +391,7 @@ namespace Microsoft.Build.Collections
         /// <summary>
         /// Returns true if these dictionaries have the same backing.
         /// </summary>
-        internal bool HasSameBacking(CopyOnWriteDictionary<V> other)
+        public bool HasSameBacking(CopyOnWriteDictionary<V> other)
         {
             return ReferenceEquals(other._backing, _backing);
         }

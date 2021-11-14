@@ -16,7 +16,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// Type of parameter, used to figure out how to serialize it. 
     /// </summary>
-    internal enum TaskParameterType
+    public enum TaskParameterType
     {
         /// <summary>
         /// Parameter is null
@@ -64,7 +64,7 @@ namespace Microsoft.Build.BackEnd
     /// Wrapper for task parameters, to allow proper serialization even 
     /// in cases where the parameter is not .NET serializable. 
     /// </summary>
-    internal class TaskParameter :
+    public class TaskParameter :
 #if FEATURE_APPDOMAIN
         MarshalByRefObject,
 #endif
@@ -260,7 +260,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Factory for deserialization.
         /// </summary>
-        internal static TaskParameter FactoryForDeserialization(ITranslator translator)
+        public static TaskParameter FactoryForDeserialization(ITranslator translator)
         {
             TaskParameter taskParameter = new TaskParameter();
             taskParameter.Translate(translator);

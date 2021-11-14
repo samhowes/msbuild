@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Shared;
@@ -241,7 +241,7 @@ After:
         /// <summary>
         /// Returns true if there is any in process host object registered for this project file.
         /// </summary>
-        internal bool HasInProcessHostObject(string projectFile)
+        public bool HasInProcessHostObject(string projectFile)
         {
             if (_hostObjectMap == null)
             {
@@ -374,13 +374,13 @@ After:
         /// Test only
         /// </summary>
         /// <param name="runningObjectTable"></param>
-        internal void SetTestRunningObjectTable(IRunningObjectTableWrapper runningObjectTable)
+        public void SetTestRunningObjectTable(IRunningObjectTableWrapper runningObjectTable)
         {
             _runningObjectTable = new Lazy<IRunningObjectTableWrapper>(() => runningObjectTable);
         }
 #endif
 
-        internal class MonikerNameOrITaskHost
+        public class MonikerNameOrITaskHost
         {
             public ITaskHost TaskHost { get; }
             public string MonikerName { get; }
@@ -408,12 +408,12 @@ After:
             /// <summary>
             /// The mapping of targets and tasks to host objects.
             /// </summary>
-            internal Dictionary<TargetTaskKey, MonikerNameOrITaskHost> _hostObjects;
+            public Dictionary<TargetTaskKey, MonikerNameOrITaskHost> _hostObjects;
 
             /// <summary>
             /// Constructor
             /// </summary>
-            internal HostObjects()
+            public HostObjects()
             {
                 _hostObjects = new Dictionary<TargetTaskKey, MonikerNameOrITaskHost>(1);
             }
@@ -421,7 +421,7 @@ After:
             /// <summary>
             /// Accessor which indicates if there are any registered in process host objects.
             /// </summary>
-            internal bool HasRegisteredInProcessHostObjects
+            public bool HasRegisteredInProcessHostObjects
             {
                 get
                 {
@@ -432,7 +432,7 @@ After:
             /// <summary>
             /// Registers a host object for this project file
             /// </summary>
-            internal void RegisterHostObject(string targetName, string taskName, ITaskHost hostObject)
+            public void RegisterHostObject(string targetName, string taskName, ITaskHost hostObject)
             {
                 if (hostObject == null)
                 {
@@ -448,7 +448,7 @@ After:
             /// <summary>
             /// Registers a host object for this project file
             /// </summary>
-            internal void RegisterHostObject(string targetName, string taskName, string monikerName)
+            public void RegisterHostObject(string targetName, string taskName, string monikerName)
             {
                 if (monikerName == null)
                 {
@@ -464,7 +464,7 @@ After:
             /// <summary>
             /// Gets any host object for this project file matching the task and target names specified.
             /// </summary>
-            internal MonikerNameOrITaskHost GetAnyMatchingMonikerNameOrITaskHost(string targetName, string taskName)
+            public MonikerNameOrITaskHost GetAnyMatchingMonikerNameOrITaskHost(string targetName, string taskName)
             {
                 if (_hostObjects.TryGetValue(new TargetTaskKey(targetName, taskName), out MonikerNameOrITaskHost hostObject))
                 {
@@ -477,17 +477,17 @@ After:
             /// <summary>
             /// Equatable key for the table
             /// </summary>
-            internal struct TargetTaskKey : IEquatable<TargetTaskKey>
+            public struct TargetTaskKey : IEquatable<TargetTaskKey>
             {
                 /// <summary>
                 /// Target name
                 /// </summary>
-                internal string _targetName;
+                public string _targetName;
 
                 /// <summary>
                 /// Task name
                 /// </summary>
-                internal string _taskName;
+                public string _taskName;
 
                 /// <summary>
                 /// Constructor

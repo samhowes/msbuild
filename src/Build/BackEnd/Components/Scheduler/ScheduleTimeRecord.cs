@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -9,7 +9,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// Class used to track time accumulated during scheduling.
     /// </summary>
-    internal class ScheduleTimeRecord
+    public class ScheduleTimeRecord
     {
         /// <summary>
         /// The time the current counter started.

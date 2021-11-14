@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -17,7 +17,7 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// This class contains utility methods for dealing with resources.
     /// </summary>
-    internal static class ResourceUtilities
+    public static class ResourceUtilities
     {
         /// <summary>
         /// Extracts the message code (if any) prefixed to the given string. 
@@ -32,7 +32,7 @@ namespace Microsoft.Build.Shared
         /// <param name="code">[out] The message code, or null if there was no code.</param>
         /// <returns>The string without its message code prefix, if any.</returns>
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Scope = "member", Target = "Microsoft.Build.Shared.ResourceUtilities.#ExtractMessageCode(System.Boolean,System.String,System.String&)", Justification = "Unavoidable complexity")]
-        internal static string ExtractMessageCode(bool msbuildCodeOnly, string message, out string code)
+        public static string ExtractMessageCode(bool msbuildCodeOnly, string message, out string code)
         {
 #if !BUILDINGAPPXTASKS
             ErrorUtilities.VerifyThrowInternalNull(message, nameof(message));
@@ -142,7 +142,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="resourceName">Resource string name.</param>
         /// <returns>Resource string contents.</returns>
-        internal static string GetResourceString(string resourceName)
+        public static string GetResourceString(string resourceName)
         {
             string result = AssemblyResources.GetString(resourceName);
             return result;
@@ -161,7 +161,7 @@ namespace Microsoft.Build.Shared
         /// <param name="resourceName">Resource string to load.</param>
         /// <param name="args">Optional arguments for formatting the resource string.</param>
         /// <returns>The formatted resource string.</returns>
-        internal static string FormatResourceStringStripCodeAndKeyword(out string code, out string helpKeyword, string resourceName, params object[] args)
+        public static string FormatResourceStringStripCodeAndKeyword(out string code, out string helpKeyword, string resourceName, params object[] args)
         {
             helpKeyword = GetHelpKeyword(resourceName);
 
@@ -171,7 +171,7 @@ namespace Microsoft.Build.Shared
 
         [Obsolete("Use GetResourceString instead.", true)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        internal static string FormatResourceString(string resourceName)
+        public static string FormatResourceString(string resourceName)
         {   // Avoids an accidental dependency on FormatResourceString(string, params object[])
             return null;
         }
@@ -187,7 +187,7 @@ namespace Microsoft.Build.Shared
         /// <param name="resourceName">Resource string to load.</param>
         /// <param name="args">Optional arguments for formatting the resource string.</param>
         /// <returns>The formatted resource string.</returns>
-        internal static string FormatResourceStringStripCodeAndKeyword(string resourceName, params object[] args)
+        public static string FormatResourceStringStripCodeAndKeyword(string resourceName, params object[] args)
         {
             string code;
             string helpKeyword;
@@ -202,7 +202,7 @@ namespace Microsoft.Build.Shared
         /// <param name="resourceName"></param>
         /// <param name="args"></param>
         /// <returns></returns>
-        internal static string FormatResourceStringIgnoreCodeAndKeyword(string resourceName, params object[] args)
+        public static string FormatResourceStringIgnoreCodeAndKeyword(string resourceName, params object[] args)
         {
             // NOTE: the AssemblyResources.GetString() method is thread-safe
             return FormatString(GetResourceString(resourceName), args);
@@ -219,7 +219,7 @@ namespace Microsoft.Build.Shared
         /// <param name="unformatted">The string to format.</param>
         /// <param name="args">Optional arguments for formatting the given string.</param>
         /// <returns>The formatted string.</returns>
-        internal static string FormatString(string unformatted, params object[] args)
+        public static string FormatString(string unformatted, params object[] args)
         {
             string formatted = unformatted;
 
@@ -258,7 +258,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <remarks>This method is thread-safe.</remarks>
         /// <param name="resourceName">Resource string to check.</param>
-        internal static void VerifyResourceStringExists(string resourceName)
+        public static void VerifyResourceStringExists(string resourceName)
         {
 #if DEBUG
             try

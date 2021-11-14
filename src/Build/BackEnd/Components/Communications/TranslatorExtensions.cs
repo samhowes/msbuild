@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -17,7 +17,7 @@ namespace Microsoft.Build.BackEnd
     /// officially supported by ITranslator, but that we still want to do 
     /// custom translation of.  
     /// </summary>
-    internal static class TranslatorExtensions
+    public static class TranslatorExtensions
     {
         private static Lazy<ConcurrentDictionary<Type, ConstructorInfo>> parameterlessConstructorCache = new Lazy<ConcurrentDictionary<Type, ConstructorInfo>>(() => new ConcurrentDictionary<Type, ConstructorInfo>());
 
@@ -84,12 +84,12 @@ namespace Microsoft.Build.BackEnd
                 {
                     ConstructorInfo constructor = null;
 #if FEATURE_TYPE_GETCONSTRUCTOR
-                    constructor = type.GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null, Type.EmptyTypes, null);
+                    constructor = type.GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public, null, Type.EmptyTypes, null);
 #else
                     constructor =
                         type
                             .GetTypeInfo()
-                            .GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic)
+                            .GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
                             .FirstOrDefault(c => c.GetParameters().Length == 0);
 #endif
                     ErrorUtilities.VerifyThrowInvalidOperation(

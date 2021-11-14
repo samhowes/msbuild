@@ -8,7 +8,7 @@ using System.IO;
 
 namespace Microsoft.Build.Shared
 {
-    internal static class ProcessExtensions
+    public static class ProcessExtensions
     {
         public static void KillTree(this Process process, int timeoutMilliseconds)
         {

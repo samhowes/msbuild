@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace Microsoft.Build.BackEnd
@@ -6,7 +6,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// Objects which wish to receive packets from the NodePacketRouter must implement this interface.
     /// </summary>
-    internal interface INodePacketHandler
+    public interface INodePacketHandler
     {
         /// <summary>
         /// This method is invoked by the NodePacketRouter when a packet is received and is intended for

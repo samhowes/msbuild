@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -84,7 +84,7 @@ namespace Microsoft.Build.Collections
 #if FEATURE_SECURITY_PERMISSIONS
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
 #endif
-    internal class RetrievableEntryHashSet<T> : ICollection<T>,
+    public class RetrievableEntryHashSet<T> : ICollection<T>,
         ISerializable, IDeserializationCallback,
         IDictionary<string, T>
         where T : class, IKeyed
@@ -231,7 +231,7 @@ namespace Microsoft.Build.Collections
         #region ICollection<T> methods
 
         // Convenience to minimise change to callers used to dictionaries
-        internal T this[string name]
+        public T this[string name]
         {
             get
             {
@@ -282,7 +282,7 @@ namespace Microsoft.Build.Collections
         }
 
         // Convenience
-        internal bool Contains(string key)
+        public bool Contains(string key)
         {
             return Get(key) != null;
         }
@@ -474,7 +474,7 @@ namespace Microsoft.Build.Collections
         /// <summary>
         /// Permanently prevent changes to the set.
         /// </summary>
-        internal void MakeReadOnly()
+        public void MakeReadOnly()
         {
             _readOnly = true;
         }
@@ -1266,7 +1266,7 @@ namespace Microsoft.Build.Collections
         /// Equality comparer against another of this type.
         /// Compares entries by reference - not merely by using the comparer on the key
         /// </summary>
-        internal bool EntriesAreReferenceEquals(RetrievableEntryHashSet<T> other)
+        public bool EntriesAreReferenceEquals(RetrievableEntryHashSet<T> other)
         {
             if (Object.ReferenceEquals(this, other))
             {
@@ -1626,7 +1626,7 @@ namespace Microsoft.Build.Collections
         /// Copies this to an array. Used for DebugView
         /// </summary>
         /// <returns></returns>
-        internal T[] ToArray()
+        public T[] ToArray()
         {
             T[] newArray = new T[Count];
             CopyTo(newArray);
@@ -1645,7 +1645,7 @@ namespace Microsoft.Build.Collections
                                                                                                                                                             /// <param name="set2"></param>
                                                                                                                                                             /// <param name="comparer"></param>
                                                                                                                                                             /// <returns></returns>
-                                                                                                                                                            internal static bool HashSetEquals(RetrievableEntryHashSet<T> set1, RetrievableEntryHashSet<T> set2, IEqualityComparer<T> comparer) {
+                                                                                                                                                            public static bool HashSetEquals(RetrievableEntryHashSet<T> set1, RetrievableEntryHashSet<T> set2, IEqualityComparer<T> comparer) {
                                                                                                                                                                 // handle null cases first
                                                                                                                                                                 if (set1 == null) {
                                                                                                                                                                     return (set2 == null);
@@ -1724,17 +1724,17 @@ namespace Microsoft.Build.Collections
         #endregion
 
         // used for set checking operations (using enumerables) that rely on counting
-        internal struct ElementCount
+        public struct ElementCount
         {
-            internal int uniqueCount;
-            internal int unfoundCount;
+            public int uniqueCount;
+            public int unfoundCount;
         }
 
-        internal struct Slot
+        public struct Slot
         {
-            internal int hashCode;      // Lower 31 bits of hash code, -1 if unused
-            internal T value;
-            internal int next;          // Index of next entry, -1 if last
+            public int hashCode;      // Lower 31 bits of hash code, -1 if unused
+            public T value;
+            public int next;          // Index of next entry, -1 if last
         }
 
 #if !SILVERLIGHT
@@ -1750,7 +1750,7 @@ namespace Microsoft.Build.Collections
             private int _version;
             private T _current;
 
-            internal Enumerator(RetrievableEntryHashSet<T> set)
+            public Enumerator(RetrievableEntryHashSet<T> set)
             {
                 _set = set;
                 _index = 0;

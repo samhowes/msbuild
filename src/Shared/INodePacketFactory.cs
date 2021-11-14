@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace Microsoft.Build.BackEnd
@@ -8,13 +8,13 @@ namespace Microsoft.Build.BackEnd
     /// </summary>
     /// <param name="translator">The translator containing the packet data.</param>
     /// <returns>The packet reconstructed from the stream.</returns>
-    internal delegate INodePacket NodePacketFactoryMethod(ITranslator translator);
+    public delegate INodePacket NodePacketFactoryMethod(ITranslator translator);
 
     /// <summary>
     /// This interface represents an object which is used to reconstruct packet objects from
     /// binary data.
     /// </summary>
-    internal interface INodePacketFactory
+    public interface INodePacketFactory
     {
         #region Methods
 

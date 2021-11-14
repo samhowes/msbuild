@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -32,7 +32,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Constructor that associates a set of properties with a sub-toolset version.  
         /// </summary>
-        internal SubToolset(string subToolsetVersion, PropertyDictionary<ProjectPropertyInstance> properties)
+        public SubToolset(string subToolsetVersion, PropertyDictionary<ProjectPropertyInstance> properties)
         {
             ErrorUtilities.VerifyThrowArgumentLength(subToolsetVersion, nameof(subToolsetVersion));
 
@@ -87,7 +87,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Factory for deserialization.
         /// </summary>
-        internal static SubToolset FactoryForDeserialization(ITranslator translator)
+        public static SubToolset FactoryForDeserialization(ITranslator translator)
         {
             SubToolset subToolset = new SubToolset(translator);
             return subToolset;

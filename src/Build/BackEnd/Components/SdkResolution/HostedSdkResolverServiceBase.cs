@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.BackEnd.Logging;
@@ -12,7 +12,7 @@ namespace Microsoft.Build.BackEnd.SdkResolution
     /// <summary>
     /// A base class for "hosted" ISdkResolverService implementations which are registered by an <see cref="IBuildComponentHost"/>.
     /// </summary>
-    internal abstract class HostedSdkResolverServiceBase : IBuildComponent, INodePacketHandler, ISdkResolverService
+    public abstract class HostedSdkResolverServiceBase : IBuildComponent, INodePacketHandler, ISdkResolverService
     {
         /// <summary>
         /// An event to signal for waiting threads when the <see cref="IBuildComponent"/> is being shut down.

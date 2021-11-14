@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,7 +10,7 @@ namespace Microsoft.Build.Exceptions
     /// Generic exception used to wrap exceptions thrown during Registry access.
     /// </summary>
     [Serializable]
-    internal class RegistryException : Exception
+    public class RegistryException : Exception
     {
         /// <summary>
         /// Basic constructor.

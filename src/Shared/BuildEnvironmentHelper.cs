@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -11,7 +11,7 @@ using Microsoft.Build.Shared.FileSystem;
 
 namespace Microsoft.Build.Shared
 {
-    internal class BuildEnvironmentHelper
+    public class BuildEnvironmentHelper
     {
         // Since this class is added as 'link' to shared source in multiple projects,
         // MSBuildConstants.CurrentVisualStudioVersion is not available in all of them.
@@ -355,7 +355,7 @@ namespace Microsoft.Build.Shared
                 //  See the comments on the TestInfo class for an explanation of why it works this way.
                 var frameworkAssembly = typeof(Framework.ITask).Assembly;
                 var testInfoType = frameworkAssembly.GetType("Microsoft.Build.Framework.TestInfo");
-                var runningTestsField = testInfoType.GetField("s_runningTests", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                var runningTestsField = testInfoType.GetField("s_runningTests", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
 
                 _runningTests = (bool)runningTestsField.GetValue(null);
 
@@ -420,7 +420,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Resets the current singleton instance (for testing).
         /// </summary>
-        internal static void ResetInstance_ForUnitTestsOnly(Func<string> getProcessFromRunningProcess = null,
+        public static void ResetInstance_ForUnitTestsOnly(Func<string> getProcessFromRunningProcess = null,
             Func<string> getExecutingAssemblyPath = null, Func<string> getAppContextBaseDirectory = null,
             Func<IEnumerable<VisualStudioInstance>> getVisualStudioInstances = null,
             Func<string, string> getEnvironmentVariable = null,
@@ -441,7 +441,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Resets the current singleton instance (for testing).
         /// </summary>
-        internal static void ResetInstance_ForUnitTestsOnly(BuildEnvironment buildEnvironment)
+        public static void ResetInstance_ForUnitTestsOnly(BuildEnvironment buildEnvironment)
         {
             BuildEnvironmentHelperSingleton.s_instance = buildEnvironment;
         }
@@ -467,7 +467,7 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// Enum which defines which environment / mode MSBuild is currently running.
     /// </summary>
-    internal enum BuildEnvironmentMode
+    public enum BuildEnvironmentMode
     {
         /// <summary>
         /// Running from Visual Studio directly or from MSBuild installed under an instance of Visual Studio.
@@ -492,7 +492,7 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// Defines the current environment for build tools.
     /// </summary>
-    internal class BuildEnvironment
+    public class BuildEnvironment
     {
         public BuildEnvironment(BuildEnvironmentMode mode, string currentMSBuildExePath, bool runningTests, bool runningInVisualStudio, string visualStudioPath)
         {
@@ -555,32 +555,32 @@ namespace Microsoft.Build.Shared
                 : MSBuildToolsDirectory32;
         }
 
-        internal BuildEnvironmentMode Mode { get; }
+        public BuildEnvironmentMode Mode { get; }
 
         /// <summary>
         /// Gets the flag that indicates if we are running in a test harness.
         /// </summary>
-        internal bool RunningTests { get; }
+        public bool RunningTests { get; }
 
         /// <summary>
         /// Returns true when the entry point application is Visual Studio.
         /// </summary>
-        internal bool RunningInVisualStudio { get; }
+        public bool RunningInVisualStudio { get; }
 
         /// <summary>
         /// Path to the MSBuild 32-bit tools directory.
         /// </summary>
-        internal string MSBuildToolsDirectory32 { get; }
+        public string MSBuildToolsDirectory32 { get; }
 
         /// <summary>
         /// Path to the MSBuild 64-bit (AMD64) tools directory.
         /// </summary>
-        internal string MSBuildToolsDirectory64 { get; }
+        public string MSBuildToolsDirectory64 { get; }
 
         /// <summary>
         /// Path to the Sdks folder for this MSBuild instance.
         /// </summary>
-        internal string MSBuildSDKsPath
+        public string MSBuildSDKsPath
         {
             get
             {
@@ -604,7 +604,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Full path to the current MSBuild configuration file.
         /// </summary>
-        internal string CurrentMSBuildConfigurationFile { get; }
+        public string CurrentMSBuildConfigurationFile { get; }
 
         /// <summary>
         /// Full path to current MSBuild.exe.
@@ -614,24 +614,24 @@ namespace Microsoft.Build.Shared
         /// version of MSBuild found to be associated with the current environment.
         /// </remarks>
         /// </summary>
-        internal string CurrentMSBuildExePath { get; private set; }
+        public string CurrentMSBuildExePath { get; private set; }
 
         /// <summary>
         /// Full path to the current MSBuild tools directory. This will be 32-bit unless
         /// we're executing from the 'AMD64' folder.
         /// </summary>
-        internal string CurrentMSBuildToolsDirectory { get; }
+        public string CurrentMSBuildToolsDirectory { get; }
 
         /// <summary>
         /// Path to the root Visual Studio install directory
         /// (e.g. 'C:\Program Files (x86)\Microsoft Visual Studio\Preview\Enterprise')
         /// </summary>
-        internal string VisualStudioInstallRootDirectory { get; }
+        public string VisualStudioInstallRootDirectory { get; }
 
         /// <summary>
         /// MSBuild extensions path. On Standalone this defaults to the MSBuild folder. In
         /// VisualStudio mode this folder will be %VSINSTALLDIR%\MSBuild.
         /// </summary>
-        internal string MSBuildExtensionsPath { get; set; }
+        public string MSBuildExtensionsPath { get; set; }
     }
 }

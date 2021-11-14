@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -20,7 +20,7 @@ namespace Microsoft.Build.Shared.FileSystem
     [SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors",
         Justification = "We don't need exceptions to cross AppDomain boundaries.")]
     [Serializable]
-    internal sealed class NativeWin32Exception : Win32Exception
+    public sealed class NativeWin32Exception : Win32Exception
     {
         /// <summary>
         /// Creates an exception representing a native failure (with a corresponding Win32 error code).

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -21,7 +21,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// Implementation of the ItemGroup intrinsic task
     /// </summary>
-    internal class ItemGroupIntrinsicTask : IntrinsicTask
+    public class ItemGroupIntrinsicTask : IntrinsicTask
     {
         /// <summary>
         /// The task instance data
@@ -48,7 +48,7 @@ namespace Microsoft.Build.BackEnd
         /// Execute an ItemGroup element, including each child item expression
         /// </summary>
         /// <param name="lookup">The lookup used for evaluation and as a destination for these items.</param>
-        internal override void ExecuteTask(Lookup lookup)
+        public override void ExecuteTask(Lookup lookup)
         {
             foreach (ProjectItemGroupTaskItemInstance child in _taskInstance.Items)
             {
@@ -630,7 +630,7 @@ namespace Microsoft.Build.BackEnd
             /// <param name="itemType">The type of item for which we are doing evaluation.</param>
             /// <param name="bucketTable">The metadata table created for this batch bucket.  May be null.</param>
             /// <param name="itemDefinitionTable">The metadata table for the item definition representing this item.  May be null.</param>
-            internal NestedMetadataTable(string itemType, IMetadataTable bucketTable, IMetadataTable itemDefinitionTable)
+            public NestedMetadataTable(string itemType, IMetadataTable bucketTable, IMetadataTable itemDefinitionTable)
             {
                 _itemType = itemType;
                 _addTable = new Dictionary<string, string>(MSBuildNameIgnoreCaseComparer.Default);
@@ -641,7 +641,7 @@ namespace Microsoft.Build.BackEnd
             /// <summary>
             /// Retrieves the metadata table used to collect additions.
             /// </summary>
-            internal Dictionary<string, string> AddedMetadata
+            public Dictionary<string, string> AddedMetadata
             {
                 get { return _addTable; }
             }
@@ -706,7 +706,7 @@ namespace Microsoft.Build.BackEnd
             /// <summary>
             /// Sets the metadata value.
             /// </summary>
-            internal void SetValue(string name, string value)
+            public void SetValue(string name, string value)
             {
                 _addTable[name] = value;
             }

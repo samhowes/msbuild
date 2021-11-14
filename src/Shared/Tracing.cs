@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -12,7 +12,7 @@ namespace Microsoft.Build.Internal
     /// <summary>
     /// A debug only helper class for tracing
     /// </summary>
-    internal static class Tracing
+    public static class Tracing
     {
         // Disabling warning about unused fields -- this is effectively a 
         // debug-only class, so these fields cause a build break in RET
@@ -74,7 +74,7 @@ namespace Microsoft.Build.Internal
         /// Put something in the slot
         /// </summary>
         [Conditional("DEBUG")]
-        internal static void Slot(string tag, string value)
+        public static void Slot(string tag, string value)
         {
             lock (s_counts)
             {
@@ -88,7 +88,7 @@ namespace Microsoft.Build.Internal
         /// <typeparam name="K">The key type.</typeparam>
         /// <typeparam name="V">The value type.</typeparam>
         [Conditional("DEBUG")]
-        internal static void Slot<K, V>(string tag, KeyValuePair<K, V> value)
+        public static void Slot<K, V>(string tag, KeyValuePair<K, V> value)
         {
             Slot(tag, value.Key.ToString() + "=" + value.Key.ToString());
         }
@@ -97,7 +97,7 @@ namespace Microsoft.Build.Internal
         /// Increment the named counter, and dump if it's time to do so
         /// </summary>
         [Conditional("DEBUG")]
-        internal static void Record(string counter)
+        public static void Record(string counter)
         {
             lock (s_counts)
             {
@@ -124,7 +124,7 @@ namespace Microsoft.Build.Internal
         /// </summary>
         /// <typeparam name="T">The item type.</typeparam>
         [Conditional("DEBUG")]
-        internal static void List<T>(IEnumerable<T> items)
+        public static void List<T>(IEnumerable<T> items)
         {
             foreach (T item in items)
             {
@@ -137,7 +137,7 @@ namespace Microsoft.Build.Internal
         /// </summary>
         [Conditional("DEBUG")]
         [SuppressMessage("Microsoft.MSInternal", "CA908:AvoidTypesThatRequireJitCompilationInPrecompiledAssemblies", Justification = "Debug only")]
-        internal static void Dump()
+        public static void Dump()
         {
             if (s_counts.Count > 0)
             {

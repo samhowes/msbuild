@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -13,14 +13,14 @@ namespace Microsoft.Build.Shared.LanguageParser
      * Provides utility functions for dealing with C#-specific tokens.
      *
      */
-    sealed internal class CSharpTokenCharReader : TokenCharReader
+    sealed public class CSharpTokenCharReader : TokenCharReader
     {
         /*
          * Method:  CSharpTokenCharReader
          * 
          * Construct
          */
-        internal CSharpTokenCharReader(Stream binaryStream, bool forceANSI)
+        public CSharpTokenCharReader(Stream binaryStream, bool forceANSI)
             : base(binaryStream, forceANSI)
         {
         }
@@ -30,7 +30,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Skip C# integer literal long suffix: L, U, l, u, ul, etc.                    
          */
-        internal bool SinkLongIntegerSuffix()
+        public bool SinkLongIntegerSuffix()
         {
             // Skip the long integer suffix if there is one.
             if (CurrentCharacter == 'U' || CurrentCharacter == 'u')
@@ -58,7 +58,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Determine whether this is a C# operator or punctuator
          */
-        internal bool SinkOperatorOrPunctuator()
+        public bool SinkOperatorOrPunctuator()
         {
             const string operatorsAndPunctuators = "{}[]().,:;+-*/%&|^!~=<>?";
             if (operatorsAndPunctuators.IndexOf(CurrentCharacter) == -1)
@@ -74,7 +74,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Determine whether this is a valid escape character for strings?
          */
-        internal bool SinkStringEscape()
+        public bool SinkStringEscape()
         {
             switch (CurrentCharacter)
             {
@@ -103,7 +103,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Determine whether this is a regular C# string literal character
          */
-        internal bool MatchRegularStringLiteral()
+        public bool MatchRegularStringLiteral()
         {
             if (CurrentCharacter == '\"' || CurrentCharacter == '\\' || TokenChar.IsNewLine(CurrentCharacter))
             {
@@ -118,7 +118,7 @@ namespace Microsoft.Build.Shared.LanguageParser
          * 
          * Sink some C# whitespace
          */
-        internal bool SinkMultipleWhiteSpace()
+        public bool SinkMultipleWhiteSpace()
         {
             int count = 0;
             while (!EndOfLines && Char.IsWhiteSpace(CurrentCharacter))

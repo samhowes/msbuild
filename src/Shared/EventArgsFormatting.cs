@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -12,7 +12,7 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// Offers a default string format for Error and Warning events
     /// </summary>
-    internal static class EventArgsFormatting
+    public static class EventArgsFormatting
     {
         /// <summary>
         /// Format the error event message and all the other event data into
@@ -22,7 +22,7 @@ namespace Microsoft.Build.Shared
         /// <param name="showProjectFile"><code>true</code> to show the project file which issued the event, otherwise <code>false</code>.</param>
         /// <param name="projectConfigurationDescription">Properties to Print along with message</param>
         /// <returns>The formatted message string.</returns>
-        internal static string FormatEventMessage(BuildErrorEventArgs e, bool showProjectFile, string projectConfigurationDescription)
+        public static string FormatEventMessage(BuildErrorEventArgs e, bool showProjectFile, string projectConfigurationDescription)
         {
             return FormatEventMessage("error", e.Subcategory, e.Message,
                             e.Code, e.File, showProjectFile ? e.ProjectFile : null, e.LineNumber, e.EndLineNumber,
@@ -37,7 +37,7 @@ namespace Microsoft.Build.Shared
         /// <param name="showProjectFile"><code>true</code> to show the project file which issued the event, otherwise <code>false</code>.</param>
         /// <param name="projectConfigurationDescription">Properties to Print along with message</param>
         /// <returns>The formatted message string.</returns>
-        internal static string FormatEventMessage(BuildWarningEventArgs e, bool showProjectFile, string projectConfigurationDescription)
+        public static string FormatEventMessage(BuildWarningEventArgs e, bool showProjectFile, string projectConfigurationDescription)
         {
             return FormatEventMessage("warning", e.Subcategory, e.Message,
                             e.Code, e.File, showProjectFile ? e.ProjectFile : null, e.LineNumber, e.EndLineNumber,
@@ -52,7 +52,7 @@ namespace Microsoft.Build.Shared
         /// <param name="showProjectFile"><code>true</code> to show the project file which issued the event, otherwise <code>false</code>.</param>
         /// <param name="projectConfigurationDescription">Properties to Print along with message</param>
         /// <returns>The formatted message string.</returns>
-        internal static string FormatEventMessage(BuildMessageEventArgs e, bool showProjectFile, string projectConfigurationDescription)
+        public static string FormatEventMessage(BuildMessageEventArgs e, bool showProjectFile, string projectConfigurationDescription)
         {
             return FormatEventMessage("message", e.Subcategory, e.Message,
                             e.Code, e.File, showProjectFile ? e.ProjectFile : null, e.LineNumber, e.EndLineNumber,
@@ -65,7 +65,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="e">Error to format</param>
         /// <returns>The formatted message string.</returns>
-        internal static string FormatEventMessage(BuildErrorEventArgs e)
+        public static string FormatEventMessage(BuildErrorEventArgs e)
         {
             ErrorUtilities.VerifyThrowArgumentNull(e, nameof(e));
 
@@ -82,7 +82,7 @@ namespace Microsoft.Build.Shared
         /// <param name="e">Error to format</param>
         /// <param name="showProjectFile"><code>true</code> to show the project file which issued the event, otherwise <code>false</code>.</param>
         /// <returns>The formatted message string.</returns>
-        internal static string FormatEventMessage(BuildErrorEventArgs e, bool showProjectFile)
+        public static string FormatEventMessage(BuildErrorEventArgs e, bool showProjectFile)
         {
             ErrorUtilities.VerifyThrowArgumentNull(e, nameof(e));
 
@@ -98,7 +98,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="e">Warning to format</param>
         /// <returns>The formatted message string.</returns>
-        internal static string FormatEventMessage(BuildWarningEventArgs e)
+        public static string FormatEventMessage(BuildWarningEventArgs e)
         {
             ErrorUtilities.VerifyThrowArgumentNull(e, nameof(e));
 
@@ -115,7 +115,7 @@ namespace Microsoft.Build.Shared
         /// <param name="e">Warning to format</param>
         /// <param name="showProjectFile"><code>true</code> to show the project file which issued the event, otherwise <code>false</code>.</param>
         /// <returns>The formatted message string.</returns>
-        internal static string FormatEventMessage(BuildWarningEventArgs e, bool showProjectFile)
+        public static string FormatEventMessage(BuildWarningEventArgs e, bool showProjectFile)
         {
             ErrorUtilities.VerifyThrowArgumentNull(e, nameof(e));
 
@@ -131,7 +131,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="e">Message to format</param>
         /// <returns>The formatted message string.</returns>
-        internal static string FormatEventMessage(BuildMessageEventArgs e)
+        public static string FormatEventMessage(BuildMessageEventArgs e)
         {
             return FormatEventMessage(e, false);
         }
@@ -143,7 +143,7 @@ namespace Microsoft.Build.Shared
         /// <param name="e">Message to format</param>
         /// <param name="showProjectFile">Show project file or not</param>
         /// <returns>The formatted message string.</returns>
-        internal static string FormatEventMessage(BuildMessageEventArgs e, bool showProjectFile)
+        public static string FormatEventMessage(BuildMessageEventArgs e, bool showProjectFile)
         {
             ErrorUtilities.VerifyThrowArgumentNull(e, nameof(e));
 
@@ -167,7 +167,7 @@ namespace Microsoft.Build.Shared
         /// <param name="endColumnNumber">end column number (0 if n/a)</param>
         /// <param name="threadId">thread id</param>
         /// <returns>The formatted message string.</returns>
-        internal static string FormatEventMessage
+        public static string FormatEventMessage
         (
             string category,
             string subcategory,
@@ -201,7 +201,7 @@ namespace Microsoft.Build.Shared
         /// <param name="threadId">thread id</param>
         /// <param name="logOutputProperties">log output properties</param>
         /// <returns>The formatted message string.</returns>
-        internal static string FormatEventMessage
+        public static string FormatEventMessage
         (
             string category,
             string subcategory,

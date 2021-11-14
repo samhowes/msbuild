@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -14,7 +14,7 @@ using WriteHandler = Microsoft.Build.Logging.WriteHandler;
 
 namespace Microsoft.Build.BackEnd.Logging
 {
-    internal class SerialConsoleLogger : BaseConsoleLogger
+    public class SerialConsoleLogger : BaseConsoleLogger
     {
         #region Constructors
 
@@ -71,7 +71,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// Reset the states of per-build member variables
         /// VSW#516376 
         /// </summary>
-        internal override void ResetConsoleLoggerState()
+        public override void ResetConsoleLoggerState()
         {
             if (ShowSummary == true)
             {
@@ -587,7 +587,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Writes project started messages.
         /// </summary>
-        internal void WriteProjectStarted()
+        public void WriteProjectStarted()
         {
             this.VerifyStack(!contextStack.IsEmpty(), "Bad project stack");
 
@@ -807,7 +807,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// This enumeration represents the kinds of context that can be
         /// stored in the context stack.
         /// </summary>
-        internal enum FrameType
+        public enum FrameType
         {
             Project,
             Target
@@ -817,7 +817,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// This struct represents context information about a single
         /// target or project.
         /// </summary>
-        internal struct Frame
+        public struct Frame
         {
             /// <summary>
             /// Creates a new instance of frame with all fields specified.
@@ -829,7 +829,7 @@ namespace Microsoft.Build.BackEnd.Logging
             /// <param name="targets">targets to execute, in the case of a project frame</param>
             /// <param name="fileOfTarget">the file name where the target is defined</param>
             /// <param name="parent">parent project file</param>
-            internal Frame
+            public Frame
                 (
                 FrameType t,
                 bool d,
@@ -853,34 +853,34 @@ namespace Microsoft.Build.BackEnd.Logging
             /// <summary>
             /// Indicates if project or target frame.
             /// </summary>
-            internal FrameType type;
+            public FrameType type;
 
             /// <summary>
             /// Set to true to indicate the user has seen a message about this frame.
             /// </summary>
-            internal bool displayed;
+            public bool displayed;
 
             /// <summary>
             /// The number of tabstops to indent this event when it is eventually displayed.
             /// </summary>
-            internal int indentLevel;
+            public int indentLevel;
 
             /// <summary>
             /// A string associated with this frame -- should be a target name
             /// or a project file.
             /// </summary>
-            internal string ID;
+            public string ID;
 
             /// <summary>
             /// For a TargetStarted or a ProjectStarted event, this field tells us
             /// the name of the *parent* project file that was responsible.
             /// </summary>
-            internal string parentProjectFile;
+            public string parentProjectFile;
 
             /// <summary>
             /// Stores the TargetNames from the ProjectStarted event. Null for Target frames.
             /// </summary>
-            internal string targetNames;
+            public string targetNames;
 
             /// <summary>
             /// For TargetStarted events, this stores the filename where the Target is defined
@@ -888,18 +888,18 @@ namespace Microsoft.Build.BackEnd.Logging
             /// being built.  
             /// For ProjectStarted events, this is null.
             /// </summary>
-            internal string file;
+            public string file;
 
             /// <summary>
             /// True if there were errors/warnings during the project or target frame.
             /// </summary>
-            internal bool hasErrorsOrWarnings;
+            public bool hasErrorsOrWarnings;
         }
 
         /// <summary>
         /// The FrameStack class represents a (lifo) stack of Frames.
         /// </summary>
-        internal class FrameStack
+        public class FrameStack
         {
             /// <summary>
             /// The frames member is contained by FrameStack and does
@@ -910,7 +910,7 @@ namespace Microsoft.Build.BackEnd.Logging
             /// <summary>
             /// Create a new, empty, FrameStack.
             /// </summary>
-            internal FrameStack()
+            public FrameStack()
             {
                 _frames = new System.Collections.Stack();
             }
@@ -919,7 +919,7 @@ namespace Microsoft.Build.BackEnd.Logging
             /// Remove and return the top element in the stack.
             /// </summary>
             /// <exception cref="InvalidOperationException">Thrown when stack is empty.</exception>
-            internal Frame Pop()
+            public Frame Pop()
             {
                 return (Frame)(_frames.Pop());
             }
@@ -927,7 +927,7 @@ namespace Microsoft.Build.BackEnd.Logging
             /// <summary>
             /// Returns, but does not remove, the top of the stack.
             /// </summary>
-            internal Frame Peek()
+            public Frame Peek()
             {
                 return (Frame)(_frames.Peek());
             }
@@ -936,7 +936,7 @@ namespace Microsoft.Build.BackEnd.Logging
             /// Push(f) adds f to the top of the stack.
             /// </summary>
             /// <param name="f">a frame to push</param>
-            internal void Push(Frame f)
+            public void Push(Frame f)
             {
                 _frames.Push(f);
             }
@@ -945,7 +945,7 @@ namespace Microsoft.Build.BackEnd.Logging
             /// Constant property that indicates the number of elements
             /// in the stack.
             /// </summary>
-            internal int Count
+            public int Count
             {
                 get
                 {
@@ -956,7 +956,7 @@ namespace Microsoft.Build.BackEnd.Logging
             /// <summary>
             /// s.IsEmpty() is true iff s.Count == 0
             /// </summary>
-            internal bool IsEmpty()
+            public bool IsEmpty()
             {
                 return _frames.Count == 0;
             }
@@ -970,7 +970,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// logger.  The context stack contains a sequence of frames
         /// denoting current and previous containing projects and targets
         /// </summary>
-        internal FrameStack contextStack = new FrameStack();
+        public FrameStack contextStack = new FrameStack();
         #endregion
     }
 }

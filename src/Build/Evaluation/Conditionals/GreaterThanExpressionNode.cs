@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,7 +10,7 @@ namespace Microsoft.Build.Evaluation
     /// Compares for left > right
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    internal sealed class GreaterThanExpressionNode : NumericComparisonExpressionNode
+    public sealed class GreaterThanExpressionNode : NumericComparisonExpressionNode
     {
         /// <summary>
         /// Compare numerically
@@ -59,6 +59,6 @@ namespace Microsoft.Build.Evaluation
             return false;
         }
 
-        internal override string DebuggerDisplay => $"(> {LeftChild.DebuggerDisplay} {RightChild.DebuggerDisplay})";
+        public override string DebuggerDisplay => $"(> {LeftChild.DebuggerDisplay} {RightChild.DebuggerDisplay})";
     }
 }

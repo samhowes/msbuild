@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -17,7 +17,7 @@ namespace Microsoft.Build.Shared
     /// <remarks>
     /// This class is being deprecated in favor of SpanBasedStringBuilder in StringTools. Avoid adding more uses.
     /// </remarks>
-    internal sealed class ReuseableStringBuilder : IDisposable
+    public sealed class ReuseableStringBuilder : IDisposable
     {
         /// <summary>
         /// Captured string builder.
@@ -32,7 +32,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Create a new builder, under the covers wrapping a reused one.
         /// </summary>
-        internal ReuseableStringBuilder(int capacity = 16) // StringBuilder default is 16
+        public ReuseableStringBuilder(int capacity = 16) // StringBuilder default is 16
         {
             _capacity = capacity;
 
@@ -81,7 +81,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Append a character.
         /// </summary>
-        internal ReuseableStringBuilder Append(char value)
+        public ReuseableStringBuilder Append(char value)
         {
             LazyPrepare();
             _borrowedBuilder.Append(value);
@@ -91,7 +91,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Append a string.
         /// </summary>
-        internal ReuseableStringBuilder Append(string value)
+        public ReuseableStringBuilder Append(string value)
         {
             LazyPrepare();
             _borrowedBuilder.Append(value);
@@ -101,7 +101,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Append a substring.
         /// </summary>
-        internal ReuseableStringBuilder Append(string value, int startIndex, int count)
+        public ReuseableStringBuilder Append(string value, int startIndex, int count)
         {
             LazyPrepare();
             _borrowedBuilder.Append(value, startIndex, count);
@@ -139,7 +139,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Remove a substring.
         /// </summary>
-        internal ReuseableStringBuilder Remove(int startIndex, int length)
+        public ReuseableStringBuilder Remove(int startIndex, int length)
         {
             LazyPrepare();
             _borrowedBuilder.Remove(startIndex, length);
@@ -221,7 +221,7 @@ namespace Microsoft.Build.Shared
             /// have been used. 
             /// Never returns null.
             /// </summary>
-            internal static StringBuilder Get(int capacity)
+            public static StringBuilder Get(int capacity)
             {
 #if DEBUG
                 bool missed = false;
@@ -264,7 +264,7 @@ namespace Microsoft.Build.Shared
             /// Returns the shared builder for the next caller to use.
             /// ** CALLERS, DO NOT USE THE BUILDER AFTER RELEASING IT HERE! **
             /// </summary>
-            internal static void Release(StringBuilder returningBuilder)
+            public static void Release(StringBuilder returningBuilder)
             {
                 // It's possible for someone to cause the builder to
                 // enlarge to such an extent that this static field
@@ -297,7 +297,7 @@ namespace Microsoft.Build.Shared
             /// </summary>
             [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Handy helper method that can be used to annotate ReuseableStringBuilder when debugging it, but is not hooked up usually for the sake of perf.")]
             [SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "System.String.Format(System.IFormatProvider,System.String,System.Object[])", Justification = "Handy string that can be used to annotate ReuseableStringBuilder when debugging it, but is not hooked up usually.")]
-            internal static void DumpUnreturned()
+            public static void DumpUnreturned()
             {
                 String.Format(CultureInfo.CurrentUICulture, "{0} Hits of which\n    {1} Misses (was on loan)\n    {2} Upsizes (needed bigger) \n\n{3} Returns=\n{4}    Discards (returned too large)+\n    {5} Accepts\n\n{6} estimated bytes saved", s_hits, s_misses, s_upsizes, s_discards + s_accepts, s_discards, s_accepts, s_saved);
 

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace Microsoft.Build.Evaluation
@@ -6,7 +6,7 @@ namespace Microsoft.Build.Evaluation
     /// <summary>
     /// Table of metadata useable to expand expressions
     /// </summary>
-    internal interface IMetadataTable
+    public interface IMetadataTable
     {
         /// <summary>
         /// Retrieves any value we have in our metadata table for the metadata name specified.

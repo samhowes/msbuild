@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -12,7 +12,7 @@ namespace Microsoft.Build.BackEnd
     /// </summary>
     [SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors", Justification = "No point in adding the serialization constructors since BuildRequest is not serializable")]
     [SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "No point in marking as ISerializable since BuildRequest is not. ")]
-    internal class SchedulerCircularDependencyException : Exception
+    public class SchedulerCircularDependencyException : Exception
     {
         /// <summary>
         /// The ancestors which led to this circular dependency.

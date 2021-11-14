@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.BackEnd.Logging;
@@ -11,7 +11,7 @@ namespace Microsoft.Build.BackEnd.SdkResolution
     /// <summary>
     /// An internal implementation of <see cref="Framework.SdkLogger"/>.
     /// </summary>
-    internal class SdkLogger : SdkLoggerBase
+    public class SdkLogger : SdkLoggerBase
     {
         private readonly LoggingContext _loggingContext;
 

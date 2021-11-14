@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,18 +10,18 @@ namespace Microsoft.Build.Evaluation
     /// <summary>
     /// Pretty prints an evaluation location with its associated profiled location
     /// </summary>
-    internal abstract class EvaluationLocationPrettyPrinterBase
+    public abstract class EvaluationLocationPrettyPrinterBase
     {
         /// <summary>
         /// Appends the header of all the locations to the string builder
         /// </summary>
         /// <param name="stringBuilder"></param>
-        internal abstract void AppendHeader(StringBuilder stringBuilder);
+        public abstract void AppendHeader(StringBuilder stringBuilder);
 
         /// <summary>
         /// Appends a pretty printed location with its associated profiled data
         /// </summary>
-        internal abstract void AppendLocation(StringBuilder stringBuilder, TimeSpan totalTime, EvaluationLocation evaluationLocation, ProfiledLocation profiledLocation);
+        public abstract void AppendLocation(StringBuilder stringBuilder, TimeSpan totalTime, EvaluationLocation evaluationLocation, ProfiledLocation profiledLocation);
 
         /// <summary>
         /// Normalizes the expression returned by <see cref="GetElementOrConditionText"/>

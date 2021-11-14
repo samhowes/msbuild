@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 #if FEATURE_WIN32_REGISTRY
 
@@ -14,7 +14,7 @@ namespace Microsoft.Build.Internal
     /// Thin wrapper around Microsoft.Win32.RegistryKey that can be 
     /// subclassed for testing purposes
     /// </summary>
-    internal class RegistryKeyWrapper : IDisposable
+    public class RegistryKeyWrapper : IDisposable
     {
         // Path to the key this instance wraps
         private string _registryKeyPath;
@@ -45,7 +45,7 @@ namespace Microsoft.Build.Internal
         /// and assumes the key is underneath HKLM
         /// Note that registryKeyPath should be relative to HKLM.
         /// </summary>
-        internal RegistryKeyWrapper(string registryKeyPath)
+        public RegistryKeyWrapper(string registryKeyPath)
             : this(registryKeyPath, Registry.LocalMachine)
         {
         }
@@ -53,7 +53,7 @@ namespace Microsoft.Build.Internal
         /// <summary>
         /// Initializes this RegistryKeyWrapper to wrap the key at the specified path
         /// </summary>
-        internal RegistryKeyWrapper(string registryKeyPath, RegistryHive registryHive, RegistryView registryView)
+        public RegistryKeyWrapper(string registryKeyPath, RegistryHive registryHive, RegistryView registryView)
             : this(registryKeyPath, RegistryKey.OpenBaseKey(registryHive, registryView))
         {
         }
@@ -61,7 +61,7 @@ namespace Microsoft.Build.Internal
         /// <summary>
         /// Initializes this RegistryKeyWrapper to wrap the key at the specified path
         /// </summary>
-        internal RegistryKeyWrapper(string registryKeyPath, RegistryKey registryHive)
+        public RegistryKeyWrapper(string registryKeyPath, RegistryKey registryHive)
         {
             ErrorUtilities.VerifyThrowArgumentNull(registryKeyPath, nameof(registryKeyPath));
             ErrorUtilities.VerifyThrowArgumentNull(registryHive, nameof(registryHive));

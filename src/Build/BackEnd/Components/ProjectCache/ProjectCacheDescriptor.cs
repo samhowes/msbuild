@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 #nullable enable
@@ -30,7 +30,7 @@ namespace Microsoft.Build.Experimental.ProjectCache
 
         public ProjectCachePluginBase? PluginInstance { get; }
 
-        internal bool VsWorkaround { get; }
+        public bool VsWorkaround { get; }
 
         private ProjectCacheDescriptor(
             IReadOnlyCollection<ProjectGraphEntryPoint>? entryPoints,
@@ -72,7 +72,7 @@ namespace Microsoft.Build.Experimental.ProjectCache
         }
 
         // TODO: remove after we change VS to set the cache descriptor via build parameters.
-        internal static ProjectCacheDescriptor FromVisualStudioWorkaround(ProjectCacheItem projectCacheItem)
+        public static ProjectCacheDescriptor FromVisualStudioWorkaround(ProjectCacheItem projectCacheItem)
         {
             return new ProjectCacheDescriptor(projectCacheItem);
         }

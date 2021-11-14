@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Construction;
@@ -14,7 +14,7 @@ using System.Linq;
 
 namespace Microsoft.Build.Evaluation
 {
-    internal partial class LazyItemEvaluator<P, I, M, D>
+    public partial class LazyItemEvaluator<P, I, M, D>
     {
         class IncludeOperation : LazyItemOperation
         {

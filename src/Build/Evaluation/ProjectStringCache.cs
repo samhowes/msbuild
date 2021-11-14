@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -15,7 +15,7 @@ namespace Microsoft.Build.Construction
     /// This class will cache string values for loaded Xml files.
     /// </summary>
     [DebuggerDisplay("#Strings={Count} #Documents={_documents.Count}")]
-    internal class ProjectStringCache
+    public class ProjectStringCache
     {
         /// <summary>
         /// Start off with a large size as there are very many strings in common scenarios and resizing is expensive.
@@ -50,7 +50,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Obtain the number of entries contained in the cache.
         /// </summary>
-        internal int Count
+        public int Count
         {
             get
             {
@@ -64,7 +64,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Obtain the number of documents contained in the cache.
         /// </summary>
-        internal int DocumentCount
+        public int DocumentCount
         {
             get
             {
@@ -253,7 +253,7 @@ namespace Microsoft.Build.Construction
             /// Constructor.
             /// Caller must then do Increment().
             /// </summary>
-            internal StringCacheEntry(string str)
+            public StringCacheEntry(string str)
             {
                 _cachedString = str;
                 _refCount = 0;
@@ -270,7 +270,7 @@ namespace Microsoft.Build.Construction
             /// <summary>
             /// Number of documents using this string
             /// </summary>
-            internal int RefCount
+            public int RefCount
             {
                 get { return _refCount; }
             }
@@ -278,7 +278,7 @@ namespace Microsoft.Build.Construction
             /// <summary>
             /// Get the cached string.
             /// </summary>
-            internal string CachedString
+            public string CachedString
             {
                 get
                 {
@@ -291,7 +291,7 @@ namespace Microsoft.Build.Construction
             /// Indicates that this entry is included in the given document.
             /// Callers must verify that we were not already adreffed for this document.
             /// </summary>
-            internal void Increment()
+            public void Increment()
             {
                 _refCount++;
             }
@@ -300,7 +300,7 @@ namespace Microsoft.Build.Construction
             /// Removes a container for this entry.
             /// Callers must verify that this was not already reffed and not subsequently dereffed.
             /// </summary>
-            internal void Decrement()
+            public void Decrement()
             {
                 ErrorUtilities.VerifyThrow(_refCount > 0, "extra deref");
                 _refCount--;

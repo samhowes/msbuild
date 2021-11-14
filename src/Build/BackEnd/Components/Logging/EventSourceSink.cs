@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 // </copyright>
 // <summary>Sink which will take in a build event and raise it on its internal event source</summary>
@@ -14,7 +14,7 @@ namespace Microsoft.Build.BackEnd.Logging
     /// <summary>
     /// This class raises events on behalf of the build engine to all registered loggers.
     /// </summary>
-    internal sealed class EventSourceSink :
+    public sealed class EventSourceSink :
 #if FEATURE_APPDOMAIN
         MarshalByRefObject,
 #endif
@@ -298,7 +298,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// <summary>
         /// Clears out all events.
         /// </summary>
-        internal void UnregisterAllEventHandlers()
+        public void UnregisterAllEventHandlers()
         {
             MessageRaised = null;
             ErrorRaised = null;

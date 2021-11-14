@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.IO.Compression;
 using Microsoft.Build.Framework;
@@ -51,7 +51,7 @@ namespace Microsoft.Build.Logging
         //   - TargetSkippedEventArgs: added OriginallySucceeded, Condition, EvaluatedCondition
         // version 14:
         //   - TargetSkippedEventArgs: added SkipReason, OriginalBuildEventContext
-        internal const int FileFormatVersion = 14;
+        public const int FileFormatVersion = 14;
 
         private Stream stream;
         private BinaryWriter binaryWriter;

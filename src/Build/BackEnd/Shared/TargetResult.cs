@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -61,7 +61,7 @@ namespace Microsoft.Build.Execution
         ///  * in <see cref="ITargetBuilderCallback.LegacyCallTarget"/> when Cancellation was requested
         ///  * in ProjectCache.CacheResult.ConstructBuildResult
         /// </param>
-        internal TargetResult(TaskItem[] items, WorkUnitResult result, BuildEventContext originalBuildEventContext = null)
+        public TargetResult(TaskItem[] items, WorkUnitResult result, BuildEventContext originalBuildEventContext = null)
         {
             ErrorUtilities.VerifyThrowArgumentNull(items, nameof(items));
             ErrorUtilities.VerifyThrowArgumentNull(result, nameof(result));
@@ -137,7 +137,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Returns the internal result for the target.
         /// </summary>
-        internal WorkUnitResult WorkUnitResult
+        public WorkUnitResult WorkUnitResult
         {
             [DebuggerStepThrough]
             get => _result;
@@ -146,12 +146,12 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// The (possibly null) <see cref="BuildEventContext"/> from the original target build
         /// </summary>
-        internal BuildEventContext OriginalBuildEventContext => _originalBuildEventContext;
+        public BuildEventContext OriginalBuildEventContext => _originalBuildEventContext;
 
         /// <summary>
         /// Sets or gets a flag indicating whether or not a failure results should cause the build to fail.
         /// </summary>
-        internal bool TargetFailureDoesntCauseBuildFailure
+        public bool TargetFailureDoesntCauseBuildFailure
         {
             [DebuggerStepThrough]
             get => _targetFailureDoesntCauseBuildFailure;
@@ -163,7 +163,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Sets or gets a flag indicating whether at least one target which has run after us (transitively via AfterTargets) failed.
         /// </summary>
-        internal bool AfterTargetsHaveFailed
+        public bool AfterTargetsHaveFailed
         {
             [DebuggerStepThrough]
             get => _afterTargetsHaveFailed;
@@ -198,7 +198,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Factory for serialization.
         /// </summary>
-        internal static TargetResult FactoryForDeserialization(ITranslator translator)
+        public static TargetResult FactoryForDeserialization(ITranslator translator)
         {
             return new TargetResult(translator);
         }
@@ -208,7 +208,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Gets the name of the cache file for this configuration.
         /// </summary>
-        internal static string GetCacheFile(int configId, string targetToCache)
+        public static string GetCacheFile(int configId, string targetToCache)
         {
             string filename = Path.Combine(FileUtilities.GetCacheDirectory(), String.Format(CultureInfo.InvariantCulture, Path.Combine("Results{0}", "{1}.cache"), configId, targetToCache));
             return filename;
@@ -217,7 +217,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Gets the name of the cache file for this configuration.
         /// </summary>
-        internal static string GetCacheDirectory(int configId, string targetToCache)
+        public static string GetCacheDirectory(int configId, string targetToCache)
         {
             string filename = GetCacheFile(configId, targetToCache);
             string directoryName = Path.GetDirectoryName(filename);
@@ -227,7 +227,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Cache the items.
         /// </summary>
-        internal void CacheItems(int configId, string targetName)
+        public void CacheItems(int configId, string targetName)
         {
             lock (_result)
             {

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -19,7 +19,7 @@ namespace Microsoft.Build.Evaluation
     /// <summary>
     /// Class used to read toolset configurations.
     /// </summary>
-    internal class ToolsetConfigurationReader : ToolsetReader
+    public class ToolsetConfigurationReader : ToolsetReader
     {
         /// <summary>
         /// A section of a toolset configuration
@@ -57,7 +57,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Default constructor
         /// </summary>
-        internal ToolsetConfigurationReader(PropertyDictionary<ProjectPropertyInstance> environmentProperties, PropertyDictionary<ProjectPropertyInstance> globalProperties)
+        public ToolsetConfigurationReader(PropertyDictionary<ProjectPropertyInstance> environmentProperties, PropertyDictionary<ProjectPropertyInstance> globalProperties)
             : this(environmentProperties, globalProperties, ReadApplicationConfiguration)
         {
         }
@@ -65,7 +65,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Constructor taking a delegate for unit test purposes only
         /// </summary>
-        internal ToolsetConfigurationReader(PropertyDictionary<ProjectPropertyInstance> environmentProperties, PropertyDictionary<ProjectPropertyInstance> globalProperties, Func<Configuration> readApplicationConfiguration)
+        public ToolsetConfigurationReader(PropertyDictionary<ProjectPropertyInstance> environmentProperties, PropertyDictionary<ProjectPropertyInstance> globalProperties, Func<Configuration> readApplicationConfiguration)
             : base(environmentProperties, globalProperties)
         {
             ErrorUtilities.VerifyThrowArgumentNull(readApplicationConfiguration, nameof(readApplicationConfiguration));

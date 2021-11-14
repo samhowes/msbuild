@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -17,12 +17,12 @@ namespace Microsoft.Build.BackEnd
     /// </summary>
     /// <param name="entry">The entry whose state has changed.</param>
     /// <param name="newState">The new state value.</param>
-    internal delegate void BuildRequestEntryStateChangedDelegate(BuildRequestEntry entry, BuildRequestEntryState newState);
+    public delegate void BuildRequestEntryStateChangedDelegate(BuildRequestEntry entry, BuildRequestEntryState newState);
 
     /// <summary>
     /// The set of states in which a build request entry can be.
     /// </summary>
-    internal enum BuildRequestEntryState
+    public enum BuildRequestEntryState
     {
         /// <summary>
         /// There should only ever be one entry in the Active state.  This is the request which is
@@ -70,7 +70,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// BuildRequestEntry holds a build request and associated state data.
     /// </summary>
-    internal class BuildRequestEntry
+    public class BuildRequestEntry
     {
         /// <summary>
         /// Mapping of Build Request Configurations to Build Requests waiting for configuration resolution.
@@ -118,7 +118,7 @@ namespace Microsoft.Build.BackEnd
         /// </summary>
         /// <param name="request">The originating build request.</param>
         /// <param name="requestConfiguration">The build request configuration.</param>
-        internal BuildRequestEntry(BuildRequest request, BuildRequestConfiguration requestConfiguration)
+        public BuildRequestEntry(BuildRequest request, BuildRequestConfiguration requestConfiguration)
         {
             ErrorUtilities.VerifyThrowArgumentNull(request, nameof(request));
             ErrorUtilities.VerifyThrowArgumentNull(requestConfiguration, nameof(requestConfiguration));

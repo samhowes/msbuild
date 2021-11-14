@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Collections;
@@ -10,11 +10,11 @@ using System.Linq;
 
 namespace Microsoft.Build.Evaluation
 {
-    internal class ToolsetLocalReader : ToolsetReader
+    public class ToolsetLocalReader : ToolsetReader
     {
         private readonly IElementLocation _sourceLocation = new RegistryLocation("ToolsetLocalReader");
 
-        internal ToolsetLocalReader(PropertyDictionary<ProjectPropertyInstance> environmentProperties, PropertyDictionary<ProjectPropertyInstance> globalProperties)
+        public ToolsetLocalReader(PropertyDictionary<ProjectPropertyInstance> environmentProperties, PropertyDictionary<ProjectPropertyInstance> globalProperties)
            : base(environmentProperties, globalProperties)
         {
         }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Diagnostics;
@@ -16,7 +16,7 @@ namespace Microsoft.Build.BackEnd
     /// 2. The request was blocked on some set of build requests.  This class will then contain the build results 
     ///    needed to satisfy those requests.
     /// </summary>
-    internal class BuildRequestUnblocker : ITranslatable, INodePacket
+    public class BuildRequestUnblocker : ITranslatable, INodePacket
     {
         /// <summary>
         /// The node request id of the request which is blocked and now will either result or have results reported.
@@ -31,7 +31,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Constructor for deserialization.
         /// </summary>
-        internal BuildRequestUnblocker(ITranslator translator)
+        public BuildRequestUnblocker(ITranslator translator)
         {
             Translate(translator);
         }
@@ -39,7 +39,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Constructor for the unblocker where we are blocked waiting for a target.
         /// </summary>
-        internal BuildRequestUnblocker(int globalRequestIdToResume)
+        public BuildRequestUnblocker(int globalRequestIdToResume)
         {
             ErrorUtilities.VerifyThrowArgumentOutOfRange(globalRequestIdToResume != BuildRequest.InvalidGlobalRequestId, nameof(globalRequestIdToResume));
             _blockedGlobalRequestId = globalRequestIdToResume;
@@ -48,7 +48,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Constructor for the unblocker where we are blocked waiting for results.
         /// </summary>
-        internal BuildRequestUnblocker(BuildResult buildResult)
+        public BuildRequestUnblocker(BuildResult buildResult)
         {
             ErrorUtilities.VerifyThrowArgumentNull(buildResult, nameof(buildResult));
             _buildResult = buildResult;
@@ -58,7 +58,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Constructor for the unblocker for circular dependencies
         /// </summary>
-        internal BuildRequestUnblocker(BuildRequest parentRequest, BuildResult buildResult)
+        public BuildRequestUnblocker(BuildRequest parentRequest, BuildResult buildResult)
             : this(buildResult)
         {
             ErrorUtilities.VerifyThrowArgumentNull(parentRequest, nameof(parentRequest));
@@ -115,7 +115,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Factory for serialization.
         /// </summary>
-        internal static INodePacket FactoryForDeserialization(ITranslator translator)
+        public static INodePacket FactoryForDeserialization(ITranslator translator)
         {
             return new BuildRequestUnblocker(translator);
         }

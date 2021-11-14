@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Diagnostics;
@@ -12,7 +12,7 @@ namespace Microsoft.Build.Evaluation
     /// A class representing a property.  Used internally by the toolset readers.
     /// </summary>
     [DebuggerDisplay("Name={Name} Value={Value}")]
-    internal class ToolsetPropertyDefinition
+    public class ToolsetPropertyDefinition
     {
         /// <summary>
         /// The property name

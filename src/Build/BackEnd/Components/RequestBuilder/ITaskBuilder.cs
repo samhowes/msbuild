@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -13,7 +13,7 @@ namespace Microsoft.Build.BackEnd
     /// Flags indicating the mode in which the task builder should operate.
     /// </summary>
     [Flags]
-    internal enum TaskExecutionMode
+    public enum TaskExecutionMode
     {
         /// <summary>
         /// This entry is necessary to use the enum with binary math. It is never used outside 
@@ -35,7 +35,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// Interface representing an object which can build tasks.
     /// </summary>
-    internal interface ITaskBuilder
+    public interface ITaskBuilder
     {
         /// <summary>
         /// Executes the specified task, batching it is necessary.

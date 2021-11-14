@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.BackEnd.Logging;
@@ -11,7 +11,7 @@ namespace Microsoft.Build.BackEnd.SdkResolution
     /// <summary>
     /// An interface for services which resolve SDKs.
     /// </summary>
-    internal interface ISdkResolverService
+    public interface ISdkResolverService
     {
         /// <summary>
         /// A method to use when sending packets to a remote host.

@@ -1,6 +1,6 @@
-﻿namespace Microsoft.Build.Logging
+namespace Microsoft.Build.Logging
 {
-    internal enum BinaryLogRecordKind
+    public enum BinaryLogRecordKind
     {
         EndOfFile = 0,
         BuildStarted,

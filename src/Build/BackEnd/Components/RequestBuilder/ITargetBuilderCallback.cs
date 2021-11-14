@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using ElementLocation = Microsoft.Build.Construction.ElementLocation;
@@ -10,7 +10,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// Interface implemented by the Target Builder which allows tasks to invoke targets and build projects.
     /// </summary>
-    internal interface ITargetBuilderCallback : IRequestBuilderCallback
+    public interface ITargetBuilderCallback : IRequestBuilderCallback
     {
         /// <summary>
         /// Invokes the specified targets using Dev9 behavior.  

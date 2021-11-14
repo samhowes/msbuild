@@ -15,7 +15,7 @@ namespace Microsoft.Build.BackEnd
     /// A build request contains information about the configuration used to build as well
     /// as which targets need to be built.
     /// </summary>
-    internal class BuildRequest : INodePacket
+    public class BuildRequest : INodePacket
     {
         /// <summary>
         /// The invalid global request id
@@ -351,7 +351,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// The route for host-aware tasks back to the host
         /// </summary>
-        internal HostServices HostServices
+        public HostServices HostServices
         {
             [DebuggerStepThrough]
             get => _hostServices;
@@ -363,7 +363,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Returns true if this is a root request (one which has no parent.)
         /// </summary>
-        internal bool IsRootRequest
+        public bool IsRootRequest
         {
             [DebuggerStepThrough]
             get
@@ -373,7 +373,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Whether static graph isolation constraints should be skipped for this request
         /// </summary>
-        internal bool SkipStaticGraphIsolationConstraints => _skipStaticGraphIsolationConstraints;
+        public bool SkipStaticGraphIsolationConstraints => _skipStaticGraphIsolationConstraints;
 
         /// <summary>
         /// Sets the configuration id to a resolved id.
@@ -413,7 +413,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Factory for serialization.
         /// </summary>
-        internal static INodePacket FactoryForDeserialization(ITranslator translator)
+        public static INodePacket FactoryForDeserialization(ITranslator translator)
         {
             return new BuildRequest(translator);
         }

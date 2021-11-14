@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -12,7 +12,7 @@ using Microsoft.Build.Utilities;
 
 namespace Microsoft.Build.Internal
 {
-    internal class EngineFileUtilities
+    public class EngineFileUtilities
     {
         private readonly FileMatcher _fileMatcher;
 
@@ -29,7 +29,7 @@ namespace Microsoft.Build.Internal
         }
 
         // used by test to reset regexes
-        internal static void CaptureLazyWildcardRegexes()
+        public static void CaptureLazyWildcardRegexes()
         {
             s_lazyWildCardExpansionRegexes = PopulateRegexFromEnvironment();
         }
@@ -54,7 +54,7 @@ namespace Microsoft.Build.Internal
         /// <param name="directoryEscaped">The directory to evaluate, escaped.</param>
         /// <param name="filespecEscaped">The filespec to evaluate, escaped.</param>
         /// <returns>Array of file paths, unescaped.</returns>
-        internal string[] GetFileListUnescaped
+        public string[] GetFileListUnescaped
             (
             string directoryEscaped,
             string filespecEscaped
@@ -79,7 +79,7 @@ namespace Microsoft.Build.Internal
         /// <param name="excludeSpecsEscaped">Filespecs to exclude, escaped.</param>
         /// <param name="forceEvaluate">Whether to force file glob expansion when eager expansion is turned off</param>
         /// <returns>Array of file paths, escaped.</returns>
-        internal string[] GetFileListEscaped
+        public string[] GetFileListEscaped
             (
             string directoryEscaped,
             string filespecEscaped,
@@ -90,7 +90,7 @@ namespace Microsoft.Build.Internal
             return GetFileList(directoryEscaped, filespecEscaped, returnEscaped: true, forceEvaluate, excludeSpecsEscaped);
         }
 
-        internal static bool FilespecHasWildcards(string filespecEscaped)
+        public static bool FilespecHasWildcards(string filespecEscaped)
         {
             if (!FileMatcher.HasWildcards(filespecEscaped))
             {
@@ -232,7 +232,7 @@ namespace Microsoft.Build.Internal
         /// Returns a Func that will return true IFF its argument matches any of the specified filespecs
         /// Assumes filespec may be escaped, so it unescapes it
         /// The returned function makes no escaping assumptions or escaping operations. Its callers should control escaping.
-        internal static Func<string, bool> GetFileSpecMatchTester(IList<string> filespecsEscaped, string currentDirectory)
+        public static Func<string, bool> GetFileSpecMatchTester(IList<string> filespecsEscaped, string currentDirectory)
         {
             var matchers = filespecsEscaped
                 .Select(fs => new Lazy<FileSpecMatcherTester>(() => FileSpecMatcherTester.Parse(currentDirectory, fs)))
@@ -241,7 +241,7 @@ namespace Microsoft.Build.Internal
             return file => matchers.Any(m => m.Value.IsMatch(file));
         }
 
-        internal class IOCache
+        public class IOCache
         {
             private readonly Lazy<ConcurrentDictionary<string, bool>> existenceCache = new Lazy<ConcurrentDictionary<string, bool>>(() => new ConcurrentDictionary<string, bool>(), true);
 

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Eventing;
@@ -16,12 +16,12 @@ namespace Microsoft.Build.Construction
     /// <summary>
     /// Parses a project from raw XML into strongly typed objects
     /// </summary>
-    internal class ProjectParser
+    public class ProjectParser
     {
         /// <summary>
         /// Maximum nesting level of Choose elements. No reasonable project needs more than this
         /// </summary>
-        internal const int MaximumChooseNesting = 50;
+        public const int MaximumChooseNesting = 50;
 
         /// <summary>
         /// Valid attribute list when only Condition and Label are valid
@@ -109,7 +109,7 @@ namespace Microsoft.Build.Construction
         /// The code markers here used to be around the Project class constructor in the old code.
         /// In the new code, that's not very interesting; we are repurposing to wrap parsing the XML.
         /// </remarks>
-        internal static void Parse(XmlDocumentWithLocation document, ProjectRootElement projectRootElement)
+        public static void Parse(XmlDocumentWithLocation document, ProjectRootElement projectRootElement)
         {
             MSBuildEventSource.Log.ParseStart(projectRootElement.ProjectFileLocation.File);
             {
@@ -337,7 +337,7 @@ namespace Microsoft.Build.Construction
             return item;
         }
 
-        internal static void CheckMetadataAsAttributeName(string name, out bool isReservedAttributeName, out bool isValidMetadataNameInAttribute)
+        public static void CheckMetadataAsAttributeName(string name, out bool isReservedAttributeName, out bool isValidMetadataNameInAttribute)
         {
             if (!XmlUtilities.IsValidElementName(name))
             {

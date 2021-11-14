@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -24,7 +24,7 @@ namespace Microsoft.Build.UnitTests
 
         private class ResetDefaultBuildManager
         {
-            protected internal static FieldInfo SingletonField;
+            public static FieldInfo SingletonField;
 
             public ResetDefaultBuildManager()
             {
@@ -56,7 +56,7 @@ namespace Microsoft.Build.UnitTests
             {
                 if (SingletonField == null)
                 {
-                    SingletonField = typeof(BuildManager).GetField("s_singletonInstance", BindingFlags.Static | BindingFlags.NonPublic);
+                    SingletonField = typeof(BuildManager).GetField("s_singletonInstance", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
                 }
 
                 SingletonField.ShouldNotBeNull();
@@ -126,13 +126,13 @@ namespace Microsoft.Build.UnitTests
             CreatedFiles = Helpers.CreateFilesInDirectory(TestRoot, files);
         }
 
-        internal MockLogger BuildProjectExpectFailure(IDictionary<string, string> globalProperties = null, string toolsVersion = null, bool validateLoggerRoundtrip = true)
+        public MockLogger BuildProjectExpectFailure(IDictionary<string, string> globalProperties = null, string toolsVersion = null, bool validateLoggerRoundtrip = true)
         {
             BuildProject(globalProperties, toolsVersion, out MockLogger logger, validateLoggerRoundtrip).ShouldBeFalse();
             return logger;
         }
 
-        internal MockLogger BuildProjectExpectSuccess(IDictionary<string, string> globalProperties = null, string toolsVersion = null, bool validateLoggerRoundtrip = true)
+        public MockLogger BuildProjectExpectSuccess(IDictionary<string, string> globalProperties = null, string toolsVersion = null, bool validateLoggerRoundtrip = true)
         {
             BuildProject(globalProperties, toolsVersion, out MockLogger logger, validateLoggerRoundtrip).ShouldBeTrue();
             return logger;

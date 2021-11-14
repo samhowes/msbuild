@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -8,12 +8,12 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// Delegate invoked to create a configuration
     /// </summary>
-    internal delegate BuildRequestConfiguration ConfigCreateCallback(BuildRequestConfiguration existingConfiguration, bool loadProject);
+    public delegate BuildRequestConfiguration ConfigCreateCallback(BuildRequestConfiguration existingConfiguration, bool loadProject);
 
     /// <summary>
     /// An interfacing representing a build request configuration cache.
     /// </summary>
-    internal interface IConfigCache : IBuildComponent, IEnumerable<BuildRequestConfiguration>, ITranslatable
+    public interface IConfigCache : IBuildComponent, IEnumerable<BuildRequestConfiguration>, ITranslatable
     {
         /// <summary>
         /// Returns the configuration with the specified id.

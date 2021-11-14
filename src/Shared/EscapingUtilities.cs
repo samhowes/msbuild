@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -18,7 +18,7 @@ namespace Microsoft.Build.Shared
     /// PERF: since we escape and unescape relatively frequently, it may be worth caching
     /// the last N strings that were (un)escaped
     /// </remarks>
-    static internal class EscapingUtilities
+    static public class EscapingUtilities
     {
         /// <summary>
         /// Optional cache of escaped strings for use when needing to escape in performance-critical scenarios with significant
@@ -54,7 +54,7 @@ namespace Microsoft.Build.Shared
         /// <param name="escapedString">The string to unescape.</param>
         /// <param name="trim">If the string should be trimmed before being unescaped.</param>
         /// <returns>unescaped string</returns>
-        internal static string UnescapeAll(string escapedString, bool trim = false)
+        public static string UnescapeAll(string escapedString, bool trim = false)
         {
             // If the string doesn't contain anything, then by definition it doesn't
             // need unescaping.
@@ -138,7 +138,7 @@ namespace Microsoft.Build.Shared
         /// NOTE:  Only recommended for use in scenarios where there's expected to be significant
         /// repetition of the escaped string.  Cache currently grows unbounded.
         /// </comment>
-        internal static string EscapeWithCaching(string unescapedString)
+        public static string EscapeWithCaching(string unescapedString)
         {
             return EscapeWithOptionalCaching(unescapedString, cache: true);
         }
@@ -149,7 +149,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="unescapedString">The string to escape.</param>
         /// <returns>escaped string</returns>
-        internal static string Escape(string unescapedString)
+        public static string Escape(string unescapedString)
         {
             return EscapeWithOptionalCaching(unescapedString, cache: false);
         }
@@ -226,7 +226,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="escapedString"></param>
         /// <returns></returns>
-        internal static bool ContainsEscapedWildcards(string escapedString)
+        public static bool ContainsEscapedWildcards(string escapedString)
         {
             if (escapedString.Length < 3)
             {

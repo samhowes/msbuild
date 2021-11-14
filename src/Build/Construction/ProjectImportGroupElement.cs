@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -20,7 +20,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// External projects support
         /// </summary>
-        internal ProjectImportGroupElement(ProjectImportGroupElementLink link)
+        public ProjectImportGroupElement(ProjectImportGroupElementLink link)
             : base(link)
         {
         }
@@ -28,7 +28,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Initialize a parented ProjectImportGroupElement
         /// </summary>
-        internal ProjectImportGroupElement(XmlElementWithLocation xmlElement, ProjectElementContainer parent, ProjectRootElement containingProject)
+        public ProjectImportGroupElement(XmlElementWithLocation xmlElement, ProjectElementContainer parent, ProjectRootElement containingProject)
             : base(xmlElement, parent, containingProject)
         {
             ErrorUtilities.VerifyThrowArgumentNull(parent, nameof(parent));
@@ -73,7 +73,7 @@ namespace Microsoft.Build.Construction
         /// Creates an unparented ProjectImportGroupElement, wrapping an unparented XmlElement.
         /// Caller should then ensure the element is added to a parent
         /// </summary>
-        internal static ProjectImportGroupElement CreateDisconnected(ProjectRootElement containingProject)
+        public static ProjectImportGroupElement CreateDisconnected(ProjectRootElement containingProject)
         {
             XmlElementWithLocation element = containingProject.CreateElement(XMakeElements.importGroup);
 
@@ -84,7 +84,7 @@ namespace Microsoft.Build.Construction
         /// Overridden to verify that the potential parent and siblings
         /// are acceptable. Throws InvalidOperationException if they are not.
         /// </summary>
-        internal override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
+        public override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
         {
             ErrorUtilities.VerifyThrowInvalidOperation(parent is ProjectRootElement, "OM_CannotAcceptParent");
         }

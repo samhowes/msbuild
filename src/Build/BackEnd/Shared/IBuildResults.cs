@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,7 +10,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// An interface representing results for a build request
     /// </summary>
-    internal interface IBuildResults
+    public interface IBuildResults
     {
         /// <summary>
         /// The exception, if any, generated while the build ran.

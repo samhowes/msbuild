@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -11,7 +11,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// The type of response.
     /// </summary>
-    internal enum ResultsCacheResponseType
+    public enum ResultsCacheResponseType
     {
         /// <summary>
         /// There were no matching results, or some implicit targets need to be built.
@@ -27,7 +27,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// Container for results of IResultsCache.SatisfyRequest
     /// </summary>
-    internal struct ResultsCacheResponse
+    public struct ResultsCacheResponse
     {
         /// <summary>
         /// The results type.

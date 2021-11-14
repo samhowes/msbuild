@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -12,7 +12,7 @@ namespace Microsoft.Build.Shared
     /// This class contains utility methods for file IO.
     /// It is in a separate file so that it can be selectively included into an assembly.
     /// </summary>
-    internal static partial class FileUtilities
+    public static partial class FileUtilities
     {
         /// <summary>
         /// Generates a unique directory name in the temporary folder.
@@ -20,7 +20,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="createDirectory"></param>
         /// <param name="subfolder"></param>
-        internal static string GetTemporaryDirectory(bool createDirectory = true, string subfolder = null)
+        public static string GetTemporaryDirectory(bool createDirectory = true, string subfolder = null)
         {
             string temporaryDirectory = Path.Combine(Path.GetTempPath(), "Temporary" + Guid.NewGuid().ToString("N"), subfolder ?? string.Empty);
 
@@ -39,7 +39,7 @@ namespace Microsoft.Build.Shared
         /// File will NOT be created.
         /// May throw IOException.
         /// </summary>
-        internal static string GetTemporaryFileName(string extension)
+        public static string GetTemporaryFileName(string extension)
         {
             return GetTemporaryFile(null, extension, false);
         }
@@ -50,7 +50,7 @@ namespace Microsoft.Build.Shared
         /// File is guaranteed to be unique.
         /// Caller must delete it when finished.
         /// </summary>
-        internal static string GetTemporaryFile()
+        public static string GetTemporaryFile()
         {
             return GetTemporaryFile(".tmp");
         }
@@ -62,7 +62,7 @@ namespace Microsoft.Build.Shared
         /// Caller must delete it when finished.
         /// May throw IOException.
         /// </summary>
-        internal static string GetTemporaryFile(string extension)
+        public static string GetTemporaryFile(string extension)
         {
             return GetTemporaryFile(null, extension);
         }
@@ -75,7 +75,7 @@ namespace Microsoft.Build.Shared
         /// Caller must delete it when finished.
         /// May throw IOException.
         /// </summary>
-        internal static string GetTemporaryFile(string directory, string extension, bool createFile = true)
+        public static string GetTemporaryFile(string directory, string extension, bool createFile = true)
         {
             ErrorUtilities.VerifyThrowArgumentLengthIfNotNull(directory, nameof(directory));
             ErrorUtilities.VerifyThrowArgumentLength(extension, nameof(extension));
@@ -108,7 +108,7 @@ namespace Microsoft.Build.Shared
             }
         }
 
-        internal static void CopyDirectory(string source, string dest)
+        public static void CopyDirectory(string source, string dest)
         {
             Directory.CreateDirectory(dest);
 

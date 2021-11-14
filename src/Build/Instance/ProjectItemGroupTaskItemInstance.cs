@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -135,7 +135,7 @@ namespace Microsoft.Build.Execution
         /// Metadata collection is ordered.
         /// Assumes ProjectItemGroupTaskMetadataInstance is an immutable type.
         /// </summary>
-        internal ProjectItemGroupTaskItemInstance
+        public ProjectItemGroupTaskItemInstance
             (
             string itemType,
             string include,
@@ -435,7 +435,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Deep clone
         /// </summary>
-        internal ProjectItemGroupTaskItemInstance DeepClone()
+        public ProjectItemGroupTaskItemInstance DeepClone()
         {
             return new ProjectItemGroupTaskItemInstance(this);
         }
@@ -463,7 +463,7 @@ namespace Microsoft.Build.Execution
             translator.Translate(ref _metadata, ProjectItemGroupTaskMetadataInstance.FactoryForDeserialization);
         }
 
-        internal static ProjectItemGroupTaskItemInstance FactoryForDeserialization(ITranslator translator)
+        public static ProjectItemGroupTaskItemInstance FactoryForDeserialization(ITranslator translator)
         {
             var instance = new ProjectItemGroupTaskItemInstance();
             ((ITranslatable)instance).Translate(translator);

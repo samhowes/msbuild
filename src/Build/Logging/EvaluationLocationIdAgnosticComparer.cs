@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -11,7 +11,7 @@ namespace Microsoft.Build.Logging
     /// Comparer for <see cref="EvaluationLocation"/> that ignores 
     /// both <see cref="EvaluationLocation.Id"/> and <see cref="EvaluationLocation.ParentId"/>
     /// </summary>
-    internal class EvaluationLocationIdAgnosticComparer : IEqualityComparer<EvaluationLocation>
+    public class EvaluationLocationIdAgnosticComparer : IEqualityComparer<EvaluationLocation>
     {
         /// <nodoc/>
         public static EvaluationLocationIdAgnosticComparer Singleton = new EvaluationLocationIdAgnosticComparer();

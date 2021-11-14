@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace Microsoft.Build.ObjectModelRemoting
     /// external linking.
     /// <see cref="ProjectElement.XmlElement"/> and <see cref="ProjectElement.Link"/>
     /// </summary>
-    internal interface ILinkedXml
+    public interface ILinkedXml
     {
         /// <summary>
         /// Not null for "external" objects, null for internal objects

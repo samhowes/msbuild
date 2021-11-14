@@ -18,9 +18,9 @@ using Microsoft.Build.Shared;
 
 namespace Microsoft.Build.Graph
 {
-    internal class GraphBuilder
+    public class GraphBuilder
     {
-        internal static readonly string SolutionItemReference = "_SolutionReference";
+        public static readonly string SolutionItemReference = "_SolutionReference";
         
         /// <summary>
         /// The thread calling BuildGraph() will act as an implicit worker
@@ -562,7 +562,7 @@ namespace Microsoft.Build.Graph
             return referenceInfos;
         }
 
-        internal static string FormatCircularDependencyError(List<string> projectsInCycle)
+        public static string FormatCircularDependencyError(List<string> projectsInCycle)
         {
             var errorMessage = new StringBuilder(projectsInCycle.Select(p => p.Length).Sum());
 
@@ -602,12 +602,12 @@ namespace Microsoft.Build.Graph
             return propertyDictionary;
         }
 
-        internal class GraphEdges
+        public class GraphEdges
         {
             private ConcurrentDictionary<(ProjectGraphNode, ProjectGraphNode), ProjectItemInstance> ReferenceItems =
                 new ConcurrentDictionary<(ProjectGraphNode, ProjectGraphNode), ProjectItemInstance>();
 
-            internal int Count => ReferenceItems.Count;
+            public int Count => ReferenceItems.Count;
 
             public ProjectItemInstance this[(ProjectGraphNode node, ProjectGraphNode reference) key]
             {
@@ -626,10 +626,10 @@ namespace Microsoft.Build.Graph
                 ErrorUtilities.VerifyThrow(ReferenceItems.TryRemove(key, out _), "All requested keys should exist");
             }
 
-            internal bool HasEdge((ProjectGraphNode node, ProjectGraphNode reference) key) => ReferenceItems.ContainsKey(key);
-            internal bool TryGetEdge((ProjectGraphNode node, ProjectGraphNode reference) key, out ProjectItemInstance edge) => ReferenceItems.TryGetValue(key, out edge);
+            public bool HasEdge((ProjectGraphNode node, ProjectGraphNode reference) key) => ReferenceItems.ContainsKey(key);
+            public bool TryGetEdge((ProjectGraphNode node, ProjectGraphNode reference) key, out ProjectItemInstance edge) => ReferenceItems.TryGetValue(key, out edge);
 
-            internal IReadOnlyDictionary<(ConfigurationMetadata, ConfigurationMetadata), ProjectItemInstance> TestOnly_AsConfigurationMetadata()
+            public IReadOnlyDictionary<(ConfigurationMetadata, ConfigurationMetadata), ProjectItemInstance> TestOnly_AsConfigurationMetadata()
             {
                 return ReferenceItems.ToImmutableDictionary(
                     kvp => (kvp.Key.Item1.ToConfigurationMetadata(), kvp.Key.Item2.ToConfigurationMetadata()),
@@ -647,7 +647,7 @@ namespace Microsoft.Build.Graph
         }
     }
 
-    internal readonly struct ParsedProject
+    public readonly struct ParsedProject
     {
         public ConfigurationMetadata ConfigurationMetadata { get; }
         public ProjectGraphNode GraphNode { get; }

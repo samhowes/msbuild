@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,14 +10,14 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// Utilities for collections
     /// </summary>
-    internal static class CollectionHelpers
+    public static class CollectionHelpers
     {
         /// <summary>
         /// Returns a new list containing the input list
         /// contents, except for nulls
         /// </summary>
         /// <typeparam name="T">Type of list elements</typeparam>
-        internal static List<T> RemoveNulls<T>(List<T> inputs)
+        public static List<T> RemoveNulls<T>(List<T> inputs)
         {
             List<T> inputsWithoutNulls = new List<T>(inputs.Count);
 
@@ -36,7 +36,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Extension method -- combines a TryGet with a check to see that the value is equal. 
         /// </summary>
-        internal static bool ContainsValueAndIsEqual(this Dictionary<string, string> dictionary, string key, string value, StringComparison comparer)
+        public static bool ContainsValueAndIsEqual(this Dictionary<string, string> dictionary, string key, string value, StringComparison comparer)
         {
             string valueFromDictionary;
             if (dictionary.TryGetValue(key, out valueFromDictionary))
@@ -48,12 +48,12 @@ namespace Microsoft.Build.Shared
         }
 
 #if !CLR2COMPATIBILITY
-        internal static bool SetEquivalent<T>(IEnumerable<T> a, IEnumerable<T> b)
+        public static bool SetEquivalent<T>(IEnumerable<T> a, IEnumerable<T> b)
         {
             return a.ToHashSet().SetEquals(b);
         }
 
-        internal static bool DictionaryEquals<K, V>(IReadOnlyDictionary<K, V> a, IReadOnlyDictionary<K, V> b)
+        public static bool DictionaryEquals<K, V>(IReadOnlyDictionary<K, V> a, IReadOnlyDictionary<K, V> b)
         {
             if (a.Count != b.Count)
             {

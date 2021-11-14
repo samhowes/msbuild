@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -12,22 +12,22 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// This class contains utility methods for dealing with encoding.
     /// </summary>
-    internal static class EncodingUtilities
+    public static class EncodingUtilities
     {
-        internal static readonly Encoding Utf8WithoutBom = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
+        public static readonly Encoding Utf8WithoutBom = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
 
         private static Encoding s_currentOemEncoding;
 
-        internal const string UseUtf8Always = "ALWAYS";
-        internal const string UseUtf8Never = "NEVER";
-        internal const string UseUtf8Detect = "DETECT";
-        internal const string UseUtf8System = "SYSTEM";
+        public const string UseUtf8Always = "ALWAYS";
+        public const string UseUtf8Never = "NEVER";
+        public const string UseUtf8Detect = "DETECT";
+        public const string UseUtf8System = "SYSTEM";
 
         /// <summary>
         /// Get the current system locale code page, OEM version. OEM code pages are used for console-based input/output
         /// for historical reasons.
         /// </summary>
-        internal static Encoding CurrentSystemOemEncoding
+        public static Encoding CurrentSystemOemEncoding
         {
             get
             {
@@ -77,7 +77,7 @@ namespace Microsoft.Build.Shared
         /// <param name="encoding1"></param>
         /// <param name="encoding2"></param>
         /// <returns>True if the two Encoding objects are equal or similar.</returns>
-        internal static bool SimilarToEncoding(this Encoding encoding1, Encoding encoding2)
+        public static bool SimilarToEncoding(this Encoding encoding1, Encoding encoding2)
         {
             if (encoding1 == null)
                 return encoding2 == null;
@@ -96,7 +96,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="encoding"></param>
         /// <returns>True if the encoding is UTF8.</returns>
-        internal static bool IsUtf8Encoding(this Encoding encoding)
+        public static bool IsUtf8Encoding(this Encoding encoding)
         {
             return SimilarToEncoding(encoding, Encoding.UTF8);
         }
@@ -106,7 +106,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="stream">Steam to check.</param>
         /// <returns>True when the first 3 bytes of the Stream are equal to the UTF8 preamble (BOM).</returns>
-        internal static bool StartsWithPreamble(this Stream stream)
+        public static bool StartsWithPreamble(this Stream stream)
         {
             return StartsWithPreamble(stream, Encoding.UTF8.GetPreamble());
         }
@@ -117,7 +117,7 @@ namespace Microsoft.Build.Shared
         /// <param name="stream">Steam to check.</param>
         /// <param name="preamble">Preamble to look for.</param>
         /// <returns>True when the first 3 bytes of the Stream are equal to the preamble.</returns>
-        internal static bool StartsWithPreamble(this Stream stream, byte[] preamble)
+        public static bool StartsWithPreamble(this Stream stream, byte[] preamble)
         {
             if (preamble == null) return false;
 
@@ -148,7 +148,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="file">Path to file to check.</param>
         /// <returns>True when the first 3 bytes of the file are equal to the UTF8 BOM.</returns>
-        internal static bool FileStartsWithPreamble(string file)
+        public static bool FileStartsWithPreamble(string file)
         {
             using (var stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
@@ -163,7 +163,7 @@ namespace Microsoft.Build.Shared
         /// <param name="codePage">Code page for encoding.</param>
         /// <param name="stringToEncode">String to encode.</param>
         /// <returns>True if the string can be encoded in the specified code page.</returns>
-        internal static bool CanEncodeString(int codePage, string stringToEncode)
+        public static bool CanEncodeString(int codePage, string stringToEncode)
         {
             // We have a System.String that contains some characters. Get a lossless representation
             // in byte-array form.
@@ -199,7 +199,7 @@ namespace Microsoft.Build.Shared
         /// Why not always UTF-8? Because tools don't always handle it well. See
         /// https://github.com/Microsoft/msbuild/issues/397
         /// </remarks>
-        internal static Encoding BatchFileEncoding(string contents, string encodingSpecification)
+        public static Encoding BatchFileEncoding(string contents, string encodingSpecification)
         {
             if (!NativeMethodsShared.IsWindows)
             {

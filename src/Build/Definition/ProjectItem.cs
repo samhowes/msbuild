@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Diagnostics;
@@ -104,7 +104,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// External projects support
         /// </summary>
-        internal ProjectItem(ProjectItemElement xml, Project project)
+        public ProjectItem(ProjectItemElement xml, Project project)
         {
             this._project = project;
             this._xml = xml;
@@ -116,7 +116,7 @@ namespace Microsoft.Build.Evaluation
         /// Inherited item definition metadata may be null. It is assumed that its list has already been cloned.
         /// ProjectMetadata objects may be shared with other items.
         /// </summary>
-        internal ProjectItem(
+        public ProjectItem(
                              Project project,
                              ProjectItemElement xml,
                              string evaluatedIncludeEscaped,
@@ -140,7 +140,7 @@ namespace Microsoft.Build.Evaluation
             _inheritedItemDefinitions = inheritedItemDefinitionsCloned;
         }
 
-        internal virtual ProjectItemLink Link => null;
+        public virtual ProjectItemLink Link => null;
 
         /// <summary>
         /// Backing XML item.
@@ -314,7 +314,7 @@ namespace Microsoft.Build.Evaluation
         /// Includes any from item definitions not masked by directly set metadata.
         /// This is a read-only collection. To modify the metadata, use <see cref="SetMetadataValue(string, string)"/>.
         /// </summary>
-        internal ICollection<ProjectMetadata> MetadataCollection
+        public ICollection<ProjectMetadata> MetadataCollection
         {
             get
             {
@@ -359,7 +359,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Accesses the unescaped evaluated include prior to wildcard expansion
         /// </summary>
-        internal string EvaluatedIncludeBeforeWildcardExpansion
+        public string EvaluatedIncludeBeforeWildcardExpansion
         {
             [DebuggerStepThrough]
             get
@@ -369,7 +369,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Accesses the evaluated include prior to wildcard expansion
         /// </summary>
-        internal string EvaluatedIncludeBeforeWildcardExpansionEscaped
+        public string EvaluatedIncludeBeforeWildcardExpansionEscaped
         {
             [DebuggerStepThrough]
             get
@@ -380,7 +380,7 @@ namespace Microsoft.Build.Evaluation
         /// Accesses the inherited item definitions, if any.
         /// Used ONLY by the ProjectInstance, when cloning a ProjectItem.
         /// </summary>
-        internal List<ProjectItemDefinition> InheritedItemDefinitions
+        public List<ProjectItemDefinition> InheritedItemDefinitions
         {
             [DebuggerStepThrough]
             get
@@ -773,7 +773,7 @@ namespace Microsoft.Build.Evaluation
         /// This is a little involved, as it requires replacing
         /// the XmlElement, and updating the project's datastructures.
         /// </remarks>
-        internal void ChangeItemType(string newItemType)
+        public void ChangeItemType(string newItemType)
         {
             ErrorUtilities.VerifyThrowArgumentLength(newItemType, "ItemType");
             Project.VerifyThrowInvalidOperationNotImported(_xml.ContainingProject);
@@ -806,7 +806,7 @@ namespace Microsoft.Build.Evaluation
         /// <remarks>
         /// Called when breaking up a single ProjectItemElement that evaluates into several ProjectItems.
         /// </remarks>
-        internal void SplitOwnItemElement()
+        public void SplitOwnItemElement()
         {
             ProjectItemElement oldXml = _xml;
 
@@ -891,7 +891,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// A class factory for ProjectItems.
         /// </summary>
-        internal class ProjectItemFactory : IItemFactory<ProjectItem, ProjectItem>
+        public class ProjectItemFactory : IItemFactory<ProjectItem, ProjectItem>
         {
             /// <summary>
             /// The Project with which each item should be associated.
@@ -908,7 +908,7 @@ namespace Microsoft.Build.Evaluation
             /// be specified later.
             /// </summary>
             /// <param name="project">The project for items generated.</param>
-            internal ProjectItemFactory(Project project)
+            public ProjectItemFactory(Project project)
             {
                 _project = project;
             }
@@ -918,7 +918,7 @@ namespace Microsoft.Build.Evaluation
             /// </summary>
             /// <param name="project">The project for items generated.</param>
             /// <param name="xml">The xml for items generated.</param>
-            internal ProjectItemFactory(Project project, ProjectItemElement xml)
+            public ProjectItemFactory(Project project, ProjectItemElement xml)
             {
                 _project = project;
                 _xml = xml;
@@ -1089,7 +1089,7 @@ namespace Microsoft.Build.Evaluation
             /// <summary>
             /// Constructor.
             /// </summary>
-            internal BuiltInMetadataTable(ProjectItem item)
+            public BuiltInMetadataTable(ProjectItem item)
             {
                 _item = item;
             }

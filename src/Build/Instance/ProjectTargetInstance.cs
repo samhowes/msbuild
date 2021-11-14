@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -137,7 +137,7 @@ namespace Microsoft.Build.Execution
         /// All parameters are in the unevaluated state.
         /// All location parameters may be null if not applicable, except for the main location parameter.
         /// </summary>
-        internal ProjectTargetInstance
+        public ProjectTargetInstance
             (
             string name,
             string condition,
@@ -453,7 +453,7 @@ namespace Microsoft.Build.Execution
         /// in the file without Returns attributes changes from returning the Outputs, to
         /// returning nothing.
         /// </summary>
-        internal bool ParentProjectSupportsReturnsAttribute
+        public bool ParentProjectSupportsReturnsAttribute
         {
             [DebuggerStepThrough]
             get
@@ -465,7 +465,7 @@ namespace Microsoft.Build.Execution
         /// </summary>
         /// <param name="rootElement">The root element to which the new element will belong.</param>
         /// <returns>The new element.</returns>
-        internal ProjectTargetElement ToProjectTargetElement(ProjectRootElement rootElement)
+        public ProjectTargetElement ToProjectTargetElement(ProjectRootElement rootElement)
         {
             ProjectTargetElement target = rootElement.CreateTargetElement(Name);
             rootElement.AppendChild(target);
@@ -509,7 +509,7 @@ namespace Microsoft.Build.Execution
 
         /// <summary> Adds new child instance. </summary>
         /// <param name="projectTargetInstanceChild"> Child instance. </param>
-        internal void AddProjectTargetInstanceChild(ProjectTargetInstanceChild projectTargetInstanceChild)
+        public void AddProjectTargetInstanceChild(ProjectTargetInstanceChild projectTargetInstanceChild)
         {
             if (!(_children is List<ProjectTargetInstanceChild>))
             {
@@ -526,7 +526,7 @@ namespace Microsoft.Build.Execution
         /// <param name="condition">The task's condition.</param>
         /// <param name="continueOnError">The continue on error flag.</param>
         /// <returns>The new task instance.</returns>
-        internal ProjectTaskInstance AddTask(string taskName, string condition, string continueOnError)
+        public ProjectTaskInstance AddTask(string taskName, string condition, string continueOnError)
         {
             ProjectTaskInstance task = AddTask(taskName, condition, continueOnError, String.Empty, String.Empty);
             return task;
@@ -541,7 +541,7 @@ namespace Microsoft.Build.Execution
         /// <param name="msbuildRuntime">The MSBuild runtime.</param>
         /// <param name="msbuildArchitecture">The MSBuild architecture.</param>
         /// <returns>The new task instance.</returns>
-        internal ProjectTaskInstance AddTask(string taskName, string condition, string continueOnError, string msbuildRuntime, string msbuildArchitecture)
+        public ProjectTaskInstance AddTask(string taskName, string condition, string continueOnError, string msbuildRuntime, string msbuildArchitecture)
         {
             ErrorUtilities.VerifyThrowInternalLength(taskName, nameof(taskName));
             ProjectTaskInstance task = new ProjectTaskInstance(taskName, _location, condition ?? String.Empty, continueOnError ?? String.Empty, msbuildRuntime ?? String.Empty, msbuildArchitecture ?? String.Empty);
@@ -584,7 +584,7 @@ namespace Microsoft.Build.Execution
             }
         }
 
-        internal static ProjectTargetInstance FactoryForDeserialization(ITranslator translator)
+        public static ProjectTargetInstance FactoryForDeserialization(ITranslator translator)
         {
             var instance = new ProjectTargetInstance();
             var translatable = (ITranslatable) instance;

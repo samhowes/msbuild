@@ -15,7 +15,7 @@ namespace Microsoft.Build.Collections
     /// </summary>
     /// <typeparam name="TKey">Type of keys</typeparam>
     /// <typeparam name="TValue">Type of values</typeparam>
-    internal class ArrayDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary, IReadOnlyDictionary<TKey, TValue>
+    public class ArrayDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary, IReadOnlyDictionary<TKey, TValue>
     {
         private TKey[] keys;
         private TValue[] values;

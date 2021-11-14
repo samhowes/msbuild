@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -23,7 +23,7 @@ namespace Microsoft.Build.Logging
     {
         #region Constructor
 
-        internal LoggerDescription()
+        public LoggerDescription()
         {
         }
 
@@ -79,7 +79,7 @@ namespace Microsoft.Build.Logging
         /// <summary>
         /// This property exposes the logger id which identifies each distributed logger uniquiely
         /// </summary>
-        internal int LoggerId
+        public int LoggerId
         {
             get
             {
@@ -94,7 +94,7 @@ namespace Microsoft.Build.Logging
         /// <summary>
         /// This property generates the logger name by appending together the class name and assembly name
         /// </summary>
-        internal string Name
+        public string Name
         {
             get
             {
@@ -154,7 +154,7 @@ namespace Microsoft.Build.Logging
         /// exceptions if desired.
         /// </summary>
         /// <returns></returns>
-        internal IForwardingLogger CreateForwardingLogger()
+        public IForwardingLogger CreateForwardingLogger()
         {
             IForwardingLogger forwardingLogger = null;
             try
@@ -307,7 +307,7 @@ namespace Microsoft.Build.Logging
         /// <summary>
         /// Converts the path to the logger assembly to a full path
         /// </summary>
-        internal void ConvertPathsToFullPaths()
+        public void ConvertPathsToFullPaths()
         {
             if (_loggerAssembly.AssemblyFile != null)
             {
@@ -328,7 +328,7 @@ namespace Microsoft.Build.Logging
         #endregion
 
         #region CustomSerializationToStream
-        internal void WriteToStream(BinaryWriter writer)
+        public void WriteToStream(BinaryWriter writer)
         {
             writer.WriteOptionalString(_loggerClassName);
             writer.WriteOptionalString(_loggerSwitchParameters);
@@ -349,7 +349,7 @@ namespace Microsoft.Build.Logging
             writer.Write((Int32)_loggerId);
         }
 
-        internal void CreateFromStream(BinaryReader reader)
+        public void CreateFromStream(BinaryReader reader)
         {
             _loggerClassName = reader.ReadByte() == 0 ? null : reader.ReadString();
             _loggerSwitchParameters = reader.ReadByte() == 0 ? null : reader.ReadString();
@@ -382,7 +382,7 @@ namespace Microsoft.Build.Logging
             translator.Translate(ref _loggerId);
         }
 
-        static internal LoggerDescription FactoryForTranslation(ITranslator translator)
+        static public LoggerDescription FactoryForTranslation(ITranslator translator)
         {
             LoggerDescription description = new LoggerDescription();
             ((ITranslatable)description).Translate(translator);

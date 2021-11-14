@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -18,7 +18,7 @@ namespace Microsoft.Build.Construction
     /// certain XmlDocument members are used. So for extra robustness, this could wrap an XmlDocument instead,
     /// and expose the small number of members that the MSBuild code actually uses. 
     /// </remarks>
-    internal class XmlDocumentWithLocation : XmlDocument
+    public class XmlDocumentWithLocation : XmlDocument
     {
         /// <summary>
         /// Used to cache strings used in attribute values and comments.
@@ -60,7 +60,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Constructor
         /// </summary>
-        internal XmlDocumentWithLocation()
+        public XmlDocumentWithLocation()
             : base(s_nameTable)
         {
         }
@@ -68,7 +68,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Constructor
         /// </summary>
-        internal XmlDocumentWithLocation(bool? loadAsReadOnly)
+        public XmlDocumentWithLocation(bool? loadAsReadOnly)
             : this()
         {
             _loadAsReadOnly = loadAsReadOnly;
@@ -108,7 +108,7 @@ namespace Microsoft.Build.Construction
         /// that path, the setter here should be called when the project is given a path.
         /// It may be set to null.
         /// </summary>
-        internal string FullPath
+        public string FullPath
         {
             get { return _fullPath; }
             set { _fullPath = value; }
@@ -121,7 +121,7 @@ namespace Microsoft.Build.Construction
         /// When a particular instance has not been set will use the global string cache. The ability
         /// to use a particular instance is useful for tests.
         /// </remarks>
-        internal ProjectStringCache StringCache
+        public ProjectStringCache StringCache
         {
             get { return _stringCache ?? s_globalStringCache; }
             set { _stringCache = value; }
@@ -316,7 +316,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Reset state for unit tests that want to set the env var
         /// </summary>
-        internal static void ClearReadOnlyFlags_UnitTestsOnly()
+        public static void ClearReadOnlyFlags_UnitTestsOnly()
         {
             s_readOnlyFlags = ReadOnlyLoadFlags.Undefined;
         }
@@ -326,7 +326,7 @@ namespace Microsoft.Build.Construction
         /// contribution to the string interning cache.
         /// Does NOT zombie the ProjectRootElement or anything else.
         /// </summary>
-        internal void ClearAnyCachedStrings()
+        public void ClearAnyCachedStrings()
         {
             StringCache.Clear(this);
         }

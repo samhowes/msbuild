@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -19,7 +19,7 @@ namespace Microsoft.Build.Evaluation
     /// <typeparam name="I">The type of items to be produced.</typeparam>
     /// <typeparam name="M">The type of metadata on those items.</typeparam>
     /// <typeparam name="D">The type of item definitions to be produced.</typeparam>
-    internal interface IEvaluatorData<P, I, M, D> : IPropertyProvider<P>, IItemProvider<I>
+    public interface IEvaluatorData<P, I, M, D> : IPropertyProvider<P>, IItemProvider<I>
         where P : class, IProperty, IEquatable<P>, IValued
         where I : class, IItem
         where M : class, IMetadatum

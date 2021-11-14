@@ -48,9 +48,9 @@ namespace Microsoft.Build.Logging
         // reflection is needed to set these three fields because public constructors don't provide
         // a way to set these from the outside
         private static FieldInfo buildEventArgsFieldThreadId =
-            typeof(BuildEventArgs).GetField("threadId", BindingFlags.Instance | BindingFlags.NonPublic);
+            typeof(BuildEventArgs).GetField("threadId", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
         private static FieldInfo buildEventArgsFieldSenderName =
-            typeof(BuildEventArgs).GetField("senderName", BindingFlags.Instance | BindingFlags.NonPublic);
+            typeof(BuildEventArgs).GetField("senderName", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
 
         /// <summary>
         /// Initializes a new instance of BuildEventArgsReader using a BinaryReader instance
@@ -76,7 +76,7 @@ namespace Microsoft.Build.Logging
         /// Raised when the log reader encounters a binary blob embedded in the stream.
         /// The arguments include the blob kind and the byte buffer with the contents.
         /// </summary>
-        internal event Action<BinaryLogRecordKind, byte[]> OnBlobRead;
+        public event Action<BinaryLogRecordKind, byte[]> OnBlobRead;
 
         /// <summary>
         /// Reads the next log record from the binary reader. If there are no more records, returns null.
@@ -1241,7 +1241,7 @@ namespace Microsoft.Build.Logging
         /// <summary>
         /// Locates the string in the page file.
         /// </summary>
-        internal class StringPosition
+        public class StringPosition
         {
             /// <summary>
             /// Offset in the file.
@@ -1258,7 +1258,7 @@ namespace Microsoft.Build.Logging
         /// Stores large strings in a temp file on disk, to avoid keeping all strings in memory.
         /// Only creates a file for 32-bit MSBuild.exe, just returns the string directly on 64-bit.
         /// </summary>
-        internal class StringStorage : IDisposable
+        public class StringStorage : IDisposable
         {
             private readonly string filePath;
             private FileStream stream;

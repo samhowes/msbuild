@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -12,7 +12,7 @@ namespace Microsoft.Build.Execution
     /// <summary>
     /// A reflection-generated TaskPropertyInfo instance.
     /// </summary>
-    internal class ReflectableTaskPropertyInfo : TaskPropertyInfo
+    public class ReflectableTaskPropertyInfo : TaskPropertyInfo
     {
         /// <summary>
         /// The reflection-produced PropertyInfo.
@@ -29,7 +29,7 @@ namespace Microsoft.Build.Execution
         /// </summary>
         /// <param name="taskPropertyInfo">The original property info that generated this instance.</param>
         /// <param name="taskType">The type to reflect over to get the reflection propertyinfo later.</param>
-        internal ReflectableTaskPropertyInfo(TaskPropertyInfo taskPropertyInfo, Type taskType)
+        public ReflectableTaskPropertyInfo(TaskPropertyInfo taskPropertyInfo, Type taskType)
             : base(taskPropertyInfo.Name, taskPropertyInfo.PropertyType, taskPropertyInfo.Output, taskPropertyInfo.Required)
         {
             ErrorUtilities.VerifyThrowArgumentNull(taskType, nameof(taskType));
@@ -40,7 +40,7 @@ namespace Microsoft.Build.Execution
         /// Initializes a new instance of the <see cref="ReflectableTaskPropertyInfo"/> class.
         /// </summary>
         /// <param name="propertyInfo">The PropertyInfo used to discover this task property.</param>
-        internal ReflectableTaskPropertyInfo(PropertyInfo propertyInfo)
+        public ReflectableTaskPropertyInfo(PropertyInfo propertyInfo)
             : base(
             propertyInfo.Name,
             propertyInfo.PropertyType,
@@ -53,7 +53,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Gets or sets the reflection-produced PropertyInfo.
         /// </summary>
-        internal PropertyInfo Reflection
+        public PropertyInfo Reflection
         {
             get
             {

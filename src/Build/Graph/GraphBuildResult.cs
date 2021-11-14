@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -14,7 +14,7 @@ namespace Microsoft.Build.Graph
         /// </summary>
         /// <param name="submissionId">The id of the build submission.</param>
         /// <param name="resultsByNode">The set of results for each graph node.</param>
-        internal GraphBuildResult(int submissionId, IReadOnlyDictionary<ProjectGraphNode, BuildResult> resultsByNode)
+        public GraphBuildResult(int submissionId, IReadOnlyDictionary<ProjectGraphNode, BuildResult> resultsByNode)
         {
             SubmissionId = submissionId;
             ResultsByNode = resultsByNode;
@@ -25,7 +25,7 @@ namespace Microsoft.Build.Graph
         /// </summary>
         /// <param name="submissionId">The id of the build submission.</param>
         /// <param name="circularDependency">Set to true if a circular dependency was detected.</param>
-        internal GraphBuildResult(int submissionId, bool circularDependency)
+        public GraphBuildResult(int submissionId, bool circularDependency)
         {
             SubmissionId = submissionId;
             CircularDependency = circularDependency;
@@ -36,7 +36,7 @@ namespace Microsoft.Build.Graph
         /// </summary>
         /// <param name="submissionId">The id of the build submission.</param>
         /// <param name="exception">The exception, if any.</param>
-        internal GraphBuildResult(int submissionId, Exception exception)
+        public GraphBuildResult(int submissionId, Exception exception)
         {
             SubmissionId = submissionId;
             Exception = exception;

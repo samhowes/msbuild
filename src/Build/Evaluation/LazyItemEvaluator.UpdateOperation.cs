@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,7 +10,7 @@ using Microsoft.Build.Utilities;
 
 namespace Microsoft.Build.Evaluation
 {
-    internal partial class LazyItemEvaluator<P, I, M, D>
+    public partial class LazyItemEvaluator<P, I, M, D>
     {
         class UpdateOperation : LazyItemOperation
         {
@@ -70,7 +70,7 @@ namespace Microsoft.Build.Evaluation
             /// </summary>
             /// <param name="item">The item to check for a match.</param>
             /// <returns>The updated item.</returns>
-            internal ItemData UpdateItem(ItemData item)
+            public ItemData UpdateItem(ItemData item)
             {
                 if (_conditionResult)
                 {

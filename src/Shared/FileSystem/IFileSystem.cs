@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -18,7 +18,7 @@ namespace Microsoft.Build.Shared.FileSystem
      * Microsoft.Build.Framework assembly, but that assembly cannot take new types because it breaks some old version of Nuget.exe.
      * IFileSystem cannot be deleted for the same reason.
      */
-    internal interface IFileSystem
+    public interface IFileSystem
     {
         TextReader ReadFile(string path);
 

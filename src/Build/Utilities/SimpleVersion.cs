@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Shared;
@@ -35,7 +35,7 @@ namespace Microsoft.Build.Utilities
     /// the integer component substrings are allocated as there is no int.Parse
     /// on span there.
     /// </remarks>
-    internal readonly struct SimpleVersion : IEquatable<SimpleVersion>, IComparable<SimpleVersion>
+    public readonly struct SimpleVersion : IEquatable<SimpleVersion>, IComparable<SimpleVersion>
     {
         public readonly int Major;
         public readonly int Minor;

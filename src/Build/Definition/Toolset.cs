@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -29,7 +29,7 @@ namespace Microsoft.Build.Evaluation
     /// </summary>
     /// <param name="path">The path to load.</param>
     /// <returns>An Xml document.</returns>
-    internal delegate XmlDocumentWithLocation LoadXmlFromPath(string path);
+    public delegate XmlDocumentWithLocation LoadXmlFromPath(string path);
 
     /// <summary>
     /// Aggregation of a toolset version (eg. "2.0"), tools path, and optional set of associated properties.
@@ -269,7 +269,7 @@ namespace Microsoft.Build.Evaluation
         /// <param name="globalProperties">A <see cref="PropertyDictionary{ProjectPropertyInstance}"/> containing the global properties.</param>
         /// <param name="msbuildOverrideTasksPath">The override tasks path.</param>
         /// <param name="defaultOverrideToolsVersion">ToolsVersion to use as the default ToolsVersion for this version of MSBuild.</param>
-        internal Toolset(string toolsVersion, string toolsPath, PropertyDictionary<ProjectPropertyInstance> environmentProperties, PropertyDictionary<ProjectPropertyInstance> globalProperties, string msbuildOverrideTasksPath, string defaultOverrideToolsVersion)
+        public Toolset(string toolsVersion, string toolsPath, PropertyDictionary<ProjectPropertyInstance> environmentProperties, PropertyDictionary<ProjectPropertyInstance> globalProperties, string msbuildOverrideTasksPath, string defaultOverrideToolsVersion)
         {
             ErrorUtilities.VerifyThrowArgumentLength(toolsVersion, nameof(toolsVersion));
             ErrorUtilities.VerifyThrowArgumentLength(toolsPath, nameof(toolsPath));
@@ -299,7 +299,7 @@ namespace Microsoft.Build.Evaluation
         /// <param name="msbuildOverrideTasksPath">The override tasks path.</param>
         /// <param name="defaultOverrideToolsVersion">ToolsVersion to use as the default ToolsVersion for this version of MSBuild.</param>
         /// <param name="importSearchPathsTable">Map of parameter name to property search paths for use during Import.</param>
-        internal Toolset(
+        public Toolset(
             string toolsVersion,
             string toolsPath,
             PropertyDictionary<ProjectPropertyInstance> buildProperties,
@@ -347,7 +347,7 @@ namespace Microsoft.Build.Evaluation
         /// <param name="loadXmlFromPath">A delegate to intercept Xml load calls.  For unit testing.</param>
         /// <param name="msbuildOverrideTasksPath">The override tasks path.</param>
         /// <param name="directoryExists"></param>
-        internal Toolset(string toolsVersion, string toolsPath, PropertyDictionary<ProjectPropertyInstance> buildProperties, ProjectCollection projectCollection, DirectoryGetFiles getFiles, LoadXmlFromPath loadXmlFromPath, string msbuildOverrideTasksPath, DirectoryExists directoryExists)
+        public Toolset(string toolsVersion, string toolsPath, PropertyDictionary<ProjectPropertyInstance> buildProperties, ProjectCollection projectCollection, DirectoryGetFiles getFiles, LoadXmlFromPath loadXmlFromPath, string msbuildOverrideTasksPath, DirectoryExists directoryExists)
             : this(toolsVersion, toolsPath, buildProperties, projectCollection.EnvironmentProperties, projectCollection.GlobalPropertiesCollection, null, msbuildOverrideTasksPath, null)
         {
             ErrorUtilities.VerifyThrowInternalNull(getFiles, nameof(getFiles));
@@ -372,7 +372,7 @@ namespace Microsoft.Build.Evaluation
         /// <param name="expression">Expression to search for properties in (first level only, not recursive)</param>
         /// <returns>List of search paths or ProjectImportPathMatch.None if empty</returns>
         /// </summary>
-        internal ProjectImportPathMatch GetProjectImportSearchPaths(string expression)
+        public ProjectImportPathMatch GetProjectImportSearchPaths(string expression)
         {
             if (string.IsNullOrEmpty(expression) || ImportPropertySearchPathsTable == null)
             {
@@ -524,7 +524,7 @@ namespace Microsoft.Build.Evaluation
         /// <comments>
         /// Internal so that unit tests can use it too.
         /// </comments>
-        internal static bool Dev10IsInstalled
+        public static bool Dev10IsInstalled
         {
             get
             {
@@ -591,22 +591,22 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Path to look for msbuild override task files.
         /// </summary>
-        internal string OverrideTasksPath => _overrideTasksPath;
+        public string OverrideTasksPath => _overrideTasksPath;
 
         /// <summary>
         /// ToolsVersion to use as the default ToolsVersion for this version of MSBuild
         /// </summary>
-        internal string DefaultOverrideToolsVersion => _defaultOverrideToolsVersion;
+        public string DefaultOverrideToolsVersion => _defaultOverrideToolsVersion;
 
         /// <summary>
         /// Map of properties to their list of fall-back search paths
         /// </summary>
-        internal Dictionary<string, ProjectImportPathMatch> ImportPropertySearchPathsTable => _propertySearchPathsTable;
+        public Dictionary<string, ProjectImportPathMatch> ImportPropertySearchPathsTable => _propertySearchPathsTable;
 
         /// <summary>
         /// Map of MSBuildExtensionsPath properties to their list of fallback search paths
         /// </summary>
-        internal Dictionary<MSBuildExtensionsPathReferenceKind, IList<string>> MSBuildExtensionsPathSearchPathsTable
+        public Dictionary<MSBuildExtensionsPathReferenceKind, IList<string>> MSBuildExtensionsPathSearchPathsTable
         {
             get; set;
         }
@@ -684,7 +684,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Factory for deserialization.
         /// </summary>
-        internal static Toolset FactoryForDeserialization(ITranslator translator)
+        public static Toolset FactoryForDeserialization(ITranslator translator)
         {
             Toolset toolset = new Toolset(translator);
             return toolset;
@@ -693,7 +693,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Given a search path and a task pattern get a list of task or override task files.
         /// </summary>
-        internal static string[] GetTaskFiles(DirectoryGetFiles getFiles, ILoggingService loggingServices, BuildEventContext buildEventContext, string taskPattern, string searchPath, string taskFileWarning)
+        public static string[] GetTaskFiles(DirectoryGetFiles getFiles, ILoggingService loggingServices, BuildEventContext buildEventContext, string taskPattern, string searchPath, string taskFileWarning)
         {
             string[] defaultTasksFiles = null;
 
@@ -760,7 +760,7 @@ namespace Microsoft.Build.Evaluation
         ///
         /// The global properties dictionary may be null.
         /// </summary>
-        internal string GenerateSubToolsetVersion(PropertyDictionary<ProjectPropertyInstance> overrideGlobalProperties)
+        public string GenerateSubToolsetVersion(PropertyDictionary<ProjectPropertyInstance> overrideGlobalProperties)
         {
             if (overrideGlobalProperties != null)
             {
@@ -790,7 +790,7 @@ namespace Microsoft.Build.Evaluation
         ///
         /// The global properties dictionary may be null.
         /// </summary>
-        internal string GenerateSubToolsetVersion(int visualStudioVersionFromSolution)
+        public string GenerateSubToolsetVersion(int visualStudioVersionFromSolution)
         {
             // Next, try the toolset global properties (before environment properties because if there's a clash between the
             // two, global should win)
@@ -835,7 +835,7 @@ namespace Microsoft.Build.Evaluation
         /// <param name="buildEventContext">The build event context used to log during task registration.</param>
         /// <param name="projectRootElementCache">The <see cref="ProjectRootElementCache"/> to use.</param>
         /// <returns>The task registry</returns>
-        internal TaskRegistry GetTaskRegistry(ILoggingService loggingServices, BuildEventContext buildEventContext, ProjectRootElementCacheBase projectRootElementCache)
+        public TaskRegistry GetTaskRegistry(ILoggingService loggingServices, BuildEventContext buildEventContext, ProjectRootElementCacheBase projectRootElementCache)
         {
             RegisterDefaultTasks(loggingServices, buildEventContext, projectRootElementCache);
             return _defaultTaskRegistry;
@@ -844,7 +844,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Get SubToolset version using Visual Studio version from Dev 12 solution file
         /// </summary>
-        internal string GenerateSubToolsetVersionUsingVisualStudioVersion(IDictionary<string, string> overrideGlobalProperties, int visualStudioVersionFromSolution)
+        public string GenerateSubToolsetVersionUsingVisualStudioVersion(IDictionary<string, string> overrideGlobalProperties, int visualStudioVersionFromSolution)
         {
             string visualStudioVersion;
             if (overrideGlobalProperties != null && overrideGlobalProperties.TryGetValue(Constants.SubToolsetVersionPropertyName, out visualStudioVersion))
@@ -862,7 +862,7 @@ namespace Microsoft.Build.Evaluation
         /// <param name="buildEventContext">The build event context used to log during task registration.</param>
         /// <param name="projectRootElementCache">The <see cref="ProjectRootElementCache"/> to use.</param>
         /// <returns>The task registry</returns>
-        internal TaskRegistry GetOverrideTaskRegistry(ILoggingService loggingServices, BuildEventContext buildEventContext, ProjectRootElementCacheBase projectRootElementCache)
+        public TaskRegistry GetOverrideTaskRegistry(ILoggingService loggingServices, BuildEventContext buildEventContext, ProjectRootElementCacheBase projectRootElementCache)
         {
             RegisterOverrideTasks(loggingServices, buildEventContext, projectRootElementCache);
             return _overrideTaskRegistry;

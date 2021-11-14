@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -20,7 +20,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// External projects support
         /// </summary>
-        internal ProjectItemDefinitionElement(ProjectItemDefinitionElementLink link)
+        public ProjectItemDefinitionElement(ProjectItemDefinitionElementLink link)
             : base(link)
         {
         }
@@ -28,7 +28,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Initialize a ProjectItemDefinitionElement instance from a node read from a project file
         /// </summary>
-        internal ProjectItemDefinitionElement(XmlElement xmlElement, ProjectItemDefinitionGroupElement parent, ProjectRootElement containingProject)
+        public ProjectItemDefinitionElement(XmlElement xmlElement, ProjectItemDefinitionGroupElement parent, ProjectRootElement containingProject)
             : base(xmlElement, parent, containingProject)
         {
             ErrorUtilities.VerifyThrowArgumentNull(parent, nameof(parent));
@@ -93,7 +93,7 @@ namespace Microsoft.Build.Construction
         /// Creates an unparented ProjectItemDefinitionElement, wrapping an unparented XmlElement.
         /// Caller should then ensure the element is added to a parent.
         /// </summary>
-        internal static ProjectItemDefinitionElement CreateDisconnected(string itemType, ProjectRootElement containingProject)
+        public static ProjectItemDefinitionElement CreateDisconnected(string itemType, ProjectRootElement containingProject)
         {
             XmlUtilities.VerifyThrowArgumentValidElementName(itemType);
 
@@ -110,7 +110,7 @@ namespace Microsoft.Build.Construction
         /// Overridden to verify that the potential parent and siblings
         /// are acceptable. Throws InvalidOperationException if they are not.
         /// </summary>
-        internal override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
+        public override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
         {
             ErrorUtilities.VerifyThrowInvalidOperation(parent is ProjectItemDefinitionGroupElement, "OM_CannotAcceptParent");
         }
@@ -126,6 +126,6 @@ namespace Microsoft.Build.Construction
         /// </summary>
         protected override bool ShouldCloneXmlAttribute(XmlAttribute attribute) => !ProjectMetadataElement.AttributeNameIsValidMetadataName(attribute.LocalName);
 
-        internal override bool ShouldCloneXmlAttribute(XmlAttributeLink attributeLink) => !ProjectMetadataElement.AttributeNameIsValidMetadataName(attributeLink.LocalName);
+        public override bool ShouldCloneXmlAttribute(XmlAttributeLink attributeLink) => !ProjectMetadataElement.AttributeNameIsValidMetadataName(attributeLink.LocalName);
     }
 }

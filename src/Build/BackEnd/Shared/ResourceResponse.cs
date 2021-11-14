@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace Microsoft.Build.BackEnd
@@ -6,7 +6,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// This packet is sent by the scheduler in response to <see cref="ResourceRequest"/> to grant resources to a node.
     /// </summary>
-    internal sealed class ResourceResponse : INodePacket
+    public sealed class ResourceResponse : INodePacket
     {
         /// <summary>
         /// The global request id of the request which is being responded to.
@@ -21,7 +21,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Constructor for deserialization.
         /// </summary>
-        internal ResourceResponse(ITranslator translator)
+        public ResourceResponse(ITranslator translator)
         {
             Translate(translator);
         }
@@ -29,7 +29,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Constructor for granting cores.
         /// </summary>
-        internal ResourceResponse(int globalRequestId, int numCores)
+        public ResourceResponse(int globalRequestId, int numCores)
         {
             _globalRequestId = globalRequestId;
             _numCores = numCores;
@@ -66,7 +66,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Factory for serialization.
         /// </summary>
-        internal static INodePacket FactoryForDeserialization(ITranslator translator)
+        public static INodePacket FactoryForDeserialization(ITranslator translator)
         {
             return new ResourceResponse(translator);
         }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -58,7 +58,7 @@ namespace Microsoft.Build.Graph
 
         private GraphBuilder.GraphEdges Edges { get; }
 
-        internal GraphBuilder.GraphEdges TestOnly_Edges => Edges;
+        public GraphBuilder.GraphEdges TestOnly_Edges => Edges;
 
         public GraphConstructionMetrics ConstructionMetrics { get; private set;}
 
@@ -476,13 +476,13 @@ namespace Microsoft.Build.Graph
             }
         }
 
-        internal string ToDot(IReadOnlyDictionary<ProjectGraphNode, ImmutableList<string>> targetsPerNode = null)
+        public string ToDot(IReadOnlyDictionary<ProjectGraphNode, ImmutableList<string>> targetsPerNode = null)
         {
             var nodeCount = 0;
             return ToDot(node => nodeCount++.ToString(), targetsPerNode);
         }
 
-        internal string ToDot(
+        public string ToDot(
             Func<ProjectGraphNode, string> nodeIdProvider,
             IReadOnlyDictionary<ProjectGraphNode, ImmutableList<string>> targetsPerNode = null
         )
@@ -745,7 +745,7 @@ namespace Microsoft.Build.Graph
             return targets;
         }
 
-        internal static ProjectInstance DefaultProjectInstanceFactory(
+        public static ProjectInstance DefaultProjectInstanceFactory(
             string projectPath,
             Dictionary<string, string> globalProperties,
             ProjectCollection projectCollection)

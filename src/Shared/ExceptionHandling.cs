@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 #if BUILDINGAPPXTASKS
@@ -30,7 +30,7 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// Utility methods for classifying and handling exceptions.
     /// </summary>
-    internal static class ExceptionHandling
+    public static class ExceptionHandling
     {
         private static readonly string s_debugDumpPath;
 
@@ -63,7 +63,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// The directory used for diagnostic log files.
         /// </summary>
-        internal static string DebugDumpPath => s_debugDumpPath;
+        public static string DebugDumpPath => s_debugDumpPath;
 
 #if !BUILDINGAPPXTASKS
         /// <summary>
@@ -78,7 +78,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="e"> The exception to check. </param>
         /// <returns> True if exception is critical. </returns>
-        internal static bool IsCriticalException(Exception e)
+        public static bool IsCriticalException(Exception e)
         {
             if (e is OutOfMemoryException
              || e is StackOverflowException
@@ -120,7 +120,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="e">The exception to check.</param>
         /// <returns>True if exception is not IO related or expected otherwise false.</returns>
-        internal static bool NotExpectedException(Exception e)
+        public static bool NotExpectedException(Exception e)
         {
             return !IsIoRelatedException(e);
         }
@@ -130,7 +130,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="e">The exception to check.</param>
         /// <returns>True if exception is IO related.</returns>
-        internal static bool IsIoRelatedException(Exception e)
+        public static bool IsIoRelatedException(Exception e)
         {
             // These all derive from IOException
             //     DirectoryNotFoundException
@@ -150,7 +150,7 @@ namespace Microsoft.Build.Shared
         /// <summary> Checks if the exception is an XML one. </summary>
         /// <param name="e"> Exception to check. </param>
         /// <returns> True if exception is related to XML parsing. </returns>
-        internal static bool IsXmlException(Exception e)
+        public static bool IsXmlException(Exception e)
         {
             return e is XmlException
                 || e is XmlSyntaxException
@@ -162,7 +162,7 @@ namespace Microsoft.Build.Shared
         /// <param name="e"> XML-related exception. </param>
         /// <returns> Line and column numbers if available, (0,0) if not. </returns>
         /// <remarks> This function works around the fact that XmlException and XmlSchemaException are not directly related. </remarks>
-        internal static LineAndColumn GetXmlLineAndColumn(Exception e)
+        public static LineAndColumn GetXmlLineAndColumn(Exception e)
         {
             var line = 0;
             var column = 0;
@@ -197,7 +197,7 @@ namespace Microsoft.Build.Shared
         /// Otherwise, return true.
         /// </summary>
         /// <param name="e">The exception to check.</param>
-        internal static bool NotExpectedIoOrXmlException(Exception e)
+        public static bool NotExpectedIoOrXmlException(Exception e)
         {
             if
             (
@@ -216,7 +216,7 @@ namespace Microsoft.Build.Shared
         /// Otherwise, return true.
         /// </summary>
         /// <param name="e">The exception to check.</param>
-        internal static bool NotExpectedReflectionException(Exception e)
+        public static bool NotExpectedReflectionException(Exception e)
         {
             // We are explicitly not handling TargetInvocationException. Those are just wrappers around
             // exceptions thrown by the called code (such as a task or logger) which callers will typically
@@ -252,7 +252,7 @@ namespace Microsoft.Build.Shared
         /// well as SerializationException and IO exceptions. (Obviously
         /// it has to do reflection but it ought to be wrapping the exceptions.)
         /// </summary>
-        internal static bool NotExpectedSerializationException(Exception e)
+        public static bool NotExpectedSerializationException(Exception e)
         {
             if
             (
@@ -269,7 +269,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Returns false if this is a known exception thrown by the registry API.
         /// </summary>
-        internal static bool NotExpectedRegistryException(Exception e)
+        public static bool NotExpectedRegistryException(Exception e)
         {
             if (e is SecurityException
              || e is UnauthorizedAccessException
@@ -286,7 +286,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Returns false if this is a known exception thrown by function evaluation
         /// </summary>
-        internal static bool NotExpectedFunctionException(Exception e)
+        public static bool NotExpectedFunctionException(Exception e)
         {
             if (e is InvalidCastException
              || e is ArgumentNullException
@@ -305,7 +305,7 @@ namespace Microsoft.Build.Shared
         /// Dump any unhandled exceptions to a file so they can be diagnosed
         /// </summary>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "It is called by the CLR")]
-        internal static void UnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
+        public static void UnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
         {
             Exception ex = (Exception)e.ExceptionObject;
             DumpExceptionToFile(ex);
@@ -315,7 +315,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Dump the exception information to a file
         /// </summary>
-        internal static void DumpExceptionToFile(Exception ex)
+        public static void DumpExceptionToFile(Exception ex)
         {
             //  Locking on a type is not recommended.  However, we are doing it here to be extra cautious about compatibility because
             //  this method previously had a [MethodImpl(MethodImplOptions.Synchronized)] attribute, which does lock on the type when
@@ -360,7 +360,7 @@ namespace Microsoft.Build.Shared
         /// Returns the content of any exception dump files modified
         /// since the provided time, otherwise returns an empty string.
         /// </summary>
-        internal static string ReadAnyExceptionFromFile(DateTime fromTimeUtc)
+        public static string ReadAnyExceptionFromFile(DateTime fromTimeUtc)
         {
             var builder = new StringBuilder();
             IEnumerable<string> files = FileSystems.Default.EnumerateFiles(DebugDumpPath, "MSBuild*failure.txt");
@@ -383,13 +383,13 @@ namespace Microsoft.Build.Shared
 #endif
 
         /// <summary> Line and column pair. </summary>
-        internal struct LineAndColumn
+        public struct LineAndColumn
         {
             /// <summary> Gets or sets line number. </summary>
-            internal int Line { get; set; }
+            public int Line { get; set; }
 
             /// <summary> Gets or sets column position. </summary>
-            internal int Column { get; set; }
+            public int Column { get; set; }
         }
     }
 }

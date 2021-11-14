@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections;
@@ -16,7 +16,7 @@ namespace Microsoft.Build.Collections
     /// <see cref="GetEnumerator()"/> is thread safe for concurrent access.
     /// </remarks>
     /// <typeparam name="T">The type contained in the backing collection.</typeparam>
-    internal class CopyOnReadEnumerable<T> : IEnumerable<T>
+    public class CopyOnReadEnumerable<T> : IEnumerable<T>
     {
         /// <summary>
         /// The backing collection.

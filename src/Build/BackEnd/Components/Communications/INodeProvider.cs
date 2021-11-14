@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace Microsoft.Build.BackEnd
@@ -6,7 +6,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// The type of nodes provided by the node provider.
     /// </summary>
-    internal enum NodeProviderType
+    public enum NodeProviderType
     {
         /// <summary>
         /// The provider provides the in-proc node.
@@ -28,7 +28,7 @@ namespace Microsoft.Build.BackEnd
     /// This interface represents a collection of nodes in the system.  It provides methods to 
     /// enumerate active nodes as well as send data and receive events from those nodes.
     /// </summary>
-    internal interface INodeProvider : IBuildComponent
+    public interface INodeProvider : IBuildComponent
     {
         #region Properties
 

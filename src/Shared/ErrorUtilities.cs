@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -17,7 +17,7 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// This class contains methods that are useful for error checking and validation.
     /// </summary>
-    internal static class ErrorUtilities
+    public static class ErrorUtilities
     {
         /// <summary>
         /// Emergency escape hatch. If a customer hits a bug in the shipped product causing an internal exception,
@@ -47,7 +47,7 @@ namespace Microsoft.Build.Shared
 #if !BUILDINGAPPXTASKS
         #region VerifyThrow -- for internal errors
 
-        internal static void VerifyThrowInternalError(bool condition, string message, params object[] args)
+        public static void VerifyThrowInternalError(bool condition, string message, params object[] args)
         {
             if (s_throwExceptions && !condition)
             {
@@ -59,7 +59,7 @@ namespace Microsoft.Build.Shared
         /// Throws InternalErrorException. 
         /// This is only for situations that would mean that there is a bug in MSBuild itself.
         /// </summary>
-        internal static void ThrowInternalError(string message, params object[] args)
+        public static void ThrowInternalError(string message, params object[] args)
         {
             if (s_throwExceptions)
             {
@@ -71,7 +71,7 @@ namespace Microsoft.Build.Shared
         /// Throws InternalErrorException. 
         /// This is only for situations that would mean that there is a bug in MSBuild itself.
         /// </summary>
-        internal static void ThrowInternalError(string message, Exception innerException, params object[] args)
+        public static void ThrowInternalError(string message, Exception innerException, params object[] args)
         {
             if (s_throwExceptions)
             {
@@ -84,7 +84,7 @@ namespace Microsoft.Build.Shared
         /// Indicates the code path followed should not have been possible.
         /// This is only for situations that would mean that there is a bug in MSBuild itself.
         /// </summary>
-        internal static void ThrowInternalErrorUnreachable()
+        public static void ThrowInternalErrorUnreachable()
         {
             if (s_throwExceptions)
             {
@@ -97,7 +97,7 @@ namespace Microsoft.Build.Shared
         /// Indicates the code path followed should not have been possible.
         /// This is only for situations that would mean that there is a bug in MSBuild itself.
         /// </summary>
-        internal static void VerifyThrowInternalErrorUnreachable(bool condition)
+        public static void VerifyThrowInternalErrorUnreachable(bool condition)
         {
             if (s_throwExceptions && !condition)
             {
@@ -110,7 +110,7 @@ namespace Microsoft.Build.Shared
         /// Indicates the code path followed should not have been possible.
         /// This is only for situations that would mean that there is a bug in MSBuild itself.
         /// </summary>
-        internal static void ThrowIfTypeDoesNotImplementToString(object param)
+        public static void ThrowIfTypeDoesNotImplementToString(object param)
         {
 #if DEBUG
             // Check it has a real implementation of ToString()
@@ -128,7 +128,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="parameter">The value of the argument.</param>
         /// <param name="parameterName">Parameter that should not be null</param>
-        internal static void VerifyThrowInternalNull(object parameter, string parameterName)
+        public static void VerifyThrowInternalNull(object parameter, string parameterName)
         {
             if (parameter == null)
             {
@@ -142,7 +142,7 @@ namespace Microsoft.Build.Shared
         /// anything caused by user action.
         /// </summary>
         /// <param name="locker">The object that should already have been used as a lock.</param>
-        internal static void VerifyThrowInternalLockHeld(object locker)
+        public static void VerifyThrowInternalLockHeld(object locker)
         {
 #if !CLR2COMPATIBILITY
             if (!Monitor.IsEntered(locker))
@@ -159,7 +159,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="parameterValue">The value of the argument.</param>
         /// <param name="parameterName">Parameter that should not be null or zero length</param>
-        internal static void VerifyThrowInternalLength(string parameterValue, string parameterName)
+        public static void VerifyThrowInternalLength(string parameterValue, string parameterName)
         {
             VerifyThrowInternalNull(parameterValue, parameterName);
 
@@ -185,7 +185,7 @@ namespace Microsoft.Build.Shared
         /// anything caused by user action.
         /// </summary>
         /// <param name="value">Parameter that should be a rooted path</param>
-        internal static void VerifyThrowInternalRooted(string value)
+        public static void VerifyThrowInternalRooted(string value)
         {
             if (!Path.IsPathRooted(value))
             {
@@ -202,7 +202,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="condition"></param>
         /// <param name="unformattedMessage"></param>
-        internal static void VerifyThrow
+        public static void VerifyThrow
         (
             bool condition,
             string unformattedMessage
@@ -222,7 +222,7 @@ namespace Microsoft.Build.Shared
         /// <param name="condition"></param>
         /// <param name="unformattedMessage"></param>
         /// <param name="arg0"></param>
-        internal static void VerifyThrow
+        public static void VerifyThrow
         (
             bool condition,
             string unformattedMessage,
@@ -245,7 +245,7 @@ namespace Microsoft.Build.Shared
         /// <param name="unformattedMessage"></param>
         /// <param name="arg0"></param>
         /// <param name="arg1"></param>
-        internal static void VerifyThrow
+        public static void VerifyThrow
         (
             bool condition,
             string unformattedMessage,
@@ -270,7 +270,7 @@ namespace Microsoft.Build.Shared
         /// <param name="arg0"></param>
         /// <param name="arg1"></param>
         /// <param name="arg2"></param>
-        internal static void VerifyThrow
+        public static void VerifyThrow
         (
             bool condition,
             string unformattedMessage,
@@ -297,7 +297,7 @@ namespace Microsoft.Build.Shared
         /// <param name="arg1"></param>
         /// <param name="arg2"></param>
         /// <param name="arg3"></param>
-        internal static void VerifyThrow
+        public static void VerifyThrow
         (
             bool condition,
             string unformattedMessage,
@@ -325,7 +325,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="resourceName">Resource to use in the exception</param>
         /// <param name="args">Formatting args.</param>
-        internal static void ThrowInvalidOperation(string resourceName, params object[] args)
+        public static void ThrowInvalidOperation(string resourceName, params object[] args)
         {
 #if DEBUG
             ResourceUtilities.VerifyResourceStringExists(resourceName);
@@ -341,7 +341,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="condition"></param>
         /// <param name="resourceName"></param>
-        internal static void VerifyThrowInvalidOperation
+        public static void VerifyThrowInvalidOperation
         (
             bool condition,
             string resourceName
@@ -361,7 +361,7 @@ namespace Microsoft.Build.Shared
         /// <param name="condition"></param>
         /// <param name="resourceName"></param>
         /// <param name="arg0"></param>
-        internal static void VerifyThrowInvalidOperation
+        public static void VerifyThrowInvalidOperation
         (
             bool condition,
             string resourceName,
@@ -384,7 +384,7 @@ namespace Microsoft.Build.Shared
         /// <param name="resourceName"></param>
         /// <param name="arg0"></param>
         /// <param name="arg1"></param>
-        internal static void VerifyThrowInvalidOperation
+        public static void VerifyThrowInvalidOperation
         (
             bool condition,
             string resourceName,
@@ -409,7 +409,7 @@ namespace Microsoft.Build.Shared
         /// <param name="arg0"></param>
         /// <param name="arg1"></param>
         /// <param name="arg2"></param>
-        internal static void VerifyThrowInvalidOperation
+        public static void VerifyThrowInvalidOperation
         (
             bool condition,
             string resourceName,
@@ -436,7 +436,7 @@ namespace Microsoft.Build.Shared
         /// <param name="arg1"></param>
         /// <param name="arg2"></param>
         /// <param name="arg3"></param>
-        internal static void VerifyThrowInvalidOperation
+        public static void VerifyThrowInvalidOperation
         (
             bool condition,
             string resourceName,
@@ -466,7 +466,7 @@ namespace Microsoft.Build.Shared
         /// is expensive, because memory is allocated for the array of arguments -- do
         /// not call this method repeatedly in performance-critical scenarios
         /// </summary>
-        internal static void ThrowArgument
+        public static void ThrowArgument
         (
             string resourceName,
             params object[] args
@@ -510,7 +510,7 @@ namespace Microsoft.Build.Shared
         /// <remarks>This method is thread-safe.</remarks>
         /// <param name="condition"></param>
         /// <param name="resourceName"></param>
-        internal static void VerifyThrowArgument
+        public static void VerifyThrowArgument
         (
             bool condition,
             string resourceName
@@ -526,7 +526,7 @@ namespace Microsoft.Build.Shared
         /// <param name="condition"></param>
         /// <param name="resourceName"></param>
         /// <param name="arg0"></param>
-        internal static void VerifyThrowArgument
+        public static void VerifyThrowArgument
         (
             bool condition,
             string resourceName,
@@ -544,7 +544,7 @@ namespace Microsoft.Build.Shared
         /// <param name="resourceName"></param>
         /// <param name="arg0"></param>
         /// <param name="arg1"></param>
-        internal static void VerifyThrowArgument
+        public static void VerifyThrowArgument
         (
             bool condition,
             string resourceName,
@@ -559,7 +559,7 @@ namespace Microsoft.Build.Shared
         /// Overload for three string format arguments.
         /// </summary>
         /// <remarks>This method is thread-safe.</remarks>
-        internal static void VerifyThrowArgument
+        public static void VerifyThrowArgument
         (
             bool condition,
             string resourceName,
@@ -575,7 +575,7 @@ namespace Microsoft.Build.Shared
         /// Overload for four string format arguments.
         /// </summary>
         /// <remarks>This method is thread-safe.</remarks>
-        internal static void VerifyThrowArgument
+        public static void VerifyThrowArgument
         (
             bool condition,
             string resourceName,
@@ -596,7 +596,7 @@ namespace Microsoft.Build.Shared
         /// <param name="condition"></param>
         /// <param name="innerException">Can be null.</param>
         /// <param name="resourceName"></param>
-        internal static void VerifyThrowArgument
+        public static void VerifyThrowArgument
         (
             bool condition,
             Exception innerException,
@@ -619,7 +619,7 @@ namespace Microsoft.Build.Shared
         /// <param name="innerException"></param>
         /// <param name="resourceName"></param>
         /// <param name="arg0"></param>
-        internal static void VerifyThrowArgument
+        public static void VerifyThrowArgument
         (
             bool condition,
             Exception innerException,
@@ -645,7 +645,7 @@ namespace Microsoft.Build.Shared
         /// <param name="resourceName"></param>
         /// <param name="arg0"></param>
         /// <param name="arg1"></param>
-        internal static void VerifyThrowArgument
+        public static void VerifyThrowArgument
         (
             bool condition,
             Exception innerException,
@@ -667,7 +667,7 @@ namespace Microsoft.Build.Shared
         /// Overload for three string format arguments.
         /// </summary>
         /// <remarks>This method is thread-safe.</remarks>
-        internal static void VerifyThrowArgument
+        public static void VerifyThrowArgument
         (
             bool condition,
             Exception innerException,
@@ -690,7 +690,7 @@ namespace Microsoft.Build.Shared
         /// Overload for four string format arguments.
         /// </summary>
         /// <remarks>This method is thread-safe.</remarks>
-        internal static void VerifyThrowArgument
+        public static void VerifyThrowArgument
         (
             bool condition,
             Exception innerException,
@@ -717,7 +717,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Throws an argument out of range exception.
         /// </summary>
-        internal static void ThrowArgumentOutOfRange(string parameterName)
+        public static void ThrowArgumentOutOfRange(string parameterName)
         {
             if (s_throwExceptions)
             {
@@ -729,7 +729,7 @@ namespace Microsoft.Build.Shared
         /// Throws an ArgumentOutOfRangeException using the given parameter name
         /// if the condition is false.
         /// </summary>
-        internal static void VerifyThrowArgumentOutOfRange(bool condition, string parameterName)
+        public static void VerifyThrowArgumentOutOfRange(bool condition, string parameterName)
         {
             if (!condition)
             {
@@ -743,7 +743,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="parameter"></param>
         /// <param name="parameterName"></param>
-        internal static void VerifyThrowArgumentLength(string parameter, string parameterName)
+        public static void VerifyThrowArgumentLength(string parameter, string parameterName)
         {
             VerifyThrowArgumentNull(parameter, parameterName);
 
@@ -760,7 +760,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="parameter"></param>
         /// <param name="parameterName"></param>
-        internal static void VerifyThrowArgumentLength<T>(IReadOnlyCollection<T> parameter, string parameterName)
+        public static void VerifyThrowArgumentLength<T>(IReadOnlyCollection<T> parameter, string parameterName)
         {
             VerifyThrowArgumentNull(parameter, parameterName);
 
@@ -775,7 +775,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="parameter"></param>
         /// <param name="parameterName"></param>
-        internal static void VerifyThrowArgumentLengthIfNotNull<T>(IReadOnlyCollection<T> parameter, string parameterName)
+        public static void VerifyThrowArgumentLengthIfNotNull<T>(IReadOnlyCollection<T> parameter, string parameterName)
         {
             if (parameter?.Count == 0 && s_throwExceptions)
             {
@@ -790,7 +790,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="parameter"></param>
         /// <param name="parameterName"></param>
-        internal static void VerifyThrowArgumentInvalidPath(string parameter, string parameterName)
+        public static void VerifyThrowArgumentInvalidPath(string parameter, string parameterName)
         {
             VerifyThrowArgumentNull(parameter, parameterName);
 
@@ -804,7 +804,7 @@ namespace Microsoft.Build.Shared
         /// Throws an ArgumentException if the string has zero length, unless it is 
         /// null, in which case no exception is thrown.
         /// </summary>
-        internal static void VerifyThrowArgumentLengthIfNotNull(string parameter, string parameterName)
+        public static void VerifyThrowArgumentLengthIfNotNull(string parameter, string parameterName)
         {
             if (parameter?.Length == 0 && s_throwExceptions)
             {
@@ -818,7 +818,7 @@ namespace Microsoft.Build.Shared
         /// <remarks>This method is thread-safe.</remarks>
         /// <param name="parameter"></param>
         /// <param name="parameterName"></param>
-        internal static void VerifyThrowArgumentNull(object parameter, string parameterName)
+        public static void VerifyThrowArgumentNull(object parameter, string parameterName)
         {
             VerifyThrowArgumentNull(parameter, parameterName, "Shared.ParameterCannotBeNull");
         }
@@ -827,7 +827,7 @@ namespace Microsoft.Build.Shared
         /// Throws an ArgumentNullException if the given parameter is null.
         /// </summary>
         /// <remarks>This method is thread-safe.</remarks>
-        internal static void VerifyThrowArgumentNull(object parameter, string parameterName, string resourceName)
+        public static void VerifyThrowArgumentNull(object parameter, string parameterName, string resourceName)
         {
             if (parameter == null && s_throwExceptions)
             {
@@ -846,7 +846,7 @@ namespace Microsoft.Build.Shared
         /// <param name="parameter2"></param>
         /// <param name="parameter1Name"></param>
         /// <param name="parameter2Name"></param>
-        internal static void VerifyThrowArgumentArraysSameLength(Array parameter1, Array parameter2, string parameter1Name, string parameter2Name)
+        public static void VerifyThrowArgumentArraysSameLength(Array parameter1, Array parameter2, string parameter1Name, string parameter2Name)
         {
             VerifyThrowArgumentNull(parameter1, parameter1Name);
             VerifyThrowArgumentNull(parameter2, parameter2Name);
@@ -861,7 +861,7 @@ namespace Microsoft.Build.Shared
 
         #region VerifyThrowObjectDisposed
 
-        internal static void VerifyThrowObjectDisposed(bool condition, string objectName)
+        public static void VerifyThrowObjectDisposed(bool condition, string objectName)
         {
             {
                 if (s_throwExceptions && !condition)

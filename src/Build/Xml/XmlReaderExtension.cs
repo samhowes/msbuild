@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -9,7 +9,7 @@ namespace Microsoft.Build.Internal
     /// <summary>
     ///     Disposable helper class to wrap XmlReader / XmlTextReader functionality.
     /// </summary>
-    internal class XmlReaderExtension : IDisposable
+    public class XmlReaderExtension : IDisposable
     {
         /// <summary>
         ///     Creates an XmlReaderExtension with handle to an XmlReader.
@@ -17,7 +17,7 @@ namespace Microsoft.Build.Internal
         /// <param name="filePath">Path to the file on disk.</param>
         /// <param name="loadAsReadOnly">Whther to load the file in real only mode.</param>
         /// <returns>Disposable XmlReaderExtension object.</returns>
-        internal static XmlReaderExtension Create(string filePath, bool loadAsReadOnly)
+        public static XmlReaderExtension Create(string filePath, bool loadAsReadOnly)
         {
             return new XmlReaderExtension(filePath, loadAsReadOnly);
         }
@@ -60,9 +60,9 @@ namespace Microsoft.Build.Internal
             }
         }
 
-        internal XmlReader Reader { get; }
+        public XmlReader Reader { get; }
 
-        internal Encoding Encoding { get; }
+        public Encoding Encoding { get; }
 
         public void Dispose()
         {

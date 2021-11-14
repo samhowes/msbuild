@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -15,7 +15,7 @@ namespace Microsoft.Build.BackEnd
     /// A struct representing the uniquely-identifying portion of a BuildRequestConfiguration.  Used for lookups.
     /// </summary>
     [DebuggerDisplay(@"{DebugString()}")]
-    internal class ConfigurationMetadata : IEquatable<ConfigurationMetadata>, ITranslatable
+    public class ConfigurationMetadata : IEquatable<ConfigurationMetadata>, ITranslatable
     {
         /// <summary>
         /// Constructor over a BuildRequestConfiguration.

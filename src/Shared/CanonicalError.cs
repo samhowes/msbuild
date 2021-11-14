@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -47,7 +47,7 @@ namespace Microsoft.Build.Shared
     ///
     ///          &lt;text&gt; : warning [num]: &lt;msg&gt;
     /// </remarks>
-    internal static class CanonicalError
+    public static class CanonicalError
     {
         // Defines the main pattern for matching messages.
         private static readonly Lazy<Regex> s_originCategoryCodeTextExpression = new Lazy<Regex>(
@@ -160,12 +160,12 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Represents the parts of a decomposed canonical message.
         /// </summary>
-        internal sealed class Parts
+        public sealed class Parts
         {
             /// <summary>
             /// Defines the error category\severity level.
             /// </summary>
-            internal enum Category
+            public enum Category
             {
                 Warning,
                 Error
@@ -174,59 +174,59 @@ namespace Microsoft.Build.Shared
             /// <summary>
             /// Value used for unspecified line and column numbers, which are 1-relative.
             /// </summary>
-            internal const int numberNotSpecified = 0;
+            public const int numberNotSpecified = 0;
 
             /// <summary>
             /// Initializes a new instance of the <see cref="Parts"/> class.
             /// </summary>
-            internal Parts()
+            public Parts()
             {
             }
 
             /// <summary>
             /// Name of the file or tool (not localized)
             /// </summary>
-            internal string origin;
+            public string origin;
 
             /// <summary>
             /// The line number.
             /// </summary>
-            internal int line = Parts.numberNotSpecified;
+            public int line = Parts.numberNotSpecified;
 
             /// <summary>
             /// The column number.
             /// </summary>
-            internal int column = Parts.numberNotSpecified;
+            public int column = Parts.numberNotSpecified;
 
             /// <summary>
             /// The ending line number.
             /// </summary>
-            internal int endLine = Parts.numberNotSpecified;
+            public int endLine = Parts.numberNotSpecified;
 
             /// <summary>
             /// The ending column number.
             /// </summary>
-            internal int endColumn = Parts.numberNotSpecified;
+            public int endColumn = Parts.numberNotSpecified;
 
             /// <summary>
             /// The category/severity level
             /// </summary>
-            internal Category category;
+            public Category category;
 
             /// <summary>
             /// The sub category (localized)
             /// </summary>
-            internal string subcategory;
+            public string subcategory;
 
             /// <summary>
             /// The error code (not localized)
             /// </summary>
-            internal string code;
+            public string code;
 
             /// <summary>
             /// The error message text (localized)
             /// </summary>
-            internal string text;
+            public string text;
         }
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace Microsoft.Build.Shared
         /// <remarks>This method is thread-safe, because the Regex class is thread-safe (per MSDN).</remarks>
         /// <param name="message"></param>
         /// <returns>Decomposed canonical message, or null.</returns>
-        internal static Parts Parse(string message)
+        public static Parts Parse(string message)
         {
             // An unusually long string causes pathologically slow Regex back-tracking.
             // To avoid that, only scan the first 400 characters. That's enough for

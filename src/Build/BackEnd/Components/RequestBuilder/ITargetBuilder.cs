@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Threading;
@@ -11,7 +11,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// Represents an object which can build targets for a project.
     /// </summary>
-    internal interface ITargetBuilder
+    public interface ITargetBuilder
     {
         /// <summary>
         /// Builds the specified targets.

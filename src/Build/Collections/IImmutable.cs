@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace Microsoft.Build.Collections
@@ -9,7 +9,7 @@ namespace Microsoft.Build.Collections
     /// <remarks>
     /// This can be internal as it is a constraint only on internal collections.
     /// </remarks>
-    internal interface IImmutable
+    public interface IImmutable
     {
     }
 }

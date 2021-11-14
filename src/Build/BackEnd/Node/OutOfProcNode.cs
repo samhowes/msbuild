@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -201,7 +201,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Whether the current appdomain has an out of proc node.
         /// </summary>
-        internal static bool IsOutOfProcNode => s_isOutOfProcNode;
+        public static bool IsOutOfProcNode => s_isOutOfProcNode;
 
         #region INode Members
 

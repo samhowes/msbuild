@@ -6,71 +6,71 @@ using Microsoft.Build.Construction;
 
 namespace Microsoft.Build.Evaluation
 {
-    internal abstract class ProjectRootElementCacheBase
+    public abstract class ProjectRootElementCacheBase
     {
         public bool LoadProjectsReadOnly { get; protected set; }
 
         /// <summary>
         /// Handler for which project root element just got added to the cache
         /// </summary>
-        internal delegate void ProjectRootElementCacheAddEntryHandler(object sender, ProjectRootElementCacheAddEntryEventArgs e);
+        public delegate void ProjectRootElementCacheAddEntryHandler(object sender, ProjectRootElementCacheAddEntryEventArgs e);
 
         /// <summary>
         /// Delegate for StrongCacheEntryRemoved event
         /// </summary>
-        internal delegate void StrongCacheEntryRemovedDelegate(object sender, ProjectRootElement projectRootElement);
+        public delegate void StrongCacheEntryRemovedDelegate(object sender, ProjectRootElement projectRootElement);
 
         /// <summary>
         /// Callback to create a ProjectRootElement if need be
         /// </summary>
-        internal delegate ProjectRootElement OpenProjectRootElement(string path, ProjectRootElementCacheBase cache);
+        public delegate ProjectRootElement OpenProjectRootElement(string path, ProjectRootElementCacheBase cache);
 
         /// <summary>
         /// Event that is fired when an entry in the Strong Cache is removed.
         /// </summary>
-        internal static event StrongCacheEntryRemovedDelegate StrongCacheEntryRemoved;
+        public static event StrongCacheEntryRemovedDelegate StrongCacheEntryRemoved;
 
         /// <summary>
         /// Event which is fired when a project root element is added to this cache.
         /// </summary>
-        internal event ProjectRootElementCacheAddEntryHandler ProjectRootElementAddedHandler;
+        public event ProjectRootElementCacheAddEntryHandler ProjectRootElementAddedHandler;
 
         /// <summary>
         /// Event which is fired when a project root element in this cache is dirtied.
         /// </summary>
-        internal event EventHandler<ProjectXmlChangedEventArgs> ProjectRootElementDirtied;
+        public event EventHandler<ProjectXmlChangedEventArgs> ProjectRootElementDirtied;
 
         /// <summary>
         /// Event which is fired when a project is marked dirty.
         /// </summary>
-        internal event EventHandler<ProjectChangedEventArgs> ProjectDirtied;
+        public event EventHandler<ProjectChangedEventArgs> ProjectDirtied;
 
-        internal abstract ProjectRootElement Get(string projectFile, OpenProjectRootElement openProjectRootElement,
+        public abstract ProjectRootElement Get(string projectFile, OpenProjectRootElement openProjectRootElement,
             bool isExplicitlyLoaded,
             bool? preserveFormatting);
 
-        internal abstract void AddEntry(ProjectRootElement projectRootElement);
+        public abstract void AddEntry(ProjectRootElement projectRootElement);
 
-        internal abstract void RenameEntry(string oldFullPath, ProjectRootElement projectRootElement);
+        public abstract void RenameEntry(string oldFullPath, ProjectRootElement projectRootElement);
 
-        internal abstract ProjectRootElement TryGet(string projectFile);
+        public abstract ProjectRootElement TryGet(string projectFile);
 
-        internal abstract ProjectRootElement TryGet(string projectFile, bool? preserveFormatting);
+        public abstract ProjectRootElement TryGet(string projectFile, bool? preserveFormatting);
 
-        internal abstract void DiscardStrongReferences();
+        public abstract void DiscardStrongReferences();
 
-        internal abstract void Clear();
+        public abstract void Clear();
 
-        internal abstract void DiscardImplicitReferences();
+        public abstract void DiscardImplicitReferences();
 
-        internal abstract void DiscardAnyWeakReference(ProjectRootElement projectRootElement);
+        public abstract void DiscardAnyWeakReference(ProjectRootElement projectRootElement);
 
         /// <summary>
         /// Raises the <see cref="ProjectRootElementDirtied"/> event.
         /// </summary>
         /// <param name="sender">The dirtied project root element.</param>
         /// <param name="e">Details on the PRE and the nature of the change.</param>
-        internal virtual void OnProjectRootElementDirtied(ProjectRootElement sender, ProjectXmlChangedEventArgs e)
+        public virtual void OnProjectRootElementDirtied(ProjectRootElement sender, ProjectXmlChangedEventArgs e)
         {
             var cacheDirtied = ProjectRootElementDirtied;
             cacheDirtied?.Invoke(sender, e);
@@ -81,7 +81,7 @@ namespace Microsoft.Build.Evaluation
         /// </summary>
         /// <param name="sender">The dirtied project.</param>
         /// <param name="e">Details on the Project and the change.</param>
-        internal virtual void OnProjectDirtied(Project sender, ProjectChangedEventArgs e)
+        public virtual void OnProjectDirtied(Project sender, ProjectChangedEventArgs e)
         {
             var projectDirtied = ProjectDirtied;
             projectDirtied?.Invoke(sender, e);
@@ -108,12 +108,12 @@ namespace Microsoft.Build.Evaluation
     /// <summary>
     /// This class is an event that holds which ProjectRootElement was added to the root element cache.
     /// </summary>
-    internal class ProjectRootElementCacheAddEntryEventArgs : EventArgs
+    public class ProjectRootElementCacheAddEntryEventArgs : EventArgs
     {
         /// <summary>
         /// Takes the root element which was added to the results cache.
         /// </summary>
-        internal ProjectRootElementCacheAddEntryEventArgs(ProjectRootElement element)
+        public ProjectRootElementCacheAddEntryEventArgs(ProjectRootElement element)
         {
             RootElement = element;
         }
@@ -121,6 +121,6 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Root element which was just added to the cache.
         /// </summary>
-        internal readonly ProjectRootElement RootElement;
+        public readonly ProjectRootElement RootElement;
     }
 }

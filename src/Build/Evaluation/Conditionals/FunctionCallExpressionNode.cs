@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -13,12 +13,12 @@ namespace Microsoft.Build.Evaluation
     /// <summary>
     /// Evaluates a function expression, such as "Exists('foo')"
     /// </summary>
-    internal sealed class FunctionCallExpressionNode : OperatorExpressionNode
+    public sealed class FunctionCallExpressionNode : OperatorExpressionNode
     {
         private readonly List<GenericExpressionNode> _arguments;
         private readonly string _functionName;
 
-        internal FunctionCallExpressionNode(string functionName, List<GenericExpressionNode> arguments)
+        public FunctionCallExpressionNode(string functionName, List<GenericExpressionNode> arguments)
         {
             _functionName = functionName;
             _arguments = arguments;
@@ -27,7 +27,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Evaluate node as boolean
         /// </summary>
-        internal override bool BoolEvaluate(ConditionEvaluator.IConditionEvaluationState state)
+        public override bool BoolEvaluate(ConditionEvaluator.IConditionEvaluationState state)
         {
             if (String.Equals(_functionName, "exists", StringComparison.OrdinalIgnoreCase))
             {

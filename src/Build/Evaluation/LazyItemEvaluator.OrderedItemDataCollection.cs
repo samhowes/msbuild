@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -7,20 +7,20 @@ using System.Collections.Immutable;
 
 namespace Microsoft.Build.Evaluation
 {
-    internal partial class LazyItemEvaluator<P, I, M, D>
+    public partial class LazyItemEvaluator<P, I, M, D>
     {
         /// <summary>
         /// A collection of ItemData that maintains insertion order and internally optimizes some access patterns, e.g. bulk removal
         /// based on normalized item values.
         /// </summary>
-        internal sealed class OrderedItemDataCollection
+        public sealed class OrderedItemDataCollection
         {
             #region Inner types
 
             /// <summary>
             /// A mutable and enumerable version of <see cref="OrderedItemDataCollection"/>.
             /// </summary>
-            internal sealed class Builder : IEnumerable<ItemData>
+            public sealed class Builder : IEnumerable<ItemData>
             {
                 /// <summary>
                 /// The list of items in the collection. Defines the enumeration order.
@@ -32,7 +32,7 @@ namespace Microsoft.Build.Evaluation
                 /// </summary>
                 private Dictionary<string, ItemDataCollectionValue<I>> _dictionaryBuilder;
 
-                internal Builder(ImmutableList<ItemData>.Builder listBuilder)
+                public Builder(ImmutableList<ItemData>.Builder listBuilder)
                 {
                     _listBuilder = listBuilder;
                 }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -14,7 +14,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// Manages full tracking activation and suspension.
     /// </summary>
-    internal class FullTracking : IDisposable
+    public class FullTracking : IDisposable
     {
         /// <summary>
         /// The default name of the MSBuild property to read for the relative path to the full tracking .tlog files.
@@ -87,7 +87,7 @@ namespace Microsoft.Build.BackEnd
         /// <returns>
         /// An object that will stop full tracking when disposed.
         /// </returns>
-        internal static IDisposable Track(string targetName, string taskName, string projectRootDirectory, PropertyDictionary<ProjectPropertyInstance> projectProperties)
+        public static IDisposable Track(string targetName, string taskName, string projectRootDirectory, PropertyDictionary<ProjectPropertyInstance> projectProperties)
         {
             FullTracking tracking = new FullTracking();
 
@@ -113,7 +113,7 @@ namespace Microsoft.Build.BackEnd
         /// Suspends full tracking.
         /// </summary>
         /// <returns>An object that will resume full tracking when disposed.</returns>
-        internal static IDisposable Suspend()
+        public static IDisposable Suspend()
         {
             FullTracking tracking = new FullTracking();
 

@@ -2,7 +2,7 @@ using System.Collections.Immutable;
 
 namespace Microsoft.Build.Globbing.Visitor
 {
-    internal class ParsedGlobCollector : GlobVisitor
+    public class ParsedGlobCollector : GlobVisitor
     {
         private readonly ImmutableList<MSBuildGlob>.Builder _collectedGlobs = ImmutableList.CreateBuilder<MSBuildGlob>();
         public ImmutableList<MSBuildGlob> CollectedGlobs => _collectedGlobs.ToImmutable();

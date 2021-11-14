@@ -23,7 +23,7 @@ namespace Microsoft.Build.Logging
     /// <summary>
     /// Serializes BuildEventArgs-derived objects into a provided BinaryWriter
     /// </summary>
-    internal class BuildEventArgsWriter
+    public class BuildEventArgsWriter
     {
         private readonly Stream originalStream;
 
@@ -75,12 +75,12 @@ namespace Microsoft.Build.Logging
         /// Index 0 is null, Index 1 is the empty string.
         /// Reserve indices 2-9 for future use. Start indexing actual strings at 10.
         /// </summary>
-        internal const int StringStartIndex = 10;
+        public const int StringStartIndex = 10;
 
         /// <summary>
         /// Let's reserve a few indices for future use.
         /// </summary>
-        internal const int NameValueRecordStartIndex = 10;
+        public const int NameValueRecordStartIndex = 10;
 
         /// <summary>
         /// 0 is null, 1 is empty string
@@ -1155,7 +1155,7 @@ Build
             Write(e.InclusiveTime);
         }
 
-        internal readonly struct HashKey : IEquatable<HashKey>
+        public readonly struct HashKey : IEquatable<HashKey>
         {
             private readonly ulong value;
 
@@ -1209,7 +1209,7 @@ Build
             }
         }
 
-        internal static class FnvHash64
+        public static class FnvHash64
         {
             public const ulong Offset = 14695981039346656037;
             public const ulong Prime = 1099511628211;

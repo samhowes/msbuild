@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -38,14 +38,14 @@ namespace Microsoft.Build.Construction
         /// <comment>
         /// Should be protected+internal.
         /// </comment>
-        internal ProjectElement()
+        public ProjectElement()
         {
         }
 
         /// <summary>
         /// External projects support
         /// </summary>
-        internal ProjectElement(ProjectElementLink link)
+        public ProjectElement(ProjectElementLink link)
         {
             ErrorUtilities.VerifyThrowArgumentNull(link, nameof(link));
 
@@ -56,7 +56,7 @@ namespace Microsoft.Build.Construction
         /// Constructor called by derived classes, except from ProjectRootElement.
         /// Parameters may not be null, except parent.
         /// </summary>
-        internal ProjectElement(XmlElement xmlElement, ProjectElementContainer parent, ProjectRootElement containingProject)
+        public ProjectElement(XmlElement xmlElement, ProjectElementContainer parent, ProjectRootElement containingProject)
         {
             ErrorUtilities.VerifyThrowArgumentNull(xmlElement, nameof(xmlElement));
             ErrorUtilities.VerifyThrowArgumentNull(containingProject, nameof(containingProject));
@@ -73,7 +73,7 @@ namespace Microsoft.Build.Construction
         /// If this is true, then the <see cref="XmlElement"/> will still be used to hold the data for this (pseudo) ProjectElement, but
         /// it will not be added to the Xml tree.  
         /// </remarks>
-        internal virtual bool ExpressedAsAttribute
+        public virtual bool ExpressedAsAttribute
         {
             get => Link != null ? Link.ExpressedAsAttribute : _expressedAsAttribute;
             set
@@ -160,7 +160,7 @@ namespace Microsoft.Build.Construction
                 return _parent;
             }
 
-            internal set
+            set
             {
                 ErrorUtilities.VerifyThrow(Link == null, "External project");
                 if (value == null)
@@ -210,7 +210,7 @@ namespace Microsoft.Build.Construction
             [DebuggerStepThrough]
             get => Link != null? Link.PreviousSibling : _previousSibling;
             [DebuggerStepThrough]
-            internal set => _previousSibling = value;
+            set => _previousSibling = value;
         }
 
         /// <summary>
@@ -225,7 +225,7 @@ namespace Microsoft.Build.Construction
             [DebuggerStepThrough]
             get => Link != null ? Link.NextSibling : _nextSibling;
             [DebuggerStepThrough]
-            internal set => _nextSibling = value;
+            set => _nextSibling = value;
         }
 
         /// <summary>
@@ -257,7 +257,7 @@ namespace Microsoft.Build.Construction
             }
 
             // ContainingProject is set ONLY when an element is first constructed.
-            internal set
+            set
             {
                 ErrorUtilities.VerifyThrow(Link == null, "External project");
                 ErrorUtilities.VerifyThrowArgumentNull(value, "ContainingProject");
@@ -297,7 +297,7 @@ namespace Microsoft.Build.Construction
         // Using ILinkedXml to share single field for either Linked (external) and local (XML backed) nodes.
         private ILinkedXml _xmlSource;
 
-        internal ProjectElementLink Link => _xmlSource?.Link;
+        public ProjectElementLink Link => _xmlSource?.Link;
 
         /// <summary>
         /// <see cref="ILinkableObject.Link"/>
@@ -314,7 +314,7 @@ namespace Microsoft.Build.Construction
         /// This should be protected, but "protected internal" means "OR" not "AND",
         /// so this is not possible.
         /// </remarks>
-        internal XmlElementWithLocation XmlElement => _xmlSource?.Xml;
+        public XmlElementWithLocation XmlElement => _xmlSource?.Xml;
 
         /// <summary>
         /// Gets the XmlDocument associated with this project element.
@@ -324,7 +324,7 @@ namespace Microsoft.Build.Construction
         /// This should be protected, but "protected internal" means "OR" not "AND",
         /// so this is not possible.
         /// </remarks>
-        internal XmlDocumentWithLocation XmlDocument
+        public XmlDocumentWithLocation XmlDocument
         {
             [DebuggerStepThrough]
             get
@@ -419,13 +419,13 @@ namespace Microsoft.Build.Construction
         /// </summary>
         protected virtual bool ShouldCloneXmlAttribute(XmlAttribute attribute) => true;
 
-        internal virtual bool ShouldCloneXmlAttribute(XmlAttributeLink attributeLink) => true;
+        public virtual bool ShouldCloneXmlAttribute(XmlAttributeLink attributeLink) => true;
 
         /// <summary>
         /// Called only by the parser to tell the ProjectRootElement its backing XmlElement and its own parent project (itself)
         /// This can't be done during construction, as it hasn't loaded the document at that point and it doesn't have a 'this' pointer either.
         /// </summary>
-        internal void SetProjectRootElementFromParser(XmlElementWithLocation xmlElement, ProjectRootElement projectRootElement)
+        public void SetProjectRootElementFromParser(XmlElementWithLocation xmlElement, ProjectRootElement projectRootElement)
         {
             _xmlSource = xmlElement;
             ContainingProject = projectRootElement;
@@ -435,7 +435,7 @@ namespace Microsoft.Build.Construction
         /// Called by ProjectElementContainer to clear the parent when
         /// removing an element from its parent.
         /// </summary>
-        internal void ClearParent()
+        public void ClearParent()
         {
             Parent = null;
         }
@@ -454,7 +454,7 @@ namespace Microsoft.Build.Construction
         /// This should be protected, but "protected internal" means "OR" not "AND",
         /// so this is not possible.
         /// </remarks>
-        internal void ReplaceElement(XmlElementWithLocation newElement)
+        public void ReplaceElement(XmlElementWithLocation newElement)
         {
             if (ReferenceEquals(newElement, XmlElement))
             {
@@ -469,7 +469,7 @@ namespace Microsoft.Build.Construction
         /// Overridden to verify that the potential parent and siblings
         /// are acceptable. Throws InvalidOperationException if they are not.
         /// </summary>
-        internal abstract void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer proposedParent, ProjectElement previousSibling, ProjectElement nextSibling);
+        public abstract void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer proposedParent, ProjectElement previousSibling, ProjectElement nextSibling);
 
         /// <summary>
         /// Marks this element as dirty.
@@ -481,7 +481,7 @@ namespace Microsoft.Build.Construction
         /// <comment>
         /// Should ideally be protected+internal.
         /// </comment>
-        internal virtual void MarkDirty(string reason, string param)
+        public virtual void MarkDirty(string reason, string param)
         {
             Parent?.MarkDirty(reason, param);
         }
@@ -490,7 +490,7 @@ namespace Microsoft.Build.Construction
         /// Called after a new parent is set. Parent may be null.
         /// By default does nothing.
         /// </summary>
-        internal virtual void OnAfterParentChanged(ProjectElementContainer newParent)
+        public virtual void OnAfterParentChanged(ProjectElementContainer newParent)
         {
         }
 
@@ -499,7 +499,7 @@ namespace Microsoft.Build.Construction
         /// </summary>
         /// <param name="factory">The factory to use for creating the new instance.</param>
         /// <returns>The cloned element.</returns>
-        protected internal virtual ProjectElement Clone(ProjectRootElement factory)
+        public virtual ProjectElement Clone(ProjectRootElement factory)
         {
             var clone = CreateNewInstance(factory);
             if (!clone.GetType().IsEquivalentTo(GetType()))
@@ -519,7 +519,7 @@ namespace Microsoft.Build.Construction
         /// <param name="owner">The factory to use for creating the new instance.</param>
         protected abstract ProjectElement CreateNewInstance(ProjectRootElement owner);
 
-        internal static ProjectElement CreateNewInstance(ProjectElement xml, ProjectRootElement owner)
+        public static ProjectElement CreateNewInstance(ProjectElement xml, ProjectRootElement owner)
         {
             if (xml.Link != null)
             {
@@ -529,18 +529,18 @@ namespace Microsoft.Build.Construction
             return xml.CreateNewInstance(owner);
         }
 
-        internal ElementLocation GetAttributeLocation(string attributeName)
+        public ElementLocation GetAttributeLocation(string attributeName)
         {
             return Link != null ? Link.GetAttributeLocation(attributeName) : XmlElement.GetAttributeLocation(attributeName);
         }
 
-        internal string GetAttributeValue(string attributeName, bool nullIfNotExists = false)
+        public string GetAttributeValue(string attributeName, bool nullIfNotExists = false)
         {
             return Link != null ? Link.GetAttributeValue(attributeName, nullIfNotExists) :
                 ProjectXmlUtilities.GetAttributeValue(XmlElement, attributeName, nullIfNotExists);
         }
 
-        internal string GetAttributeValue(string attributeName, ref string cache)
+        public string GetAttributeValue(string attributeName, ref string cache)
         {
             if (cache != null) return cache;
             var value = GetAttributeValue(attributeName, false);
@@ -552,12 +552,12 @@ namespace Microsoft.Build.Construction
             return value;
         }
 
-        internal virtual void ClearAttributeCache()
+        public virtual void ClearAttributeCache()
         {
             this._condition = null;
         }
 
-        internal void SetOrRemoveAttributeForLink(string name, string value, bool clearAttributeCache, string reason, string param)
+        public void SetOrRemoveAttributeForLink(string name, string value, bool clearAttributeCache, string reason, string param)
         {
             SetOrRemoveAttribute(name, value, reason, param);
             if (clearAttributeCache)
@@ -566,7 +566,7 @@ namespace Microsoft.Build.Construction
             }
         }
 
-        internal void SetOrRemoveAttribute(string name, string value, string reason = null, string param = null)
+        public void SetOrRemoveAttribute(string name, string value, string reason = null, string param = null)
         {
             if (Link != null)
             {
@@ -582,7 +582,7 @@ namespace Microsoft.Build.Construction
             }
         }
 
-        internal void SetOrRemoveAttribute(string name, string value, ref string cache, string reason = null, string param = null)
+        public void SetOrRemoveAttribute(string name, string value, ref string cache, string reason = null, string param = null)
         {
             if (Link != null)
             {
@@ -609,7 +609,7 @@ namespace Microsoft.Build.Construction
             /// <summary>
             /// Constructor
             /// </summary>
-            internal WrapperForProjectRootElement(ProjectRootElement containingProject)
+            public WrapperForProjectRootElement(ProjectRootElement containingProject)
             {
                 ErrorUtilities.VerifyThrowInternalNull(containingProject, nameof(containingProject));
                 ContainingProject = containingProject;
@@ -618,12 +618,12 @@ namespace Microsoft.Build.Construction
             /// <summary>
             /// Wrapped ProjectRootElement
             /// </summary>
-            internal new ProjectRootElement ContainingProject { get; }
+            public new ProjectRootElement ContainingProject { get; }
 
             /// <summary>
             /// Dummy required implementation
             /// </summary>
-            internal override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
+            public override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
             {
                 ErrorUtilities.ThrowInternalErrorUnreachable();
             }

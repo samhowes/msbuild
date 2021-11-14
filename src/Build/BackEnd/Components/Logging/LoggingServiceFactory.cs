@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Shared;
@@ -8,7 +8,7 @@ namespace Microsoft.Build.BackEnd.Logging
     /// <summary>
     /// Factory to create components of the type LoggingService
     /// </summary>
-    internal class LoggingServiceFactory
+    public class LoggingServiceFactory
     {
         #region Data
 
@@ -31,7 +31,7 @@ namespace Microsoft.Build.BackEnd.Logging
         /// </summary>
         /// <param name="mode">Synchronous or Asynchronous</param>
         /// <param name="nodeId">The node identifier.</param>
-        internal LoggingServiceFactory(LoggerMode mode, int nodeId)
+        public LoggingServiceFactory(LoggerMode mode, int nodeId)
         {
             _logMode = mode;
             _nodeId = nodeId;

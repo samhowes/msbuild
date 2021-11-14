@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -12,7 +12,7 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// Class for loading tasks
     /// </summary>
-    internal static class TaskLoader
+    public static class TaskLoader
     {
 #if FEATURE_APPDOMAIN
         /// <summary>
@@ -25,14 +25,14 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Delegate for logging task loading errors. 
         /// </summary>
-        internal delegate void LogError(string taskLocation, int taskLine, int taskColumn, string message, params object[] messageArgs);
+        public delegate void LogError(string taskLocation, int taskLine, int taskColumn, string message, params object[] messageArgs);
 
         /// <summary>
         /// Checks if the given type is a task factory.
         /// </summary>
         /// <remarks>This method is used as a type filter delegate.</remarks>
         /// <returns>true, if specified type is a task</returns>
-        internal static bool IsTaskClass(Type type, object unused)
+        public static bool IsTaskClass(Type type, object unused)
         {
             return type.GetTypeInfo().IsClass && !type.GetTypeInfo().IsAbstract && (
 #if FEATURE_TYPE_GETINTERFACE
@@ -45,7 +45,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Creates an ITask instance and returns it.  
         /// </summary>
-        internal static ITask CreateTask(LoadedType loadedType, string taskName, string taskLocation, int taskLine, int taskColumn, LogError logError
+        public static ITask CreateTask(LoadedType loadedType, string taskName, string taskLocation, int taskLine, int taskColumn, LogError logError
 #if FEATURE_APPDOMAIN
             , AppDomainSetup appDomainSetup
 #endif
@@ -179,7 +179,7 @@ namespace Microsoft.Build.Shared
         /// This is a resolver to help created AppDomains when they are unable to load an assembly into their domain we will help
         /// them succeed by providing the already loaded one in the currentdomain so that they can derive AssemblyName info from it
         /// </summary>
-        internal static Assembly AssemblyResolver(object sender, ResolveEventArgs args)
+        public static Assembly AssemblyResolver(object sender, ResolveEventArgs args)
         {
             if ((s_resolverLoadedType?.LoadedAssembly != null))
             {
@@ -196,7 +196,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Check if we added a resolver and remove it
         /// </summary>
-        internal static void RemoveAssemblyResolver()
+        public static void RemoveAssemblyResolver()
         {
             if (s_resolverLoadedType != null)
             {

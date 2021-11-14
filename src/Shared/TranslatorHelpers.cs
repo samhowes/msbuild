@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -14,7 +14,7 @@ namespace Microsoft.Build.BackEnd
     /// This class provides helper methods to adapt from <see cref="NodePacketValueFactory{T}"/> to
     /// <see cref="ObjectTranslator{T}"/>.
     /// </summary>
-    internal static class TranslatorHelpers
+    public static class TranslatorHelpers
     {
         /// <summary>
         /// Translates an object implementing <see cref="ITranslatable"/> which does not expose a

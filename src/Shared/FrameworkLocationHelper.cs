@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -16,7 +16,7 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// Used to specify the targeted bitness of the .NET Framework for some methods of FrameworkLocationHelper
     /// </summary>
-    internal enum DotNetFrameworkArchitecture
+    public enum DotNetFrameworkArchitecture
     {
         /// <summary>
         /// Indicates the .NET Framework that is currently being run under.
@@ -37,67 +37,67 @@ namespace Microsoft.Build.Shared
     /// <summary>
     /// FrameworkLocationHelper provides utility methods for locating .NET Framework and .NET Framework SDK directories and files
     /// </summary>
-    internal static class FrameworkLocationHelper
+    public static class FrameworkLocationHelper
     {
         #region Constants
 
-        internal const string dotNetFrameworkIdentifier = ".NETFramework";
+        public const string dotNetFrameworkIdentifier = ".NETFramework";
 
         // .net versions.
-        internal static readonly Version dotNetFrameworkVersion11 = new Version(1, 1);
-        internal static readonly Version dotNetFrameworkVersion20 = new Version(2, 0);
-        internal static readonly Version dotNetFrameworkVersion30 = new Version(3, 0);
-        internal static readonly Version dotNetFrameworkVersion35 = new Version(3, 5);
-        internal static readonly Version dotNetFrameworkVersion40 = new Version(4, 0);
-        internal static readonly Version dotNetFrameworkVersion45 = new Version(4, 5);
-        internal static readonly Version dotNetFrameworkVersion451 = new Version(4, 5, 1);
-        internal static readonly Version dotNetFrameworkVersion452 = new Version(4, 5, 2);
-        internal static readonly Version dotNetFrameworkVersion46 = new Version(4, 6);
-        internal static readonly Version dotNetFrameworkVersion461 = new Version(4, 6, 1);
-        internal static readonly Version dotNetFrameworkVersion462 = new Version(4, 6, 2);
-        internal static readonly Version dotNetFrameworkVersion47 = new Version(4, 7);
-        internal static readonly Version dotNetFrameworkVersion471 = new Version(4, 7, 1);
-        internal static readonly Version dotNetFrameworkVersion472 = new Version(4, 7, 2);
-        internal static readonly Version dotNetFrameworkVersion48 = new Version(4, 8);
+        public static readonly Version dotNetFrameworkVersion11 = new Version(1, 1);
+        public static readonly Version dotNetFrameworkVersion20 = new Version(2, 0);
+        public static readonly Version dotNetFrameworkVersion30 = new Version(3, 0);
+        public static readonly Version dotNetFrameworkVersion35 = new Version(3, 5);
+        public static readonly Version dotNetFrameworkVersion40 = new Version(4, 0);
+        public static readonly Version dotNetFrameworkVersion45 = new Version(4, 5);
+        public static readonly Version dotNetFrameworkVersion451 = new Version(4, 5, 1);
+        public static readonly Version dotNetFrameworkVersion452 = new Version(4, 5, 2);
+        public static readonly Version dotNetFrameworkVersion46 = new Version(4, 6);
+        public static readonly Version dotNetFrameworkVersion461 = new Version(4, 6, 1);
+        public static readonly Version dotNetFrameworkVersion462 = new Version(4, 6, 2);
+        public static readonly Version dotNetFrameworkVersion47 = new Version(4, 7);
+        public static readonly Version dotNetFrameworkVersion471 = new Version(4, 7, 1);
+        public static readonly Version dotNetFrameworkVersion472 = new Version(4, 7, 2);
+        public static readonly Version dotNetFrameworkVersion48 = new Version(4, 8);
 
         // visual studio versions.
-        internal static readonly Version visualStudioVersion100 = new Version(10, 0);
-        internal static readonly Version visualStudioVersion110 = new Version(11, 0);
-        internal static readonly Version visualStudioVersion120 = new Version(12, 0);
-        internal static readonly Version visualStudioVersion140 = new Version(14, 0);
-        internal static readonly Version visualStudioVersion150 = new Version(15, 0);
-        internal static readonly Version visualStudioVersion160 = new Version(16, 0);
-        internal static readonly Version visualStudioVersion170 = new Version(17, 0);
+        public static readonly Version visualStudioVersion100 = new Version(10, 0);
+        public static readonly Version visualStudioVersion110 = new Version(11, 0);
+        public static readonly Version visualStudioVersion120 = new Version(12, 0);
+        public static readonly Version visualStudioVersion140 = new Version(14, 0);
+        public static readonly Version visualStudioVersion150 = new Version(15, 0);
+        public static readonly Version visualStudioVersion160 = new Version(16, 0);
+        public static readonly Version visualStudioVersion170 = new Version(17, 0);
 
         // keep this up-to-date; always point to the latest visual studio version.
-        internal static readonly Version visualStudioVersionLatest = visualStudioVersion160;
+        public static readonly Version visualStudioVersionLatest = visualStudioVersion160;
 
         private const string dotNetFrameworkRegistryPath = "SOFTWARE\\Microsoft\\.NETFramework";
         private const string dotNetFrameworkSetupRegistryPath = "SOFTWARE\\Microsoft\\NET Framework Setup\\NDP";
         private const string dotNetFrameworkSetupRegistryInstalledName = "Install";
 
-        internal const string fullDotNetFrameworkRegistryKey = "HKEY_LOCAL_MACHINE\\" + dotNetFrameworkRegistryPath;
+        public const string fullDotNetFrameworkRegistryKey = "HKEY_LOCAL_MACHINE\\" + dotNetFrameworkRegistryPath;
 #if FEATURE_WIN32_REGISTRY
         private const string dotNetFrameworkAssemblyFoldersRegistryPath = dotNetFrameworkRegistryPath + "\\AssemblyFolders";
         private const string referenceAssembliesRegistryValueName = "All Assemblies In";
 #endif // FEATURE_WIN32_REGISTRY
-        internal const string dotNetFrameworkSdkInstallKeyValueV11 = "SDKInstallRootv1.1";
-        internal static string dotNetFrameworkVersionFolderPrefixV11 = NativeMethodsShared.IsWindows ? "v1.1" : "1.1"; // v1.1 is for Everett.
+        public const string dotNetFrameworkSdkInstallKeyValueV11 = "SDKInstallRootv1.1";
+        public static string dotNetFrameworkVersionFolderPrefixV11 = NativeMethodsShared.IsWindows ? "v1.1" : "1.1"; // v1.1 is for Everett.
         private const string dotNetFrameworkVersionV11 = "v1.1.4322"; // full Everett version to pass to NativeMethodsShared.GetRequestedRuntimeInfo().
         private const string dotNetFrameworkRegistryKeyV11 = dotNetFrameworkSetupRegistryPath + "\\" + dotNetFrameworkVersionV11;
 
-        internal const string dotNetFrameworkSdkInstallKeyValueV20 = "SDKInstallRootv2.0";
-        internal static string dotNetFrameworkVersionFolderPrefixV20 = NativeMethodsShared.IsWindows ? "v2.0" : "2.0"; // v2.0 is for Whidbey.
+        public const string dotNetFrameworkSdkInstallKeyValueV20 = "SDKInstallRootv2.0";
+        public static string dotNetFrameworkVersionFolderPrefixV20 = NativeMethodsShared.IsWindows ? "v2.0" : "2.0"; // v2.0 is for Whidbey.
         private const string dotNetFrameworkVersionV20 = "v2.0.50727"; // full Whidbey version to pass to NativeMethodsShared.GetRequestedRuntimeInfo().
         private const string dotNetFrameworkRegistryKeyV20 = dotNetFrameworkSetupRegistryPath + "\\" + dotNetFrameworkVersionV20;
 
-        internal static string dotNetFrameworkVersionFolderPrefixV30 = NativeMethodsShared.IsWindows ? "v3.0" : "3.0"; // v3.0 is for WinFx.
+        public static string dotNetFrameworkVersionFolderPrefixV30 = NativeMethodsShared.IsWindows ? "v3.0" : "3.0"; // v3.0 is for WinFx.
         private static string s_dotNetFrameworkRegistryKeyV30 = dotNetFrameworkSetupRegistryPath + "\\" + dotNetFrameworkVersionFolderPrefixV30 + "\\Setup";
 
 #if FEATURE_WIN32_REGISTRY
         private const string fallbackDotNetFrameworkSdkRegistryInstallPath = "SOFTWARE\\Microsoft\\Microsoft SDKs\\Windows";
 #endif // FEATURE_WIN32_REGISTRY
-        internal const string fallbackDotNetFrameworkSdkInstallKeyValue = "CurrentInstallFolder";
+        public const string fallbackDotNetFrameworkSdkInstallKeyValue = "CurrentInstallFolder";
 
         private const string dotNetFrameworkSdkRegistryPathForV35ToolsOnWinSDK70A = @"SOFTWARE\Microsoft\Microsoft SDKs\Windows\v7.0A\WinSDK-NetFx35Tools-x86";
         private const string fullDotNetFrameworkSdkRegistryPathForV35ToolsOnWinSDK70A = "HKEY_LOCAL_MACHINE\\" + dotNetFrameworkSdkRegistryPathForV35ToolsOnWinSDK70A;
@@ -105,14 +105,14 @@ namespace Microsoft.Build.Shared
         private const string dotNetFrameworkSdkRegistryPathForV35ToolsOnManagedToolsSDK80A = @"SOFTWARE\Microsoft\Microsoft SDKs\Windows\v8.0A\WinSDK-NetFx35Tools-x86";
         private const string fullDotNetFrameworkSdkRegistryPathForV35ToolsOnManagedToolsSDK80A = "HKEY_LOCAL_MACHINE\\" + dotNetFrameworkSdkRegistryPathForV35ToolsOnManagedToolsSDK80A;
 
-        internal static string dotNetFrameworkVersionFolderPrefixV35 = NativeMethodsShared.IsWindows ? "v3.5" : "3.5"; // v3.5 is for Orcas.
+        public static string dotNetFrameworkVersionFolderPrefixV35 = NativeMethodsShared.IsWindows ? "v3.5" : "3.5"; // v3.5 is for Orcas.
         private static string s_dotNetFrameworkRegistryKeyV35 = dotNetFrameworkSetupRegistryPath + "\\" + dotNetFrameworkVersionFolderPrefixV35;
 
-        internal const string fullDotNetFrameworkSdkRegistryKeyV35OnVS10 = fullDotNetFrameworkSdkRegistryPathForV35ToolsOnWinSDK70A;
-        internal const string fullDotNetFrameworkSdkRegistryKeyV35OnVS11 = fullDotNetFrameworkSdkRegistryPathForV35ToolsOnManagedToolsSDK80A;
+        public const string fullDotNetFrameworkSdkRegistryKeyV35OnVS10 = fullDotNetFrameworkSdkRegistryPathForV35ToolsOnWinSDK70A;
+        public const string fullDotNetFrameworkSdkRegistryKeyV35OnVS11 = fullDotNetFrameworkSdkRegistryPathForV35ToolsOnManagedToolsSDK80A;
 
-        internal static string dotNetFrameworkVersionFolderPrefixV40 = NativeMethodsShared.IsWindows ? "v4.0" : "4.0";
-        internal static string dotNetFrameworkVersionFolderPrefixV45 = NativeMethodsShared.IsWindows ? "v4.5" : "4.5";
+        public static string dotNetFrameworkVersionFolderPrefixV40 = NativeMethodsShared.IsWindows ? "v4.0" : "4.0";
+        public static string dotNetFrameworkVersionFolderPrefixV45 = NativeMethodsShared.IsWindows ? "v4.5" : "4.5";
 
 #if FEATURE_WIN32_REGISTRY
         /// <summary>
@@ -129,10 +129,10 @@ namespace Microsoft.Build.Shared
         /// By default when a root path is not specified we would like to use the program files directory \ reference assemblies\framework as the root location
         /// to generate the reference assembly paths from.
         /// </summary>
-        internal static readonly string programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-        internal static readonly string programFiles32 = GenerateProgramFiles32();
-        internal static readonly string programFiles64 = GenerateProgramFiles64();
-        internal static readonly string programFilesReferenceAssemblyLocation = GenerateProgramFilesReferenceAssemblyRoot();
+        public static readonly string programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+        public static readonly string programFiles32 = GenerateProgramFiles32();
+        public static readonly string programFiles64 = GenerateProgramFiles64();
+        public static readonly string programFilesReferenceAssemblyLocation = GenerateProgramFilesReferenceAssemblyRoot();
 
         private static string s_fallbackDotNetFrameworkSdkInstallPath;
 
@@ -387,7 +387,7 @@ namespace Microsoft.Build.Shared
 
 #region Static properties
 
-        internal static string PathToDotNetFrameworkV11
+        public static string PathToDotNetFrameworkV11
         {
             get
             {
@@ -397,7 +397,7 @@ namespace Microsoft.Build.Shared
             }
         }
 
-        internal static string PathToDotNetFrameworkV20
+        public static string PathToDotNetFrameworkV20
         {
             get
             {
@@ -407,7 +407,7 @@ namespace Microsoft.Build.Shared
             }
         }
 
-        internal static string PathToDotNetFrameworkV30
+        public static string PathToDotNetFrameworkV30
         {
             get
             {
@@ -417,7 +417,7 @@ namespace Microsoft.Build.Shared
             }
         }
 
-        internal static string PathToDotNetFrameworkV35
+        public static string PathToDotNetFrameworkV35
         {
             get
             {
@@ -427,7 +427,7 @@ namespace Microsoft.Build.Shared
             }
         }
 
-        internal static string PathToDotNetFrameworkV40
+        public static string PathToDotNetFrameworkV40
         {
             get
             {
@@ -437,7 +437,7 @@ namespace Microsoft.Build.Shared
             }
         }
 
-        internal static string PathToDotNetFrameworkV45
+        public static string PathToDotNetFrameworkV45
         {
             get
             {
@@ -447,7 +447,7 @@ namespace Microsoft.Build.Shared
             }
         }
 
-        internal static string PathToDotNetFrameworkSdkV11
+        public static string PathToDotNetFrameworkSdkV11
         {
             get
             {
@@ -457,7 +457,7 @@ namespace Microsoft.Build.Shared
             }
         }
 
-        internal static string PathToDotNetFrameworkSdkV20
+        public static string PathToDotNetFrameworkSdkV20
         {
             get
             {
@@ -611,7 +611,7 @@ namespace Microsoft.Build.Shared
 
 #region Internal methods
 
-        internal static string GetDotNetFrameworkSdkRootRegistryKey(Version dotNetFrameworkVersion, Version visualStudioVersion)
+        public static string GetDotNetFrameworkSdkRootRegistryKey(Version dotNetFrameworkVersion, Version visualStudioVersion)
         {
             RedirectVersionsIfNecessary(ref dotNetFrameworkVersion, ref visualStudioVersion);
 
@@ -621,7 +621,7 @@ namespace Microsoft.Build.Shared
             return dotNetFrameworkSpec.GetDotNetFrameworkSdkRootRegistryKey(visualStudioSpec);
         }
 
-        internal static string GetDotNetFrameworkSdkInstallKeyValue(Version dotNetFrameworkVersion, Version visualStudioVersion)
+        public static string GetDotNetFrameworkSdkInstallKeyValue(Version dotNetFrameworkVersion, Version visualStudioVersion)
         {
             RedirectVersionsIfNecessary(ref dotNetFrameworkVersion, ref visualStudioVersion);
 
@@ -631,22 +631,22 @@ namespace Microsoft.Build.Shared
             return dotNetFrameworkSpec.DotNetFrameworkSdkRegistryInstallationFolderName;
         }
 
-        internal static string GetDotNetFrameworkVersionFolderPrefix(Version dotNetFrameworkVersion)
+        public static string GetDotNetFrameworkVersionFolderPrefix(Version dotNetFrameworkVersion)
         {
             return GetDotNetFrameworkSpec(dotNetFrameworkVersion).DotNetFrameworkFolderPrefix;
         }
 
-        internal static string GetPathToWindowsSdk(Version dotNetFrameworkVersion)
+        public static string GetPathToWindowsSdk(Version dotNetFrameworkVersion)
         {
             return GetDotNetFrameworkSpec(dotNetFrameworkVersion).GetPathToWindowsSdk();
         }
 
-        internal static string GetPathToDotNetFrameworkReferenceAssemblies(Version dotNetFrameworkVersion)
+        public static string GetPathToDotNetFrameworkReferenceAssemblies(Version dotNetFrameworkVersion)
         {
             return GetDotNetFrameworkSpec(dotNetFrameworkVersion).GetPathToDotNetFrameworkReferenceAssemblies();
         }
 
-        internal static string GetPathToDotNetFrameworkSdkTools(Version dotNetFrameworkVersion, Version visualStudioVersion)
+        public static string GetPathToDotNetFrameworkSdkTools(Version dotNetFrameworkVersion, Version visualStudioVersion)
         {
             RedirectVersionsIfNecessary(ref dotNetFrameworkVersion, ref visualStudioVersion);
 
@@ -656,7 +656,7 @@ namespace Microsoft.Build.Shared
             return dotNetFrameworkSpec.GetPathToDotNetFrameworkSdkTools(visualStudioSpec);
         }
 
-        internal static string GetPathToDotNetFrameworkSdk(Version dotNetFrameworkVersion, Version visualStudioVersion)
+        public static string GetPathToDotNetFrameworkSdk(Version dotNetFrameworkVersion, Version visualStudioVersion)
         {
             RedirectVersionsIfNecessary(ref dotNetFrameworkVersion, ref visualStudioVersion);
 
@@ -666,42 +666,42 @@ namespace Microsoft.Build.Shared
             return dotNetFrameworkSpec.GetPathToDotNetFrameworkSdk(visualStudioSpec);
         }
 
-        internal static string GetPathToDotNetFrameworkV11(DotNetFrameworkArchitecture architecture)
+        public static string GetPathToDotNetFrameworkV11(DotNetFrameworkArchitecture architecture)
         {
             return GetPathToDotNetFramework(dotNetFrameworkVersion11, architecture);
         }
 
-        internal static string GetPathToDotNetFrameworkV20(DotNetFrameworkArchitecture architecture)
+        public static string GetPathToDotNetFrameworkV20(DotNetFrameworkArchitecture architecture)
         {
             return GetPathToDotNetFramework(dotNetFrameworkVersion20, architecture);
         }
 
-        internal static string GetPathToDotNetFrameworkV30(DotNetFrameworkArchitecture architecture)
+        public static string GetPathToDotNetFrameworkV30(DotNetFrameworkArchitecture architecture)
         {
             return GetPathToDotNetFramework(dotNetFrameworkVersion30, architecture);
         }
 
-        internal static string GetPathToDotNetFrameworkV35(DotNetFrameworkArchitecture architecture)
+        public static string GetPathToDotNetFrameworkV35(DotNetFrameworkArchitecture architecture)
         {
             return GetPathToDotNetFramework(dotNetFrameworkVersion35, architecture);
         }
 
-        internal static string GetPathToDotNetFrameworkV40(DotNetFrameworkArchitecture architecture)
+        public static string GetPathToDotNetFrameworkV40(DotNetFrameworkArchitecture architecture)
         {
             return GetPathToDotNetFramework(dotNetFrameworkVersion40, architecture);
         }
 
-        internal static string GetPathToDotNetFrameworkV45(DotNetFrameworkArchitecture architecture)
+        public static string GetPathToDotNetFrameworkV45(DotNetFrameworkArchitecture architecture)
         {
             return GetPathToDotNetFramework(dotNetFrameworkVersion45, architecture);
         }
 
-        internal static string GetPathToDotNetFramework(Version version)
+        public static string GetPathToDotNetFramework(Version version)
         {
             return GetPathToDotNetFramework(version, DotNetFrameworkArchitecture.Current);
         }
 
-        internal static string GetPathToDotNetFramework(Version version, DotNetFrameworkArchitecture architecture)
+        public static string GetPathToDotNetFramework(Version version, DotNetFrameworkArchitecture architecture)
         {
             return GetDotNetFrameworkSpec(version).GetPathToDotNetFramework(architecture);
         }
@@ -749,7 +749,7 @@ namespace Microsoft.Build.Shared
         /// <param name="getDirectories">Delegate to method that can return filesystem entries.</param>
         /// <param name="architecture">.NET framework architecture</param>
         /// <returns>Will return 'null' if there is no target frameworks on this machine.</returns>
-        internal static string FindDotNetFrameworkPath
+        public static string FindDotNetFrameworkPath
         (
             string currentRuntimePath,
             string prefix,
@@ -858,7 +858,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Determine the 32 bit program files directory, this is used for finding where the reference assemblies live.
         /// </summary>
-        internal static string GenerateProgramFiles32()
+        public static string GenerateProgramFiles32()
         {
             // With Mono, all we look for in Files32 should be found in the below location
             if (!NativeMethodsShared.IsWindows && NativeMethodsShared.IsMono)
@@ -882,7 +882,7 @@ namespace Microsoft.Build.Shared
         /// Determine the 64-bit program files directory, used as the basis for MSBuildExtensionsPath64.
         /// Returns null if we're not on a 64-bit machine
         /// </summary>
-        internal static string GenerateProgramFiles64()
+        public static string GenerateProgramFiles64()
         {
             // With Mono, all we look for in Files32 should be found in the below location
             if (!NativeMethodsShared.IsWindows && NativeMethodsShared.IsMono)
@@ -912,7 +912,7 @@ namespace Microsoft.Build.Shared
         /// Generate the path to the program files reference assembly location by taking in the program files special folder and then
         /// using that path to generate the path to the reference assemblies location.
         /// </summary>
-        internal static string GenerateProgramFilesReferenceAssemblyRoot()
+        public static string GenerateProgramFilesReferenceAssemblyRoot()
         {
             string combinedPath = Environment.GetEnvironmentVariable("ReferenceAssemblyRoot");
             if (!String.IsNullOrEmpty(combinedPath))
@@ -938,7 +938,7 @@ namespace Microsoft.Build.Shared
         /// <param name="architecture">Target build tools architecture.</param>
         /// <returns>The path to the build tools folder for that ToolsVersion, if it exists, or
         /// null otherwise</returns>
-        internal static string GeneratePathToBuildToolsForToolsVersion(string toolsVersion, DotNetFrameworkArchitecture architecture)
+        public static string GeneratePathToBuildToolsForToolsVersion(string toolsVersion, DotNetFrameworkArchitecture architecture)
         {
             if (string.Equals(toolsVersion, MSBuildConstants.CurrentToolsVersion, StringComparison.Ordinal))
             {
@@ -969,7 +969,7 @@ namespace Microsoft.Build.Shared
         ///     \Program Files\Reference Assemblies\Microsoft\Framework\.NETCompactFramework\v3.5\SubType\PocketPC
         /// </summary>
         /// <returns>The path to the reference assembly location</returns>
-        internal static string GenerateReferenceAssemblyPath(string targetFrameworkRootPath, FrameworkName frameworkName)
+        public static string GenerateReferenceAssemblyPath(string targetFrameworkRootPath, FrameworkName frameworkName)
         {
             ErrorUtilities.VerifyThrowArgumentNull(targetFrameworkRootPath, nameof(targetFrameworkRootPath));
             ErrorUtilities.VerifyThrowArgumentNull(frameworkName, nameof(frameworkName));
@@ -1001,7 +1001,7 @@ namespace Microsoft.Build.Shared
         /// <comments>
         /// Internal only so that I can have the unit tests use it too, instead of duplicating the same code
         /// </comments>
-        internal static string RemoveDirectories(string path, int numberOfLevelsToRemove)
+        public static string RemoveDirectories(string path, int numberOfLevelsToRemove)
         {
             ErrorUtilities.VerifyThrowArgumentOutOfRange(numberOfLevelsToRemove > 0, nameof(numberOfLevelsToRemove));
 

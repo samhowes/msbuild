@@ -1936,7 +1936,7 @@ namespace Microsoft.Build.UnitTests
         /// It accepts multiple sets of files and keeps track of how many files were "hit"
         /// In this case, "hit" means that the caller asked for that file directly.
         /// </summary>
-        internal class MockFileSystem
+        public class MockFileSystem
         {
             /// <summary>
             /// Array of files (set1)
@@ -1974,7 +1974,7 @@ namespace Microsoft.Build.UnitTests
             /// <param name="fileSet1">First set of files.</param>
             /// <param name="fileSet2">Second set of files.</param>
             /// <param name="fileSet3">Third set of files.</param>
-            internal MockFileSystem
+            public MockFileSystem
             (
                 string[] fileSet1,
                 string[] fileSet2,
@@ -1989,7 +1989,7 @@ namespace Microsoft.Build.UnitTests
             /// <summary>
             /// Number of times a file from set 1 was requested.
             /// </summary>
-            internal int FileHits1
+            public int FileHits1
             {
                 get { return _fileSet1Hits; }
             }
@@ -1997,7 +1997,7 @@ namespace Microsoft.Build.UnitTests
             /// <summary>
             /// Number of times a file from set 2 was requested.
             /// </summary>
-            internal int FileHits2
+            public int FileHits2
             {
                 get { return _fileSet2Hits; }
             }
@@ -2005,7 +2005,7 @@ namespace Microsoft.Build.UnitTests
             /// <summary>
             /// Number of times a file from set 3 was requested.
             /// </summary>
-            internal int FileHits3
+            public int FileHits3
             {
                 get { return _fileSet3Hits; }
             }
@@ -2158,7 +2158,7 @@ namespace Microsoft.Build.UnitTests
             /// <param name="path">The path to search.</param>
             /// <param name="pattern">The pattern to search (may be null)</param>
             /// <returns>The matched files or folders.</returns>
-            internal IReadOnlyList<string> GetAccessibleFileSystemEntries(FileMatcher.FileSystemEntity entityType, string path, string pattern, string projectDirectory, bool stripProjectDirectory)
+            public IReadOnlyList<string> GetAccessibleFileSystemEntries(FileMatcher.FileSystemEntity entityType, string path, string pattern, string projectDirectory, bool stripProjectDirectory)
             {
                 string normalizedPath = Normalize(path);
 
@@ -2185,7 +2185,7 @@ namespace Microsoft.Build.UnitTests
             /// </summary>
             /// <param name="path">The path to fix up.</param>
             /// <returns>The normalized path.</returns>
-            internal static string Normalize(string path)
+            public static string Normalize(string path)
             {
                 if (path.Length == 0)
                 {
@@ -2287,7 +2287,7 @@ namespace Microsoft.Build.UnitTests
             /// </summary>
             /// <param name="path">The path to check.</param>
             /// <returns>True if the directory exists.</returns>
-            internal bool DirectoryExists(string path)
+            public bool DirectoryExists(string path)
             {
                 if (IndexOfFirstMatchingDirectory(path, _fileSet1) != -1)
                 {

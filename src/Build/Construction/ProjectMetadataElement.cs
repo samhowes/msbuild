@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Diagnostics;
@@ -13,12 +13,12 @@ namespace Microsoft.Build.Construction
     [DebuggerDisplay("{Name} Value={Value} Condition={Condition}")]
     public class ProjectMetadataElement : ProjectElement
     {
-        internal ProjectMetadataElementLink MetadataLink => (ProjectMetadataElementLink)Link;
+        public ProjectMetadataElementLink MetadataLink => (ProjectMetadataElementLink)Link;
 
         /// <summary>
         /// External projects support
         /// </summary>
-        internal ProjectMetadataElement(ProjectMetadataElementLink link)
+        public ProjectMetadataElement(ProjectMetadataElementLink link)
             : base(link)
         {
         }
@@ -26,7 +26,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Initialize a parented ProjectMetadataElement
         /// </summary>
-        internal ProjectMetadataElement(XmlElementWithLocation xmlElement, ProjectElementContainer parent, ProjectRootElement project)
+        public ProjectMetadataElement(XmlElementWithLocation xmlElement, ProjectElementContainer parent, ProjectRootElement project)
             : base(xmlElement, parent, project)
         {
             ErrorUtilities.VerifyThrowArgumentNull(parent, nameof(parent));
@@ -98,7 +98,7 @@ namespace Microsoft.Build.Construction
         /// Creates an unparented ProjectMetadataElement, wrapping an unparented XmlElement.
         /// Caller should then ensure the element is added to a parent.
         /// </summary>
-        internal static ProjectMetadataElement CreateDisconnected(string name, ProjectRootElement containingProject)
+        public static ProjectMetadataElement CreateDisconnected(string name, ProjectRootElement containingProject)
         {
             XmlUtilities.VerifyThrowArgumentValidElementName(name);
             ErrorUtilities.VerifyThrowArgument(!FileUtilities.ItemSpecModifiers.IsItemSpecModifier(name), "ItemSpecModifierCannotBeCustomMetadata", name);
@@ -115,7 +115,7 @@ namespace Microsoft.Build.Construction
         /// <remarks>
         /// The implementation has to actually replace the element to do this.
         /// </remarks>
-        internal void ChangeName(string newName)
+        public void ChangeName(string newName)
         {
             ErrorUtilities.VerifyThrowArgumentLength(newName, nameof(newName));
             XmlUtilities.VerifyThrowArgumentValidElementName(newName);
@@ -139,7 +139,7 @@ namespace Microsoft.Build.Construction
             ReplaceElement(newElement);
         }
 
-        internal static void ValidateValidMetadataAsAttributeName(string name, string parentName, IElementLocation parentLocation)
+        public static void ValidateValidMetadataAsAttributeName(string name, string parentName, IElementLocation parentLocation)
         {
             if (!AttributeNameIsValidMetadataName(name))
             {
@@ -147,7 +147,7 @@ namespace Microsoft.Build.Construction
             }
         }
 
-        internal static bool AttributeNameIsValidMetadataName(string name)
+        public static bool AttributeNameIsValidMetadataName(string name)
         {
             ProjectParser.CheckMetadataAsAttributeName(name, out bool isReservedAttributeName, out bool isValidMetadataNameInAttribute);
 
@@ -158,7 +158,7 @@ namespace Microsoft.Build.Construction
         /// Overridden to verify that the potential parent and siblings
         /// are acceptable. Throws InvalidOperationException if they are not.
         /// </summary>
-        internal override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
+        public override void VerifyThrowInvalidOperationAcceptableLocation(ProjectElementContainer parent, ProjectElement previousSibling, ProjectElement nextSibling)
         {
             ErrorUtilities.VerifyThrowInvalidOperation(parent is ProjectItemElement || parent is ProjectItemDefinitionElement, "OM_CannotAcceptParent");
         }

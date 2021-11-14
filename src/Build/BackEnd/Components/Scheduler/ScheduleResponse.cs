@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -10,7 +10,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// The type of action to take in response to a scheduling request.
     /// </summary>
-    internal enum ScheduleActionType
+    public enum ScheduleActionType
     {
         /// <summary>
         /// The response indicates that no action should be taken.
@@ -58,47 +58,47 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// A response from the scheduler indicating where a build request should be handled.
     /// </summary>
-    internal class ScheduleResponse
+    public class ScheduleResponse
     {
         /// <summary>
         /// The type of action to take on this response.
         /// </summary>
-        internal readonly ScheduleActionType Action;
+        public readonly ScheduleActionType Action;
 
         /// <summary>
         /// The node ID to which the request should be sent.
         /// </summary>
-        internal readonly int NodeId;
+        public readonly int NodeId;
 
         /// <summary>
         /// The results for a completed submission.
         /// </summary>
-        internal readonly BuildResult BuildResult;
+        public readonly BuildResult BuildResult;
 
         /// <summary>
         /// The build request to send.
         /// </summary>
-        internal readonly BuildRequest BuildRequest;
+        public readonly BuildRequest BuildRequest;
 
         /// <summary>
         /// The unblocking information.
         /// </summary>
-        internal readonly BuildRequestUnblocker Unblocker;
+        public readonly BuildRequestUnblocker Unblocker;
 
         /// <summary>
         /// The type of node we must create.
         /// </summary>
-        internal readonly NodeAffinity RequiredNodeType;
+        public readonly NodeAffinity RequiredNodeType;
 
         /// <summary>
         /// The number of nodes of the requested affinity to create.
         /// </summary>
-        internal readonly int NumberOfNodesToCreate;
+        public readonly int NumberOfNodesToCreate;
 
         /// <summary>
         /// Constructs a response where no action should be taken.
         /// </summary>
-        internal ScheduleResponse(ScheduleActionType type)
+        public ScheduleResponse(ScheduleActionType type)
         {
             Action = type;
         }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -13,7 +13,7 @@ namespace Microsoft.Build.Shared
     /// This class is used to save MSBuild project files. It contains special handling for MSBuild notations that are not saved
     /// correctly by the XML DOM's default save mechanism.
     /// </summary>
-    internal sealed class ProjectWriter : XmlTextWriter
+    public sealed class ProjectWriter : XmlTextWriter
     {
         #region Regular expressions for item vector transforms
 
@@ -24,10 +24,10 @@ namespace Microsoft.Build.Shared
 
         // the portion of the expression that matches the item type or metadata name, eg: "foo123"
         // Note that the pattern is more strict than the rules for valid XML element names.
-        internal const string itemTypeOrMetadataNameSpecification = @"[A-Za-z_][A-Za-z_0-9\-]*";
+        public const string itemTypeOrMetadataNameSpecification = @"[A-Za-z_][A-Za-z_0-9\-]*";
 
         // the portion of an item transform that is the function that we wish to execute on the item
-        internal const string itemFunctionNameSpecification = @"[A-Za-z]*";
+        public const string itemFunctionNameSpecification = @"[A-Za-z]*";
 
         // description of an item vector transform, including the optional separator specification
         private const string itemVectorTransformSpecification =
@@ -40,7 +40,7 @@ namespace Microsoft.Build.Shared
 
         // regular expression used to match item vector transforms
         // internal for unit testing only
-        internal static readonly Lazy<Regex> itemVectorTransformPattern = new Lazy<Regex>(
+        public static readonly Lazy<Regex> itemVectorTransformPattern = new Lazy<Regex>(
             () =>
                 new Regex(itemVectorTransformSpecification,
                     RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture | RegexOptions.Compiled));
@@ -56,7 +56,7 @@ namespace Microsoft.Build.Shared
 
         // regular expression used to match item vector transforms, with no (named) capturing groups
         // internal for unit testing only
-        internal static readonly Lazy<Regex> itemVectorTransformRawPattern = new Lazy<Regex>(
+        public static readonly Lazy<Regex> itemVectorTransformRawPattern = new Lazy<Regex>(
             () =>
                 new Regex(itemVectorTransformRawSpecification,
                     RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture | RegexOptions.Compiled));
@@ -73,7 +73,7 @@ namespace Microsoft.Build.Shared
         /// Creates an instance of this class using the specified TextWriter.
         /// </summary>
         /// <param name="w"></param>
-        internal ProjectWriter(TextWriter w)
+        public ProjectWriter(TextWriter w)
             : base(w)
         {
             _documentEncoding = w.Encoding;
@@ -84,7 +84,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="filename"></param>
         /// <param name="encoding">If null, defaults to UTF-8 and omits encoding attribute from processing instruction.</param>
-        internal ProjectWriter(string filename, Encoding encoding)
+        public ProjectWriter(string filename, Encoding encoding)
             : base(filename, encoding)
         {
             _documentEncoding = encoding;
@@ -96,7 +96,7 @@ namespace Microsoft.Build.Shared
         /// <summary>
         /// Initializes settings for the project to be saved.
         /// </summary>
-        internal void Initialize(XmlDocument project)
+        public void Initialize(XmlDocument project)
         {
             XmlDeclaration declaration = project.FirstChild as XmlDeclaration;
 
@@ -108,7 +108,7 @@ namespace Microsoft.Build.Shared
         /// </summary>
         /// <param name="project"></param>
         /// <param name="projectRootElementDeclaration">If null, XML declaration is not written.</param>
-        internal void Initialize(XmlDocument project, XmlDeclaration projectRootElementDeclaration)
+        public void Initialize(XmlDocument project, XmlDeclaration projectRootElementDeclaration)
         {
             // if the project's whitespace is not being preserved
             if (!project.PreserveWhitespace)

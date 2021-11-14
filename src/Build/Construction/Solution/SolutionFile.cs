@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -66,9 +66,9 @@ namespace Microsoft.Build.Construction
                 )
             );
 
-        internal const int slnFileMinUpgradableVersion = 7; // Minimum version for MSBuild to give a nice message
-        internal const int slnFileMinVersion = 9; // Minimum version for MSBuild to actually do anything useful
-        internal const int slnFileMaxVersion = VisualStudioConstants.CurrentVisualStudioSolutionFileVersion;
+        public const int slnFileMinUpgradableVersion = 7; // Minimum version for MSBuild to give a nice message
+        public const int slnFileMinVersion = 9; // Minimum version for MSBuild to actually do anything useful
+        public const int slnFileMaxVersion = VisualStudioConstants.CurrentVisualStudioSolutionFileVersion;
 
         private const string vbProjectGuid = "{F184B08F-C81C-45F6-A57F-5ABD9991F28F}";
         private const string csProjectGuid = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}";
@@ -121,7 +121,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Constructor
         /// </summary>
-        internal SolutionFile()
+        public SolutionFile()
         {
         }
 
@@ -132,27 +132,27 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// This property returns the list of warnings that were generated during solution parsing
         /// </summary>
-        internal List<string> SolutionParserWarnings { get; } = new List<string>();
+        public List<string> SolutionParserWarnings { get; } = new List<string>();
 
         /// <summary>
         /// This property returns the list of comments that were generated during the solution parsing
         /// </summary>
-        internal List<string> SolutionParserComments { get; } = new List<string>();
+        public List<string> SolutionParserComments { get; } = new List<string>();
 
         /// <summary>
         /// This property returns the list of error codes for warnings/errors that were generated during solution parsing. 
         /// </summary>
-        internal List<string> SolutionParserErrorCodes { get; } = new List<string>();
+        public List<string> SolutionParserErrorCodes { get; } = new List<string>();
 
         /// <summary>
         /// Returns the actual major version of the parsed solution file
         /// </summary>
-        internal int Version { get; private set; }
+        public int Version { get; private set; }
 
         /// <summary>
         /// Returns Visual Studio major version
         /// </summary>
-        internal int VisualStudioVersion
+        public int VisualStudioVersion
         {
             get
             {
@@ -170,13 +170,13 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Returns true if the solution contains any web projects
         /// </summary>
-        internal bool ContainsWebProjects { get; private set; }
+        public bool ContainsWebProjects { get; private set; }
 
         /// <summary>
         /// Returns true if the solution contains any .wdproj projects.  Used to determine
         /// whether we need to load up any projects to examine dependencies. 
         /// </summary>
-        internal bool ContainsWebDeploymentProjects { get; private set; }
+        public bool ContainsWebDeploymentProjects { get; private set; }
 
         /// <summary>
         /// All projects in this solution, in the order they appeared in the solution file
@@ -194,7 +194,7 @@ namespace Microsoft.Build.Construction
         /// must be set before calling any other methods on this class.
         /// </summary>
         /// <value></value>
-        internal string FullPath
+        public string FullPath
         {
             get => _solutionFile;
 
@@ -216,7 +216,7 @@ namespace Microsoft.Build.Construction
             }
         }
 
-        internal string SolutionFileDirectory
+        public string SolutionFileDirectory
         {
             get;
             // This setter is only used by the unit tests
@@ -227,7 +227,7 @@ namespace Microsoft.Build.Construction
         /// For unit-testing only.
         /// </summary>
         /// <value></value>
-        internal StreamReader SolutionReader { get; set; }
+        public StreamReader SolutionReader { get; set; }
 
         /// <summary>
         /// The list of all full solution configurations (configuration + platform) in this solution
@@ -238,7 +238,7 @@ namespace Microsoft.Build.Construction
 
         #region Methods
 
-        internal bool ProjectShouldBuild(string projectFile)
+        public bool ProjectShouldBuild(string projectFile)
         {
             return _solutionFilter?.Contains(FileUtilities.FixFilePath(projectFile)) != false;
         }
@@ -261,7 +261,7 @@ namespace Microsoft.Build.Construction
         /// </summary>
         /// <param name="project">The project in the solution</param>
         /// <returns>Whether the project is expected to be buildable</returns>
-        internal static bool IsBuildableProject(ProjectInSolution project)
+        public static bool IsBuildableProject(ProjectInSolution project)
         {
             return project.ProjectType != SolutionProjectType.SolutionFolder && project.ProjectConfigurations.Count > 0;
         }
@@ -272,7 +272,7 @@ namespace Microsoft.Build.Construction
         /// Throws InvalidProjectFileException if the solution header is invalid, or if the version is less than 
         /// our minimum version. 
         /// </summary>
-        internal static void GetSolutionFileAndVisualStudioMajorVersions(string solutionFile, out int solutionVersion, out int visualStudioMajorVersion)
+        public static void GetSolutionFileAndVisualStudioMajorVersions(string solutionFile, out int solutionVersion, out int visualStudioMajorVersion)
         {
             ErrorUtilities.VerifyThrow(!String.IsNullOrEmpty(solutionFile), "null solution file passed to GetSolutionFileMajorVersion!");
             ErrorUtilities.VerifyThrowInternalRooted(solutionFile);
@@ -406,7 +406,7 @@ namespace Microsoft.Build.Construction
             }
         }
 
-        internal static string ParseSolutionFromSolutionFilter(string solutionFilterFile, out JsonElement solution)
+        public static string ParseSolutionFromSolutionFilter(string solutionFilterFile, out JsonElement solution)
         {
             try
             {
@@ -435,7 +435,7 @@ namespace Microsoft.Build.Construction
         /// <summary>
         /// Adds a configuration to this solution
         /// </summary>
-        internal void AddSolutionConfiguration(string configurationName, string platformName)
+        public void AddSolutionConfiguration(string configurationName, string platformName)
         {
             _solutionConfigurations.Add(new SolutionConfigurationInSolution(configurationName, platformName));
         }
@@ -459,7 +459,7 @@ namespace Microsoft.Build.Construction
         /// in the solution file, and creates internal data structures representing the projects within
         /// the SLN.  Used for conversion, which means it allows situations that we refuse to actually build. 
         /// </summary>
-        internal void ParseSolutionFileForConversion()
+        public void ParseSolutionFileForConversion()
         {
             _parsingForConversionOnly = true;
             ParseSolutionFile();
@@ -470,7 +470,7 @@ namespace Microsoft.Build.Construction
         /// in the solution file, and creates internal data structures representing the projects within
         /// the SLN.
         /// </summary>
-        internal void ParseSolutionFile()
+        public void ParseSolutionFile()
         {
             ErrorUtilities.VerifyThrow(!string.IsNullOrEmpty(_solutionFile), "ParseSolutionFile() got a null solution file!");
             ErrorUtilities.VerifyThrowInternalRooted(_solutionFile);
@@ -501,7 +501,7 @@ namespace Microsoft.Build.Construction
         /// Parses the SLN file represented by the StreamReader in this.reader, and populates internal
         /// data structures based on the SLN file contents.
         /// </summary>
-        internal void ParseSolution()
+        public void ParseSolution()
         {
             _projects = new Dictionary<string, ProjectInSolution>(StringComparer.OrdinalIgnoreCase);
             _projectsInOrder = new List<ProjectInSolution>();
@@ -866,7 +866,7 @@ namespace Microsoft.Build.Construction
         /// add all the projects found to projects and projectsInOrder
         /// </summary>
         /// <param name="etpProj">ETP Project</param>
-        internal void ParseEtpProject(ProjectInSolution etpProj)
+        public void ParseEtpProject(ProjectInSolution etpProj)
         {
             var etpProjectDocument = new XmlDocument();
             // Get the full path to the .etp project file
@@ -1252,7 +1252,7 @@ namespace Microsoft.Build.Construction
         /// </summary>
         /// <param name="firstLine"></param>
         /// <param name="proj"></param>
-        internal void ParseFirstProjectLine
+        public void ParseFirstProjectLine
         (
             string firstLine,
             ProjectInSolution proj
@@ -1337,7 +1337,7 @@ namespace Microsoft.Build.Construction
         /// Read nested projects section.
         /// This is required to find a unique name for each project's target
         /// </summary>
-        internal void ParseNestedProjects()
+        public void ParseNestedProjects()
         {
             do
             {
@@ -1381,7 +1381,7 @@ namespace Microsoft.Build.Construction
         ///     Release|Any CPU = Release|Any CPU
         /// EndGlobalSection
         /// </remarks>
-        internal void ParseSolutionConfigurations()
+        public void ParseSolutionConfigurations()
         {
             var nameValueSeparators = '=';
 
@@ -1424,7 +1424,7 @@ namespace Microsoft.Build.Construction
             } while (true);
         }
 
-        internal static (string Configuration, string Platform) ParseConfigurationName(string fullConfigurationName, string projectPath, int lineNumber, string containingString)
+        public static (string Configuration, string Platform) ParseConfigurationName(string fullConfigurationName, string projectPath, int lineNumber, string containingString)
         {
             string[] configurationPlatformParts = fullConfigurationName.Split(SolutionConfigurationInSolution.ConfigurationPlatformSeparatorArray);
 
@@ -1458,7 +1458,7 @@ namespace Microsoft.Build.Construction
         /// EndGlobalSection
         /// </remarks>
         /// <returns>An unprocessed hashtable of entries in this section</returns>
-        internal Dictionary<string, string> ParseProjectConfigurations()
+        public Dictionary<string, string> ParseProjectConfigurations()
         {
             var rawProjectConfigurationsEntries = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
@@ -1494,7 +1494,7 @@ namespace Microsoft.Build.Construction
         /// solution section data. 
         /// </summary>
         /// <param name="rawProjectConfigurationsEntries">Cached data from the project configuration section</param>
-        internal void ProcessProjectConfigurationSection(Dictionary<string, string> rawProjectConfigurationsEntries)
+        public void ProcessProjectConfigurationSection(Dictionary<string, string> rawProjectConfigurationsEntries)
         {
             // Instead of parsing the data line by line, we parse it project by project, constructing the 
             // entry name (e.g. "{A6F99D27-47B9-4EA4-BFC9-25157CBDC281}.Release|Any CPU.ActiveCfg") and retrieving its 
@@ -1622,7 +1622,7 @@ namespace Microsoft.Build.Construction
         /// </summary>
         /// <param name="projectGuid"></param>
         /// <returns></returns>
-        internal string GetProjectUniqueNameByGuid(string projectGuid)
+        public string GetProjectUniqueNameByGuid(string projectGuid)
         {
             if (_projects.TryGetValue(projectGuid, out ProjectInSolution proj))
             {
@@ -1638,7 +1638,7 @@ namespace Microsoft.Build.Construction
         /// </summary>
         /// <param name="projectGuid"></param>
         /// <returns></returns>
-        internal string GetProjectRelativePathByGuid(string projectGuid)
+        public string GetProjectRelativePathByGuid(string projectGuid)
         {
             if (_projects.TryGetValue(projectGuid, out ProjectInSolution proj))
             {

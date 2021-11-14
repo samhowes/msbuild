@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using System.IO;
 using System.Linq;
@@ -30,7 +30,7 @@ public class MSBuildTestAssemblyFixture : IDisposable
         //  See the comments on the TestInfo class for an explanation of why it works this way.
         var frameworkAssembly = typeof(Microsoft.Build.Framework.ITask).Assembly;
         var testInfoType = frameworkAssembly.GetType("Microsoft.Build.Framework.TestInfo");
-        var runningTestsField = testInfoType.GetField("s_runningTests", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+        var runningTestsField = testInfoType.GetField("s_runningTests", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
         runningTestsField.SetValue(null, true);
 
         _testEnvironment = TestEnvironment.Create();

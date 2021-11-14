@@ -810,13 +810,13 @@ namespace Microsoft.Build.Evaluation
         /// Global collection id.
         /// Can be used for external providers to optimize the cross-site link exchange
         /// </summary>
-        internal Guid CollectionId { get; } = Guid.NewGuid();
+        public Guid CollectionId { get; } = Guid.NewGuid();
 
         /// <summary>
         /// External project support.
         /// Establish a remote project link for this collection.
         /// </summary>
-        internal ExternalProjectsProvider Link
+        public ExternalProjectsProvider Link
         {
             get => _link;
             set => Interlocked.Exchange(ref _link, value)?.Disconnected(this);
@@ -825,7 +825,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Logging service that should be used for project load and for builds
         /// </summary>
-        internal ILoggingService LoggingService
+        public ILoggingService LoggingService
         {
             [DebuggerStepThrough]
             get
@@ -841,7 +841,7 @@ namespace Microsoft.Build.Evaluation
         /// Gets default global properties for all projects in this collection.
         /// Dead copy.
         /// </summary>
-        internal PropertyDictionary<ProjectPropertyInstance> GlobalPropertiesCollection
+        public PropertyDictionary<ProjectPropertyInstance> GlobalPropertiesCollection
         {
             [DebuggerStepThrough]
             get
@@ -863,7 +863,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Returns the property dictionary containing the properties representing the environment.
         /// </summary>
-        internal PropertyDictionary<ProjectPropertyInstance> EnvironmentProperties
+        public PropertyDictionary<ProjectPropertyInstance> EnvironmentProperties
         {
             get
             {
@@ -893,7 +893,7 @@ namespace Microsoft.Build.Evaluation
         /// Returns the internal version for this object's state.
         /// Updated when toolsets change, indicating all contained projects are potentially invalid.
         /// </summary>
-        internal int ToolsetsVersion
+        public int ToolsetsVersion
         {
             [DebuggerStepThrough]
             get
@@ -908,7 +908,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// The maximum number of nodes which can be started during the build
         /// </summary>
-        internal int MaxNodeCount
+        public int MaxNodeCount
         {
             get
             {
@@ -935,7 +935,7 @@ namespace Microsoft.Build.Evaluation
         /// - So that the owner of this project collection can force the XML to be loaded again
         /// from disk, by doing <see cref="UnloadAllProjects"/>.
         /// </summary>
-        internal ProjectRootElementCacheBase ProjectRootElementCache { get; }
+        public ProjectRootElementCacheBase ProjectRootElementCache { get; }
 
         /// <summary>
         /// Escape a string using MSBuild escaping format. For example, "%3b" for ";".
@@ -1065,7 +1065,7 @@ namespace Microsoft.Build.Evaluation
         /// There may be more than one, if they are distinguished by global properties
         /// and/or tools version.
         /// </summary>
-        internal ICollection<Project> GetLoadedProjects(bool includeExternal, string fullPath = null)
+        public ICollection<Project> GetLoadedProjects(bool includeExternal, string fullPath = null)
         {
             List<Project> loaded;
             using (_locker.EnterWriteLock())
@@ -1533,7 +1533,7 @@ namespace Microsoft.Build.Evaluation
         /// If the project previously had a name, but was not in the collection already, throws InvalidOperationException.
         /// If the project was not previously in the collection, sets the collection's global properties on it.
         /// </summary>
-        internal void OnAfterRenameLoadedProject(string oldFullPathIfAny, Project project)
+        public void OnAfterRenameLoadedProject(string oldFullPathIfAny, Project project)
         {
             if (project.FullPath == null)
             {
@@ -1572,7 +1572,7 @@ namespace Microsoft.Build.Evaluation
         /// We have to remove and re-add so that there's an error if there's already an equivalent
         /// project loaded.
         /// </remarks>
-        internal void AfterUpdateLoadedProjectGlobalProperties(Project project)
+        public void AfterUpdateLoadedProjectGlobalProperties(Project project)
         {
             using (_locker.EnterWriteLock())
             {
@@ -1731,7 +1731,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Reset the toolsets using the provided toolset reader, used by unit tests
         /// </summary>
-        internal void ResetToolsetsForTests(ToolsetConfigurationReader configurationReaderForTestsOnly)
+        public void ResetToolsetsForTests(ToolsetConfigurationReader configurationReaderForTestsOnly)
         {
             InitializeToolsetCollection(configReader:configurationReaderForTestsOnly);
         }
@@ -1740,7 +1740,7 @@ namespace Microsoft.Build.Evaluation
         /// <summary>
         /// Reset the toolsets using the provided toolset reader, used by unit tests
         /// </summary>
-        internal void ResetToolsetsForTests(ToolsetRegistryReader registryReaderForTestsOnly)
+        public void ResetToolsetsForTests(ToolsetRegistryReader registryReaderForTestsOnly)
         {
             InitializeToolsetCollection(registryReader:registryReaderForTestsOnly);
         }
@@ -1794,7 +1794,7 @@ namespace Microsoft.Build.Evaluation
         /// The ReusableLogger wraps a logger and allows it to be used for both design-time and build-time.  It internally swaps
         /// between the design-time and build-time event sources in response to Initialize and Shutdown events.
         /// </summary>
-        internal class ReusableLogger : INodeLogger, IEventSource4
+        public class ReusableLogger : INodeLogger, IEventSource4
         {
             /// <summary>
             /// The logger we are wrapping.
@@ -1804,7 +1804,7 @@ namespace Microsoft.Build.Evaluation
             /// <summary>
             /// Returns the logger we are wrapping.
             /// </summary>
-            internal ILogger OriginalLogger => _originalLogger;
+            public ILogger OriginalLogger => _originalLogger;
 
             /// <summary>
             /// The design-time event source
@@ -2400,7 +2400,7 @@ namespace Microsoft.Build.Evaluation
             /// <summary>
             /// Returns the number of projects currently loaded
             /// </summary>
-            internal int Count
+            public int Count
             {
                 get
                 {
@@ -2444,7 +2444,7 @@ namespace Microsoft.Build.Evaluation
             /// Get all projects with the provided path.
             /// Returns an empty list if there are none.
             /// </summary>
-            internal IList<Project> GetMatchingProjectsIfAny(string fullPath)
+            public IList<Project> GetMatchingProjectsIfAny(string fullPath)
             {
                 lock (_loadedProjects)
                 {
@@ -2459,7 +2459,7 @@ namespace Microsoft.Build.Evaluation
             /// There can be no more than one match.
             /// If none is found, returns null.
             /// </summary>
-            internal Project GetMatchingProjectIfAny(string fullPath, IDictionary<string, string> globalProperties, string toolsVersion)
+            public Project GetMatchingProjectIfAny(string fullPath, IDictionary<string, string> globalProperties, string toolsVersion)
             {
                 lock (_loadedProjects)
                 {
@@ -2482,7 +2482,7 @@ namespace Microsoft.Build.Evaluation
             /// Adds the provided project to the collection.
             /// If there is already an equivalent project, throws InvalidOperationException.
             /// </summary>
-            internal void AddProject(Project project)
+            public void AddProject(Project project)
             {
                 lock (_loadedProjects)
                 {
@@ -2509,7 +2509,7 @@ namespace Microsoft.Build.Evaluation
             /// Removes the provided project from the collection.
             /// If project was not loaded, returns false.
             /// </summary>
-            internal bool RemoveProject(Project project)
+            public bool RemoveProject(Project project)
             {
                 return RemoveProject(project.FullPath, project);
             }
@@ -2518,7 +2518,7 @@ namespace Microsoft.Build.Evaluation
             /// Removes a project, using the specified full path to use as the key to find it.
             /// This is specified separately in case the project was previously stored under a different path.
             /// </summary>
-            internal bool RemoveProject(string projectFullPath, Project project)
+            public bool RemoveProject(string projectFullPath, Project project)
             {
                 lock (_loadedProjects)
                 {
@@ -2546,7 +2546,7 @@ namespace Microsoft.Build.Evaluation
             /// <summary>
             /// Removes all projects from the collection.
             /// </summary>
-            internal void RemoveAllProjects()
+            public void RemoveAllProjects()
             {
                 lock (_loadedProjects)
                 {

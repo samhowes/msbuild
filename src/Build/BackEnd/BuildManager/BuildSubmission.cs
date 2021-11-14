@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -39,7 +39,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Flag indicating if logging is done.
         /// </summary>
-        internal bool LoggingCompleted { get; private set; }
+        public bool LoggingCompleted { get; private set; }
 
         /// <summary>
         /// True if it has been invoked
@@ -54,7 +54,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Constructor
         /// </summary>
-        internal BuildSubmission(BuildManager buildManager, int submissionId, BuildRequestData requestData, bool legacyThreadingSemantics)
+        public BuildSubmission(BuildManager buildManager, int submissionId, BuildRequestData requestData, bool legacyThreadingSemantics)
         {
             ErrorUtilities.VerifyThrowArgumentNull(buildManager, nameof(buildManager));
             ErrorUtilities.VerifyThrowArgumentNull(requestData, nameof(requestData));
@@ -101,12 +101,12 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// The BuildRequestData being used for this submission.
         /// </summary>
-        internal BuildRequestData BuildRequestData { get; }
+        public BuildRequestData BuildRequestData { get; }
 
         /// <summary>
         /// The build request for execution.
         /// </summary>
-        internal BuildRequest BuildRequest { get; set; }
+        public BuildRequest BuildRequest { get; set; }
 
         /// <summary>
         /// Starts the request and blocks until results are available.
@@ -144,7 +144,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Sets the event signaling that the build is complete.
         /// </summary>
-        internal void CompleteResults(BuildResult result)
+        public void CompleteResults(BuildResult result)
         {
             ErrorUtilities.VerifyThrowArgumentNull(result, nameof(result));
 
@@ -165,7 +165,7 @@ namespace Microsoft.Build.Execution
         /// <summary>
         /// Indicates that all logging events for this submission are complete.
         /// </summary>
-        internal void CompleteLogging()
+        public void CompleteLogging()
         {
             LoggingCompleted = true;
             CheckForCompletion();

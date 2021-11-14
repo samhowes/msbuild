@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -13,7 +13,7 @@ namespace Microsoft.Build.Graph
     /// Provides deduping of expensive work by a key, or modeling of a set of deduped work that
     /// can be awaited as a unit. Completed results are kept in the collection for reuse.
     /// </summary>
-    internal class ParallelWorkSet<TKey, TResult>
+    public class ParallelWorkSet<TKey, TResult>
     {
         private readonly CancellationToken _cancellationToken;
 
@@ -38,7 +38,7 @@ namespace Microsoft.Build.Graph
         /// <summary>
         /// Retrieves all completed work items.
         /// </summary>
-        internal Dictionary<TKey, TResult> CompletedWork
+        public Dictionary<TKey, TResult> CompletedWork
         {
             get
             {
@@ -61,13 +61,13 @@ namespace Microsoft.Build.Graph
         /// <summary>
         /// Checks if the work set has been marked as completed.
         /// </summary>
-        internal bool IsCompleted
+        public bool IsCompleted
         {
             get => Volatile.Read(ref _isSchedulingCompleted);
             private set => Volatile.Write(ref _isSchedulingCompleted, value);
         }
 
-        internal ParallelWorkSet(int degreeOfParallelism, IEqualityComparer<TKey> comparer, CancellationToken cancellationToken)
+        public ParallelWorkSet(int degreeOfParallelism, IEqualityComparer<TKey> comparer, CancellationToken cancellationToken)
         {
             if (degreeOfParallelism < 0)
             {
@@ -93,7 +93,7 @@ namespace Microsoft.Build.Graph
         /// </summary>
         /// <param name="key"></param>
         /// <param name="workFunc"></param>
-        internal void AddWork(TKey key, Func<TResult> workFunc)
+        public void AddWork(TKey key, Func<TResult> workFunc)
         {
             if (IsCompleted)
             {
@@ -121,7 +121,7 @@ namespace Microsoft.Build.Graph
         /// Assists processing items until all the items added to the queue are processed, completes the work set, and
         /// propagates any exceptions thrown by workers.
         /// </summary>
-        internal void WaitForAllWorkAndComplete()
+        public void WaitForAllWorkAndComplete()
         {
             if (IsCompleted)
             {

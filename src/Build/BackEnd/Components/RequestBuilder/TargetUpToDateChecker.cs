@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -32,7 +32,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// Enumeration of the results of target dependency analysis.
     /// </summary>
-    internal enum DependencyAnalysisResult
+    public enum DependencyAnalysisResult
     {
         SkipUpToDate,
         SkipNoInputs,
@@ -44,14 +44,14 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// This class is used for performing dependency analysis on targets to determine if they should be built/rebuilt/skipped.
     /// </summary>
-    internal sealed class TargetUpToDateChecker
+    public sealed class TargetUpToDateChecker
     {
         #region Constructors
 
         /// <summary>
         /// Creates an instance of this class for the given target.
         /// </summary>
-        internal TargetUpToDateChecker(ProjectInstance project, ProjectTargetInstance targetToAnalyze, ILoggingService loggingServices, BuildEventContext buildEventContext)
+        public TargetUpToDateChecker(ProjectInstance project, ProjectTargetInstance targetToAnalyze, ILoggingService loggingServices, BuildEventContext buildEventContext)
         {
             ErrorUtilities.VerifyThrow(project != null, "Need a project.");
             ErrorUtilities.VerifyThrow(targetToAnalyze != null, "Need a target to analyze.");
@@ -72,7 +72,7 @@ namespace Microsoft.Build.BackEnd
         /// Gets the target to perform dependency analysis on.
         /// </summary>
         /// <value>Target object.</value>
-        internal ProjectTargetInstance TargetToAnalyze
+        public ProjectTargetInstance TargetToAnalyze
         {
             get
             {
@@ -126,7 +126,7 @@ namespace Microsoft.Build.BackEnd
         /// DependencyAnalysisResult.IncrementalBuild, if only some target outputs are out-of-date;
         /// DependencyAnalysisResult.FullBuild, if target is out-of-date
         /// </returns>
-        internal DependencyAnalysisResult PerformDependencyAnalysis
+        public DependencyAnalysisResult PerformDependencyAnalysis
         (
             ItemBucket bucket,
             out ItemDictionary<ProjectItemInstance> changedTargetInputs,
@@ -294,7 +294,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Returns a string indicating why a full build is occurring.
         /// </summary>
-        internal static string GetFullBuildReason(DependencyAnalysisLogDetail logDetail)
+        public static string GetFullBuildReason(DependencyAnalysisLogDetail logDetail)
         {
             string reason = null;
 
@@ -940,7 +940,7 @@ namespace Microsoft.Build.BackEnd
         /// NOTE: Internal for unit test purposes only.
         /// </remarks>
         /// <returns>true, if any "input" is newer than any "output", or if any input or output does not exist.</returns>
-        internal static bool IsAnyOutOfDate<T>(out DependencyAnalysisLogDetail dependencyAnalysisDetailEntry, string projectDirectory, IList<T> inputs, IList<T> outputs)
+        public static bool IsAnyOutOfDate<T>(out DependencyAnalysisLogDetail dependencyAnalysisDetailEntry, string projectDirectory, IList<T> inputs, IList<T> outputs)
         {
             ErrorUtilities.VerifyThrow((inputs.Count > 0) && (outputs.Count > 0), "Need to specify inputs and outputs.");
             if (inputs.Count > 0)
@@ -1253,7 +1253,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// Why TLDA decided this entry was out of date
     /// </summary>
-    internal enum OutofdateReason
+    public enum OutofdateReason
     {
         MissingInput, // The input file was missing
         MissingOutput, // The output file was missing
@@ -1263,7 +1263,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// A logging detail entry. Describes what TLDA decided about inputs / outputs
     /// </summary>
-    internal class DependencyAnalysisLogDetail
+    public class DependencyAnalysisLogDetail
     {
         private OutofdateReason _reason;
         private string _inputItemName;
@@ -1274,7 +1274,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// The reason that we are logging this entry
         /// </summary>
-        internal OutofdateReason Reason
+        public OutofdateReason Reason
         {
             get { return _reason; }
         }

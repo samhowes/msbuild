@@ -14,7 +14,7 @@ using Microsoft.Build.Shared;
 
 namespace Microsoft.Build.BackEnd.SdkResolution
 {
-    internal class SdkResolverLoader
+    public class SdkResolverLoader
     {
 #if FEATURE_ASSEMBLYLOADCONTEXT
         private static readonly CoreClrAssemblyLoader s_loader = new CoreClrAssemblyLoader();
@@ -32,7 +32,7 @@ namespace Microsoft.Build.BackEnd.SdkResolution
 #endif
             ) ?? Environment.GetEnvironmentVariable("MSBUILDADDITIONALSDKRESOLVERSFOLDER");
 
-        internal virtual IList<SdkResolver> LoadResolvers(LoggingContext loggingContext,
+        public virtual IList<SdkResolver> LoadResolvers(LoggingContext loggingContext,
             ElementLocation location)
         {
             var resolvers = !String.Equals(IncludeDefaultResolver, "false", StringComparison.OrdinalIgnoreCase) ?
@@ -62,7 +62,7 @@ namespace Microsoft.Build.BackEnd.SdkResolution
         /// <param name="rootFolder"></param>
         /// <param name="location"></param>
         /// <returns></returns>
-        internal virtual IList<string> FindPotentialSdkResolvers(string rootFolder, ElementLocation location)
+        public virtual IList<string> FindPotentialSdkResolvers(string rootFolder, ElementLocation location)
         {
             var assembliesList = new List<string>();
 

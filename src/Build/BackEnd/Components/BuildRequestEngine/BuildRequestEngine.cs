@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -30,7 +30,7 @@ namespace Microsoft.Build.BackEnd
     /// and shutting down.  However, each RequestBuilder can call back into the BuildRequestEngine (via events)
     /// to cause new requests to be submitted.  See <seealso cref="IssueBuildRequest"/>.
     /// </remarks>
-    internal class BuildRequestEngine : IBuildRequestEngine, IBuildComponent
+    public class BuildRequestEngine : IBuildRequestEngine, IBuildComponent
     {
         /// <summary>
         /// The starting unresolved configuration id assigned by the engine.
@@ -115,7 +115,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Constructor
         /// </summary>
-        internal BuildRequestEngine()
+        public BuildRequestEngine()
         {
             _debugDumpState = Traits.Instance.DebugScheduler;
             _debugDumpPath = ChangeWaves.AreFeaturesEnabled(ChangeWaves.Wave17_0)
@@ -613,7 +613,7 @@ namespace Microsoft.Build.BackEnd
         /// <summary>
         /// Class factory for component creation.
         /// </summary>
-        internal static IBuildComponent CreateComponent(BuildComponentType type)
+        public static IBuildComponent CreateComponent(BuildComponentType type)
         {
             ErrorUtilities.VerifyThrow(type == BuildComponentType.RequestEngine, "Cannot create component of type {0}", type);
             return new BuildRequestEngine();

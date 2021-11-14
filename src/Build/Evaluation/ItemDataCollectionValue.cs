@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ namespace Microsoft.Build.Evaluation
     /// <summary>
     /// An efficient multi-value wrapper holding one or more items.
     /// </summary>
-    internal struct ItemDataCollectionValue<I>
+    public struct ItemDataCollectionValue<I>
     {
         /// <summary>
         /// A non-allocating enumerator for the multi-value.

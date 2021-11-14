@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace Microsoft.Build.BackEnd
     /// <summary>
     /// Represents an object which provides scheduling services for BuildRequests over Nodes.
     /// </summary>
-    internal interface IScheduler : IBuildComponent
+    public interface IScheduler : IBuildComponent
     {
         /// <summary>
         /// Retrieves the minimum assignable configuration id

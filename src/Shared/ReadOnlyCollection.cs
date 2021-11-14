@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -18,7 +18,7 @@ namespace Microsoft.Build.Collections
     /// Thus this is an omission from the BCL.
     /// </remarks>
     /// <typeparam name="T">Type of element in the collection</typeparam>
-    internal class ReadOnlyCollection<T> : ICollection<T>, ICollection
+    public class ReadOnlyCollection<T> : ICollection<T>, ICollection
     {
         /// <summary>
         /// Backing live enumerable.
@@ -31,7 +31,7 @@ namespace Microsoft.Build.Collections
         /// of the IEnumerable, or around the backing collection if the 
         /// IEnumerable is in fact a collection. 
         /// </summary>
-        internal ReadOnlyCollection(IEnumerable<T> backing)
+        public ReadOnlyCollection(IEnumerable<T> backing)
         {
             ErrorUtilities.VerifyThrow(backing != null, "Need backing collection");
 

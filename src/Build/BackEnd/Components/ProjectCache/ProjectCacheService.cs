@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 #nullable enable
@@ -24,14 +24,14 @@ using Microsoft.Build.Shared.FileSystem;
 
 namespace Microsoft.Build.Experimental.ProjectCache
 {
-    internal record CacheRequest(BuildSubmission Submission, BuildRequestConfiguration Configuration);
+    public record CacheRequest(BuildSubmission Submission, BuildRequestConfiguration Configuration);
 
-    internal record NullableBool(bool Value)
+    public record NullableBool(bool Value)
     {
         public static implicit operator bool(NullableBool? d) => d is not null && d.Value;
     }
 
-    internal enum ProjectCacheServiceState
+    public enum ProjectCacheServiceState
     {
         NotInitialized,
         BeginBuildStarted,
@@ -40,7 +40,7 @@ namespace Microsoft.Build.Experimental.ProjectCache
         ShutdownFinished
     }
 
-    internal class ProjectCacheService
+    public class ProjectCacheService
     {
         private readonly BuildManager _buildManager;
         private readonly Func<PluginLoggerBase> _loggerFactory;

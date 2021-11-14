@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Framework;
@@ -13,11 +13,11 @@ namespace Microsoft.Build.BackEnd.SdkResolution
     /// <summary>
     /// An internal implementation of <see cref="Microsoft.Build.Framework.SdkResultFactory"/>.
     /// </summary>
-    internal class SdkResultFactory : SdkResultFactoryBase
+    public class SdkResultFactory : SdkResultFactoryBase
     {
         private readonly SdkReference _sdkReference;
 
-        internal SdkResultFactory(SdkReference sdkReference)
+        public SdkResultFactory(SdkReference sdkReference)
         {
             _sdkReference = sdkReference;
         }

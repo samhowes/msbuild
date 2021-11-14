@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 #nullable enable
@@ -50,7 +50,7 @@ namespace Microsoft.Build.Experimental.ProjectCache
         public CacheResultType ResultType { get; }
         public BuildResult? BuildResult { get; }
         public ProxyTargets? ProxyTargets { get; }
-        internal Exception? Exception { get; }
+        public Exception? Exception { get; }
 
         private CacheResult(
             CacheResultType resultType,
@@ -98,7 +98,7 @@ namespace Microsoft.Build.Experimental.ProjectCache
             return new CacheResult(resultType);
         }
 
-        internal static CacheResult IndicateException(Exception e)
+        public static CacheResult IndicateException(Exception e)
         {
             return new CacheResult(e);
         }

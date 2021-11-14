@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.Build.Utilities;
@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace Microsoft.Build.Shared.Debugging
 {
-    internal static class DebugUtils
+    public static class DebugUtils
     {
         private enum NodeMode
         {
