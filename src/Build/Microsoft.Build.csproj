@@ -23,7 +23,8 @@
     <ApplyNgenOptimization Condition="'$(TargetFramework)' == '$(FullFrameworkTFM)'">full</ApplyNgenOptimization>
 
     <!-- Do not generate a warning that our 'stable' package should not have a prerelease dependency. -->
-    <NoWarn>$(NoWarn);NU5104</NoWarn>
+    <NoWarn>$(NoWarn);NU5104;CS3001;CS3002;CS3003;CS3005;CS3008;CS1573;CS3026</NoWarn>
+    <PackageId>SamHowes.Microsoft.Build</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
